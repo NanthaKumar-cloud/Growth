@@ -10,7 +10,7 @@
 A Tour of IncuBrix Creator Studio: 4 Superpowers
 
 ## Full Script / Caption
-Slide 1: What makes IncuBrix different? Slide 2: Superpower 1: Know what to create next (/thought-inbox). Slide 3: Superpower 2: Edit video like text (/editor). Slide 4: Superpower 3: Post once, land everywhere (/publishing). Slide 5: Superpower 4: Creator Growth Score analytics. Try free.
+What makes IncuBrix different? Superpower 1: Ideation (/thought-inbox). Superpower 2: Prompt Video Editing (/editor). Superpower 3: Omnichannel Publishing (/publishing). Superpower 4: Creator Growth Score.
 
 ## Call to Action (CTA)
 Create your free account at app.incubrix.com.

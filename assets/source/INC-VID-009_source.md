@@ -10,7 +10,7 @@
 Stop wasting client approval cycles on email threads.
 
 ## Full Script / Caption
-[Visual: Client clicking 'Accept' inside IncuBrix /collab]. If you run an agency, managing client video approvals across Dropbox and Slack is a nightmare. IncuBrix gives you dedicated collaborative review sessions with 1-click approvals.
+If you run an agency, managing client video approvals across Dropbox and Slack is a nightmare. IncuBrix gives you dedicated collaborative review sessions with 1-click approvals.
 
 ## Call to Action (CTA)
 Scale your agency with IncuBrix Collaborative Studio.

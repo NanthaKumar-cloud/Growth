@@ -10,7 +10,7 @@
 How 1 webinar can power your entire month of social media.
 
 ## Full Script / Caption
-[Visual: 45-minute Zoom recording dragging into IncuBrix]. Take your monthly webinar, drop it into IncuBrix, and generate 30 days of scheduled content in 15 minutes. 10 shorts, 8 carousels, and 12 posts.
+Take your monthly webinar, drop it into IncuBrix, and generate 30 days of scheduled content in 15 minutes: 10 shorts, 8 carousels, and 12 posts.
 
 ## Call to Action (CTA)
 Automate your social calendar at incubrix.com.

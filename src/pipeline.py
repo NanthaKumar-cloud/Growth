@@ -100,6 +100,7 @@ class ContentEnginePipeline:
                         asset_id=asset_id,
                         hook=item.get("hook", ""),
                         caption=item.get("caption", ""),
+                        pillar=pillar,
                         duration_seconds=15
                     )
                     final_file_url = f"assets/final/videos/{v_path.name}"
@@ -114,15 +115,14 @@ class ContentEnginePipeline:
                     )
                     final_file_url = f"assets/final/carousels/{c_path.name}"
                 else:
-                    g_path = self.renderer.render_carousel_slide(
+                    g_path = self.renderer.render_graphic(
                         asset_id=asset_id,
-                        slide_idx=1,
-                        total_slides=1,
                         title=item.get("hook", ""),
                         body_text=item.get("caption", ""),
-                        pillar=pillar
+                        pillar=pillar,
+                        cta=item.get("cta", "Visit incubrix.com")
                     )
-                    final_file_url = f"assets/final/carousels/{g_path.name}"
+                    final_file_url = f"assets/final/graphics/{g_path.name}"
 
                 # Save Editable Source
                 s_path = self.renderer.save_source_asset(asset_id, item)

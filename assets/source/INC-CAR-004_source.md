@@ -10,7 +10,7 @@
 5 AI Video Editing Mistakes Costing You 10+ Hours
 
 ## Full Script / Caption
-Slide 1: Are you still editing video on a traditional timeline? Slide 2: Mistake 1: Manually cutting silence and pauses. Slide 3: Mistake 2: Re-recording whole takes for one stumble. Slide 4: Mistake 3: Formatting captions by hand. Slide 5: The Fix: Use IncuBrix prompt-based video editing. Link in bio.
+Are you still editing video on a traditional timeline? Stop manually cutting silence and re-recording takes. Use IncuBrix prompt-based video editing.
 
 ## Call to Action (CTA)
 Share this with a fellow creator and test prompt editing today.

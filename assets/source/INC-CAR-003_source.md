@@ -10,7 +10,7 @@
 The 2026 Social Media Algorithm Playbook
 
 ## Full Script / Caption
-Slide 1: What actually drives organic reach in 2026? Slide 2: LinkedIn prioritizes document carousels and dwell time. Slide 3: YouTube Shorts prioritizes >100% view percentage. Slide 4: Instagram favors send-to-friend DMs over raw likes. Slide 5: The IncuBrix Creator Growth Score tracks all three in one place.
+What actually drives organic reach in 2026? LinkedIn prioritizes document carousels. YouTube Shorts prioritizes view percentage. Instagram favors DMs. The IncuBrix Creator Growth Score tracks all three.
 
 ## Call to Action (CTA)
 Follow IncuBrix for weekly algorithm benchmark reports.

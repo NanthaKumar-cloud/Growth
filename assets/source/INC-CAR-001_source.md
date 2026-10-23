@@ -10,7 +10,7 @@
 The $100/mo Tool Bloat vs. The Unified CreatorOps Stack
 
 ## Full Script / Caption
-Slide 1: Are you paying for 4 separate apps just to produce 1 video? Slide 2: Descript ($24) + Opus Clip ($19) + Buffer ($15) + Copy.ai ($39) = $97/mo. Slide 3: The hidden cost is context-switching between 5 tabs. Slide 4: IncuBrix brings ideation, prompt video editing, voice cloning, and publishing into 1 workspace for $29/mo. Slide 5: Cut weekly editing from 14h to 2h. Check link to try free.
+Are you paying for 4 separate apps just to produce 1 video? Descript ($24) + Opus Clip ($19) + Buffer ($15) + Copy.ai ($39) = $97/mo. IncuBrix brings ideation, prompt video editing, voice cloning, and publishing into 1 workspace for $29/mo.
 
 ## Call to Action (CTA)
 Swipe through and click link to consolidate your stack at incubrix.com.

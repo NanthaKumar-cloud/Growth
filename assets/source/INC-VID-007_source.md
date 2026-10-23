@@ -10,7 +10,7 @@
 Where ideas go before they become posts: The Thought Inbox.
 
 ## Full Script / Caption
-[Visual: Recording a 20-second voice thought on mobile]. Never lose a spontaneous idea again. IncuBrix Thought Inbox transcribes your raw voice notes, extracts the core insight, and drafts 3 hooks automatically while you sleep.
+Never lose a spontaneous idea again. IncuBrix Thought Inbox transcribes your raw voice notes, extracts the core insight, and drafts 3 hooks automatically while you sleep.
 
 ## Call to Action (CTA)
 Start capturing your ideas at incubrix.com.

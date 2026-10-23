@@ -10,7 +10,7 @@
 Editing video by editing text: the death of complex timelines.
 
 ## Full Script / Caption
-[Visual: Highlighting text in IncuBrix transcript editor; video cuts immediately]. Delete a sentence in the text, and the clip cuts instantly. No multi-track keyframing, no ripple edits. IncuBrix prompt-based video editing makes video as simple as editing a Google Doc.
+Delete a sentence in the text, and the clip cuts instantly. No multi-track keyframing, no ripple edits. IncuBrix prompt-based video editing makes video as simple as editing a Google Doc.
 
 ## Call to Action (CTA)
 Experience prompt-based editing at app.incubrix.com.

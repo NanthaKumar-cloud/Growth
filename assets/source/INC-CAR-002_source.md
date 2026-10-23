@@ -10,7 +10,7 @@
 The 1-to-10 Content Repurposing Architecture
 
 ## Full Script / Caption
-Slide 1: How to turn 1 podcast into 10 multi-platform assets. Slide 2: Input: 20-min raw recording. Slide 3: Layer 1: Three 9:16 Shorts with dynamic captions. Slide 4: Layer 2: Two deep-dive LinkedIn PDF carousels. Slide 5: Layer 3: Five hook-driven text posts. Slide 6: Automated distribution via IncuBrix. Slide 7: Save this blueprint for your next recording.
+How to turn 1 podcast into 10 multi-platform assets. Layer 1: 3 Shorts. Layer 2: 2 LinkedIn carousels. Layer 3: 5 hook-driven posts. Automated distribution via IncuBrix.
 
 ## Call to Action (CTA)
 Save this carousel and try the repurposing engine at incubrix.com.

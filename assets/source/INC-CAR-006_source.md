@@ -10,7 +10,7 @@
 The Ultimate Omnichannel Publishing Checklist
 
 ## Full Script / Caption
-Slide 1: Don't hit publish until you verify these 5 items. Slide 2: Platform-specific aspect ratios (9:16 for Shorts, 1:1 for feed). Slide 3: Dynamic opening hook in first 3 seconds. Slide 4: Standardized UTM tracking links. Slide 5: Clear single call to action. Automated by IncuBrix.
+Don't hit publish until you verify these 5 quality gates: aspect ratios, 3s hook timing, UTM tracking, rights safety, and clear CTAs.
 
 ## Call to Action (CTA)
 Save this checklist for your next campaign.

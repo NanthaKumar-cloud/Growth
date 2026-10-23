@@ -10,7 +10,7 @@
 You will never have to re-record a flubbed podcast line again.
 
 ## Full Script / Caption
-[Visual: Audio waveform in IncuBrix /voice-hub]. We all hate having to set up the microphone just to fix one mispronounced sentence. With IncuBrix Voice Hub, simply clone your voice once and edit the transcript. It resynthesizes your voice with perfect cadence and zero robotic artifacts.
+We all hate having to set up the microphone just to fix one misspoken sentence. With IncuBrix Voice Hub, simply clone your voice once and edit the transcript. It resynthesizes your voice with perfect cadence and zero robotic artifacts.
 
 ## Call to Action (CTA)
 Clone your voice profile today at incubrix.com/voice-hub.

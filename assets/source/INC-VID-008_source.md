@@ -10,7 +10,7 @@
 We tested 500 short-form video hooks. Here is what actually works.
 
 ## Full Script / Caption
-[Visual: Graph of audience retention at 3 seconds]. Negative contrast hooks like 'Stop doing X' hold 42% higher retention than positive hooks. IncuBrix analyzes your video hooks and scores them before you hit publish.
+Negative contrast hooks like 'Stop doing X' hold 42% higher retention than positive hooks. IncuBrix analyzes your video hooks and scores them before you hit publish.
 
 ## Call to Action (CTA)
 Check your Creator Growth Score at incubrix.com.
