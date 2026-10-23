@@ -1,0 +1,19 @@
+# Editable Source Asset: INC-CAR-001
+
+- **Platform:** LinkedIn
+- **Format:** Carousel
+- **Pillar:** CreatorOps & Tool Consolidation
+- **Target Metric:** Saves & Bookmarks (>= 5%)
+- **Rights Checked:** Yes (Original IncuBrix IP / AI-disclosed)
+
+## Hook
+The $100/mo Tool Bloat vs. The Unified CreatorOps Stack
+
+## Full Script / Caption
+Slide 1: Are you paying for 4 separate apps just to produce 1 video? Slide 2: Descript ($24) + Opus Clip ($19) + Buffer ($15) + Copy.ai ($39) = $97/mo. Slide 3: The hidden cost is context-switching between 5 tabs. Slide 4: IncuBrix brings ideation, prompt video editing, voice cloning, and publishing into 1 workspace for $29/mo. Slide 5: Cut weekly editing from 14h to 2h. Check link to try free.
+
+## Call to Action (CTA)
+Swipe through and click link to consolidate your stack at incubrix.com.
+
+## Tracked Link
+https://incubrix.com/?utm_source=linkedin&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-001&utm_term=creatorops_and_tool_consolidation
