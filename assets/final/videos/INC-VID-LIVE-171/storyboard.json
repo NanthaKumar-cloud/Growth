@@ -1,0 +1,114 @@
+{
+  "title": "CreatorOps Studio 2026 Launch",
+  "brand": {
+    "name": "CreatorOS",
+    "tagline": "One unified studio, zero burnout",
+    "website": "creatorstudio.in",
+    "handle": "@creatoros"
+  },
+  "voice": {
+    "name": "Fenrir",
+    "speaking_rate": 1.05,
+    "why": "High-energy and punchy, perfect for a fast-paced wakeup call about creator burnout and modern tool fatigue."
+  },
+  "world": "A modern minimalist creator desk setup in warm morning light, featuring a floating 3D modular cube that transforms from fragmented chaotic apps into a single sleek studio interface.",
+  "design_system": {
+    "palette": {
+      "bg": "#0D0F18",
+      "bg_alt": "#1A1D2E",
+      "primary": "#FF5722",
+      "secondary": "#6C5CE7",
+      "accent": "#00CEC9",
+      "ink": "#FFFFFF",
+      "paper": "#2D3250"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Flat vector illustration with soft glowing gradients, crisp geometric shapes, and smooth 3D isometric UI floating elements.",
+    "hero_element": "A glowing isometric modular studio cube representing CreatorOS",
+    "recurring_motifs": [
+      "Floating notification bubbles",
+      "Subtle gradient glowing mesh background",
+      "Consistent floating CreatorOS cube"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 32,
+      "color_key": "secondary"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Why do solo creators burn out fast? Paying one hundred dollars monthly across four fragmented tools.",
+      "on_screen_headline": "Stop The Burnout",
+      "on_screen_support": "Paying $100/mo on 4 fragmented tools?",
+      "visual_description": "Wide shot of a dark neon-lit desk with four separate floating app icons blinking red in frustration against a deep slate background. The hero cube is absent, replaced by chaos.",
+      "key_beats": [
+        {
+          "narration_fragment": "Why do solo creators burn out fast?",
+          "visual_action": "Four red-tinted app icons pulse erratically on screen."
+        },
+        {
+          "narration_fragment": "Paying one hundred dollars monthly across four fragmented tools.",
+          "visual_action": "Dollar bills fly out of the icons as they stack up high."
+        }
+      ],
+      "mood": "Urgent and stressful",
+      "background_color_key": "bg",
+      "opens_with": "Fresh start with chaotic floating app icons",
+      "closes_with": "Four fragmented app icons congregating in the center",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "SOLUTION",
+      "narration": "Ditch the clutter. Step into CreatorOps Studio, your all in one workspace for twenty twenty six.",
+      "on_screen_headline": "Meet CreatorOps",
+      "on_screen_support": "One unified studio for 2026",
+      "visual_description": "The four fragmented app icons swirl together in a vortex of colorful energy and snap neatly into the glowing isometric hero cube in the center of the frame.",
+      "key_beats": [
+        {
+          "narration_fragment": "Ditch the clutter.",
+          "visual_action": "Fragmented app icons shatter and dissolve into glowing dust."
+        },
+        {
+          "narration_fragment": "Step into CreatorOps Studio, your all in one workspace.",
+          "visual_action": "The hero cube expands, glowing bright orange and teal."
+        }
+      ],
+      "mood": "Relieving and energetic",
+      "background_color_key": "bg_alt",
+      "opens_with": "Fragmented icons entering from the right via slideleft",
+      "closes_with": "The glowing hero cube centered on screen",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 3,
+      "role": "CTA",
+      "narration": "Create more, spend less. Build your empire at creator studio dot in today.",
+      "on_screen_headline": "Build Your Empire",
+      "on_screen_support": "creatorstudio.in | @creatoros",
+      "visual_description": "Medium close-up of the hero cube opening up like a dashboard, showing a rising green growth chart. Brand handle and website URL animate onto the bottom ribbon cleanly.",
+      "key_beats": [
+        {
+          "narration_fragment": "Create more, spend less.",
+          "visual_action": "Dashboard interface slides out of the cube with a smooth upward growth graph."
+        },
+        {
+          "narration_fragment": "Build your empire at creator studio dot in today.",
+          "visual_action": "Website URL and brand handle appear with a bright accent pulse."
+        }
+      ],
+      "mood": "Confident and inspiring",
+      "background_color_key": "bg",
+      "opens_with": "Hero cube from previous scene centered",
+      "closes_with": "Final branded dashboard frame with website and handle",
+      "transition_out": "fade"
+    }
+  ]
+}

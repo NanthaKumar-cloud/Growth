@@ -1,0 +1,72 @@
+{
+  "title": "IncuBrix CreatorOps Platform Launch",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Unified CreatorOps Platform",
+    "website": "yourbrand.com",
+    "handle": "@yourbrand"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "Build creator empires with AI",
+    "headline_emphasis": "EMPIRES",
+    "support": "Discover, create, repurpose and publish across all platforms effortlessly.",
+    "cta": "Start building",
+    "steps": [
+      "Discover",
+      "Create",
+      "Repurpose",
+      "Publish"
+    ],
+    "stats": [
+      {
+        "value": "20",
+        "label": "TEAM EXPERTS"
+      },
+      {
+        "value": "2",
+        "label": "GLOBAL HUBS"
+      },
+      {
+        "value": "4x",
+        "label": "FASTER GROWTH"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "A warm, premium and elegant layout featuring a central glowing node-and-orbit hub representing the unified CreatorOps pipeline, surrounded by polished floating content creation icons.",
+  "design_system": {
+    "palette": {
+      "bg": "#1E1A2E",
+      "bg_alt": "#2A2440",
+      "primary": "#E0A96D",
+      "secondary": "#C85A53",
+      "accent": "#6C5B7B",
+      "ink": "#FFFFFF",
+      "paper": "#F7F5F0"
+    },
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "DM Sans"
+    },
+    "headline_caps": false,
+    "corner_radius": 24,
+    "style": "Sophisticated vector illustration with rich warm gradients, glowing nodes, and soft dimensional shadows.",
+    "lighting": "Warm top-left studio illumination casting gentle depth and highlights."
+  },
+  "composition": {
+    "layout": "left",
+    "hero": "A central glowing golden ring hub with four interconnected orbiting nodes representing discovery, creation, repurposing, and publishing, rendered with smooth gradients and soft drop shadows.",
+    "props": [
+      "Floating golden text quill top left",
+      "Audio wave pulse top right",
+      "Video play spark bottom right",
+      "Tiny glowing sparkle dots scattered around the orbit"
+    ],
+    "background": "Deep violet-brown vertical gradient with a soft warm golden glow radiating behind the central hero mechanism.",
+    "decor": [
+      "Large faint overlapping circles",
+      "Subtle angled geometric lines"
+    ]
+  }
+}

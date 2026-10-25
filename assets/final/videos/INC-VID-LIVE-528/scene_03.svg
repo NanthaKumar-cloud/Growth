@@ -1,0 +1,226 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Poppins:wght@600;700;800&amp;display=swap');
+
+  .bg-base { fill: #0D1117; }
+  .grid-line { stroke: #21262d; stroke-width: 2; stroke-dasharray: 6 12; }
+  
+  .a {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .fadeIn { animation-name: fadeInAnim; animation-timing-function: ease-out; }
+  .fadeUp { animation-name: fadeUpAnim; }
+  .popIn { animation-name: popInAnim; }
+  .floatAnim { animation-name: floatLoop; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+  .steamAnim { animation-name: steamLoop; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+  .rocketFly { animation-name: rocketLoop; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+
+  @keyframes fadeInAnim {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes fadeUpAnim {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popInAnim {
+    0% { opacity: 0; transform: scale(0.4) rotate(-10deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  @keyframes floatLoop {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1deg); }
+  }
+
+  @keyframes rocketLoop {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(-2deg); }
+  }
+
+  @keyframes steamLoop {
+    0% { opacity: 0; transform: translateY(0) scale(0.8); }
+    50% { opacity: 0.9; transform: translateY(-30px) scale(1.1); }
+    100% { opacity: 0; transform: translateY(-60px) scale(1.3); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+</style>
+
+<defs>
+  <filter id="shadow-deep" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6" />
+  </filter>
+  <filter id="shadow-card" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.4" />
+  </filter>
+  <filter id="glow-orange" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="20" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+  <filter id="glow-rocket" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="25" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+
+  <linearGradient id="mugGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#FF7A50" />
+    <stop offset="100%" stop-color="#FF5722" />
+  </linearGradient>
+
+  <linearGradient id="dashboardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#161B22" />
+    <stop offset="100%" stop-color="#0d1117" />
+  </linearGradient>
+</defs>
+
+<rect width="1080" height="1920" class="bg-base" />
+
+<!-- Background Grid -->
+<g class="a fadeIn" style="animation-duration: 1s; animation-delay: 0.1s;">
+  <line x1="0" y1="480" x2="1080" y2="480" class="grid-line" />
+  <line x1="0" y1="960" x2="1080" y2="960" class="grid-line" />
+  <line x1="0" y1="1440" x2="1080" y2="1440" class="grid-line" />
+  <line x1="270" y1="0" x2="270" y2="1920" class="grid-line" />
+  <line x1="540" y1="0" x2="540" y2="1920" class="grid-line" />
+  <line x1="810" y1="0" x2="810" y2="1920" class="grid-line" />
+</g>
+
+<!-- Persistent Brand Mark -->
+<g transform="translate(80, 90)">
+  <g class="a fadeIn" style="animation-duration: 0.8s; animation-delay: 0.2s;">
+    <rect x="0" y="0" width="48" height="48" rx="12" fill="#FF5722" />
+    <path d="M16 24L24 16L32 24L24 32Z" fill="#FFFFFF" />
+    <text x="64" y="32" font-family="'Poppins', Arial, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">CreatorOps</text>
+  </g>
+</g>
+
+<!-- Ribbon Accent (Localized near center/hero) -->
+<g transform="translate(390, 1260)">
+  <g class="a fadeIn" style="animation-duration: 1s; animation-delay: 0.3s;">
+    <path d="M0 20 C 80 -10, 220 50, 300 20" fill="none" stroke="#FF5722" stroke-width="6" stroke-linecap="round" opacity="0.5" />
+    <circle cx="150" cy="18" r="6" fill="#FF5722" />
+  </g>
+</g>
+
+<!-- Header Copy: Build Without Burnout -->
+<g transform="translate(540, 230)">
+  <g class="a popIn" style="animation-duration: 0.8s; animation-delay: 0.25s;">
+    <rect x="-140" y="-45" width="280" height="50" rx="25" fill="#161B22" stroke="#FF5722" stroke-width="2" />
+    <text x="0" y="-14" font-family="'Inter', Arial, sans-serif" font-size="20" font-weight="600" fill="#FF5722" text-anchor="middle">ONE STUDIO. ZERO BURNOUT.</text>
+  </g>
+  
+  <g class="a fadeUp" style="animation-duration: 0.9s; animation-delay: 0.35s;">
+    <text x="0" y="45" font-family="'Poppins', Arial, sans-serif" font-size="64" font-weight="800" fill="#FFFFFF" text-anchor="middle">Build Without Burnout</text>
+  </g>
+  
+  <g class="a fadeUp" style="animation-duration: 0.9s; animation-delay: 0.45s;">
+    <text x="0" y="105" font-family="'Inter', Arial, sans-serif" font-size="28" font-weight="400" fill="#8B949E" text-anchor="middle">creatorops.in | @creatorops_in</text>
+  </g>
+</g>
+
+<!-- Desk Surface Base -->
+<g transform="translate(540, 1500)">
+  <g class="a fadeUp" style="animation-duration: 1s; animation-delay: 0.4s;">
+    <rect x="-440" y="0" width="880" height="24" rx="12" fill="#161B22" filter="url(#shadow-deep)" />
+    <rect x="-380" y="24" width="760" height="12" rx="4" fill="#21262d" opacity="0.8" />
+  </g>
+</g>
+
+<!-- Hero Orange Coffee Mug (Bottom-Center, Steaming) -->
+<g transform="translate(540, 1370)">
+  <g class="a popIn" style="animation-duration: 0.9s; animation-delay: 0.5s;">
+    <circle cx="0" cy="0" r="90" fill="#FF5722" opacity="0.3" filter="url(#glow-orange)" />
+    <rect x="-45" y="-55" width="90" height="110" rx="20" fill="url(#mugGrad)" filter="url(#shadow-card)" />
+    <rect x="-50" y="-65" width="100" height="16" rx="8" fill="#FF8A65" />
+    <path d="M0 -5 L-12 -18 C-18 -24, -8 -34, 0 -24 C8 -34, 18 -24, 12 -18 Z" fill="#FFFFFF" opacity="0.9" />
+    <path d="M45 -35 C 75 -35, 75 15, 45 25" fill="none" stroke="#FF5722" stroke-width="12" stroke-linecap="round" />
+    
+    <!-- Happy Steam -->
+    <g class="a steamAnim" style="animation-duration: 2s; animation-delay: 1.0s;">
+      <path d="M-12 -75 C -22 -95, 2 -105, -2 -125" fill="none" stroke="#FFC107" stroke-width="5" stroke-linecap="round" />
+      <path d="M12 -70 C 22 -90, -2 -100, 2 -120" fill="none" stroke="#FF5722" stroke-width="5" stroke-linecap="round" />
+    </g>
+  </g>
+</g>
+
+<!-- Unified Studio Dashboard & Celebratory Rocket (Beat 1 & 2) -->
+<g transform="translate(540, 830)">
+  <g class="a popIn" style="animation-duration: 0.9s; animation-delay: 0.55s;">
+    <!-- Ambient Glow Behind Dashboard -->
+    <circle cx="0" cy="0" r="280" fill="#FF5722" opacity="0.12" filter="url(#glow-rocket)" />
+    
+    <!-- Main Dashboard Window -->
+    <rect x="-380" y="-220" width="760" height="440" rx="28" fill="url(#dashboardGrad)" stroke="#FF5722" stroke-width="3" filter="url(#shadow-deep)" />
+    
+    <!-- Top Bar of Dashboard -->
+    <rect x="-380" y="-220" width="760" height="70" rx="28" fill="#161B22" />
+    <circle cx="-330" cy="-185" r="8" fill="#FF5722" />
+    <circle cx="-305" cy="-185" r="8" fill="#FFC107" />
+    <circle cx="-280" cy="-185" r="8" fill="#2196F3" />
+    <text x="-240" y="-177" font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">CreatorOps Launch Control</text>
+    
+    <!-- Success Badge / Checkmark -->
+    <g transform="translate(315, -185)">
+      <circle cx="0" cy="0" r="22" fill="#22c55e" opacity="0.2" />
+      <circle cx="0" cy="0" r="16" fill="#22c55e" />
+      <path d="M-6 0 L-2 4 L7 -5" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+
+    <!-- Dashboard Content Layout -->
+    <!-- Left side: Stats & Modules -->
+    <g transform="translate(-190, 15)">
+      <!-- Module 1: Time Saved -->
+      <rect x="-150" y="-120" width="280" height="75" rx="16" fill="#161B22" stroke="#2196F3" stroke-width="2" />
+      <circle cx="-110" cy="-82" r="16" fill="#2196F3" opacity="0.25" />
+      <path d="M-116 -82 L-104 -82 M-110 -88 L-110 -76" stroke="#2196F3" stroke-width="3" stroke-linecap="round" />
+      <text x="-80" y="-74" font-family="'Poppins', Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">Time Saved</text>
+      <text x="-80" y="-50" font-family="'Inter', Arial, sans-serif" font-size="16" font-weight="600" fill="#2196F3">100% Automated Workflow</text>
+
+      <!-- Module 2: Revenue Boost -->
+      <rect x="-150" y="-30" width="280" height="75" rx="16" fill="#161B22" stroke="#22c55e" stroke-width="2" />
+      <circle cx="-110" cy="8" r="16" fill="#22c55e" opacity="0.25" />
+      <text x="-117" y="15" font-family="'Poppins', Arial, sans-serif" font-size="20" font-weight="800" fill="#22c55e">$</text>
+      <text x="-80" y="16" font-family="'Poppins', Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">Zero Burnout</text>
+      <text x="-80" y="40" font-family="'Inter', Arial, sans-serif" font-size="16" font-weight="600" fill="#22c55e">All systems fully optimized</text>
+    </g>
+
+    <!-- Right side: Celebratory Vector Rocket Launch Graphic -->
+    <g transform="translate(190, 10)">
+      <circle cx="0" cy="0" r="110" fill="#FF5722" opacity="0.15" />
+      
+      <!-- Rocket Body & Animation -->
+      <g class="a rocketFly" style="animation-duration: 2.2s; animation-delay: 0.8s; opacity: 1;">
+        <!-- Rocket Flame -->
+        <path d="M0 60 L-14 95 L0 80 L14 95 Z" fill="#FFC107" />
+        <path d="M0 55 L-8 80 L0 70 L8 80 Z" fill="#FF5722" />
+        
+        <!-- Rocket Fins -->
+        <path d="M-18 25 L-35 45 L-18 35 Z" fill="#FF5722" />
+        <path d="M18 25 L35 45 L18 35 Z" fill="#FF5722" />
+        
+        <!-- Main Rocket Fuselage -->
+        <path d="M0 -45 C 22 -15, 22 35, 22 40 L -22 40 C -22 35, -22 -15, 0 -45 Z" fill="#FFFFFF" filter="url(#shadow-card)" />
+        
+        <!-- Rocket Window -->
+        <circle cx="0" cy="2" r="10" fill="#2196F3" />
+        <circle cx="0" cy="2" r="6" fill="#161B22" />
+        <path d="M0 -45 L-12 -20 L12 -20 Z" fill="#FF5722" />
+      </g>
+    </g>
+
+    <!-- Bottom Status Text -->
+    <text x="0" y="180" font-family="'Inter', Arial, sans-serif" font-size="18" font-weight="600" fill="#8B949E" text-anchor="middle">Ready for takeoff. Visit creatorops.in today.</text>
+  </g>
+</g>
+
+</svg>

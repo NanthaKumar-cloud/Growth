@@ -1,0 +1,197 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@500;700&amp;display=swap');
+
+      .a {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation-fill-mode: forwards;
+      }
+
+      .bg-fade { animation: fadeIn 0.6s ease-out 0s forwards; }
+      .brand-fade { animation: fadeIn 0.8s ease-out 0.2s forwards; }
+      
+      .text-in-1 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s forwards; }
+      .text-in-2 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.7s forwards; }
+
+      .orb-hero { animation: scaleUpOvershoot 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards, floatOrb 4.5s ease-in-out 1.2s infinite alternate; }
+      .cta-button { animation: scaleUpOvershoot 0.8s cubic-bezier(0.34,1.56,0.64,1) 2.2s forwards, pulseCta 2.5s ease-in-out 3s infinite alternate; }
+      .handle-in { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 2.5s forwards; }
+
+      .ring-rot-1 { animation: spinSlow 16s linear infinite; }
+      .ring-rot-2 { animation: spinReverse 20s linear infinite; }
+      .ring-rot-3 { animation: spinSlow 12s linear infinite; }
+      .pulse-glow { animation: pulseGlow 3s ease-in-out infinite alternate; }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes scaleUpOvershoot {
+        from { opacity: 0; transform: scale(0.6); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      @keyframes floatOrb {
+        0% { transform: translateY(0px) rotate(0deg); }
+        100% { transform: translateY(-12px) rotate(3deg); }
+      }
+
+      @keyframes spinSlow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes spinReverse {
+        from { transform: rotate(360deg); }
+        to { transform: rotate(0deg); }
+      }
+
+      @keyframes pulseGlow {
+        0% { transform: scale(0.98); }
+        100% { transform: scale(1.02); }
+      }
+
+      @keyframes pulseCta {
+        0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(124,58,237,0.4)); }
+        100% { transform: scale(1.03); filter: drop-shadow(0 0 30px rgba(124,58,237,0.8)); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="40" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="card-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#161E2E" />
+      <stop offset="100%" stop-color="#0B0F19" />
+    </linearGradient>
+
+    <linearGradient id="purple-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A78BFA" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+
+    <linearGradient id="cyan-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <g class="a bg-fade">
+    <rect width="1080" height="1920" fill="url(#bg-grad)" />
+  </g>
+
+  <!-- Subtle Isometric Grid & Background Glows -->
+  <g class="a bg-fade">
+    <g opacity="0.1">
+      <path d="M 0,300 L 1080,300 M 0,600 L 1080,600 M 0,900 L 1080,900 M 0,1200 L 1080,1200 M 0,1500 L 1080,1500" stroke="#7C3AED" stroke-width="2" />
+      <path d="M 270,0 L 270,1920 M 540,0 L 540,1920 M 810,0 L 810,1920" stroke="#06B6D4" stroke-width="2" />
+      <circle cx="540" cy="520" r="400" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="12 12" />
+    </g>
+    <!-- Ambient glow behind hero orb -->
+    <circle cx="540" cy="520" r="280" fill="#7C3AED" opacity="0.25" filter="url(#glow)" />
+  </g>
+
+  <!-- Persistent Brand Mark (Top Left) -->
+  <g transform="translate(72, 100)">
+    <g class="a brand-fade">
+      <circle cx="24" cy="24" r="24" fill="#7C3AED" />
+      <path d="M 16 24 L 22 30 L 34 18" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="64" y="32" fill="#F8FAFC" font-family="'Outfit', Arial, sans-serif" font-weight="700" font-size="28" letter-spacing="1">Studiowave</text>
+    </g>
+  </g>
+  
+  <!-- Ribbon Seam Links -->
+  <rect x="0" y="1228" width="1080" height="40" fill="#7C3AED" />
+  
+  <g class="a brand-fade">
+    <path d="M 0,1248 Q 270,1190 540,1248 T 1080,1248" fill="none" stroke="#7C3AED" stroke-width="40" opacity="0.9" />
+  </g>
+
+  <!-- HERO OBJECT: Floating Glowing Purple Studio Orb with Interconnected Data Rings -->
+  <g transform="translate(540, 500)">
+    <g class="a orb-hero">
+      <!-- Glow Circle with opacity inside child element -->
+      <g class="pulse-glow">
+        <circle cx="0" cy="0" r="150" fill="#7C3AED" filter="url(#glow)" opacity="0.3" />
+      </g>
+
+      <!-- Ring 1 -->
+      <g class="ring-rot-1">
+        <ellipse cx="0" cy="0" rx="160" ry="60" fill="none" stroke="#06B6D4" stroke-width="3" stroke-dasharray="20 12" />
+        <circle cx="160" cy="0" r="8" fill="#06B6D4" />
+      </g>
+
+      <!-- Ring 2 -->
+      <g class="ring-rot-2">
+        <ellipse cx="0" cy="0" rx="60" ry="160" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="25 15" />
+        <circle cx="0" cy="-160" r="8" fill="#7C3AED" />
+      </g>
+
+      <!-- Ring 3 -->
+      <g transform="rotate(45)">
+        <g class="ring-rot-3">
+          <ellipse cx="0" cy="0" rx="140" ry="50" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="16 10" />
+          <circle cx="-140" cy="0" r="6" fill="#F59E0B" />
+        </g>
+      </g>
+
+      <!-- Core Orb Body -->
+      <circle cx="0" cy="0" r="90" fill="url(#purple-grad)" filter="url(#card-shadow)" />
+      <circle cx="-30" cy="-30" r="30" fill="#FFFFFF" opacity="0.25" filter="url(#glow)" />
+      
+      <!-- Inner Node Symbol -->
+      <path d="M -35 10 Q -15 -25 5 10 T 45 10" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" />
+      <circle cx="5" cy="10" r="8" fill="#06B6D4" />
+    </g>
+  </g>
+
+  <!-- Headline Text -->
+  <g transform="translate(540, 780)">
+    <g class="a text-in-1">
+      <text x="0" y="0" fill="#F8FAFC" font-family="'Outfit', Arial, sans-serif" font-weight="800" font-size="88" letter-spacing="-1" text-anchor="middle">Consolidate Your Stack</text>
+    </g>
+  </g>
+
+  <g transform="translate(540, 880)">
+    <g class="a text-in-2">
+      <text x="0" y="0" fill="#06B6D4" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="44" text-anchor="middle">One studio for all your creator needs.</text>
+    </g>
+  </g>
+
+  <!-- Pulsing Neon CTA Button -->
+  <g transform="translate(540, 1020)">
+    <g class="a cta-button" filter="url(#card-shadow)">
+      <rect x="-310" y="0" width="620" height="110" rx="32" fill="url(#cyan-grad)" />
+      <rect x="-308" y="2" width="616" height="106" rx="30" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+      <text x="0" y="66" fill="#FFFFFF" font-family="'Outfit', Arial, sans-serif" font-weight="800" font-size="38" letter-spacing="1" text-anchor="middle">GET STARTED FREE</text>
+    </g>
+  </g>
+
+  <!-- Brand Handle & Website Subtext -->
+  <g transform="translate(540, 1200)">
+    <g class="a handle-in">
+      <text x="0" y="0" fill="#A78BFA" font-family="'Outfit', Arial, sans-serif" font-weight="700" font-size="32" letter-spacing="2" text-anchor="middle">studiowave.io  |  @studiowave</text>
+    </g>
+  </g>
+
+</svg>

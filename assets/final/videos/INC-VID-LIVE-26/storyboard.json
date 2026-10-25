@@ -1,0 +1,137 @@
+{
+  "title": "CreatorOps: Unify Your Workflow",
+  "brand": {
+    "name": "CreatorOps",
+    "tagline": "Simplify. Create. Thrive.",
+    "website": "yourbrand.com",
+    "handle": "@yourbrand"
+  },
+  "voice": {
+    "name": "Sulafat",
+    "speaking_rate": 1.0,
+    "why": "Sulafat's warm, welcoming, and reassuring tone is perfect for addressing the pain points of solo creators (burnout, overwhelm) and then offering a comforting, reliable solution. Her voice fosters trust and empathy."
+  },
+  "world": "A clean, modern digital workspace, evolving from cluttered chaos to organized harmony. The hero element is a minimalist desk, reflecting the creator's journey. The time progresses from a stressful, fragmented state to an efficient, joyful one, all within a brightly lit, inspiring environment.",
+  "design_system": {
+    "palette": {
+      "bg": "#F0F8FF",
+      "bg_alt": "#E6F0F5",
+      "primary": "#4A90E2",
+      "secondary": "#7ED321",
+      "accent": "#FFD700",
+      "ink": "#333333",
+      "paper": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 28,
+    "illustration_style": "Clean, geometric vector shapes with soft gradients and subtle textures. Characters are simple, expressive avatars with minimal features.",
+    "hero_element": "A minimalist, ergonomic desk with a sleek monitor, keyboard, and mouse. It is always centrally placed, representing the creator's workspace and evolving subtly through the narrative.",
+    "recurring_motifs": [
+      "Floating abstract shapes (representing digital tasks, ideas, or tools)",
+      "A stylized, glowing 'lightbulb' icon for insights and solutions",
+      "A simple, gender-neutral 'Creator' avatar with expressive posture"
+    ],
+    "ribbon": {
+      "y_fraction": 0.62,
+      "thickness": 36,
+      "color_key": "accent"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Solo creators, overwhelmed by fragmented tools? Endless juggling leads to burnout and lost time.",
+      "on_screen_headline": "Fragmented Tools Got You Down?",
+      "on_screen_support": "Burnout is real. Your workflow shouldn't be a puzzle.",
+      "visual_description": "A minimalist desk is central. Around it, several small, distinct tool icons (e.g., a pen for design, a microphone for audio, a calendar for scheduling) float chaotically, some with subtle red alert glows. A gender-neutral 'Creator' avatar sits at the desk, looking stressed, with a thought bubble above showing tangled lines. The background is a soft 'bg' color.",
+      "key_beats": [
+        {
+          "narration_fragment": "Solo creators, overwhelmed by fragmented tools?",
+          "visual_action": "Creator avatar looks stressed at the desk with many chaotic tool icons floating around."
+        },
+        {
+          "narration_fragment": "Endless juggling leads to burnout and lost time.",
+          "visual_action": "The red glows on some tools intensify. The Creator avatar slumps slightly, looking more exhausted, with the tangled thought bubble growing larger."
+        }
+      ],
+      "mood": "Stressed, chaotic, relatable problem.",
+      "background_color_key": "bg",
+      "opens_with": "A clean, minimalist workspace with a desk and monitor, ready for the Creator avatar to appear.",
+      "closes_with": "The stressed Creator avatar at their desk, surrounded by chaotically floating, faintly glowing red tool icons and a growing tangle in their thought bubble.",
+      "transition_out": "smoothleft"
+    },
+    {
+      "id": 2,
+      "role": "PROBLEM",
+      "narration": "Paying over one hundred dollars monthly for scattered apps? That's wasted money and time.",
+      "on_screen_headline": "Hundred Dollars Monthly? Ouch.",
+      "on_screen_support": "Fragmented subscriptions drain your budget and energy.",
+      "visual_description": "The scene opens from the chaotic desk of Scene 1. The floating tool icons now have small, animated price tags appearing over them (e.g., '$25/mo', '$30/mo'), quickly summing up to a large, flashing '$100+' total above the desk. The Creator avatar puts their head in their hands, expressing financial strain and exhaustion. The background shifts slightly to 'bg_alt' to emphasize the burden.",
+      "key_beats": [
+        {
+          "narration_fragment": "Paying over one hundred dollars monthly for scattered apps?",
+          "visual_action": "Price tags appear over individual tool icons, rapidly adding up to a prominent '$100+' total appearing above the desk."
+        },
+        {
+          "narration_fragment": "That's wasted money and time.",
+          "visual_action": "The Creator avatar puts their head in their hands, appearing visibly burdened and frustrated. The '$100+' total pulses with a subtle red glow."
+        }
+      ],
+      "mood": "Burdened, frustrating, costly.",
+      "background_color_key": "bg_alt",
+      "opens_with": "The stressed Creator avatar at their desk, surrounded by chaotically floating, faintly glowing red tool icons, continuing from the previous scene.",
+      "closes_with": "The Creator avatar looking burdened, with the '$100+' sum prominently displayed above the desk, surrounded by the still-chaotic tools.",
+      "transition_out": "smoothleft"
+    },
+    {
+      "id": 3,
+      "role": "SOLUTION",
+      "narration": "Imagine one powerful, unified CreatorOps studio, bringing everything together seamlessly.",
+      "on_screen_headline": "Unify Your Creator World.",
+      "on_screen_support": "One powerful platform for all your creative needs.",
+      "visual_description": "The scene opens with a hint of the burdened desk from Scene 2. The chaotic tool icons rapidly shrink and then smoothly flow, like digital particles, into the monitor on the desk, consolidating into a single, glowing, stylized 'CreatorOps' icon (e.g., a 'C' with a gear/leaf motif). The red glows vanish, replaced by a soft 'primary' blue and 'secondary' green aura. The Creator avatar lifts their head, a subtle smile appearing, and a bright 'lightbulb' icon appears above their head. The workspace becomes clean, organized, and inviting.",
+      "key_beats": [
+        {
+          "narration_fragment": "Imagine one powerful, unified CreatorOps studio,",
+          "visual_action": "The individual tool icons shrink and elegantly converge, flowing into the desk's monitor, merging into a single glowing 'CreatorOps' icon."
+        },
+        {
+          "narration_fragment": "bringing everything together seamlessly.",
+          "visual_action": "The 'CreatorOps' icon glows brightly on the monitor. The Creator avatar looks up with a hopeful smile, and a 'lightbulb' icon illuminates above their head."
+        }
+      ],
+      "mood": "Hopeful, empowering, clean.",
+      "background_color_key": "bg",
+      "opens_with": "The Creator avatar looking burdened, with the '$100+' sum still visible, beginning the transformation.",
+      "closes_with": "The Creator avatar smiling, with a glowing 'lightbulb' above them and the unified 'CreatorOps' icon prominently displayed on the monitor.",
+      "transition_out": "smoothleft"
+    },
+    {
+      "id": 4,
+      "role": "CALL TO ACTION",
+      "narration": "Simplify your work, save big, and create more. Visit yourbrand dot com today!",
+      "on_screen_headline": "Create More, Stress Less.",
+      "on_screen_support": "yourbrand.com | @yourbrand",
+      "visual_description": "The scene opens with the clean, unified workspace from Scene 3. The 'CreatorOps' icon on the monitor subtly pulsates. The 'lightbulb' above the Creator's head glows even brighter. The Creator avatar smiles confidently, perhaps making a subtle gesture towards the monitor. The brand name 'CreatorOps', website 'yourbrand.com', and handle '@yourbrand' appear prominently on screen, elegantly animated onto the monitor or floating in a clean, stylish box above the desk. The overall atmosphere is bright and energetic.",
+      "key_beats": [
+        {
+          "narration_fragment": "Simplify your work, save big, and create more.",
+          "visual_action": "The Creator avatar smiles broadly, looking productive and confident. The lightbulb above their head brightens and sparks."
+        },
+        {
+          "narration_fragment": "Visit yourbrand dot com today!",
+          "visual_action": "The brand name 'CreatorOps', website 'yourbrand.com', and handle '@yourbrand' animate into clear, central view, possibly on the monitor screen."
+        }
+      ],
+      "mood": "Empowered, successful, inviting.",
+      "background_color_key": "bg",
+      "opens_with": "The Creator avatar smiling with the glowing 'lightbulb' and the unified 'CreatorOps' icon on the monitor, continuing the positive energy.",
+      "closes_with": "The bright, clean workspace with the happy Creator avatar, and the brand's call-to-action details (name, website, handle) clearly visible and prominent.",
+      "transition_out": "fade"
+    }
+  ]
+}

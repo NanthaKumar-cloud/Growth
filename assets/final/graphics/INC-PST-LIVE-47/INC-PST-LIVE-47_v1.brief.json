@@ -1,0 +1,71 @@
+{
+  "title": "IncuBrix CreatorOps Platform Launch",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Unified CreatorOps Platform",
+    "website": "incubrix.com",
+    "handle": "@incubrix"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "Scale your content workflow effortlessly",
+    "headline_emphasis": "effortlessly",
+    "support": "Discover, create, repurpose and publish across all platforms from one hub.",
+    "cta": "Start building",
+    "steps": [
+      "Discover",
+      "Create",
+      "Repurpose",
+      "Publish"
+    ],
+    "stats": [
+      {
+        "value": "20",
+        "label": "TEAM MEMBERS"
+      },
+      {
+        "value": "2",
+        "label": "GLOBAL HUBS"
+      },
+      {
+        "value": "4",
+        "label": "CORE PILLARS"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "A warm, elegant hub-and-orbit visual metaphor showcasing the unified CreatorOps workflow for modern creators and builders.",
+  "design_system": {
+    "palette": {
+      "bg": "#1A1625",
+      "bg_alt": "#262138",
+      "primary": "#E0A96D",
+      "secondary": "#9D7BD8",
+      "accent": "#F4D58D",
+      "ink": "#FFFFFF",
+      "paper": "#2A253A"
+    },
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "Inter"
+    },
+    "headline_caps": false,
+    "corner_radius": 24,
+    "style": "Sophisticated vector illustration with smooth gradients, warm glowing highlights, and soft layered shadows.",
+    "lighting": "Warm soft light from top-left casting gentle depth across floating geometric nodes."
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A central glowing golden core ringed by four floating rounded nodes representing discover, create, repurpose, and publish, connected by thin luminous gradient lines.",
+    "props": [
+      "Golden starburst sparkles floating around the central hub",
+      "Soft glowing gradient spheres drifting in the background",
+      "Subtle floating particle dust dots"
+    ],
+    "background": "Deep violet-charcoal vertical gradient with an expansive warm golden glow behind the central hero.",
+    "decor": [
+      "Large faint overlapping geometric arcs in translucent amber",
+      "Soft glowing vertical pillar shapes"
+    ]
+  }
+}

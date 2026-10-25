@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&amp;family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap');
+      
+      .bg { fill: #07090E; }
+      .grid-line { stroke: #1A2333; stroke-width: 1; opacity: 0.5; }
+      
+      .brand-text { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 24px; fill: #00F0FF; letter-spacing: 2px; }
+      .ui-text { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 20px; fill: #8A99AD; }
+      .headline { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 82px; fill: #FFFFFF; line-height: 1.08; }
+      .headline-accent { fill: url(#neon-grad); }
+      .body-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 38px; fill: #8A99AD; line-height: 1.4; }
+      
+      .feature-box { fill: #0D1320; stroke: #1F2D44; stroke-width: 2; rx: 16px; }
+      .swipe-text { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 22px; fill: #00F0FF; letter-spacing: 2px; }
+
+      .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+      
+      .a-bg { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards; }
+      .a-h1 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
+      .a-sub { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
+      .a-boxes { animation: scaleUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+      .a-ui { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes scaleUp {
+        from { opacity: 0; transform: scale(0.95) translateY(20px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#7000FF" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="20" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg a a-bg" width="1080" height="1350" />
+
+  <!-- Grid lines -->
+  <g class="a a-bg">
+    <line x1="0" y1="225" x2="1080" y2="225" class="grid-line" />
+    <line x1="0" y1="450" x2="1080" y2="450" class="grid-line" />
+    <line x1="0" y1="675" x2="1080" y2="675" class="grid-line" />
+    <line x1="0" y1="900" x2="1080" y2="900" class="grid-line" />
+    <line x1="0" y1="1125" x2="1080" y2="1125" class="grid-line" />
+    <line x1="216" y1="0" x2="216" y2="1350" class="grid-line" />
+    <line x1="540" y1="0" x2="540" y2="1350" class="grid-line" />
+    <line x1="864" y1="0" x2="864" y2="1350" class="grid-line" />
+  </g>
+
+  <!-- Seam-crossing visual element: Left edge continuation -->
+  <path d="M 0 1200 C 5 1250 10 1280 10 1320 L 10 1350 L 0 1350 Z" fill="url(#neon-grad)" class="a a-bg" opacity="0.5" />
+
+  <!-- Persistent UI -->
+  <g class="a a-ui">
+    <text x="80" y="95" class="brand-text">INCLUBRIX</text>
+    <text x="940" y="95" text-anchor="end" class="ui-text">03 / 05</text>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="80" y="195" class="a a-h1 headline">Enter autonomous</text>
+  <text x="80" y="295" class="a a-h1 headline"><tspan class="headline-accent">CreatorOps.</tspan></text>
+
+  <!-- Supporting Text -->
+  <text x="80" y="390" class="a a-sub body-text">IncuBrix handles your scaling pipelines so</text>
+  <text x="80" y="440" class="a a-sub body-text">your engineering team can reclaim weekends.</text>
+
+  <!-- Feature Boxes (3 vertical steps) -->
+  <g class="a a-boxes">
+    <!-- Box 1 -->
+    <rect x="80" y="520" width="920" height="175" class="feature-box" filter="url(#glow)" />
+    <circle cx="150" cy="607" r="30" fill="rgba(0, 240, 255, 0.1)" stroke="#00F0FF" stroke-width="2" />
+    <text x="150" y="616" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="24" fill="#00F0FF">01</text>
+    <text x="220" y="585" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Instant Pipeline Provisioning</text>
+    <text x="220" y="625" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500" font-size="20" fill="#8A99AD">Spin up enterprise-grade Kubernetes clusters in under 60 seconds.</text>
+
+    <!-- Box 2 -->
+    <rect x="80" y="720" width="920" height="175" class="feature-box" filter="url(#glow)" />
+    <circle cx="150" cy="807" r="30" fill="rgba(0, 240, 255, 0.1)" stroke="#00F0FF" stroke-width="2" />
+    <text x="150" y="816" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="24" fill="#00F0FF">02</text>
+    <text x="220" y="785" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Self-Healing Deployments</text>
+    <text x="220" y="825" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500" font-size="20" fill="#8A99AD">AI-driven auto-rollback catches bugs before your users notice.</text>
+
+    <!-- Box 3 -->
+    <rect x="80" y="920" width="920" height="175" class="feature-box" filter="url(#glow)" />
+    <circle cx="150" cy="1007" r="30" fill="rgba(0, 240, 255, 0.1)" stroke="#00F0FF" stroke-width="2" />
+    <text x="150" y="1016" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="24" fill="#00F0FF">03</text>
+    <text x="220" y="985" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Zero-Touch Scaling</text>
+    <text x="220" y="1025" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500" font-size="20" fill="#8A99AD">Dynamic resource allocation that scales effortlessly with traffic spikes.</text>
+  </g>
+
+  <!-- Seam-crossing visual element: Right edge connector gradient bar -->
+  <path d="M 1070 1200 C 1075 1250 1080 1280 1080 1320 L 1080 1350 L 1070 1350 Z" fill="url(#neon-grad)" class="a a-bg" />
+
+  <!-- Swipe Cue -->
+  <g class="a a-sub">
+    <text x="920" y="1285" text-anchor="end" class="swipe-text">SWIPE</text>
+    <path d="M 945 1277 L 970 1277 M 955 1267 L 970 1277 L 955 1287" stroke="#00F0FF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

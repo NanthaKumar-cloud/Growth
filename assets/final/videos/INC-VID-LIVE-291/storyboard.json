@@ -1,0 +1,113 @@
+{
+  "title": "CreatorOps Studio 2026 Launch",
+  "brand": {
+    "name": "CreatorOps",
+    "tagline": "One unified studio, zero burnout",
+    "website": "creatorops.io",
+    "handle": "@creatorops"
+  },
+  "voice": {
+    "name": "Kore",
+    "speaking_rate": 1.05,
+    "why": "Energetic and confident voice, perfect for cutting through the pain points of modern creator life."
+  },
+  "world": "A modern minimalist creator workspace that evolves from cluttered chaotic desk fragments into a sleek, unified glowing holographic studio hub.",
+  "design_system": {
+    "palette": {
+      "bg": "#0D1117",
+      "bg_alt": "#161B22",
+      "primary": "#58A6FF",
+      "secondary": "#8B949E",
+      "accent": "#FF7B72",
+      "ink": "#C9D1D9",
+      "paper": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Plus Jakarta Sans",
+      "body": "Inter"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Flat vector illustration with clean geometry, subtle glowing gradients, and smooth kinetic motion graphics.",
+    "hero_element": "A glowing cyan CreatorOps studio cube symbol floating centrally.",
+    "recurring_motifs": [
+      "Floating subscription bill icons",
+      "Unified holographic workflow rings"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 40,
+      "color_key": "primary"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Why do solo creators burn out paying one hundred dollars monthly across four fragmented tools?",
+      "on_screen_headline": "Stop Subscription Bleed",
+      "on_screen_support": "Paying $100/mo across 4 fragmented tools?",
+      "visual_description": "Wide shot of a dark desk with four floating red bill cards showing $25 each, accumulating to $100. A stressed creator silhouette sits in the center.",
+      "key_beats": [
+        {
+          "narration_fragment": "Why do solo creators burn out",
+          "visual_action": "Creator silhouette slumps at desk under four red glowing bill cards."
+        },
+        {
+          "narration_fragment": "paying one hundred dollars monthly across four fragmented tools?",
+          "visual_action": "Bill cards spin and stack up, displaying $100 total drain."
+        }
+      ],
+      "mood": "Frustrated, anxious, expensive",
+      "background_color_key": "bg",
+      "opens_with": "Empty dark workspace background with subtle grid lines.",
+      "closes_with": "Four red bill cards glowing ominously in the upper frame.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "SOLUTION",
+      "narration": "Stop juggling apps. Replace them all with one unified CreatorOps studio.",
+      "on_screen_headline": "One Unified Studio",
+      "on_screen_support": "Replace 4 apps with CreatorOps",
+      "visual_description": "Medium shot as the four red bill cards get swept away by a bright cyan ribbon, transforming into a glowing single CreatorOps studio hub icon in the center.",
+      "key_beats": [
+        {
+          "narration_fragment": "Stop juggling apps.",
+          "visual_action": "Red bill cards scatter and dissolve into pixels."
+        },
+        {
+          "narration_fragment": "Replace them all with one unified CreatorOps studio.",
+          "visual_action": "A bright cyan hero cube assembles smoothly in the center of the frame."
+        }
+      ],
+      "mood": "Relief, transformation, modern",
+      "background_color_key": "bg_alt",
+      "opens_with": "Red bill cards from scene one sliding off left.",
+      "closes_with": "Central glowing cyan cube pulsing gently with workflow rings.",
+      "transition_out": "fade"
+    },
+    {
+      "id": 3,
+      "role": "CTA",
+      "narration": "Create more and stress less. Visit creatorops dot i o to build your studio today.",
+      "on_screen_headline": "Build Your Studio",
+      "on_screen_support": "creatorops.io | @creatorops",
+      "visual_description": "Close-up hero shot of the glowing cyan CreatorOps cube floating above a sleek clean desk, with website and handle clearly displayed in crisp white typography.",
+      "key_beats": [
+        {
+          "narration_fragment": "Create more and stress less.",
+          "visual_action": "Cyan hero cube emits a satisfying wave of calm blue light."
+        },
+        {
+          "narration_fragment": "Visit creatorops dot i o to build your studio today.",
+          "visual_action": "Website URL and handle fade in cleanly below the hero cube."
+        }
+      ],
+      "mood": "Empowering, sleek, triumphant",
+      "background_color_key": "bg",
+      "opens_with": "Central glowing cyan cube from scene two.",
+      "closes_with": "Complete branding lockup with hero cube and URL.",
+      "transition_out": "fade"
+    }
+  ]
+}

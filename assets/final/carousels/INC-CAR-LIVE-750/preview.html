@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IncuBrix Animated Carousel — INC-CAR-LIVE-750</title>
+<style>
+  :root {
+    --bg-dark: #090D16;
+    --card-bg: #111827;
+    --border: #1F2937;
+    --accent: #6366F1;
+    --accent-glow: rgba(99, 102, 241, 0.35);
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+  }
+  header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #A5B4FC;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .controls-bar {
+    display: flex;
+    gap: 12px;
+  }
+  button {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  button:hover {
+    background: #1F2937;
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  button.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  /* Main Stage - Unclipped Full Frame Display */
+  .stage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+  .viewport-card {
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 4 / 5;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    transition: max-width 0.25s ease;
+  }
+  .viewport-card.native-size {
+    max-width: 1080px;
+    width: 1080px;
+    height: 1350px;
+  }
+  .slide-stage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: visible;
+  }
+  .slide-stage svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+  /* Panoramic Seamless Mode - Unclipped */
+  .panoramic-mode {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 20px 0;
+  }
+  .panoramic-strip {
+    display: flex;
+    gap: 0;
+    width: max-content;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    border-radius: 0;
+    overflow: visible;
+  }
+  .panoramic-strip .pano-slide {
+    width: 480px;
+    height: 600px;
+    flex-shrink: 0;
+    overflow: visible;
+    border-right: 1px dashed rgba(255,255,255,0.25);
+  }
+  .panoramic-strip .pano-slide svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+  /* Bottom Navigation */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .dots-container {
+    display: flex;
+    gap: 8px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .slide-role-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h2 style="font-size:18px; font-weight:700;">IncuBrix Live Carousel Viewer</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Asset ID: INC-CAR-LIVE-750 • 5 Seamless Animated Slides</p>
+  </div>
+  <div class="controls-bar">
+    <button id="toggleNativeBtn" onclick="toggleNativeScale()">&#x2921; 100% Native (1080&times;1350)</button>
+    <button id="replayBtn" onclick="replayCurrentSlide()">&#x21bb; Replay Motion</button>
+    <button id="togglePanoBtn" onclick="togglePanoramicView()">&#x2922; Seamless Seam View</button>
+  </div>
+</header>
+
+<div class="stage-container" id="singleStageView">
+  <div class="viewport-card">
+    <div class="slide-stage" id="slideStage"></div>
+  </div>
+
+  <div class="slide-role-label" id="roleLabel">Slide 1 of 5</div>
+
+  <div class="nav-bar">
+    <button onclick="prevSlide()" id="prevBtn">&larr; Previous</button>
+    <div class="dots-container" id="dotsContainer"></div>
+    <button onclick="nextSlide()" id="nextBtn">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="panoramic-mode" id="panoramicView">
+  <div style="margin-bottom:12px; font-size:14px; color:var(--text-secondary);">
+    &#x2728; <strong>Seamless Swipe Verification:</strong> Notice how crossing elements continue across slide edges at the exact same height.
+  </div>
+  <div class="panoramic-strip" id="panoStrip"></div>
+</div>
+
+<script>
+  const slidesData = [
+    {
+      index: 1,
+      role: "Hook: Problem Identification",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@700&display=swap');
+            .font-poppins { font-family: 'Poppins', Arial, sans-serif; }
+            .font-inter { font-family: 'Inter', Helvetica, sans-serif; }
+
+            /* Colors */
+            .color-primary { fill: #6633FF; } /* Deep Purple */
+            .color-accent1 { fill: #00CCAA; } /* Teal */
+            .color-accent2 { fill: #FFCC00; } /* Yellow */
+            .color-bg-light { fill: #F5F5F5; } /* Light Gray Background */
+            .color-dark-text { fill: #333333; } /* Dark Gray Text */
+            .color-white { fill: #FFFFFF; } /* White */
+
+            /* Text styles */
+            .headline { font-size: 96px; font-weight: 700; text-anchor: middle; }
+            .subheadline { font-size: 40px; font-weight: 700; text-anchor: middle; }
+            .body-text { font-size: 40px; font-weight: 400; text-anchor: middle; }
+            .small-text { font-size: 32px; font-weight: 400; text-anchor: middle; }
+            .brand-text { font-size: 36px; font-weight: 700; text-anchor: end; }
+
+            /* Animation base */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Keyframe Animations */
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes scaleIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes gentlePulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes floatUpDown {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-8px); }
+            }
+            @keyframes dashFlow {
+                from { stroke-dashoffset: 120; }
+                to { stroke-dashoffset: 0; }
+            }
+            @keyframes rotateClock {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            @keyframes spinCircle {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            /* Animation classes */
+            .a1 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards, gentlePulse 2s ease-in-out 3.3s infinite alternate; }
+            .a2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards, gentlePulse 2s ease-in-out 3.6s infinite alternate; }
+            .a3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards, gentlePulse 2s ease-in-out 3.9s infinite alternate; }
+            .a4 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards, gentlePulse 2s ease-in-out 4.2s infinite alternate; }
+            .a5 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards, gentlePulse 2s ease-in-out 4.5s infinite alternate; }
+            .a6 { animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.8s forwards, floatUpDown 2s ease-in-out 4.8s infinite alternate; }
+            .a7 { animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.1s forwards, floatUpDown 2s ease-in-out 5.1s infinite alternate; }
+            .a8 { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.4s forwards; }
+            .a-bg { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .a-flow { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .a-dash { animation: dashFlow 3s linear 0s infinite; }
+            .a-spin-idle { animation: rotateClock 10s linear 3s infinite; }
+            .a-spin-entrance { animation: spinCircle 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards; }
+
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <filter id="shadowDepth" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="shadowHover" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.2"/>
+        </filter>
+        <filter id="glowEffect" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#00CCAA" flood-opacity="0.7" result="color"/>
+            <feComposite in="color" in2="blur" operator="in" result="glow"/>
+            <feMerge>
+                <feMergeNode in="glow"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <linearGradient id="gradPurpleTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradFlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00CCAA"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+        <linearGradient id="gradIncuBrixButton" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradRedPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF5050"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+
+        <!-- IncuBrix Logo Mark -->
+        <g id="brandMark">
+            <rect x="0" y="0" width="30" height="30" rx="6" fill="#6633FF"/>
+            <path d="M 8 22 L 8 8 L 15 8 A 7 7 0 0 1 15 22 L 8 22 Z M 15 15 L 15 22 L 22 22 L 22 8 L 15 8 L 15 15 Z" fill="#FFFFFF"/>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F5F5F5"/>
+
+    <!-- IncuFlow - Exiting Right -->
+    <g class="a a-flow">
+        <path d="M 800 1250 C 900 1150 1000 1050 1080 950" stroke="url(#gradFlow)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glowEffect)"/>
+        <path d="M 800 1250 C 900 1150 1000 1050 1080 950" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="80 40" class="a-dash"/>
+    </g>
+
+    <!-- Hook Headline -->
+    <g class="a a1">
+        <text x="540" y="420" class="headline font-poppins color-dark-text">Your CreatorOps Slow?</text>
+    </g>
+    <g class="a a2">
+        <text x="540" y="520" class="headline font-poppins color-primary">Unblock Growth Now.</text>
+    </g>
+
+    <!-- Visual Element: Stuck Gear / Progress Bar -->
+    <g transform="translate(540, 750) rotate(-15)">
+        <g class="a a3">
+            <!-- Outer Gear -->
+            <circle cx="0" cy="0" r="100" fill="#E0E0E0" filter="url(#shadowDepth)"/>
+            <path d="M-100 0 A100 100 0 0 1 0 -100 L 0 -130 A130 130 0 0 0 -130 0 Z M100 0 A100 100 0 0 0 0 -100 L 0 -130 A130 130 0 0 1 130 0 Z M0 100 A100 100 0 0 0 -100 0 L -130 0 A130 130 0 0 1 0 130 Z M0 -100 A100 100 0 0 1 100 0 L 130 0 A130 130 0 0 0 0 -130 Z" fill="#6633FF"/>
+            <!-- Inner 'Stuck' Block -->
+            <rect x="-40" y="-40" width="80" height="80" rx="8" fill="#FF5050" transform="rotate(45)"/>
+        </g>
+        <g class="a a-spin-entrance a-spin-idle">
+            <circle cx="0" cy="0" r="20" fill="#F5F5F5"/>
+        </g>
+    </g>
+
+
+    <!-- Swipe Indicator -->
+    <g class="a a8">
+        <text x="540" y="1270" class="small-text font-inter color-dark-text">SWIPE</text>
+        <path d="M 570 1260 L 590 1250 L 570 1240 Z" fill="#333333"/>
+    </g>
+
+    <!-- Progress Dots -->
+    <g class="a a8">
+        <circle cx="490" cy="1310" r="8" class="color-accent1"/>
+        <circle cx="515" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="540" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="565" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="590" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+    </g>
+
+    <!-- Brand Mark -->
+    <g class="a a8">
+        <use href="#brandMark" x="900" y="55"/>
+        <text x="1040" y="77" class="brand-text font-poppins color-dark-text">@incubrix</text>
+    </g>
+</svg>`
+    },
+    {
+      index: 2,
+      role: "Problem Agitation: The Cost of Manual Ops",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@700&display=swap');
+            .font-poppins { font-family: 'Poppins', Arial, sans-serif; }
+            .font-inter { font-family: 'Inter', Helvetica, sans-serif; }
+
+            /* Colors */
+            .color-primary { fill: #6633FF; } /* Deep Purple */
+            .color-accent1 { fill: #00CCAA; } /* Teal */
+            .color-accent2 { fill: #FFCC00; } /* Yellow */
+            .color-bg-light { fill: #F5F5F5; } /* Light Gray Background */
+            .color-dark-text { fill: #333333; } /* Dark Gray Text */
+            .color-white { fill: #FFFFFF; } /* White */
+
+            /* Text styles */
+            .headline { font-size: 96px; font-weight: 700; text-anchor: middle; }
+            .subheadline { font-size: 40px; font-weight: 700; text-anchor: middle; }
+            .body-text { font-size: 40px; font-weight: 400; text-anchor: middle; }
+            .small-text { font-size: 32px; font-weight: 400; text-anchor: middle; }
+            .brand-text { font-size: 36px; font-weight: 700; text-anchor: end; }
+
+            /* Animation base */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Keyframe Animations */
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes scaleIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes gentlePulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes floatUpDown {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-8px); }
+            }
+            @keyframes dashFlow {
+                from { stroke-dashoffset: 120; }
+                to { stroke-dashoffset: 0; }
+            }
+            @keyframes rotateClock {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            @keyframes spinCircle {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            /* Animation classes */
+            .a1 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards, gentlePulse 2s ease-in-out 3.3s infinite alternate; }
+            .a2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards, gentlePulse 2s ease-in-out 3.6s infinite alternate; }
+            .a3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards, gentlePulse 2s ease-in-out 3.9s infinite alternate; }
+            .a4 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards, gentlePulse 2s ease-in-out 4.2s infinite alternate; }
+            .a5 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards, gentlePulse 2s ease-in-out 4.5s infinite alternate; }
+            .a6 { animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.8s forwards, floatUpDown 2s ease-in-out 4.8s infinite alternate; }
+            .a7 { animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.1s forwards, floatUpDown 2s ease-in-out 5.1s infinite alternate; }
+            .a8 { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.4s forwards; }
+            .a-bg { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .a-flow { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .a-dash { animation: dashFlow 3s linear 0s infinite; }
+            .a-spin-idle { animation: rotateClock 10s linear 3s infinite; }
+            .a-spin-entrance { animation: spinCircle 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards; }
+
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <filter id="shadowDepth" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="shadowHover" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.2"/>
+        </filter>
+        <filter id="glowEffect" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#00CCAA" flood-opacity="0.7" result="color"/>
+            <feComposite in="color" in2="blur" operator="in" result="glow"/>
+            <feMerge>
+                <feMergeNode in="glow"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <linearGradient id="gradPurpleTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradFlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00CCAA"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+        <linearGradient id="gradIncuBrixButton" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradRedPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF5050"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+
+        <!-- IncuBrix Logo Mark -->
+        <g id="brandMark">
+            <rect x="0" y="0" width="30" height="30" rx="6" fill="#6633FF"/>
+            <path d="M 8 22 L 8 8 L 15 8 A 7 7 0 0 1 15 22 L 8 22 Z M 15 15 L 15 22 L 22 22 L 22 8 L 15 8 L 15 15 Z" fill="#FFFFFF"/>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F5F5F5"/>
+
+    <!-- IncuFlow - Entering Left, Exiting Right -->
+    <g class="a a-flow">
+        <path d="M 0 950 C 100 850 200 750 300 650 C 450 500 600 600 750 550 C 850 520 950 580 1080 550" stroke="url(#gradFlow)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glowEffect)"/>
+        <path d="M 0 950 C 100 850 200 750 300 650 C 450 500 600 600 750 550 C 850 520 950 580 1080 550" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="80 40" class="a-dash"/>
+    </g>
+
+    <!-- Headline -->
+    <g class="a a1">
+        <text x="540" y="240" class="headline font-poppins color-dark-text">Developer Time Isn't</text>
+    </g>
+    <g class="a a2">
+        <text x="540" y="340" class="headline font-poppins color-primary">For Content. Or Is It?</text>
+    </g>
+
+    <!-- Supporting Text -->
+    <g class="a a3">
+        <text x="540" y="470" class="body-text font-inter color-dark-text">Manual content workflows drain engineering</text>
+        <text x="540" y="520" class="body-text font-inter color-dark-text">resources and stifle product-led growth.</text>
+    </g>
+
+    <!-- Visual Element: Frustrated Dev Icon & Ticking Clock -->
+    <g class="a a4" transform="translate(300, 750)">
+        <rect x="-70" y="-70" width="140" height="140" rx="16" fill="#FFFFFF" filter="url(#shadowDepth)"/>
+        <!-- Dev icon: head -->
+        <circle cx="0" cy="-30" r="30" fill="#333333"/>
+        <!-- Dev icon: body -->
+        <rect x="-40" y="10" width="80" height="60" rx="8" fill="#333333"/>
+        <!-- Dev icon: arms -->
+        <rect x="-70" y="20" width="20" height="40" rx="4" fill="#333333"/>
+        <rect x="50" y="20" width="20" height="40" rx="4" fill="#333333"/>
+        <!-- Frustration lines -->
+        <line x1="-20" y="-70" x2="-30" y="-90" stroke="#FF5050" stroke-width="6" stroke-linecap="round"/>
+        <line x1="20" y="-70" x2="30" y="-90" stroke="#FF5050" stroke-width="6" stroke-linecap="round"/>
+    </g>
+
+    <g class="a a5" transform="translate(780, 750)">
+        <circle cx="0" cy="0" r="100" fill="#FFFFFF" filter="url(#shadowDepth)"/>
+        <circle cx="0" cy="0" r="90" fill="#FFCC00"/>
+        <!-- Clock hands -->
+        <rect x="-5" y="-70" width="10" height="60" rx="2" fill="#333333" transform="rotate(20)"/>
+        <rect x="-5" y="-50" width="10" height="40" rx="2" fill="#333333" transform="rotate(120)"/>
+        <!-- Central dot -->
+        <circle cx="0" cy="0" r="8" fill="#333333"/>
+        <text x="0" y="40" class="subheadline font-inter color-dark-text">Time!</text>
+    </g>
+
+    <!-- Swipe Indicator -->
+    <g class="a a8">
+        <text x="540" y="1270" class="small-text font-inter color-dark-text">SWIPE</text>
+        <path d="M 570 1260 L 590 1250 L 570 1240 Z" fill="#333333"/>
+    </g>
+
+    <!-- Progress Dots -->
+    <g class="a a8">
+        <circle cx="490" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="515" cy="1310" r="8" class="color-accent1"/>
+        <circle cx="540" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="565" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="590" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+    </g>
+
+    <!-- Brand Mark -->
+    <g class="a a8">
+        <use href="#brandMark" x="900" y="55"/>
+        <text x="1040" y="77" class="brand-text font-poppins color-dark-text">@incubrix</text>
+    </g>
+</svg>`
+    },
+    {
+      index: 3,
+      role: "Solution: Introducing IncuBrix CreatorOps",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@700&display=swap');
+            .font-poppins { font-family: 'Poppins', Arial, sans-serif; }
+            .font-inter { font-family: 'Inter', Helvetica, sans-serif; }
+
+            /* Colors */
+            .color-primary { fill: #6633FF; } /* Deep Purple */
+            .color-accent1 { fill: #00CCAA; } /* Teal */
+            .color-accent2 { fill: #FFCC00; } /* Yellow */
+            .color-bg-light { fill: #F5F5F5; } /* Light Gray Background */
+            .color-dark-text { fill: #333333; } /* Dark Gray Text */
+            .color-white { fill: #FFFFFF; } /* White */
+
+            /* Text styles */
+            .headline { font-size: 96px; font-weight: 700; text-anchor: middle; }
+            .subheadline { font-size: 40px; font-weight: 700; text-anchor: middle; }
+            .body-text { font-size: 40px; font-weight: 400; text-anchor: middle; }
+            .small-text { font-size: 32px; font-weight: 400; text-anchor: middle; }
+            .brand-text { font-size: 36px; font-weight: 700; text-anchor: end; }
+
+            /* Animation base */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Keyframe Animations */
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes scaleIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes gentlePulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes floatUpDown {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-8px); }
+            }
+            @keyframes dashFlow {
+                from { stroke-dashoffset: 120; }
+                to { stroke-dashoffset: 0; }
+            }
+            @keyframes rotateClock {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            @keyframes spinCircle {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            /* Animation classes */
+            .a1 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards, gentlePulse 2s ease-in-out 3.3s infinite alternate; }
+            .a2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards, gentlePulse 2s ease-in-out 3.6s infinite alternate; }
+            .a3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards, gentlePulse 2s ease-in-out 3.9s infinite alternate; }
+            .a4 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards, gentlePulse 2s ease-in-out 4.2s infinite alternate; }
+            .a5 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards, gentlePulse 2s ease-in-out 4.5s infinite alternate; }
+            .a6 { animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.8s forwards, floatUpDown 2s ease-in-out 4.8s infinite alternate; }
+            .a7 { animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.1s forwards, floatUpDown 2s ease-in-out 5.1s infinite alternate; }
+            .a8 { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.4s forwards; }
+            .a-bg { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .a-flow { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .a-dash { animation: dashFlow 3s linear 0s infinite; }
+            .a-spin-idle { animation: rotateClock 10s linear 3s infinite; }
+            .a-spin-entrance { animation: spinCircle 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards; }
+
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <filter id="shadowDepth" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="shadowHover" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.2"/>
+        </filter>
+        <filter id="glowEffect" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#00CCAA" flood-opacity="0.7" result="color"/>
+            <feComposite in="color" in2="blur" operator="in" result="glow"/>
+            <feMerge>
+                <feMergeNode in="glow"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <linearGradient id="gradPurpleTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradFlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00CCAA"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+        <linearGradient id="gradIncuBrixButton" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradRedPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF5050"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+
+        <!-- IncuBrix Logo Mark -->
+        <g id="brandMark">
+            <rect x="0" y="0" width="30" height="30" rx="6" fill="#6633FF"/>
+            <path d="M 8 22 L 8 8 L 15 8 A 7 7 0 0 1 15 22 L 8 22 Z M 15 15 L 15 22 L 22 22 L 22 8 L 15 8 L 15 15 Z" fill="#FFFFFF"/>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F5F5F5"/>
+
+    <!-- IncuFlow - Entering Left, Exiting Right -->
+    <g class="a a-flow">
+        <path d="M 0 550 C 100 580 200 520 300 500 C 450 450 600 480 750 400 C 850 350 950 450 1080 400" stroke="url(#gradFlow)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glowEffect)"/>
+        <path d="M 0 550 C 100 580 200 520 300 500 C 450 450 600 480 750 400 C 850 350 950 450 1080 400" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="80 40" class="a-dash"/>
+    </g>
+
+    <!-- Headline -->
+    <g class="a a1">
+        <text x="540" y="240" class="headline font-poppins color-dark-text">Automate Content.</text>
+    </g>
+    <g class="a a2">
+        <text x="540" y="340" class="headline font-poppins color-primary">Reclaim Engineering Focus.</text>
+    </g>
+
+    <!-- Supporting Text -->
+    <g class="a a3">
+        <text x="540" y="470" class="body-text font-inter color-dark-text">IncuBrix turns your weekend ideas into</text>
+        <text x="540" y="520" class="body-text font-inter color-dark-text">production-ready assets, automatically.</text>
+    </g>
+
+    <!-- Visual Element: Automation Pipeline / Lightbulb to multiple outputs -->
+    <g class="a a4" transform="translate(540, 800)">
+        <rect x="-300" y="-100" width="600" height="200" rx="24" fill="#FFFFFF" filter="url(#shadowDepth)"/>
+        <!-- Input: Lightbulb -->
+        <circle cx="-200" cy="0" r="50" fill="#FFCC00" filter="url(#glowEffect)"/>
+        <path d="M-200 -20 L-200 -40 C -200 -50 -190 -60 -180 -60 L -170 -60 C -160 -60 -150 -50 -150 -40 L -150 -20" stroke="#333333" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M-200 20 L-200 40 C -200 50 -190 60 -180 60 L -170 60 C -160 60 -150 50 -150 40 L -150 20" stroke="#333333" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M-200 0 C -190 -15 -210 -15 -200 0 Z" fill="#333333"/>
+        <!-- Process block -->
+        <rect x="-80" y="-40" width="160" height="80" rx="16" fill="#6633FF" filter="url(#shadowDepth)"/>
+        <path d="M -50 0 L 50 0 M 0 -20 L 0 20" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+        <!-- Output: multiple small blocks -->
+        <rect x="180" y="-60" width="60" height="30" rx="6" fill="#00CCAA"/>
+        <rect x="190" y="10" width="60" height="30" rx="6" fill="#00CCAA"/>
+        <rect x="170" y="50" width="60" height="30" rx="6" fill="#00CCAA"/>
+        <!-- Arrows -->
+        <path d="M -130 0 L -100 0 L -100 -10 L -90 0 L -100 10 L -100 0" fill="#333333"/>
+        <path d="M 80 0 L 110 0 L 110 -10 L 120 0 L 110 10 L 110 0" fill="#333333"/>
+    </g>
+
+    <!-- Swipe Indicator -->
+    <g class="a a8">
+        <text x="540" y="1270" class="small-text font-inter color-dark-text">SWIPE</text>
+        <path d="M 570 1260 L 590 1250 L 570 1240 Z" fill="#333333"/>
+    </g>
+
+    <!-- Progress Dots -->
+    <g class="a a8">
+        <circle cx="490" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="515" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="540" cy="1310" r="8" class="color-accent1"/>
+        <circle cx="565" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="590" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+    </g>
+
+    <!-- Brand Mark -->
+    <g class="a a8">
+        <use href="#brandMark" x="900" y="55"/>
+        <text x="1040" y="77" class="brand-text font-poppins color-dark-text">@incubrix</text>
+    </g>
+</svg>`
+    },
+    {
+      index: 4,
+      role: "Proof & Benefit: Speed and Efficiency",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@700&display=swap');
+            .font-poppins { font-family: 'Poppins', Arial, sans-serif; }
+            .font-inter { font-family: 'Inter', Helvetica, sans-serif; }
+
+            /* Colors */
+            .color-primary { fill: #6633FF; } /* Deep Purple */
+            .color-accent1 { fill: #00CCAA; } /* Teal */
+            .color-accent2 { fill: #FFCC00; } /* Yellow */
+            .color-bg-light { fill: #F5F5F5; } /* Light Gray Background */
+            .color-dark-text { fill: #333333; } /* Dark Gray Text */
+            .color-white { fill: #FFFFFF; } /* White */
+
+            /* Text styles */
+            .headline { font-size: 96px; font-weight: 700; text-anchor: middle; }
+            .subheadline { font-size: 40px; font-weight: 700; text-anchor: middle; }
+            .body-text { font-size: 40px; font-weight: 400; text-anchor: middle; }
+            .small-text { font-size: 32px; font-weight: 400; text-anchor: middle; }
+            .brand-text { font-size: 36px; font-weight: 700; text-anchor: end; }
+
+            /* Animation base */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Keyframe Animations */
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes scaleIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes gentlePulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes floatUpDown {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-8px); }
+            }
+            @keyframes dashFlow {
+                from { stroke-dashoffset: 120; }
+                to { stroke-dashoffset: 0; }
+            }
+            @keyframes rotateClock {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            @keyframes spinCircle {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            /* Animation classes */
+            .a1 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards, gentlePulse 2s ease-in-out 3.3s infinite alternate; }
+            .a2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards, gentlePulse 2s ease-in-out 3.6s infinite alternate; }
+            .a3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards, gentlePulse 2s ease-in-out 3.9s infinite alternate; }
+            .a4 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards, gentlePulse 2s ease-in-out 4.2s infinite alternate; }
+            .a5 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards, gentlePulse 2s ease-in-out 4.5s infinite alternate; }
+            .a6 { animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.8s forwards, floatUpDown 2s ease-in-out 4.8s infinite alternate; }
+            .a7 { animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.1s forwards, floatUpDown 2s ease-in-out 5.1s infinite alternate; }
+            .a8 { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.4s forwards; }
+            .a-bg { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .a-flow { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .a-dash { animation: dashFlow 3s linear 0s infinite; }
+            .a-spin-idle { animation: rotateClock 10s linear 3s infinite; }
+            .a-spin-entrance { animation: spinCircle 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards; }
+
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <filter id="shadowDepth" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="shadowHover" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.2"/>
+        </filter>
+        <filter id="glowEffect" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#00CCAA" flood-opacity="0.7" result="color"/>
+            <feComposite in="color" in2="blur" operator="in" result="glow"/>
+            <feMerge>
+                <feMergeNode in="glow"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <linearGradient id="gradPurpleTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradFlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00CCAA"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+        <linearGradient id="gradIncuBrixButton" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradRedPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF5050"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+
+        <!-- IncuBrix Logo Mark -->
+        <g id="brandMark">
+            <rect x="0" y="0" width="30" height="30" rx="6" fill="#6633FF"/>
+            <path d="M 8 22 L 8 8 L 15 8 A 7 7 0 0 1 15 22 L 8 22 Z M 15 15 L 15 22 L 22 22 L 22 8 L 15 8 L 15 15 Z" fill="#FFFFFF"/>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F5F5F5"/>
+
+    <!-- IncuFlow - Entering Left, Exiting Right -->
+    <g class="a a-flow">
+        <path d="M 0 400 C 100 430 200 370 300 350 C 450 300 600 330 750 200 C 850 150 950 250 1080 200" stroke="url(#gradFlow)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glowEffect)"/>
+        <path d="M 0 400 C 100 430 200 370 300 350 C 450 300 600 330 750 200 C 850 150 950 250 1080 200" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="80 40" class="a-dash"/>
+    </g>
+
+    <!-- Headline -->
+    <g class="a a1">
+        <text x="540" y="240" class="headline font-poppins color-dark-text">Deploy CreatorOps Assets</text>
+    </g>
+    <g class="a a2">
+        <text x="540" y="340" class="headline font-poppins color-primary">In Hours, Not Weeks.</text>
+    </g>
+
+    <!-- Supporting Text -->
+    <g class="a a3">
+        <text x="540" y="470" class="body-text font-inter color-dark-text">Slash content delivery times by 80%. Empower</text>
+        <text x="540" y="520" class="body-text font-inter color-dark-text">marketing without taxing dev.</text>
+    </g>
+
+    <!-- Visual Element: Fast clock and percentage saved -->
+    <g transform="translate(540, 800)">
+        <g class="a a4">
+            <circle cx="0" cy="0" r="150" fill="#FFFFFF" filter="url(#shadowDepth)"/>
+            <circle cx="0" cy="0" r="140" fill="#00CCAA"/>
+            <!-- Fast forward arrows -->
+            <path d="M -60 -40 L -60 40 L 0 0 Z" fill="#FFFFFF"/>
+            <path d="M 20 -40 L 20 40 L 80 0 Z" fill="#FFFFFF"/>
+        </g>
+        <g class="a a5">
+            <rect x="-180" y="160" width="360" height="80" rx="16" fill="url(#gradPurpleTeal)" filter="url(#shadowDepth)"/>
+            <text x="0" y="215" class="subheadline font-poppins color-white">-80% Time Saved</text>
+        </g>
+    </g>
+
+    <!-- Swipe Indicator -->
+    <g class="a a8">
+        <text x="540" y="1270" class="small-text font-inter color-dark-text">SWIPE</text>
+        <path d="M 570 1260 L 590 1250 L 570 1240 Z" fill="#333333"/>
+    </g>
+
+    <!-- Progress Dots -->
+    <g class="a a8">
+        <circle cx="490" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="515" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="540" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="565" cy="1310" r="8" class="color-accent1"/>
+        <circle cx="590" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+    </g>
+
+    <!-- Brand Mark -->
+    <g class="a a8">
+        <use href="#brandMark" x="900" y="55"/>
+        <text x="1040" y="77" class="brand-text font-poppins color-dark-text">@incubrix</text>
+    </g>
+</svg>`
+    },
+    {
+      index: 5,
+      role: "Call to Action: Free Trial",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@700&display=swap');
+            .font-poppins { font-family: 'Poppins', Arial, sans-serif; }
+            .font-inter { font-family: 'Inter', Helvetica, sans-serif; }
+
+            /* Colors */
+            .color-primary { fill: #6633FF; } /* Deep Purple */
+            .color-accent1 { fill: #00CCAA; } /* Teal */
+            .color-accent2 { fill: #FFCC00; } /* Yellow */
+            .color-bg-light { fill: #F5F5F5; } /* Light Gray Background */
+            .color-dark-text { fill: #333333; } /* Dark Gray Text */
+            .color-white { fill: #FFFFFF; } /* White */
+
+            /* Text styles */
+            .headline { font-size: 96px; font-weight: 700; text-anchor: middle; }
+            .subheadline { font-size: 40px; font-weight: 700; text-anchor: middle; }
+            .body-text { font-size: 40px; font-weight: 400; text-anchor: middle; }
+            .small-text { font-size: 32px; font-weight: 400; text-anchor: middle; }
+            .brand-text { font-size: 36px; font-weight: 700; text-anchor: end; }
+
+            /* Animation base */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Keyframe Animations */
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes scaleIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes gentlePulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes floatUpDown {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-8px); }
+            }
+            @keyframes dashFlow {
+                from { stroke-dashoffset: 120; }
+                to { stroke-dashoffset: 0; }
+            }
+            @keyframes rotateClock {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            @keyframes spinCircle {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            /* Animation classes */
+            .a1 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards, gentlePulse 2s ease-in-out 3.3s infinite alternate; }
+            .a2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards, gentlePulse 2s ease-in-out 3.6s infinite alternate; }
+            .a3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards, gentlePulse 2s ease-in-out 3.9s infinite alternate; }
+            .a4 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards, gentlePulse 2s ease-in-out 4.2s infinite alternate; }
+            .a5 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards, gentlePulse 2s ease-in-out 4.5s infinite alternate; }
+            .a6 { animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.8s forwards, floatUpDown 2s ease-in-out 4.8s infinite alternate; }
+            .a7 { animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.1s forwards, floatUpDown 2s ease-in-out 5.1s infinite alternate; }
+            .a8 { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.4s forwards; }
+            .a-bg { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .a-flow { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .a-dash { animation: dashFlow 3s linear 0s infinite; }
+            .a-spin-idle { animation: rotateClock 10s linear 3s infinite; }
+            .a-spin-entrance { animation: spinCircle 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards; }
+
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <filter id="shadowDepth" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="shadowHover" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.2"/>
+        </filter>
+        <filter id="glowEffect" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#00CCAA" flood-opacity="0.7" result="color"/>
+            <feComposite in="color" in2="blur" operator="in" result="glow"/>
+            <feMerge>
+                <feMergeNode in="glow"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <linearGradient id="gradPurpleTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradFlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00CCAA"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+        <linearGradient id="gradIncuBrixButton" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6633FF"/>
+            <stop offset="100%" stop-color="#00CCAA"/>
+        </linearGradient>
+        <linearGradient id="gradRedPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF5050"/>
+            <stop offset="100%" stop-color="#6633FF"/>
+        </linearGradient>
+
+        <!-- IncuBrix Logo Mark -->
+        <g id="brandMark">
+            <rect x="0" y="0" width="30" height="30" rx="6" fill="#6633FF"/>
+            <path d="M 8 22 L 8 8 L 15 8 A 7 7 0 0 1 15 22 L 8 22 Z M 15 15 L 15 22 L 22 22 L 22 8 L 15 8 L 15 15 Z" fill="#FFFFFF"/>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F5F5F5"/>
+
+    <!-- IncuFlow - Entering Left and connecting to CTA -->
+    <g class="a a-flow">
+        <path d="M 0 200 C 100 230 200 170 300 150 C 450 100 600 130 750 150 C 850 160 950 140 1080 150" stroke="url(#gradFlow)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glowEffect)"/>
+        <path d="M 0 200 C 100 230 200 170 300 150 C 450 100 600 130 750 150 C 850 160 950 140 1080 150" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="80 40" class="a-dash"/>
+    </g>
+
+    <!-- Headline -->
+    <g class="a a1">
+        <text x="540" y="240" class="headline font-poppins color-dark-text">Try IncuBrix Weekend</text>
+    </g>
+    <g class="a a2">
+        <text x="540" y="340" class="headline font-poppins color-primary">CreatorOps. Free Trial.</text>
+    </g>
+
+    <!-- Supporting Text -->
+    <g class="a a3">
+        <text x="540" y="470" class="body-text font-inter color-dark-text">Experience rapid, high-impact content creation.</text>
+        <text x="540" y="520" class="body-text font-inter color-dark-text">Sign up today!</text>
+    </g>
+
+    <!-- Call to Action Button -->
+    <g class="a a4">
+        <rect x="190" y="700" width="700" height="150" rx="24" fill="url(#gradIncuBrixButton)" filter="url(#shadowHover)"/>
+        <text x="540" y="795" class="headline font-poppins color-white">GET STARTED</text>
+    </g>
+
+    <!-- Website & Handle -->
+    <g class="a a5">
+        <text x="540" y="950" class="subheadline font-inter color-dark-text">incubrix.com</text>
+    </g>
+    <g class="a a6">
+        <text x="540" y="1020" class="body-text font-inter color-dark-text">@incubrix</text>
+    </g>
+
+    <!-- Progress Dots -->
+    <g class="a a8">
+        <circle cx="490" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="515" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="540" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="565" cy="1310" r="8" class="color-dark-text" opacity="0.3"/>
+        <circle cx="590" cy="1310" r="8" class="color-accent1"/>
+    </g>
+
+    <!-- Brand Mark (Larger for final slide, rhymes with slide 1's general theme) -->
+    <g class="a a8">
+        <use href="#brandMark" x="900" y="55"/>
+        <text x="1040" y="77" class="brand-text font-poppins color-dark-text">@incubrix</text>
+    </g>
+
+    <!-- Rhyming Visual Element from Slide 1 - the 'block' (cleaned up and resolved) -->
+    <g transform="translate(540, 1150)">
+        <g class="a a7">
+            <rect x="-60" y="-60" width="120" height="120" rx="16" fill="#6633FF" filter="url(#shadowHover)"/>
+            <path d="M -30 -30 L 30 -30 L 30 30 L -30 30 Z" fill="#00CCAA" transform="rotate(45)"/>
+        </g>
+    </g>
+</svg>`
+    },
+  ];
+
+  let currentIndex = 0;
+  const stage = document.getElementById("slideStage");
+  const roleLabel = document.getElementById("roleLabel");
+  const dotsContainer = document.getElementById("dotsContainer");
+
+  function init() {
+    // Render dots
+    dotsContainer.innerHTML = "";
+    slidesData.forEach((_, i) => {
+      const d = document.createElement("div");
+      d.className = "dot" + (i === 0 ? " active" : "");
+      d.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(d);
+    });
+
+    // Populate panoramic strip
+    const panoStrip = document.getElementById("panoStrip");
+    panoStrip.innerHTML = "";
+    slidesData.forEach((s) => {
+      const container = document.createElement("div");
+      container.className = "pano-slide";
+      container.innerHTML = s.svg;
+      panoStrip.appendChild(container);
+    });
+
+    renderSlide(0);
+  }
+
+  function renderSlide(index) {
+    currentIndex = index;
+    const slide = slidesData[index];
+    // Re-inject HTML to re-trigger CSS keyframe animations fresh
+    stage.innerHTML = slide.svg;
+    roleLabel.textContent = `Slide ${slide.index} of ${slidesData.length} - ${slide.role}`;
+
+    document.querySelectorAll(".dot").forEach((d, i) => {
+      d.className = "dot" + (i === index ? " active" : "");
+    });
+
+    document.getElementById("prevBtn").disabled = index === 0;
+    document.getElementById("nextBtn").disabled = index === slidesData.length - 1;
+  }
+
+  function nextSlide() {
+    if (currentIndex < slidesData.length - 1) {
+      renderSlide(currentIndex + 1);
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex > 0) {
+      renderSlide(currentIndex - 1);
+    }
+  }
+
+  function goToSlide(index) {
+    renderSlide(index);
+  }
+
+  function replayCurrentSlide() {
+    renderSlide(currentIndex);
+  }
+
+  let panoActive = false;
+  function togglePanoramicView() {
+    panoActive = !panoActive;
+    const single = document.getElementById("singleStageView");
+    const pano = document.getElementById("panoramicView");
+    const btn = document.getElementById("togglePanoBtn");
+
+    if (panoActive) {
+      single.style.display = "none";
+      pano.style.display = "block";
+      btn.classList.add("active");
+    } else {
+      single.style.display = "flex";
+      pano.style.display = "none";
+      btn.classList.remove("active");
+    }
+  }
+
+  let isNative = false;
+  function toggleNativeScale() {
+    isNative = !isNative;
+    const card = document.querySelector(".viewport-card");
+    const btn = document.getElementById("toggleNativeBtn");
+    if (isNative) {
+      card.classList.add("native-size");
+      btn.classList.add("active");
+      btn.innerHTML = "&#x2922; Fit Scale";
+    } else {
+      card.classList.remove("native-size");
+      btn.classList.remove("active");
+      btn.innerHTML = "&#x2921; 100% Native (1080&times;1350)";
+    }
+  }
+
+  // Keyboard navigation
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "r" || e.key === "R") replayCurrentSlide();
+  });
+
+  init();
+</script>
+</body>
+</html>

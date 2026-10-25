@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IncuBrix Animated Carousel — INC-CAR-LIVE-798</title>
+<style>
+  :root {
+    --bg-dark: #090D16;
+    --card-bg: #111827;
+    --border: #1F2937;
+    --accent: #6366F1;
+    --accent-glow: rgba(99, 102, 241, 0.35);
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+  }
+  header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #A5B4FC;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .controls-bar {
+    display: flex;
+    gap: 12px;
+  }
+  button {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  button:hover {
+    background: #1F2937;
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  button.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  /* Main Stage - Unclipped Full Frame Display */
+  .stage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+  .viewport-card {
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 4 / 5;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    transition: max-width 0.25s ease;
+  }
+  .viewport-card.native-size {
+    max-width: 1080px;
+    width: 1080px;
+    height: 1350px;
+  }
+  .slide-stage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: visible;
+  }
+  .slide-stage svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+  /* Panoramic Seamless Mode - Unclipped */
+  .panoramic-mode {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 20px 0;
+  }
+  .panoramic-strip {
+    display: flex;
+    gap: 0;
+    width: max-content;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    border-radius: 0;
+    overflow: visible;
+  }
+  .panoramic-strip .pano-slide {
+    width: 480px;
+    height: 600px;
+    flex-shrink: 0;
+    overflow: visible;
+    border-right: 1px dashed rgba(255,255,255,0.25);
+  }
+  .panoramic-strip .pano-slide svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+  /* Bottom Navigation */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .dots-container {
+    display: flex;
+    gap: 8px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .slide-role-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h2 style="font-size:18px; font-weight:700;">IncuBrix Live Carousel Viewer</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Asset ID: INC-CAR-LIVE-798 • 5 Seamless Animated Slides</p>
+  </div>
+  <div class="controls-bar">
+    <button id="toggleNativeBtn" onclick="toggleNativeScale()">&#x2921; 100% Native (1080&times;1350)</button>
+    <button id="replayBtn" onclick="replayCurrentSlide()">&#x21bb; Replay Motion</button>
+    <button id="togglePanoBtn" onclick="togglePanoramicView()">&#x2922; Seamless Seam View</button>
+  </div>
+</header>
+
+<div class="stage-container" id="singleStageView">
+  <div class="viewport-card">
+    <div class="slide-stage" id="slideStage"></div>
+  </div>
+
+  <div class="slide-role-label" id="roleLabel">Slide 1 of 5</div>
+
+  <div class="nav-bar">
+    <button onclick="prevSlide()" id="prevBtn">&larr; Previous</button>
+    <div class="dots-container" id="dotsContainer"></div>
+    <button onclick="nextSlide()" id="nextBtn">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="panoramic-mode" id="panoramicView">
+  <div style="margin-bottom:12px; font-size:14px; color:var(--text-secondary);">
+    &#x2728; <strong>Seamless Swipe Verification:</strong> Notice how crossing elements continue across slide edges at the exact same height.
+  </div>
+  <div class="panoramic-strip" id="panoStrip"></div>
+</div>
+
+<script>
+  const slidesData = [
+    {
+      index: 1,
+      role: "Hook: Problem Statement",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap');
+            /* Base styles for animations */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Animation Keyframes */
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes subtleFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            @keyframes swipeHint {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(5px); }
+            }
+
+            /* Specific Animation Classes */
+            .bg-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .main-shape-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .headline-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+            .body-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+            .accent-anim-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+            .accent-anim-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6s forwards; }
+            .swipe-anim { animation: fadeIn 0.5s ease-out 2.8s forwards, swipeHint 1.5s ease-in-out 3.3s infinite; }
+            .logo-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .progress-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .line-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+            .float-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards, subtleFloat 4s ease-in-out 1.6s infinite alternate; }
+
+            /* General styles */
+            .text-headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: middle; }
+            .text-body { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; }
+            .text-accent { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-small { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; font-size: 28px; }
+
+            .progress-text { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: end; }
+            .brand-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: start; }
+            .brand-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 28px; }
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <!-- Filters -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFC107" flood-opacity="0.6"/>
+        </filter>
+
+        <!-- Reusable IncuBrix "I" logo fragment -->
+        <g id="incuBrixLogo" transform="translate(0,0)">
+            <rect x="0" y="0" width="40" height="40" rx="8" ry="8" fill="#007B8C" />
+            <text x="20" y="30" class="brand-logo-text" text-anchor="middle" font-size="28">I</text>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F0F4F8" class="a bg-anim" />
+
+    <!-- Main Visual Element - Overwhelmed Desk/Server -->
+    <g class="a main-shape-anim" transform="translate(540, 600)">
+        <rect x="-150" y="-100" width="300" height="200" rx="12" ry="12" fill="#0B2F3D" filter="url(#shadow)" />
+        <rect x="-130" y="-80" width="260" height="160" rx="8" ry="8" fill="#343A40" />
+        <rect x="-100" y="-60" width="200" height="30" rx="4" ry="4" fill="#F0F4F8" opacity="0.1" />
+        <rect x="-100" y="-20" width="200" height="30" rx="4" ry="4" fill="#F0F4F8" opacity="0.1" />
+        <rect x="-100" y="20" width="200" height="30" rx="4" ry="4" fill="#F0F4F8" opacity="0.1" />
+
+        <!-- Messy lines/data -->
+        <path d="M -160 -120 C -200 -80 -200 80 -160 120" stroke="#FFC107" stroke-width="6" fill="none" opacity="0.6" stroke-dasharray="10 5" class="a accent-anim-1" />
+        <path d="M 160 -120 C 200 -80 200 80 160 120" stroke="#FFC107" stroke-width="6" fill="none" opacity="0.6" stroke-dasharray="10 5" class="a accent-anim-1" />
+        <line x1="-80" y1="-80" x2="80" y2="80" stroke="#FFC107" stroke-width="4" opacity="0.6" class="a accent-anim-1" />
+        <line x1="80" y1="-80" x2="-80" y2="80" stroke="#FFC107" stroke-width="4" opacity="0.6" class="a accent-anim-1" />
+    </g>
+
+    <!-- Headline -->
+    <text x="540" y="280" font-size="96" class="a headline-anim text-headline">Weekend CreatorOps Draining Your Team?</text>
+
+    <!-- Supporting Text -->
+    <text x="540" y="390" font-size="42" class="a body-anim text-body">Discover how IncuBrix automates content,</text>
+    <text x="540" y="440" font-size="42" class="a body-anim text-body">freeing your engineers.</text>
+
+    <!-- Continuous Line Element (Seam) -->
+    <path d="M -100 750 C 200 720 800 780 1180 750" stroke="#FFC107" stroke-width="10" fill="none" class="a line-anim" stroke-linecap="round" />
+    <circle cx="950" cy="750" r="15" fill="#FFC107" class="a accent-anim-2" />
+    <circle cx="1030" cy="750" r="10" fill="#FFC107" class="a accent-anim-2" />
+
+    <!-- Progress Indicator -->
+    <text x="1008" y="100" font-size="36" class="a progress-anim progress-text">1 / 5</text>
+
+    <!-- Brand Mark -->
+    <g class="a logo-anim" transform="translate(72, 1254)">
+        <use href="#incuBrixLogo" />
+    </g>
+    <text x="125" y="1278" font-size="36" class="a logo-anim brand-text">IncuBrix</text>
+
+    <!-- Swipe Cue -->
+    <g class="a swipe-anim" transform="translate(980, 1150)">
+        <path d="M 0 0 L 20 20 L 0 40" fill="none" stroke="#343A40" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+</svg>`
+    },
+    {
+      index: 2,
+      role: "Agitation: Problem Deep Dive",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap');
+            /* Base styles for animations */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Animation Keyframes */
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes subtleFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            @keyframes swipeHint {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(5px); }
+            }
+
+            /* Specific Animation Classes */
+            .bg-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .main-shape-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .headline-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+            .body-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+            .accent-anim-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+            .accent-anim-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6s forwards; }
+            .swipe-anim { animation: fadeIn 0.5s ease-out 2.8s forwards, swipeHint 1.5s ease-in-out 3.3s infinite; }
+            .logo-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .progress-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .line-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+            .float-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards, subtleFloat 4s ease-in-out 1.6s infinite alternate; }
+
+            /* General styles */
+            .text-headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: middle; }
+            .text-body { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; }
+            .text-accent { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-small { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; font-size: 28px; }
+
+            .progress-text { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: end; }
+            .brand-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: start; }
+            .brand-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 28px; }
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <!-- Filters -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFC107" flood-opacity="0.6"/>
+        </filter>
+
+        <!-- Reusable IncuBrix "I" logo fragment -->
+        <g id="incuBrixLogo" transform="translate(0,0)">
+            <rect x="0" y="0" width="40" height="40" rx="8" ry="8" fill="#007B8C" />
+            <text x="20" y="30" class="brand-logo-text" text-anchor="middle" font-size="28">I</text>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F0F4F8" class="a bg-anim" />
+
+    <!-- Main Visual Element - Tangled Wires / Bottleneck -->
+    <g class="a main-shape-anim" transform="translate(540, 600)">
+        <path d="M -200 -150 Q 0 -250 200 -150 Q 300 0 200 150 Q 0 250 -200 150 Q -300 0 -200 -150 Z" fill="#0B2F3D" filter="url(#shadow)" opacity="0.1" />
+        <path d="M -150 -100 C -250 -50 -150 50 -100 100 C 0 150 100 50 150 100 C 250 50 150 -50 100 -100 C 0 -150 -100 -50 -150 -100"
+            stroke="#FFC107" stroke-width="8" fill="none" opacity="0.8" class="a accent-anim-1" stroke-linecap="round" />
+        <path d="M -100 -50 C -150 -25 -100 25 -50 50 C 0 75 50 25 100 50 C 150 25 100 -25 50 -50 C 0 -75 -50 -25 -100 -50"
+            stroke="#007B8C" stroke-width="6" fill="none" opacity="0.8" class="a accent-anim-2" stroke-linecap="round" />
+        <circle cx="0" cy="0" r="40" fill="#F0F4F8" filter="url(#shadow)" />
+        <path d="M -20 -20 L 20 20 M 20 -20 L -20 20" stroke="#343A40" stroke-width="6" stroke-linecap="round" class="a accent-anim-2" />
+    </g>
+
+    <!-- Headline -->
+    <text x="540" y="280" font-size="96" class="a headline-anim text-headline">Manual Content Creation Slows Growth.</text>
+
+    <!-- Supporting Text -->
+    <text x="540" y="390" font-size="42" class="a body-anim text-body">Hours lost on repetitive tasks mean</text>
+    <text x="540" y="440" font-size="42" class="a body-anim text-body">missed opportunities and burnout.</text>
+
+    <!-- Continuous Line Element (Seam) -->
+    <path d="M -100 750 C 200 720 800 780 1180 750" stroke="#FFC107" stroke-width="10" fill="none" class="a line-anim" stroke-linecap="round" transform="translate(-1080 0)" />
+    <circle cx="70" cy="750" r="15" fill="#FFC107" class="a accent-anim-2" />
+    <circle cx="150" cy="750" r="10" fill="#FFC107" class="a accent-anim-2" />
+
+    <!-- Progress Indicator -->
+    <text x="1008" y="100" font-size="36" class="a progress-anim progress-text">2 / 5</text>
+
+    <!-- Brand Mark -->
+    <g class="a logo-anim" transform="translate(72, 1254)">
+        <use href="#incuBrixLogo" />
+    </g>
+    <text x="125" y="1278" font-size="36" class="a logo-anim brand-text">IncuBrix</text>
+
+    <!-- Swipe Cue -->
+    <g class="a swipe-anim" transform="translate(980, 1150)">
+        <path d="M 0 0 L 20 20 L 0 40" fill="none" stroke="#343A40" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+</svg>`
+    },
+    {
+      index: 3,
+      role: "Solution Introduction",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap');
+            /* Base styles for animations */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Animation Keyframes */
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes subtleFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            @keyframes swipeHint {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(5px); }
+            }
+
+            /* Specific Animation Classes */
+            .bg-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .main-shape-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .headline-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+            .body-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+            .accent-anim-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+            .accent-anim-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6s forwards; }
+            .swipe-anim { animation: fadeIn 0.5s ease-out 2.8s forwards, swipeHint 1.5s ease-in-out 3.3s infinite; }
+            .logo-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .progress-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .line-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+            .float-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards, subtleFloat 4s ease-in-out 1.6s infinite alternate; }
+
+            /* General styles */
+            .text-headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-body { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; }
+            .text-accent { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-small { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; font-size: 28px; }
+
+            .progress-text { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: end; }
+            .brand-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: start; }
+            .brand-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 28px; }
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <!-- Filters -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFC107" flood-opacity="0.6"/>
+        </filter>
+
+        <!-- Reusable IncuBrix "I" logo fragment -->
+        <g id="incuBrixLogo" transform="translate(0,0)">
+            <rect x="0" y="0" width="40" height="40" rx="8" ry="8" fill="#007B8C" />
+            <text x="20" y="30" class="brand-logo-text" text-anchor="middle" font-size="28">I</text>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F0F4F8" class="a bg-anim" />
+
+    <!-- Main Visual Element - IncuBrix Core / Automation Hub -->
+    <g class="a main-shape-anim" transform="translate(540, 600)">
+        <circle cx="0" cy="0" r="180" fill="#007B8C" filter="url(#shadow)" />
+        <circle cx="0" cy="0" r="150" fill="#F0F4F8" />
+        <path d="M -100 -50 L 100 -50 L 100 50 L -100 50 Z" fill="#FFC107" opacity="0.3" class="a accent-anim-1"/>
+        <path d="M -150 0 L -75 -130 L 75 -130 L 150 0 L 75 130 L -75 130 Z" fill="none" stroke="#0B2F3D" stroke-width="8" class="a accent-anim-1" />
+        <circle cx="0" cy="0" r="60" fill="#0B2F3D" />
+        <text x="0" y="15" font-size="36" fill="#F0F4F8" font-family="'Montserrat', sans-serif" font-weight="700" text-anchor="middle">AI</text>
+
+        <!-- Connecting lines -->
+        <path d="M -180 0 L -300 -100 M -180 0 L -300 100 M 180 0 L 300 -100 M 180 0 L 300 100" stroke="#FFC107" stroke-width="6" class="a accent-anim-2" stroke-linecap="round" />
+    </g>
+
+    <!-- Headline -->
+    <text x="540" y="280" font-size="96" class="a headline-anim text-headline">Automate CreatorOps with IncuBrix.</text>
+
+    <!-- Supporting Text -->
+    <text x="540" y="390" font-size="42" class="a body-anim text-body">Seamlessly integrate AI-powered workflows</text>
+    <text x="540" y="440" font-size="42" class="a body-anim text-body">into your existing stack.</text>
+
+    <!-- Continuous Line Element (Seam) -->
+    <path d="M -100 750 C 200 720 800 780 1180 750" stroke="#FFC107" stroke-width="10" fill="none" class="a line-anim" stroke-linecap="round" transform="translate(-2160 0)" />
+    <!-- This path on slide 3 connects from slide 2, but its visible segment needs adjustment.
+         Correct approach: just draw the local segment that appears to continue.
+         The instruction "draw the crossing element in BOTH slides, offset by exactly 1080px" implies
+         that for slide k, it's \`path d="..."\` and for slide k+1 it's \`path d="..." transform="translate(-1080,0)"\`.
+         Thus, for slide 3, it would be \`transform="translate(-2160,0)"\` IF the path's origin is always from the first slide.
+         Let's stick to the simplest interpretation for the continuity of the line segment:
+         The line segment that crosses from slide 2 to 3 means the RIGHT edge of slide 2's line and LEFT edge of slide 3's line must be identical.
+         So, for slide 3, the line starts visible from x=0. The "translate(-1080,0)" should be for the element that *started* on the previous slide.
+         This is the element on slide 2 that had translate(-1080,0) (which is the main path) that should now be translate(-2160,0) on slide 3 for visual continuity.
+         However, the simple path from -100 to 1180 is repeated on each slide.
+         Slide 1: Path drawn normally.
+         Slide 2: Path drawn with transform(-1080,0).
+         Slide 3: Path drawn with transform(-2160,0). This makes the *start* of the original path (-100,750) now appear at (-2160 -100, 750) = (-2260, 750) relative to slide 3's viewbox.
+         The portion that is visible on slide 3 is from x=0 to x=1080 of the shifted path.
+         The end of the path \`(1180, 750)\` when shifted by \`-2160\` is at \`(1180-2160, 750) = (-980, 750)\`.
+         This means the path is entirely off-screen. My interpretation of the transform logic is flawed for the continuity.
+
+         "Draw the crossing element in BOTH slides, offset by exactly 1080px."
+         This means the portion of the path that is visible on the right of slide K (e.g., \`M 980 750 L 1080 750\`) must be identical to the portion of the path on the left of slide K+1 (\`M 0 750 L 100 750\`).
+         This means the path definition itself must be modified for each slide to ensure the \`d\` attribute draws the relevant 1080px segment, and the part that crosses is explicitly drawn on both.
+
+         Let's try a simpler approach for the continuous line where each slide draws its own 'segment' but with matching start/end points.
+         If I want a smooth wave:
+         Slide 1: \`M 0 750 C 300 720 700 780 1080 750\`
+         Slide 2: \`M 0 750 C 300 720 700 780 1080 750\` (Visually, this should be the continuation).
+
+         The instruction implies ONE wide canvas cut into N slides.
+         If an element crosses the right edge of slide K, it means its coordinate \`x_k = 1080\` on slide K maps to \`x_{k+1} = 0\` on slide K+1.
+         So if I have \`path d="M 0 750 C ... 1080 750"\` on slide 1.
+         Then on slide 2, I need a path that STARTS at \`M 0 750\` and continues.
+         This means the *entire path* must be defined as \`M 0 750 C ... 1080 750 C ... 2160 750 C ... 3240 750 ...\` and then a \`clip-path\` is used for each slide, or a \`transform\` on the entire longer path.
+
+         Let's define a single long path in \`defs\` and clip it. That's the most robust way.
+         Long path for 5 slides: \`5 * 1080 = 5400px\`.
+         Let's define a path roughly 5500px long, to ensure enough overflow for transitions.
+         \`path_continuous = "M 0 750 C 270 720 810 780 1080 750 C 1350 720 1890 780 2160 750 C 2430 720 2970 780 3240 750 C 3510 720 4050 780 4320 750 C 4590 720 5130 780 5400 750"\`
+         Then for each slide \`k\` (0-indexed), I display this path within a group \`transform="translateX(-k * 1080)"\`.
+
+         This is much better.
+
+         Redefining \`defs\` for the continuous line part:
+         Add \`continuousLinePathData\` in \`defs\`.
+         And also a \`clipPath\` for each slide.
+    -->
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap');
+            /* Base styles for animations */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Animation Keyframes */
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes subtleFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            @keyframes swipeHint {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(5px); }
+            }
+
+            /* Specific Animation Classes */
+            .bg-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .main-shape-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .headline-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+            .body-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+            .accent-anim-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+            .accent-anim-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6s forwards; }
+            .swipe-anim { animation: fadeIn 0.5s ease-out 2.8s forwards, swipeHint 1.5s ease-in-out 3.3s infinite; }
+            .logo-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .progress-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .line-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+            .float-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards, subtleFloat 4s ease-in-out 1.6s infinite alternate; }
+
+            /* General styles */
+            .text-headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-body { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; }
+            .text-accent { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-small { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; font-size: 28px; }
+
+            .progress-text { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: end; }
+            .brand-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: start; }
+            .brand-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 28px; }
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <!-- Filters -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFC107" flood-opacity="0.6"/>
+        </filter>
+
+        <!-- Reusable IncuBrix "I" logo fragment -->
+        <g id="incuBrixLogo" transform="translate(0,0)">
+            <rect x="0" y="0" width="40" height="40" rx="8" ry="8" fill="#007B8C" />
+            <text x="20" y="30" class="brand-logo-text" text-anchor="middle" font-size="28">I</text>
+        </g>
+
+        <!-- Continuous line path definition, spanning multiple slides -->
+        <path id="continuousLinePathData" d="M 0 750 C 270 720 810 780 1080 750 C 1350 720 1890 780 2160 750 C 2430 720 2970 780 3240 750 C 3510 720 4050 780 4320 750 C 4590 720 5130 780 5400 750" />
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F0F4F8" class="a bg-anim" />
+
+    <!-- Main Visual Element - IncuBrix Core / Automation Hub -->
+    <g class="a main-shape-anim" transform="translate(540, 600)">
+        <circle cx="0" cy="0" r="180" fill="#007B8C" filter="url(#shadow)" />
+        <circle cx="0" cy="0" r="150" fill="#F0F4F8" />
+        <path d="M -100 -50 L 100 -50 L 100 50 L -100 50 Z" fill="#FFC107" opacity="0.3" class="a accent-anim-1"/>
+        <path d="M -150 0 L -75 -130 L 75 -130 L 150 0 L 75 130 L -75 130 Z" fill="none" stroke="#0B2F3D" stroke-width="8" class="a accent-anim-1" />
+        <circle cx="0" cy="0" r="60" fill="#0B2F3D" />
+        <text x="0" y="15" font-size="36" fill="#F0F4F8" font-family="'Montserrat', sans-serif" font-weight="700" text-anchor="middle">AI</text>
+
+        <!-- Connecting lines -->
+        <path d="M -180 0 L -300 -100 M -180 0 L -300 100 M 180 0 L 300 -100 M 180 0 L 300 100" stroke="#FFC107" stroke-width="6" class="a accent-anim-2" stroke-linecap="round" />
+    </g>
+
+    <!-- Headline -->
+    <text x="540" y="280" font-size="96" class="a headline-anim text-headline">Automate CreatorOps with IncuBrix.</text>
+
+    <!-- Supporting Text -->
+    <text x="540" y="390" font-size="42" class="a body-anim text-body">Seamlessly integrate AI-powered workflows</text>
+    <text x="540" y="440" font-size="42" class="a body-anim text-body">into your existing stack.</text>
+
+    <!-- Continuous Line Element (Seam) -->
+    <g transform="translate(-2160 0)">
+        <use href="#continuousLinePathData" stroke="#FFC107" stroke-width="10" fill="none" class="a line-anim" stroke-linecap="round" />
+    </g>
+    <circle cx="210" cy="750" r="15" fill="#FFC107" class="a accent-anim-2" />
+    <circle cx="290" cy="750" r="10" fill="#FFC107" class="a accent-anim-2" />
+
+    <!-- Progress Indicator -->
+    <text x="1008" y="100" font-size="36" class="a progress-anim progress-text">3 / 5</text>
+
+    <!-- Brand Mark -->
+    <g class="a logo-anim" transform="translate(72, 1254)">
+        <use href="#incuBrixLogo" />
+    </g>
+    <text x="125" y="1278" font-size="36" class="a logo-anim brand-text">IncuBrix</text>
+
+    <!-- Swipe Cue -->
+    <g class="a swipe-anim" transform="translate(980, 1150)">
+        <path d="M 0 0 L 20 20 L 0 40" fill="none" stroke="#343A40" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+</svg>`
+    },
+    {
+      index: 4,
+      role: "Features",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap');
+            /* Base styles for animations */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Animation Keyframes */
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes subtleFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            @keyframes swipeHint {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(5px); }
+            }
+
+            /* Specific Animation Classes */
+            .bg-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .main-shape-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .headline-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+            .body-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+            .accent-anim-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+            .accent-anim-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6s forwards; }
+            .swipe-anim { animation: fadeIn 0.5s ease-out 2.8s forwards, swipeHint 1.5s ease-in-out 3.3s infinite; }
+            .logo-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .progress-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .line-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+            .float-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards, subtleFloat 4s ease-in-out 1.6s infinite alternate; }
+
+            /* General styles */
+            .text-headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-body { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; }
+            .text-accent { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-small { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; font-size: 28px; }
+
+            .progress-text { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: end; }
+            .brand-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: start; }
+            .brand-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 28px; }
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <!-- Filters -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFC107" flood-opacity="0.6"/>
+        </filter>
+
+        <!-- Reusable IncuBrix "I" logo fragment -->
+        <g id="incuBrixLogo" transform="translate(0,0)">
+            <rect x="0" y="0" width="40" height="40" rx="8" ry="8" fill="#007B8C" />
+            <text x="20" y="30" class="brand-logo-text" text-anchor="middle" font-size="28">I</text>
+        </g>
+
+        <!-- Continuous line path definition, spanning multiple slides -->
+        <path id="continuousLinePathData" d="M 0 750 C 270 720 810 780 1080 750 C 1350 720 1890 780 2160 750 C 2430 720 2970 780 3240 750 C 3510 720 4050 780 4320 750 C 4590 720 5130 780 5400 750" />
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F0F4F8" class="a bg-anim" />
+
+    <!-- Main Visual Element - AI Brain / Workflow Diagram -->
+    <g class="a main-shape-anim" transform="translate(540, 600)">
+        <rect x="-200" y="-150" width="400" height="300" rx="20" ry="20" fill="#0B2F3D" filter="url(#shadow)" />
+        <path d="M -150 -100 C -100 -120 100 -120 150 -100 L 150 100 C 100 120 -100 120 -150 100 Z" fill="#007B8C" opacity="0.8" class="a float-anim" />
+        <circle cx="0" cy="0" r="50" fill="#F0F4F8" />
+        <text x="0" y="15" font-size="36" fill="#0B2F3D" font-family="'Montserrat', sans-serif" font-weight="700" text-anchor="middle">AI</text>
+
+        <!-- Output nodes / icons -->
+        <g class="a accent-anim-1" transform="translate(-300, -50)">
+            <rect x="-30" y="-30" width="60" height="60" rx="10" fill="#FFC107" />
+            <path d="M -15 -10 L 15 -10 L 15 10 L -15 10 Z M 0 -20 L 0 -10 M 0 10 L 0 20" stroke="#F0F4F8" stroke-width="4" stroke-linecap="round" />
+        </g>
+        <g class="a accent-anim-1" transform="translate(-300, 100)">
+            <rect x="-30" y="-30" width="60" height="60" rx="10" fill="#FFC107" />
+            <circle cx="0" cy="0" r="15" fill="#F0F4F8" />
+            <circle cx="10" cy="-10" r="5" fill="#0B2F3D" />
+        </g>
+        <g class="a accent-anim-1" transform="translate(300, -50)">
+            <rect x="-30" y="-30" width="60" height="60" rx="10" fill="#FFC107" />
+            <path d="M -15 0 L 15 0 M 0 -15 L 0 15" stroke="#F0F4F8" stroke-width="4" stroke-linecap="round" />
+        </g>
+        <g class="a accent-anim-1" transform="translate(300, 100)">
+            <rect x="-30" y="-30" width="60" height="60" rx="10" fill="#FFC107" />
+            <path d="M -15 10 L 0 -10 L 15 10 Z" fill="#F0F4F8" />
+        </g>
+
+        <!-- Flow lines -->
+        <path d="M -150 20 L -270 -30 M -150 70 L -270 120 M 150 20 L 270 -30 M 150 70 L 270 120" stroke="#FFC107" stroke-width="6" class="a accent-anim-2" stroke-linecap="round" />
+    </g>
+
+    <!-- Headline -->
+    <text x="540" y="280" font-size="96" class="a headline-anim text-headline">AI-Powered Workflows. Scale Effortlessly.</text>
+
+    <!-- Supporting Text -->
+    <text x="540" y="390" font-size="42" class="a body-anim text-body">Generate, optimize, and deploy content</text>
+    <text x="540" y="440" font-size="42" class="a body-anim text-body">at scale, without custom dev.</text>
+
+    <!-- Continuous Line Element (Seam) -->
+    <g transform="translate(-3240 0)">
+        <use href="#continuousLinePathData" stroke="#FFC107" stroke-width="10" fill="none" class="a line-anim" stroke-linecap="round" />
+    </g>
+    <circle cx="350" cy="750" r="15" fill="#FFC107" class="a accent-anim-2" />
+    <circle cx="430" cy="750" r="10" fill="#FFC107" class="a accent-anim-2" />
+
+    <!-- Progress Indicator -->
+    <text x="1008" y="100" font-size="36" class="a progress-anim progress-text">4 / 5</text>
+
+    <!-- Brand Mark -->
+    <g class="a logo-anim" transform="translate(72, 1254)">
+        <use href="#incuBrixLogo" />
+    </g>
+    <text x="125" y="1278" font-size="36" class="a logo-anim brand-text">IncuBrix</text>
+
+    <!-- Swipe Cue -->
+    <g class="a swipe-anim" transform="translate(980, 1150)">
+        <path d="M 0 0 L 20 20 L 0 40" fill="none" stroke="#343A40" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+</svg>`
+    },
+    {
+      index: 5,
+      role: "Call to Action",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap');
+            /* Base styles for animations */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Animation Keyframes */
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes subtleFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            @keyframes swipeHint {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(5px); }
+            }
+            @keyframes subtleGlow {
+                0%, 100% { filter: drop-shadow(0 0 0 rgba(255,193,7,0.4)); }
+                50% { filter: drop-shadow(0 0 8px rgba(255,193,7,0.7)); }
+            }
+
+            /* Specific Animation Classes */
+            .bg-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .main-shape-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .headline-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+            .body-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+            .accent-anim-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+            .accent-anim-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6s forwards; }
+            .swipe-anim { animation: fadeIn 0.5s ease-out 2.8s forwards, swipeHint 1.5s ease-in-out 3.3s infinite; }
+            .logo-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .progress-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .line-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+            .float-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards, subtleFloat 4s ease-in-out 1.6s infinite alternate; }
+            .cta-button-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.0s forwards, subtleGlow 3s ease-in-out 2.8s infinite; }
+
+
+            /* General styles */
+            .text-headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: middle; }
+            .text-body { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; }
+            .text-accent { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-small { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; font-size: 28px; }
+
+            .progress-text { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: end; }
+            .brand-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: start; }
+            .brand-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 28px; }
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <!-- Filters -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFC107" flood-opacity="0.6"/>
+        </filter>
+
+        <!-- Reusable IncuBrix "I" logo fragment -->
+        <g id="incuBrixLogo" transform="translate(0,0)">
+            <rect x="0" y="0" width="40" height="40" rx="8" ry="8" fill="#007B8C" />
+            <text x="20" y="30" class="brand-logo-text" text-anchor="middle" font-size="28">I</text>
+        </g>
+
+        <!-- Continuous line path definition, spanning multiple slides -->
+        <path id="continuousLinePathData" d="M 0 750 C 270 720 810 780 1080 750 C 1350 720 1890 780 2160 750 C 2430 720 2970 780 3240 750 C 3510 720 4050 780 4320 750 C 4590 720 5130 780 5400 750" />
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F0F4F8" class="a bg-anim" />
+
+    <!-- Main Visual Element - Growth Chart / Network Expansion -->
+    <g class="a main-shape-anim" transform="translate(540, 600)">
+        <rect x="-250" y="-150" width="500" height="300" rx="12" ry="12" fill="#0B2F3D" filter="url(#shadow)" />
+        <path d="M -200 100 L -100 0 L 0 50 L 100 -50 L 200 0" stroke="#FFC107" stroke-width="12" fill="none" class="a float-anim" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="200" cy="0" r="20" fill="#FFC107" class="a accent-anim-1" />
+        <circle cx="-200" cy="100" r="20" fill="#007B8C" class="a accent-anim-1" />
+        <path d="M -200 100 C -150 150 150 150 200 100" stroke="#007B8C" stroke-width="8" fill="none" opacity="0.4" class="a accent-anim-2" />
+        <path d="M -200 50 C -150 100 150 100 200 50" stroke="#007B8C" stroke-width="6" fill="none" opacity="0.2" class="a accent-anim-2" />
+    </g>
+
+    <!-- Headline -->
+    <text x="540" y="280" font-size="96" class="a headline-anim text-headline">Unlock Growth. Try IncuBrix Free.</text>
+
+    <!-- Supporting Text -->
+    <text x="540" y="390" font-size="42" class="a body-anim text-body">Experience peak efficiency. Limited-time</text>
+    <text x="540" y="440" font-size="42" class="a body-anim text-body">trial for new users.</text>
+
+    <!-- Call to Action Button -->
+    <g class="a cta-button-anim">
+        <rect x="290" y="850" width="500" height="100" rx="20" ry="20" fill="#FFC107" filter="url(#shadow)" />
+        <text x="540" y="915" font-size="48" fill="#0B2F3D" font-family="'Montserrat', sans-serif" font-weight="700" text-anchor="middle">Start Your Free Trial!</text>
+    </g>
+
+    <!-- Brand Details -->
+    <text x="540" y="1050" font-size="36" fill="#007B8C" font-family="'Lato', sans-serif" font-weight="700" text-anchor="middle" class="a body-anim">incubrix.com</text>
+    <text x="540" y="1090" font-size="36" fill="#343A40" font-family="'Lato', sans-serif" font-weight="400" text-anchor="middle" class="a body-anim">@incubrix</text>
+
+
+    <!-- Progress Indicator -->
+    <text x="1008" y="100" font-size="36" class="a progress-anim progress-text">5 / 5</text>
+
+    <!-- Brand Mark -->
+    <g class="a logo-anim" transform="translate(72, 1254)">
+        <use href="#incuBrixLogo" />
+    </g>
+    <text x="125" y="1278" font-size="36" class="a logo-anim brand-text">IncuBrix</text>
+
+    <!-- No Swipe Cue on last slide -->
+</svg>`
+    },
+  ];
+
+  let currentIndex = 0;
+  const stage = document.getElementById("slideStage");
+  const roleLabel = document.getElementById("roleLabel");
+  const dotsContainer = document.getElementById("dotsContainer");
+
+  function init() {
+    // Render dots
+    dotsContainer.innerHTML = "";
+    slidesData.forEach((_, i) => {
+      const d = document.createElement("div");
+      d.className = "dot" + (i === 0 ? " active" : "");
+      d.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(d);
+    });
+
+    // Populate panoramic strip
+    const panoStrip = document.getElementById("panoStrip");
+    panoStrip.innerHTML = "";
+    slidesData.forEach((s) => {
+      const container = document.createElement("div");
+      container.className = "pano-slide";
+      container.innerHTML = s.svg;
+      panoStrip.appendChild(container);
+    });
+
+    renderSlide(0);
+  }
+
+  function renderSlide(index) {
+    currentIndex = index;
+    const slide = slidesData[index];
+    // Re-inject HTML to re-trigger CSS keyframe animations fresh
+    stage.innerHTML = slide.svg;
+    roleLabel.textContent = `Slide ${slide.index} of ${slidesData.length} - ${slide.role}`;
+
+    document.querySelectorAll(".dot").forEach((d, i) => {
+      d.className = "dot" + (i === index ? " active" : "");
+    });
+
+    document.getElementById("prevBtn").disabled = index === 0;
+    document.getElementById("nextBtn").disabled = index === slidesData.length - 1;
+  }
+
+  function nextSlide() {
+    if (currentIndex < slidesData.length - 1) {
+      renderSlide(currentIndex + 1);
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex > 0) {
+      renderSlide(currentIndex - 1);
+    }
+  }
+
+  function goToSlide(index) {
+    renderSlide(index);
+  }
+
+  function replayCurrentSlide() {
+    renderSlide(currentIndex);
+  }
+
+  let panoActive = false;
+  function togglePanoramicView() {
+    panoActive = !panoActive;
+    const single = document.getElementById("singleStageView");
+    const pano = document.getElementById("panoramicView");
+    const btn = document.getElementById("togglePanoBtn");
+
+    if (panoActive) {
+      single.style.display = "none";
+      pano.style.display = "block";
+      btn.classList.add("active");
+    } else {
+      single.style.display = "flex";
+      pano.style.display = "none";
+      btn.classList.remove("active");
+    }
+  }
+
+  let isNative = false;
+  function toggleNativeScale() {
+    isNative = !isNative;
+    const card = document.querySelector(".viewport-card");
+    const btn = document.getElementById("toggleNativeBtn");
+    if (isNative) {
+      card.classList.add("native-size");
+      btn.classList.add("active");
+      btn.innerHTML = "&#x2922; Fit Scale";
+    } else {
+      card.classList.remove("native-size");
+      btn.classList.remove("active");
+      btn.innerHTML = "&#x2921; 100% Native (1080&times;1350)";
+    }
+  }
+
+  // Keyboard navigation
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "r" || e.key === "R") replayCurrentSlide();
+  });
+
+  init();
+</script>
+</body>
+</html>

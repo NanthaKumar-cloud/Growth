@@ -1,0 +1,34 @@
+[  0.0s] Scene 1 (hook, 5.8s, -> wiperight)
+   VO: Listen to that sizzle... that is the sound of pure, golden crunch.
+   TEXT: {'headline': 'Hear That Golden Sizzle?', 'support': 'Fresh off the blazing cast-iron tawa'}
+   VISUAL: Macro top-down view of a dark cast-iron tawa. Smooth white batter swirls outward in a fast vector spiral while droplets of golden ghee pop with energetic spark graphics and steam curves surge upward.
+
+[  5.1s] Scene 2 (problem, 5.4s, -> zoomin)
+   VO: Forget dry, dull everyday lunches.
+   TEXT: {'headline': 'Tired Of Boring Lunch?', 'support': 'Say goodbye to bland meals'}
+   VISUAL: A dull gray cardboard takeout container appears on screen but is instantly sliced diagonally by the glowing turmeric steam ribbon, dissolving the drab box into vibrant amber sparks.
+
+[  9.8s] Scene 3 (solution, 7.3s, -> slideleft)
+   VO: Welcome to The Dosa Corner, where every crepe is spun fresh and laced with pure ghee.
+   TEXT: {'headline': 'Welcome To The Dosa Corner', 'support': 'Golden, crispy, and cooked fresh'}
+   VISUAL: Hero visual of a towering, golden conical paper-roast dosa rising smoothly off the tawa. Micro-droplets of glistening ghee shine on its crisp lattice texture against a warm glowing backdrop.
+
+[ 16.4s] Scene 4 (feature, 8.1s, -> smoothleft)
+   VO: From ultra-thin paper roasts to spiced potato masala and fiery ghee podi specials.
+   TEXT: {'headline': 'Paper Roast, Masala & Ghee Podi', 'support': 'Crafted with authentic spices'}
+   VISUAL: A dynamic 3-card carousel featuring three house specials: classic paper roast cone, folded spiced potato masala dosa, and a brilliant red podi-dusted dosa with melting butter.
+
+[ 23.8s] Scene 5 (feature, 6.4s, -> slideright)
+   VO: Dipped into three handcrafted chutneys and piping hot sambar.
+   TEXT: {'headline': '3 Fresh Chutneys + Hot Sambar', 'support': 'Coconut, spicy tomato, and mint dips'}
+   VISUAL: Top-down geometric layout featuring three colorful ceramic chutney pots—creamy white coconut, vibrant orange tomato-onion, mint green—encircling a steaming bowl of aromatic sambar with mustard seed garnish.
+
+[ 29.5s] Scene 6 (offer, 7.1s, -> zoomin)
+   VO: Crafted from fresh-ground batter daily—combos start at just ninety-nine rupees!
+   TEXT: {'headline': 'Combos From ₹99', 'support': '100% daily fresh batter'}
+   VISUAL: A bold, sunburst value badge pops into the frame showing '₹99 Special'. Stylized vector rice grains and urad dal float gently in an orbital motion around the offer stamp.
+
+[ 35.9s] Scene 7 (cta, 7.9s, -> fade)
+   VO: Visit The Dosa Corner today, or order online at dosacorner.com!
+   TEXT: {'headline': 'The Dosa Corner', 'support': 'Order now at dosacorner.com | @thedosacorner'}
+   VISUAL: Grand final platter on a vibrant green banana leaf displaying the golden cone dosa, all three chutneys, hot sambar, and a 'Combos from ₹99' sticker. Bold brand logo and clear web address frame the bottom.

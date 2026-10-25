@@ -1,0 +1,63 @@
+{
+  "title": "IncuBrix CreatorOps Platform Launch",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Unified CreatorOps Platform",
+    "website": "incubrix.com",
+    "handle": "@incubrix"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "Domina tu contenido con IA",
+    "headline_emphasis": "Domina",
+    "support": "Descubre ideas, crea en múltiples formatos y publica sin límites.",
+    "cta": "Empieza hoy",
+    "steps": [
+      "Descubre",
+      "Crea",
+      "Publica"
+    ],
+    "stats": [
+      {
+        "value": "20",
+        "label": "EXPERTOS"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "Warm and elegant tech poster featuring a glowing central prism hub connected to floating content nodes, symbolizing unified creation and AI processing.",
+  "design_system": {
+    "palette": {
+      "bg": "#1A1528",
+      "bg_alt": "#2D224C",
+      "primary": "#E0A96D",
+      "secondary": "#C85A32",
+      "accent": "#F4D06F",
+      "ink": "#FFFFFF",
+      "paper": "#F9F6F0"
+    },
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "DM Sans"
+    },
+    "headline_caps": false,
+    "corner_radius": 28,
+    "style": "Sophisticated vector illustration with rich warm gradients, soft overlapping glowing shapes and golden metallic accents",
+    "lighting": "Warm ambient light from top-left casting soft violet and amber glows"
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A large glowing faceted golden prism in the upper center, emitting three concentric rings representing text, audio and video streams, with small floating glowing nodes orbiting it.",
+    "props": [
+      "Golden sparkles floating around the prism",
+      "Soft translucent content cards drifting near the center",
+      "Subtle light rays emanating from the top left",
+      "Warm glowing dust motes floating gently"
+    ],
+    "background": "Deep rich plum-to-indigo gradient with a warm amber radial glow behind the hero zone",
+    "decor": [
+      "Large faint geometric arch in the background",
+      "Subtle overlapping abstract wave shapes"
+    ]
+  }
+}

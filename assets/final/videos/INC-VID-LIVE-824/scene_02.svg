@@ -1,0 +1,233 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@600;700;800&amp;display=swap');
+
+  .bg-fill { fill: #161B22; }
+  .text-ink { fill: #F0F6FC; }
+  .text-paper { fill: #8B949E; }
+  .text-primary { fill: #58A6FF; }
+  .text-accent { fill: #F85149; }
+  .text-secondary { fill: #3FB950; }
+
+  .a {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.5); }
+    70% { transform: scale(1.08); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes floatApp1 {
+    0%, 100% { transform: translate(0, 0) rotate(-6deg); }
+    50% { transform: translate(-15px, -20px) rotate(-10deg); }
+  }
+
+  @keyframes floatApp2 {
+    0%, 100% { transform: translate(0, 0) rotate(8deg); }
+    50% { transform: translate(18px, 15px) rotate(12deg); }
+  }
+
+  @keyframes floatApp3 {
+    0%, 100% { transform: translate(0, 0) rotate(-4deg); }
+    50% { transform: translate(-12px, 18px) rotate(-6deg); }
+  }
+
+  @keyframes floatApp4 {
+    0%, 100% { transform: translate(0, 0) rotate(5deg); }
+    50% { transform: translate(15px, -18px) rotate(8deg); }
+  }
+
+  @keyframes tanglePulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(248,81,73,0.3)); }
+    50% { transform: scale(1.03); filter: drop-shadow(0 0 25px rgba(248,81,73,0.7)); }
+  }
+
+  @keyframes drainCounter {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes ribbonWave {
+    0%, 100% { transform: translateY(0) scaleX(1); }
+    50% { transform: translateY(-4px) scaleX(1.02); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+</style>
+
+<defs>
+  <filter id="glow-accent" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="12" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+
+  <filter id="glow-primary" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="10" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+
+  <filter id="card-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.6" />
+  </filter>
+
+  <linearGradient id="card-grad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#161B22" />
+    <stop offset="100%" stop-color="#0D1117" />
+  </linearGradient>
+
+  <linearGradient id="ribbon-grad" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#58A6FF" stop-opacity="0" />
+    <stop offset="20%" stop-color="#58A6FF" stop-opacity="0.8" />
+    <stop offset="80%" stop-color="#3FB950" stop-opacity="0.8" />
+    <stop offset="100%" stop-color="#3FB950" stop-opacity="0" />
+  </linearGradient>
+
+  <linearGradient id="tangle-grad-1" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#F85149" />
+    <stop offset="100%" stop-color="#D29922" />
+  </linearGradient>
+</defs>
+
+<rect width="1080" height="1920" class="bg-fill" />
+
+<!-- Background grid lines for technical minimal look -->
+<g class="a" style="animation: fadeIn 1s ease-out 0.1s forwards;">
+  <path d="M0 320 H1080 M0 640 H1080 M0 960 H1080 M0 1280 H1080 M0 1600 H1080" stroke="#21262D" stroke-width="2" />
+  <path d="M216 0 V1920 M432 0 V1920 M648 0 V1920 M864 0 V1920" stroke="#21262D" stroke-width="2" />
+</g>
+
+<!-- Persistent brand mark -->
+<g transform="translate(80, 80)">
+  <circle cx="20" cy="20" r="16" fill="#58A6FF" opacity="0.2" />
+  <circle cx="20" cy="20" r="8" fill="#58A6FF" />
+  <text x="52" y="27" font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="700" fill="#F0F6FC" letter-spacing="1">CreatorOps</text>
+</g>
+
+<!-- Localized Ribbon Accent -->
+<g transform="translate(390, 1250)">
+  <g class="a" style="animation: fadeIn 0.8s ease-out 0.2s forwards;">
+    <path d="M 0 16 Q 150 -16 300 16" fill="none" stroke="url(#ribbon-grad)" stroke-width="32" stroke-linecap="round" filter="url(#glow-primary)" style="animation: ribbonWave 4s ease-in-out infinite;" />
+  </g>
+</g>
+
+<!-- TANGLED KNOT VECTORS & DRAINED CASH (Centerpiece replacing old hub) -->
+<g transform="translate(540, 720)">
+  <g class="a" style="animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards;">
+    
+    <!-- Outer glow warning frame -->
+    <rect x="-210" y="-230" width="420" height="460" rx="24" fill="none" stroke="#F85149" stroke-width="4" opacity="0.5" filter="url(#glow-accent)" style="animation: tanglePulse 2s ease-in-out infinite;" />
+
+    <rect x="-200" y="-220" width="400" height="440" rx="24" fill="url(#card-grad)" stroke="#30363D" stroke-width="2" filter="url(#card-shadow)" />
+
+    <!-- Window top bar -->
+    <path d="M -200 -160 H 200" stroke="#30363D" stroke-width="2" />
+    <circle cx="-160" cy="-190" r="8" fill="#F85149" />
+    <circle cx="-135" cy="-190" r="8" fill="#D29922" />
+    <circle cx="-110" cy="-190" r="8" fill="#3FB950" />
+    <text x="0" y="-183" font-family="'Inter', Arial, sans-serif" font-size="16" font-weight="600" fill="#8B949E" text-anchor="middle">WORKFLOW_DEADLOCK.err</text>
+
+    <!-- Tangled Knot Graphic (Red & Yellow intersecting complex loops) -->
+    <g transform="translate(0, -30)">
+      <path d="M -100 -50 C -30 -120 80 -80 100 -20 C 120 40 40 100 -20 80 C -80 60 -140 -20 -100 -50 Z" fill="none" stroke="#F85149" stroke-width="8" stroke-linecap="round" opacity="0.85" />
+      <path d="M -90 40 C -40 100 60 50 90 -20 C 120 -90 10 -110 -40 -70 C -90 -30 -140 10 -90 40 Z" fill="none" stroke="#D29922" stroke-width="6" stroke-linecap="round" opacity="0.85" />
+      <path d="M -50 -90 C 20 -40 50 80 0 90 C -50 100 -120 20 -100 -40" fill="none" stroke="#58A6FF" stroke-width="5" stroke-linecap="round" opacity="0.6" />
+      
+      <!-- Frustrated Avatar Head in center of tangle -->
+      <circle cx="0" cy="0" r="45" fill="#21262D" stroke="#8B949E" stroke-width="3" />
+      <!-- Closed stressed eyes -->
+      <path d="M -20 -8 L -10 -15 M -10 -8 L -20 -15" stroke="#F85149" stroke-width="3" stroke-linecap="round" />
+      <path d="M 10 -8 L 20 -15 M 20 -8 L 10 -15" stroke="#F85149" stroke-width="3" stroke-linecap="round" />
+      <!-- Stressed mouth -->
+      <path d="M -12 18 Q 0 10 12 18" fill="none" stroke="#F85149" stroke-width="3" stroke-linecap="round" />
+      <!-- Hands on temples -->
+      <path d="M -35 10 C -55 5 -55 -25 -35 -20" fill="none" stroke="#8B949E" stroke-width="4" stroke-linecap="round" />
+      <path d="M 35 10 C 55 5 55 -25 35 -20" fill="none" stroke="#8B949E" stroke-width="4" stroke-linecap="round" />
+    </g>
+
+    <!-- Cash Drain Counter (Beat 2 action) -->
+    <g transform="translate(0, 130)" filter="url(#card-shadow)" style="animation: drainCounter 1.5s ease-in-out infinite;">
+      <rect x="-140" y="-30" width="280" height="60" rx="30" fill="#DA3633" opacity="0.25" />
+      <rect x="-140" y="-30" width="280" height="60" rx="30" fill="none" stroke="#F85149" stroke-width="2.5" />
+      <text x="0" y="8" font-family="'Poppins', Arial, sans-serif" font-size="28" font-weight="800" fill="#F85149" text-anchor="middle">- $450.00 / MO</text>
+    </g>
+
+  </g>
+</g>
+
+<!-- App Icon 1 (Carried over from Scene 1, top-left) -->
+<g transform="translate(140, 480)">
+  <g class="a" style="animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards, floatApp1 5s ease-in-out 1.2s infinite;">
+    <rect x="-50" y="-50" width="100" height="100" rx="24" fill="url(#card-grad)" stroke="#58A6FF" stroke-width="2" filter="url(#card-shadow)" />
+    <path d="M -20 -15 H 20 C 28 -15 32 -11 32 -3 V 11 C 32 19 28 23 20 23 H 10 L 0 35 L -10 23 H -20 C -28 23 -32 19 -32 11 V -3 C -32 -11 -28 -15 -20 -15 Z" fill="none" stroke="#58A6FF" stroke-width="4" stroke-linejoin="round" />
+    <circle cx="-12" cy="4" r="3" fill="#58A6FF" />
+    <circle cx="0" cy="4" r="3" fill="#58A6FF" />
+    <circle cx="12" cy="4" r="3" fill="#58A6FF" />
+  </g>
+  <!-- Tangled connection line reaching toward center -->
+  <path d="M 50 20 C 150 50 250 100 350 180" fill="none" stroke="#F85149" stroke-width="4" stroke-dasharray="8 8" opacity="0.8" />
+</g>
+
+<!-- App Icon 2 (Carried over from Scene 1, bottom-left) -->
+<g transform="translate(180, 1020)">
+  <g class="a" style="animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.5s forwards, floatApp2 6s ease-in-out 1.4s infinite;">
+    <rect x="-50" y="-50" width="100" height="100" rx="24" fill="url(#card-grad)" stroke="#D29922" stroke-width="2" filter="url(#card-shadow)" />
+    <path d="M 18 10 H -16 C -24 10 -30 4 -30 -4 C -30 -12 -24 -18 -16 -18 C -14 -26 -6 -32 3 -30 C 12 -28 18 -20 18 -12 C 24 -12 28 -8 28 -2 C 28 5 24 10 18 10 Z" fill="none" stroke="#D29922" stroke-width="4" stroke-linejoin="round" />
+  </g>
+  <!-- Tangled connection line reaching toward center -->
+  <path d="M 50 -30 C 150 -100 220 -200 320 -250" fill="none" stroke="#D29922" stroke-width="4" stroke-dasharray="8 8" opacity="0.8" />
+</g>
+
+<!-- App Icon 3 (Carried over from Scene 1, top-right) -->
+<g transform="translate(900, 520)">
+  <g class="a" style="animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.6s forwards, floatApp3 5.5s ease-in-out 1.3s infinite;">
+    <rect x="-50" y="-50" width="100" height="100" rx="24" fill="url(#card-grad)" stroke="#F85149" stroke-width="2" filter="url(#card-shadow)" />
+    <path d="M -22 22 H 22" stroke="#F85149" stroke-width="4" stroke-linecap="round" />
+    <path d="M -16 12 V -2 M -6 12 V -14 M 4 12 V -6 M 14 12 V -22" stroke="#F85149" stroke-width="4" stroke-linecap="round" />
+  </g>
+  <!-- Tangled connection line reaching toward center -->
+  <path d="M -50 20 C -150 50 -250 100 -330 150" fill="none" stroke="#F85149" stroke-width="4" stroke-dasharray="8 8" opacity="0.8" />
+</g>
+
+<!-- App Icon 4 (Carried over from Scene 1, bottom-right) -->
+<g transform="translate(880, 1000)">
+  <g class="a" style="animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.7s forwards, floatApp4 6.2s ease-in-out 1.6s infinite;">
+    <rect x="-50" y="-50" width="100" height="100" rx="24" fill="url(#card-grad)" stroke="#3FB950" stroke-width="2" filter="url(#card-shadow)" />
+    <path d="M -18 -24 H 18 V 24 L 12 18 L 6 24 L 0 18 L -6 24 L -12 18 L -18 24 Z" fill="none" stroke="#3FB950" stroke-width="3" stroke-linejoin="round" />
+    <path d="M -10 -10 H 10 M -10 0 H 10 M -10 10 H 4" stroke="#3FB950" stroke-width="3" stroke-linecap="round" />
+  </g>
+  <!-- Tangled connection line reaching toward center -->
+  <path d="M -50 -30 C -150 -100 -230 -180 -310 -230" fill="none" stroke="#3FB950" stroke-width="4" stroke-dasharray="8 8" opacity="0.8" />
+</g>
+
+<!-- TYPOGRAPHY / HEADLINE (Problem Statement) -->
+<g transform="translate(540, 1420)">
+  <!-- Headline -->
+  <g class="a" style="animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards;">
+    <text x="0" y="0" font-family="'Poppins', Arial, sans-serif" font-size="64" font-weight="800" fill="#F0F6FC" text-anchor="middle" letter-spacing="-1">Fragmented Workflow</text>
+  </g>
+
+  <!-- Supporting text -->
+  <g class="a" style="animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.55s forwards;">
+    <text x="0" y="65" font-family="'Inter', Arial, sans-serif" font-size="28" font-weight="400" fill="#8B949E" text-anchor="middle">Wasting time and money on disconnected software</text>
+  </g>
+</g>
+
+</svg>

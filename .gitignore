@@ -1,7 +1,14 @@
-# Environment variables
+# Environment variables and credentials
 .env
 *.env
 !.env.example
+token.json
+*token*.json
+service_account*.json
+client_secret*.json
+*.pem
+*.key
+*.p12
 
 # Python
 __pycache__/
@@ -38,7 +45,19 @@ ENV/
 Thumbs.db
 Desktop.ini
 
-# Output cache and scratch
+# Output cache, temporary runs, and scratch
 *.log
 scratch/
 .pytest_cache/
+output/
+
+# Temporary root screenshots
+calendar_page.png
+calendar_youtube_btns.png
+carousel_studio_page.png
+image_studio_page.png
+library_page.png
+library_youtube_btns.png
+schedule_modal.png
+video_studio_page.png
+video_studio_youtube_btn.png

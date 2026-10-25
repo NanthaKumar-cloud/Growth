@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap');
+
+      .bg { fill: #0B0F19; }
+      .text-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 76px; fill: #F8FAFC; text-anchor: middle; }
+      .text-body { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 36px; fill: #94A3B8; text-anchor: middle; }
+      .text-cta { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 32px; fill: #0B0F19; text-anchor: middle; }
+      .text-mono { font-family: 'JetBrains Mono', monospace; font-size: 26px; }
+      
+      .a {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+      }
+
+      .a-bg { animation: fadeIn 0.4s ease-out 0s forwards; }
+      .a-head { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards; }
+      .a-body { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards; }
+      .a-hero { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards, float 5s ease-in-out 1.1s infinite; }
+      .a-cta { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.0s forwards; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#00FF87" />
+    </linearGradient>
+
+    <filter id="btnGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="1080" height="1350" class="bg" />
+
+  <!-- Tech Grid Background -->
+  <g opacity="0.15">
+    <path d="M 0 100 L 1080 100 M 0 300 L 1080 300 M 0 500 L 1080 500 M 0 700 L 1080 700 M 0 900 L 1080 900 M 0 1100 L 1080 1100" stroke="#1E293B" stroke-width="1" />
+    <path d="M 180 0 L 180 1350 M 360 0 L 360 1350 M 540 0 L 540 1350 M 720 0 L 720 1350 M 900 0 L 900 1350" stroke="#1E293B" stroke-width="1" />
+  </g>
+
+  <!-- Continuous Seam Pipeline at Bottom -->
+  <path d="M 0 1180 L 1080 1180" stroke="#00F0FF" stroke-width="2" stroke-dasharray="12 8" opacity="0.6" />
+
+  <!-- Left Edge Seam Continuation from Slide 4 (x=-40..40, y=600) -->
+  <g transform="translate(-40, 600)">
+    <path d="M 0 0 Q 40 -50 80 0" stroke="#00F0FF" stroke-width="4" fill="none" opacity="0.8" />
+  </g>
+
+  <!-- Top UI Header -->
+  <g transform="translate(72, 70)">
+    <path d="M 0 0 L 24 -12 L 48 0 L 24 12 Z" fill="#00F0FF" />
+    <path d="M 0 0 L 24 12 L 24 38 L 0 26 Z" fill="#0072FF" />
+    <path d="M 48 0 L 48 26 L 24 38 L 24 12 Z" fill="#00FF87" />
+    <text x="64" y="22" class="text-mono" font-weight="700" fill="#F8FAFC">IncuBrix</text>
+  </g>
+  <text x="1008" y="92" text-anchor="end" class="text-mono" font-weight="700" fill="#00F0FF">05 / 05</text>
+
+  <!-- Headline -->
+  <g transform="translate(540, 240)">
+    <g class="a a-head">
+      <text x="0" y="0" class="text-title">Claim Your Free</text>
+      <text x="0" y="90" class="text-title" fill="#00FF87">Weekend Trial Today.</text>
+    </g>
+  </g>
+
+  <!-- Supporting Body -->
+  <g transform="translate(540, 460)">
+    <g class="a a-body">
+      <text x="0" y="0" class="text-body">Deploy full CreatorOps before Monday standup.</text>
+      <text x="0" y="50" class="text-body">No credit card required to get started.</text>
+    </g>
+  </g>
+
+  <!-- Visual Rhyme: Central Hero Brix Cube Array (Slide 1 Rhyme) -->
+  <g transform="translate(540, 700)">
+    <g class="a a-hero">
+      <g transform="scale(0.85)">
+        <path d="M -100 0 L 0 -50 L 100 0 L 0 50 Z" fill="#00F0FF" opacity="0.9" filter="url(#btnGlow)" />
+        <path d="M -100 0 L 0 50 L 0 110 L -100 60 Z" fill="#0072FF" />
+        <path d="M 100 0 L 0 50 L 0 110 L 100 60 Z" fill="#00FF87" />
+      </g>
+    </g>
+  </g>
+
+  <!-- CTA Offer Box -->
+  <g transform="translate(240, 880)">
+    <g class="a a-cta">
+      <!-- Outer Glow Button -->
+      <rect x="0" y="0" width="600" height="96" rx="48" fill="url(#btnGrad)" filter="url(#btnGlow)" />
+      <text x="300" y="58" class="text-cta">TRY INCUBRIX FREE</text>
+      
+      <!-- Target Website & Handle -->
+      <text x="300" y="150" class="text-mono" fill="#F8FAFC" text-anchor="middle">incubrix.com</text>
+      <text x="300" y="195" class="text-mono" font-size="22" fill="#94A3B8" text-anchor="middle">@incubrix</text>
+    </g>
+  </g>
+</svg>

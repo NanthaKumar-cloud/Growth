@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IncuBrix Animated Carousel — INC-CAR-LIVE-472</title>
+<style>
+  :root {
+    --bg-dark: #090D16;
+    --card-bg: #111827;
+    --border: #1F2937;
+    --accent: #6366F1;
+    --accent-glow: rgba(99, 102, 241, 0.35);
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+  }
+  header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #A5B4FC;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .controls-bar {
+    display: flex;
+    gap: 12px;
+  }
+  button {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  button:hover {
+    background: #1F2937;
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  button.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  /* Main Stage - Unclipped Full Frame Display */
+  .stage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+  .viewport-card {
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 4 / 5;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    transition: max-width 0.25s ease;
+  }
+  .viewport-card.native-size {
+    max-width: 1080px;
+    width: 1080px;
+    height: 1350px;
+  }
+  .slide-stage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: visible;
+  }
+  .slide-stage svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+  /* Panoramic Seamless Mode - Unclipped */
+  .panoramic-mode {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 20px 0;
+  }
+  .panoramic-strip {
+    display: flex;
+    gap: 0;
+    width: max-content;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    border-radius: 0;
+    overflow: visible;
+  }
+  .panoramic-strip .pano-slide {
+    width: 480px;
+    height: 600px;
+    flex-shrink: 0;
+    overflow: visible;
+    border-right: 1px dashed rgba(255,255,255,0.25);
+  }
+  .panoramic-strip .pano-slide svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+  /* Bottom Navigation */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .dots-container {
+    display: flex;
+    gap: 8px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .slide-role-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h2 style="font-size:18px; font-weight:700;">IncuBrix Live Carousel Viewer</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Asset ID: INC-CAR-LIVE-472 • 5 Seamless Animated Slides</p>
+  </div>
+  <div class="controls-bar">
+    <button id="toggleNativeBtn" onclick="toggleNativeScale()">&#x2921; 100% Native (1080&times;1350)</button>
+    <button id="replayBtn" onclick="replayCurrentSlide()">&#x21bb; Replay Motion</button>
+    <button id="togglePanoBtn" onclick="togglePanoramicView()">&#x2922; Seamless Seam View</button>
+  </div>
+</header>
+
+<div class="stage-container" id="singleStageView">
+  <div class="viewport-card">
+    <div class="slide-stage" id="slideStage"></div>
+  </div>
+
+  <div class="slide-role-label" id="roleLabel">Slide 1 of 5</div>
+
+  <div class="nav-bar">
+    <button onclick="prevSlide()" id="prevBtn">&larr; Previous</button>
+    <div class="dots-container" id="dotsContainer"></div>
+    <button onclick="nextSlide()" id="nextBtn">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="panoramic-mode" id="panoramicView">
+  <div style="margin-bottom:12px; font-size:14px; color:var(--text-secondary);">
+    &#x2728; <strong>Seamless Swipe Verification:</strong> Notice how crossing elements continue across slide edges at the exact same height.
+  </div>
+  <div class="panoramic-strip" id="panoStrip"></div>
+</div>
+
+<script>
+  const slidesData = [
+    {
+      index: 1,
+      role: "HOOK",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+
+      * { box-sizing: border-box; }
+      text { font-family: 'Inter', Arial, sans-serif; }
+      .title-text { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; }
+
+      .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+      .a1 { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+      .a2 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+      .a3 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+      .a4 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards, float 4s ease-in-out 1.8s infinite; }
+      .a5 { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards; }
+
+      @keyframes fadeIn { to { opacity: 1; } }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes scaleUp { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0F17"/>
+      <stop offset="100%" stop-color="#131B2A"/>
+    </linearGradient>
+
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="url(#bgGrad)"/>
+
+  <!-- Grid Tech Lines Overlay -->
+  <g opacity="0.05">
+    <line x1="0" y1="270" x2="1080" y2="270" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="540" x2="1080" y2="540" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="810" x2="1080" y2="810" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="1080" x2="1080" y2="1080" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="360" y1="0" x2="360" y2="1350" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="720" y1="0" x2="720" y2="1350" stroke="#FFFFFF" stroke-width="1"/>
+  </g>
+
+  <!-- Continuous Seam Flow Path (Starts left, exits right at y=920) -->
+  <path d="M 0,950 C 300,900 700,1000 1080,920" stroke="#F59E0B" stroke-width="4" fill="none" opacity="0.6" filter="url(#glow)"/>
+  <path d="M 0,950 C 300,900 700,1000 1080,920" stroke="#FBBF24" stroke-width="2" fill="none" opacity="0.9"/>
+
+  <!-- Top Navigation / Persistent UI -->
+  <g class="a a1">
+    <text x="72" y="100" fill="#F59E0B" font-size="24" font-weight="700" letter-spacing="2">SULLAN MADHAN x INCUBRIX</text>
+    <rect x="912" y="72" width="96" height="40" rx="20" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="960" y="98" fill="#94A3B8" font-size="22" font-weight="600" text-anchor="middle">1 / 5</text>
+  </g>
+
+  <!-- Main Title Block -->
+  <g class="a a2">
+    <text x="540" y="240" fill="#FFFFFF" font-size="82" class="title-text" text-anchor="middle">Why B2B SaaS is Like</text>
+    <text x="540" y="335" fill="url(#goldGrad)" font-size="82" class="title-text" text-anchor="middle" filter="url(#glow)">a Perfect Dosa</text>
+  </g>
+
+  <!-- Subtitle -->
+  <g class="a a3">
+    <text x="540" y="420" fill="#94A3B8" font-size="34" font-weight="400" text-anchor="middle">High heat execution, zero churn, and golden scalability at peak demand.</text>
+  </g>
+
+  <!-- Hero Visual: Tech Tawa & Golden Dosa Cylinder -->
+  <g class="a a4">
+    <!-- Card Frame -->
+    <rect x="140" y="490" width="800" height="490" rx="24" fill="url(#cardGrad)" stroke="#334155" stroke-width="2" filter="url(#shadow)"/>
+    
+    <!-- Outer Heat Ring / Tawa Base -->
+    <circle cx="540" cy="710" r="190" fill="#0B0F17" stroke="#F59E0B" stroke-width="3" stroke-dasharray="8 8" opacity="0.8"/>
+    <circle cx="540" cy="710" r="160" fill="#161F30" stroke="#10B981" stroke-width="2" opacity="0.5"/>
+    
+    <!-- Geometric Dosa Cone / Triangle Motif -->
+    <path d="M 540,570 L 680,810 L 400,810 Z" fill="url(#goldGrad)" opacity="0.9" filter="url(#glow)"/>
+    <path d="M 540,570 L 680,810 L 540,810 Z" fill="#D97706" opacity="0.4"/>
+    
+    <!-- Tech Parameter Badges -->
+    <rect x="180" y="530" width="180" height="48" rx="12" fill="#0F172A" stroke="#10B981" stroke-width="1.5"/>
+    <text x="270" y="561" fill="#10B981" font-size="22" font-weight="600" text-anchor="middle">temp: 450°C</text>
+
+    <rect x="720" y="530" width="180" height="48" rx="12" fill="#0F172A" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="810" y="561" fill="#F59E0B" font-size="22" font-weight="600" text-anchor="middle">crisp: 100%</text>
+
+    <rect x="180" y="890" width="220" height="48" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <text x="290" y="921" fill="#94A3B8" font-size="20" font-weight="500" text-anchor="middle">batter.ferment()</text>
+
+    <rect x="680" y="890" width="220" height="48" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <text x="790" y="921" fill="#94A3B8" font-size="20" font-weight="500" text-anchor="middle">churn: 0.00%</text>
+
+    <!-- Center Status Indicator -->
+    <circle cx="540" cy="710" r="16" fill="#10B981" filter="url(#glow)"/>
+  </g>
+
+  <!-- Bottom Swipe Bar Callout -->
+  <g class="a a5">
+    <rect x="360" y="1120" width="360" height="64" rx="32" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="520" y="1160" fill="#FFFFFF" font-size="28" font-weight="600" text-anchor="middle">Swipe For Recipe</text>
+    <path d="M 640,1152 L 652,1152 L 646,1146 M 652,1152 L 646,1158" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Brand Footer -->
+  <text x="540" y="1280" fill="#64748B" font-size="24" text-anchor="middle">incubrix.com • Sullan Madhan Masterclass</text>
+</svg>`
+    },
+    {
+      index: 2,
+      role: "PROBLEM / AGITATION",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+
+      * { box-sizing: border-box; }
+      text { font-family: 'Inter', Arial, sans-serif; }
+      .title-text { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; }
+
+      .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+      .a1 { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+      .a2 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+      .a3 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+      .a4 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards, float 4s ease-in-out 1.8s infinite; }
+      .a5 { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards; }
+
+      @keyframes fadeIn { to { opacity: 1; } }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes scaleUp { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0F17"/>
+      <stop offset="100%" stop-color="#131B2A"/>
+    </linearGradient>
+
+    <linearGradient id="redGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#F87171"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <filter id="redGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="url(#bgGrad)"/>
+
+  <!-- Grid Tech Lines Overlay -->
+  <g opacity="0.05">
+    <line x1="0" y1="270" x2="1080" y2="270" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="540" x2="1080" y2="540" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="810" x2="1080" y2="810" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="1080" x2="1080" y2="1080" stroke="#FFFFFF" stroke-width="1"/>
+  </g>
+
+  <!-- Continuous Seam Flow Path (Enters left at y=920, exits right at y=960) -->
+  <path d="M 0,920 C 300,840 700,1020 1080,960" stroke="#F59E0B" stroke-width="4" fill="none" opacity="0.6" filter="url(#redGlow)"/>
+  <path d="M 0,920 C 300,840 700,1020 1080,960" stroke="#FBBF24" stroke-width="2" fill="none" opacity="0.9"/>
+
+  <!-- Top Navigation / Persistent UI -->
+  <g class="a a1">
+    <text x="72" y="100" fill="#F59E0B" font-size="24" font-weight="700" letter-spacing="2">SULLAN MADHAN x INCUBRIX</text>
+    <rect x="912" y="72" width="96" height="40" rx="20" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="960" y="98" fill="#94A3B8" font-size="22" font-weight="600" text-anchor="middle">2 / 5</text>
+  </g>
+
+  <!-- Main Title Block -->
+  <g class="a a2">
+    <text x="540" y="240" fill="#FFFFFF" font-size="80" class="title-text" text-anchor="middle">Cold Tawa, Soggy Churn:</text>
+    <text x="540" y="335" fill="url(#redGrad)" font-size="80" class="title-text" text-anchor="middle" filter="url(#redGlow)">The Dev Debt Crisis</text>
+  </g>
+
+  <!-- Subtitle -->
+  <g class="a a3">
+    <text x="540" y="420" fill="#94A3B8" font-size="34" font-weight="400" text-anchor="middle">Uncalibrated infrastructure causes lag, high drop-off, and burnt capital.</text>
+  </g>
+
+  <!-- Agitation Graphic: Error Console & Soggy Performance Diagnostics -->
+  <g class="a a4">
+    <rect x="140" y="490" width="800" height="490" rx="24" fill="url(#cardGrad)" stroke="#EF4444" stroke-width="2" opacity="0.9" filter="url(#shadow)"/>
+    
+    <!-- Top Console Bar -->
+    <path d="M 140,514 C 140,500 151,490 165,490 L 915,490 C 929,490 940,500 940,514 L 940,550 L 140,550 Z" fill="#0F172A"/>
+    <circle cx="180" cy="520" r="8" fill="#EF4444"/>
+    <circle cx="205" cy="520" r="8" fill="#F59E0B"/>
+    <circle cx="230" cy="520" r="8" fill="#10B981"/>
+    <text x="540" y="527" fill="#64748B" font-size="20" font-weight="600" text-anchor="middle">SYSTEM_DIAGNOSTIC // HIGH_LATENCY_ALERT</text>
+
+    <!-- Error Metrics Display -->
+    <g transform="translate(180, 590)">
+      <rect x="0" y="0" width="340" height="150" rx="16" fill="#0B0F17" stroke="#334155" stroke-width="1"/>
+      <text x="24" y="40" fill="#64748B" font-size="20">TAWA_HEAT_INDEX</text>
+      <text x="24" y="95" fill="#EF4444" font-size="52" font-weight="700">140°C</text>
+      <text x="200" y="95" fill="#EF4444" font-size="22" font-weight="600">(CRITICAL)</text>
+    </g>
+
+    <g transform="translate(560, 590)">
+      <rect x="0" y="0" width="340" height="150" rx="16" fill="#0B0F17" stroke="#334155" stroke-width="1"/>
+      <text x="24" y="40" fill="#64748B" font-size="20">USER_RETENTION</text>
+      <text x="24" y="95" fill="#EF4444" font-size="52" font-weight="700">18.4%</text>
+      <text x="210" y="95" fill="#EF4444" font-size="22" font-weight="600">(SOGGY)</text>
+    </g>
+
+    <!-- Warning Box -->
+    <rect x="180" y="770" width="720" height="160" rx="16" fill="#1E1215" stroke="#EF4444" stroke-width="1.5"/>
+    <path d="M 220,830 L 250,780 L 280,830 Z" fill="none" stroke="#EF4444" stroke-width="3" stroke-linejoin="round"/>
+    <text x="250" y="822" fill="#EF4444" font-size="26" font-weight="700" text-anchor="middle">!</text>
+    <text x="310" y="820" fill="#F87171" font-size="28" font-weight="600">Error: Batter stickiness bottleneck</text>
+    <text x="310" y="865" fill="#94A3B8" font-size="24">Poor stack configuration leads to unbaked SaaS pipelines.</text>
+  </g>
+
+  <!-- Bottom Swipe Bar Callout -->
+  <g class="a a5">
+    <rect x="360" y="1120" width="360" height="64" rx="32" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="520" y="1160" fill="#FFFFFF" font-size="28" font-weight="600" text-anchor="middle">See The Solution</text>
+    <path d="M 640,1152 L 652,1152 L 646,1146 M 652,1152 L 646,1158" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Brand Footer -->
+  <text x="540" y="1280" fill="#64748B" font-size="24" text-anchor="middle">incubrix.com • Sullan Madhan Masterclass</text>
+</svg>`
+    },
+    {
+      index: 3,
+      role: "SOLUTION / HOW IT WORKS",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+
+      * { box-sizing: border-box; }
+      text { font-family: 'Inter', Arial, sans-serif; }
+      .title-text { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; }
+
+      .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+      .a1 { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+      .a2 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+      .a3 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+      .a4 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards, float 4s ease-in-out 1.8s infinite; }
+      .a5 { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards; }
+
+      @keyframes fadeIn { to { opacity: 1; } }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes scaleUp { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0F17"/>
+      <stop offset="100%" stop-color="#131B2A"/>
+    </linearGradient>
+
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+
+    <filter id="greenGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="url(#bgGrad)"/>
+
+  <!-- Grid Tech Lines Overlay -->
+  <g opacity="0.05">
+    <line x1="0" y1="270" x2="1080" y2="270" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="540" x2="1080" y2="540" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="810" x2="1080" y2="810" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="1080" x2="1080" y2="1080" stroke="#FFFFFF" stroke-width="1"/>
+  </g>
+
+  <!-- Continuous Seam Flow Path (Enters left at y=960, exits right at y=910) -->
+  <path d="M 0,960 C 300,900 700,980 1080,910" stroke="#F59E0B" stroke-width="4" fill="none" opacity="0.6" filter="url(#greenGlow)"/>
+  <path d="M 0,960 C 300,900 700,980 1080,910" stroke="#FBBF24" stroke-width="2" fill="none" opacity="0.9"/>
+
+  <!-- Top Navigation / Persistent UI -->
+  <g class="a a1">
+    <text x="72" y="100" fill="#F59E0B" font-size="24" font-weight="700" letter-spacing="2">SULLAN MADHAN x INCUBRIX</text>
+    <rect x="912" y="72" width="96" height="40" rx="20" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="960" y="98" fill="#94A3B8" font-size="22" font-weight="600" text-anchor="middle">3 / 5</text>
+  </g>
+
+  <!-- Main Title Block -->
+  <g class="a a2">
+    <text x="540" y="240" fill="#FFFFFF" font-size="80" class="title-text" text-anchor="middle">The Three Signature</text>
+    <text x="540" y="335" fill="url(#greenGrad)" font-size="80" class="title-text" text-anchor="middle" filter="url(#greenGlow)">Chutneys of Growth</text>
+  </g>
+
+  <!-- Subtitle -->
+  <g class="a a3">
+    <text x="540" y="420" fill="#94A3B8" font-size="34" font-weight="400" text-anchor="middle">Mint for Retention, Coconut for Zero Latency, Chili for Acquisition.</text>
+  </g>
+
+  <!-- Solution Visual: 3 Node Chutney Architecture -->
+  <g class="a a4">
+    <!-- Node 1: Mint (Green / Retention) -->
+    <g transform="translate(120, 520)">
+      <rect x="0" y="0" width="840" height="130" rx="20" fill="#1E293B" stroke="#10B981" stroke-width="2" filter="url(#shadow)"/>
+      <circle cx="75" cy="65" r="40" fill="#10B981" opacity="0.2"/>
+      <circle cx="75" cy="65" r="24" fill="#10B981" filter="url(#greenGlow)"/>
+      <text x="140" y="55" fill="#FFFFFF" font-size="32" class="title-text">1. Mint Engine // High Retention</text>
+      <text x="140" y="95" fill="#94A3B8" font-size="24">Keeps user engagement sticky with zero drop-off.</text>
+      <rect x="680" y="40" width="120" height="50" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="1"/>
+      <text x="740" y="72" fill="#10B981" font-size="22" font-weight="700" text-anchor="middle">+94%</text>
+    </g>
+
+    <!-- Node 2: Coconut (White / Zero Latency) -->
+    <g transform="translate(120, 680)">
+      <rect x="0" y="0" width="840" height="130" rx="20" fill="#1E293B" stroke="#F8FAFC" stroke-width="1.5" filter="url(#shadow)"/>
+      <circle cx="75" cy="65" r="40" fill="#F8FAFC" opacity="0.15"/>
+      <circle cx="75" cy="65" r="24" fill="#F8FAFC"/>
+      <text x="140" y="55" fill="#FFFFFF" font-size="32" class="title-text">2. Coconut Cache // Sub-10ms Speed</text>
+      <text x="140" y="95" fill="#94A3B8" font-size="24">Smooth, ultra-fast data serving under heavy load.</text>
+      <rect x="680" y="40" width="120" height="50" rx="10" fill="#0F172A" stroke="#F8FAFC" stroke-width="1"/>
+      <text x="740" y="72" fill="#F8FAFC" font-size="22" font-weight="700" text-anchor="middle">4ms</text>
+    </g>
+
+    <!-- Node 3: Chili (Red / Acquisition) -->
+    <g transform="translate(120, 840)">
+      <rect x="0" y="0" width="840" height="130" rx="20" fill="#1E293B" stroke="#EF4444" stroke-width="1.5" filter="url(#shadow)"/>
+      <circle cx="75" cy="65" r="40" fill="#EF4444" opacity="0.2"/>
+      <circle cx="75" cy="65" r="24" fill="#EF4444"/>
+      <text x="140" y="55" fill="#FFFFFF" font-size="32" class="title-text">3. Red Chili Pipeline // Acquisition</text>
+      <text x="140" y="95" fill="#94A3B8" font-size="24">Spicy, high-converting growth triggers and viral loops.</text>
+      <rect x="680" y="40" width="120" height="50" rx="10" fill="#0F172A" stroke="#EF4444" stroke-width="1"/>
+      <text x="740" y="72" fill="#EF4444" font-size="22" font-weight="700" text-anchor="middle">12x</text>
+    </g>
+  </g>
+
+  <!-- Bottom Swipe Bar Callout -->
+  <g class="a a5">
+    <rect x="360" y="1120" width="360" height="64" rx="32" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="520" y="1160" fill="#FFFFFF" font-size="28" font-weight="600" text-anchor="middle">See Proof Data</text>
+    <path d="M 640,1152 L 652,1152 L 646,1146 M 652,1152 L 646,1158" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Brand Footer -->
+  <text x="540" y="1280" fill="#64748B" font-size="24" text-anchor="middle">incubrix.com • Sullan Madhan Masterclass</text>
+</svg>`
+    },
+    {
+      index: 4,
+      role: "PROOF / METRICS",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+
+      * { box-sizing: border-box; }
+      text { font-family: 'Inter', Arial, sans-serif; }
+      .title-text { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; }
+
+      .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+      .a1 { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+      .a2 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+      .a3 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+      .a4 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards, float 4s ease-in-out 1.8s infinite; }
+      .a5 { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards; }
+
+      @keyframes fadeIn { to { opacity: 1; } }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes scaleUp { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0F17"/>
+      <stop offset="100%" stop-color="#131B2A"/>
+    </linearGradient>
+
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="url(#bgGrad)"/>
+
+  <!-- Grid Tech Lines Overlay -->
+  <g opacity="0.05">
+    <line x1="0" y1="270" x2="1080" y2="270" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="540" x2="1080" y2="540" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="810" x2="1080" y2="810" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="1080" x2="1080" y2="1080" stroke="#FFFFFF" stroke-width="1"/>
+  </g>
+
+  <!-- Continuous Seam Flow Path (Enters left at y=910, exits right at y=950) -->
+  <path d="M 0,910 C 300,980 700,880 1080,950" stroke="#F59E0B" stroke-width="4" fill="none" opacity="0.6" filter="url(#glow)"/>
+  <path d="M 0,910 C 300,980 700,880 1080,950" stroke="#FBBF24" stroke-width="2" fill="none" opacity="0.9"/>
+
+  <!-- Top Navigation / Persistent UI -->
+  <g class="a a1">
+    <text x="72" y="100" fill="#F59E0B" font-size="24" font-weight="700" letter-spacing="2">SULLAN MADHAN x INCUBRIX</text>
+    <rect x="912" y="72" width="96" height="40" rx="20" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="960" y="98" fill="#94A3B8" font-size="22" font-weight="600" text-anchor="middle">4 / 5</text>
+  </g>
+
+  <!-- Main Title Block -->
+  <g class="a a2">
+    <text x="540" y="240" fill="#FFFFFF" font-size="80" class="title-text" text-anchor="middle">99.9% Uptime and 10x</text>
+    <text x="540" y="335" fill="url(#goldGrad)" font-size="80" class="title-text" text-anchor="middle" filter="url(#glow)">Crisp Conversion</text>
+  </g>
+
+  <!-- Subtitle -->
+  <g class="a a3">
+    <text x="540" y="420" fill="#94A3B8" font-size="34" font-weight="400" text-anchor="middle">Sullan Madhan’s methodology gives SaaS teams battle-tested velocity.</text>
+  </g>
+
+  <!-- Metrics Dashboard Card -->
+  <g class="a a4">
+    <rect x="140" y="490" width="800" height="490" rx="24" fill="url(#cardGrad)" stroke="#334155" stroke-width="2" filter="url(#shadow)"/>
+
+    <!-- Left Metric: Growth Chart -->
+    <g transform="translate(180, 530)">
+      <rect x="0" y="0" width="340" height="200" rx="16" fill="#0B0F17" stroke="#10B981" stroke-width="1"/>
+      <text x="24" y="40" fill="#64748B" font-size="20">THROUGHPUT_GAIN</text>
+      <text x="24" y="105" fill="#10B981" font-size="60" font-weight="700">+320%</text>
+      <path d="M 240,150 L 270,110 L 290,130 L 320,80" stroke="#10B981" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Right Metric: Ping Gauge -->
+    <g transform="translate(560, 530)">
+      <rect x="0" y="0" width="340" height="200" rx="16" fill="#0B0F17" stroke="#F59E0B" stroke-width="1"/>
+      <text x="24" y="40" fill="#64748B" font-size="20">AVG_SERVE_LATENCY</text>
+      <text x="24" y="105" fill="#F59E0B" font-size="60" font-weight="700">12ms</text>
+      <text x="24" y="160" fill="#94A3B8" font-size="20">Zero stutter under heavy traffic</text>
+    </g>
+
+    <!-- Bottom Testimonial / Proof Quote -->
+    <g transform="translate(180, 760)">
+      <rect x="0" y="0" width="720" height="180" rx="16" fill="#0B0F17" stroke="#334155" stroke-width="1"/>
+      <circle cx="60" cy="60" r="28" fill="#F59E0B"/>
+      <text x="60" y="68" fill="#0B0F17" font-size="26" font-weight="700" text-anchor="middle">SM</text>
+      <text x="110" y="55" fill="#FFFFFF" font-size="24" font-weight="600">Sullan Madhan Engineering Review</text>
+      <text x="110" y="85" fill="#10B981" font-size="20">Verified Growth Architecture</text>
+      <text x="30" y="135" fill="#94A3B8" font-size="22" font-style="italic">"Treating pipeline latency like cold tawa surface completely transformed our conversion stats."</text>
+    </g>
+  </g>
+
+  <!-- Bottom Swipe Bar Callout -->
+  <g class="a a5">
+    <rect x="360" y="1120" width="360" height="64" rx="32" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="520" y="1160" fill="#FFFFFF" font-size="28" font-weight="600" text-anchor="middle">Claim Free Access</text>
+    <path d="M 640,1152 L 652,1152 L 646,1146 M 652,1152 L 646,1158" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Brand Footer -->
+  <text x="540" y="1280" fill="#64748B" font-size="24" text-anchor="middle">incubrix.com • Sullan Madhan Masterclass</text>
+</svg>`
+    },
+    {
+      index: 5,
+      role: "CTA / OFFER",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+
+      * { box-sizing: border-box; }
+      text { font-family: 'Inter', Arial, sans-serif; }
+      .title-text { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; }
+
+      .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+      .a1 { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+      .a2 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+      .a3 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+      .a4 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+      .a5 { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards; }
+
+      @keyframes fadeIn { to { opacity: 1; } }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes scaleUp { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+      @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0F17"/>
+      <stop offset="100%" stop-color="#131B2A"/>
+    </linearGradient>
+
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="url(#bgGrad)"/>
+
+  <!-- Grid Tech Lines Overlay -->
+  <g opacity="0.05">
+    <line x1="0" y1="270" x2="1080" y2="270" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="540" x2="1080" y2="540" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="810" x2="1080" y2="810" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="1080" x2="1080" y2="1080" stroke="#FFFFFF" stroke-width="1"/>
+  </g>
+
+  <!-- Continuous Seam Flow Path (Enters left at y=950, gracefully terminates/loops back) -->
+  <path d="M 0,950 C 300,900 700,1000 1080,950" stroke="#F59E0B" stroke-width="4" fill="none" opacity="0.6" filter="url(#glow)"/>
+  <path d="M 0,950 C 300,900 700,1000 1080,950" stroke="#FBBF24" stroke-width="2" fill="none" opacity="0.9"/>
+
+  <!-- Top Navigation / Persistent UI -->
+  <g class="a a1">
+    <text x="72" y="100" fill="#F59E0B" font-size="24" font-weight="700" letter-spacing="2">SULLAN MADHAN x INCUBRIX</text>
+    <rect x="912" y="72" width="96" height="40" rx="20" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="960" y="98" fill="#94A3B8" font-size="22" font-weight="600" text-anchor="middle">5 / 5</text>
+  </g>
+
+  <!-- Main Title Block (Rhymes visually with Slide 1) -->
+  <g class="a a2">
+    <text x="540" y="240" fill="#FFFFFF" font-size="80" class="title-text" text-anchor="middle">Ready to Scale Your</text>
+    <text x="540" y="335" fill="url(#goldGrad)" font-size="80" class="title-text" text-anchor="middle" filter="url(#glow)">Crisp SaaS Engine?</text>
+  </g>
+
+  <!-- Subtitle -->
+  <g class="a a3">
+    <text x="540" y="420" fill="#94A3B8" font-size="34" font-weight="400" text-anchor="middle">Deploy high-yield growth stack today. Try IncuBrix free at incubrix.com.</text>
+  </g>
+
+  <!-- Main Offer & Action Card -->
+  <g class="a a4">
+    <rect x="140" y="490" width="800" height="490" rx="24" fill="url(#cardGrad)" stroke="#F59E0B" stroke-width="2" filter="url(#shadow)"/>
+
+    <!-- Geometric Badge / Hero Crest -->
+    <circle cx="540" cy="620" r="70" fill="#0B0F17" stroke="#F59E0B" stroke-width="2" filter="url(#glow)"/>
+    <path d="M 540,575 L 585,650 L 495,650 Z" fill="url(#goldGrad)"/>
+    <circle cx="540" cy="620" r="12" fill="#10B981"/>
+
+    <!-- Offer Text Inside Card -->
+    <text x="540" y="740" fill="#FFFFFF" font-size="36" class="title-text" text-anchor="middle">IncuBrix Developer License</text>
+    <text x="540" y="790" fill="#10B981" font-size="26" font-weight="600" text-anchor="middle">✓ Instant Infrastructure Setup Included</text>
+
+    <!-- Large Interactive CTA Button -->
+    <rect x="240" y="830" width="600" height="90" rx="45" fill="url(#goldGrad)" filter="url(#glow)"/>
+    <text x="540" y="888" fill="#0B0F17" font-size="34" class="title-text" text-anchor="middle">TRY INCUBRIX FREE →</text>
+  </g>
+
+  <!-- Final Footer Details -->
+  <g class="a a5">
+    <rect x="300" y="1040" width="480" height="60" rx="16" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="540" y="1078" fill="#FFFFFF" font-size="26" font-weight="600" text-anchor="middle">incubrix.com • @sullanmadhan</text>
+  </g>
+
+  <!-- Brand Footer -->
+  <text x="540" y="1280" fill="#64748B" font-size="24" text-anchor="middle">Crafted for B2B SaaS Founders &amp; Growth Engineers</text>
+</svg>`
+    },
+  ];
+
+  let currentIndex = 0;
+  const stage = document.getElementById("slideStage");
+  const roleLabel = document.getElementById("roleLabel");
+  const dotsContainer = document.getElementById("dotsContainer");
+
+  function init() {
+    // Render dots
+    dotsContainer.innerHTML = "";
+    slidesData.forEach((_, i) => {
+      const d = document.createElement("div");
+      d.className = "dot" + (i === 0 ? " active" : "");
+      d.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(d);
+    });
+
+    // Populate panoramic strip
+    const panoStrip = document.getElementById("panoStrip");
+    panoStrip.innerHTML = "";
+    slidesData.forEach((s) => {
+      const container = document.createElement("div");
+      container.className = "pano-slide";
+      container.innerHTML = s.svg;
+      panoStrip.appendChild(container);
+    });
+
+    renderSlide(0);
+  }
+
+  function renderSlide(index) {
+    currentIndex = index;
+    const slide = slidesData[index];
+    // Re-inject HTML to re-trigger CSS keyframe animations fresh
+    stage.innerHTML = slide.svg;
+    roleLabel.textContent = `Slide ${slide.index} of ${slidesData.length} - ${slide.role}`;
+
+    document.querySelectorAll(".dot").forEach((d, i) => {
+      d.className = "dot" + (i === index ? " active" : "");
+    });
+
+    document.getElementById("prevBtn").disabled = index === 0;
+    document.getElementById("nextBtn").disabled = index === slidesData.length - 1;
+  }
+
+  function nextSlide() {
+    if (currentIndex < slidesData.length - 1) {
+      renderSlide(currentIndex + 1);
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex > 0) {
+      renderSlide(currentIndex - 1);
+    }
+  }
+
+  function goToSlide(index) {
+    renderSlide(index);
+  }
+
+  function replayCurrentSlide() {
+    renderSlide(currentIndex);
+  }
+
+  let panoActive = false;
+  function togglePanoramicView() {
+    panoActive = !panoActive;
+    const single = document.getElementById("singleStageView");
+    const pano = document.getElementById("panoramicView");
+    const btn = document.getElementById("togglePanoBtn");
+
+    if (panoActive) {
+      single.style.display = "none";
+      pano.style.display = "block";
+      btn.classList.add("active");
+    } else {
+      single.style.display = "flex";
+      pano.style.display = "none";
+      btn.classList.remove("active");
+    }
+  }
+
+  let isNative = false;
+  function toggleNativeScale() {
+    isNative = !isNative;
+    const card = document.querySelector(".viewport-card");
+    const btn = document.getElementById("toggleNativeBtn");
+    if (isNative) {
+      card.classList.add("native-size");
+      btn.classList.add("active");
+      btn.innerHTML = "&#x2922; Fit Scale";
+    } else {
+      card.classList.remove("native-size");
+      btn.classList.remove("active");
+      btn.innerHTML = "&#x2921; 100% Native (1080&times;1350)";
+    }
+  }
+
+  // Keyboard navigation
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "r" || e.key === "R") replayCurrentSlide();
+  });
+
+  init();
+</script>
+</body>
+</html>

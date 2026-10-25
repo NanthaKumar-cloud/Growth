@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap');
+            /* Base styles for animations */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Animation Keyframes */
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes subtleFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            @keyframes swipeHint {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(5px); }
+            }
+
+            /* Specific Animation Classes */
+            .bg-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .main-shape-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .headline-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+            .body-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+            .accent-anim-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+            .accent-anim-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6s forwards; }
+            .swipe-anim { animation: fadeIn 0.5s ease-out 2.8s forwards, swipeHint 1.5s ease-in-out 3.3s infinite; }
+            .logo-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .progress-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .line-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+            .float-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards, subtleFloat 4s ease-in-out 1.6s infinite alternate; }
+
+            /* General styles */
+            .text-headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-body { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; }
+            .text-accent { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-small { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; font-size: 28px; }
+
+            .progress-text { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: end; }
+            .brand-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: start; }
+            .brand-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 28px; }
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <!-- Filters -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFC107" flood-opacity="0.6"/>
+        </filter>
+
+        <!-- Reusable IncuBrix "I" logo fragment -->
+        <g id="incuBrixLogo" transform="translate(0,0)">
+            <rect x="0" y="0" width="40" height="40" rx="8" ry="8" fill="#007B8C" />
+            <text x="20" y="30" class="brand-logo-text" text-anchor="middle" font-size="28">I</text>
+        </g>
+
+        <!-- Continuous line path definition, spanning multiple slides -->
+        <path id="continuousLinePathData" d="M 0 750 C 270 720 810 780 1080 750 C 1350 720 1890 780 2160 750 C 2430 720 2970 780 3240 750 C 3510 720 4050 780 4320 750 C 4590 720 5130 780 5400 750" />
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F0F4F8" class="a bg-anim" />
+
+    <!-- Main Visual Element - AI Brain / Workflow Diagram -->
+    <g class="a main-shape-anim" transform="translate(540, 600)">
+        <rect x="-200" y="-150" width="400" height="300" rx="20" ry="20" fill="#0B2F3D" filter="url(#shadow)" />
+        <path d="M -150 -100 C -100 -120 100 -120 150 -100 L 150 100 C 100 120 -100 120 -150 100 Z" fill="#007B8C" opacity="0.8" class="a float-anim" />
+        <circle cx="0" cy="0" r="50" fill="#F0F4F8" />
+        <text x="0" y="15" font-size="36" fill="#0B2F3D" font-family="'Montserrat', sans-serif" font-weight="700" text-anchor="middle">AI</text>
+
+        <!-- Output nodes / icons -->
+        <g class="a accent-anim-1" transform="translate(-300, -50)">
+            <rect x="-30" y="-30" width="60" height="60" rx="10" fill="#FFC107" />
+            <path d="M -15 -10 L 15 -10 L 15 10 L -15 10 Z M 0 -20 L 0 -10 M 0 10 L 0 20" stroke="#F0F4F8" stroke-width="4" stroke-linecap="round" />
+        </g>
+        <g class="a accent-anim-1" transform="translate(-300, 100)">
+            <rect x="-30" y="-30" width="60" height="60" rx="10" fill="#FFC107" />
+            <circle cx="0" cy="0" r="15" fill="#F0F4F8" />
+            <circle cx="10" cy="-10" r="5" fill="#0B2F3D" />
+        </g>
+        <g class="a accent-anim-1" transform="translate(300, -50)">
+            <rect x="-30" y="-30" width="60" height="60" rx="10" fill="#FFC107" />
+            <path d="M -15 0 L 15 0 M 0 -15 L 0 15" stroke="#F0F4F8" stroke-width="4" stroke-linecap="round" />
+        </g>
+        <g class="a accent-anim-1" transform="translate(300, 100)">
+            <rect x="-30" y="-30" width="60" height="60" rx="10" fill="#FFC107" />
+            <path d="M -15 10 L 0 -10 L 15 10 Z" fill="#F0F4F8" />
+        </g>
+
+        <!-- Flow lines -->
+        <path d="M -150 20 L -270 -30 M -150 70 L -270 120 M 150 20 L 270 -30 M 150 70 L 270 120" stroke="#FFC107" stroke-width="6" class="a accent-anim-2" stroke-linecap="round" />
+    </g>
+
+    <!-- Headline -->
+    <text x="540" y="280" font-size="96" class="a headline-anim text-headline">AI-Powered Workflows. Scale Effortlessly.</text>
+
+    <!-- Supporting Text -->
+    <text x="540" y="390" font-size="42" class="a body-anim text-body">Generate, optimize, and deploy content</text>
+    <text x="540" y="440" font-size="42" class="a body-anim text-body">at scale, without custom dev.</text>
+
+    <!-- Continuous Line Element (Seam) -->
+    <g transform="translate(-3240 0)">
+        <use href="#continuousLinePathData" stroke="#FFC107" stroke-width="10" fill="none" class="a line-anim" stroke-linecap="round" />
+    </g>
+    <circle cx="350" cy="750" r="15" fill="#FFC107" class="a accent-anim-2" />
+    <circle cx="430" cy="750" r="10" fill="#FFC107" class="a accent-anim-2" />
+
+    <!-- Progress Indicator -->
+    <text x="1008" y="100" font-size="36" class="a progress-anim progress-text">4 / 5</text>
+
+    <!-- Brand Mark -->
+    <g class="a logo-anim" transform="translate(72, 1254)">
+        <use href="#incuBrixLogo" />
+    </g>
+    <text x="125" y="1278" font-size="36" class="a logo-anim brand-text">IncuBrix</text>
+
+    <!-- Swipe Cue -->
+    <g class="a swipe-anim" transform="translate(980, 1150)">
+        <path d="M 0 0 L 20 20 L 0 40" fill="none" stroke="#343A40" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+</svg>

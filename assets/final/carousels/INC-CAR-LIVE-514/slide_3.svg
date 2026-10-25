@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap');
+
+      .bg { fill: #0B0F19; }
+      .text-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 76px; fill: #F8FAFC; text-anchor: middle; }
+      .text-body { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 36px; fill: #94A3B8; text-anchor: middle; }
+      .text-code { font-family: 'JetBrains Mono', monospace; font-size: 24px; fill: #F8FAFC; }
+      .text-mono { font-family: 'JetBrains Mono', monospace; font-size: 26px; }
+      
+      .a {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      @keyframes pulseGlow {
+        0% { opacity: 0.3; }
+        50% { opacity: 0.8; }
+        100% { opacity: 0.3; }
+      }
+
+      .a-bg { animation: fadeIn 0.4s ease-out 0s forwards; }
+      .a-head { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards; }
+      .a-body { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards; }
+      .a-code { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
+      .a-pulse { animation: fadeIn 0.6s ease-out 2.2s forwards, pulseGlow 3s ease-in-out 2.8s infinite; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="cyanGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#0072FF" />
+    </linearGradient>
+
+    <filter id="codeGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="1080" height="1350" class="bg" />
+
+  <!-- Tech Grid Background -->
+  <g opacity="0.15">
+    <path d="M 0 100 L 1080 100 M 0 300 L 1080 300 M 0 500 L 1080 500 M 0 700 L 1080 700 M 0 900 L 1080 900 M 0 1100 L 1080 1100" stroke="#1E293B" stroke-width="1" />
+    <path d="M 180 0 L 180 1350 M 360 0 L 360 1350 M 540 0 L 540 1350 M 720 0 L 720 1350 M 900 0 L 900 1350" stroke="#1E293B" stroke-width="1" />
+  </g>
+
+  <!-- Continuous Seam Pipeline at Bottom -->
+  <path d="M 0 1180 L 1080 1180" stroke="#00F0FF" stroke-width="2" stroke-dasharray="12 8" opacity="0.6" />
+
+  <!-- Left Edge Seam Continuation from Slide 2 (x=-30..30, y=400) -->
+  <g transform="translate(-30, 400)">
+    <path d="M 0 0 C 30 0 30 100 60 100" stroke="#00FF87" stroke-width="4" fill="none" opacity="0.8" />
+  </g>
+
+  <!-- Top UI Header -->
+  <g transform="translate(72, 70)">
+    <path d="M 0 0 L 24 -12 L 48 0 L 24 12 Z" fill="#00F0FF" />
+    <path d="M 0 0 L 24 12 L 24 38 L 0 26 Z" fill="#0072FF" />
+    <path d="M 48 0 L 48 26 L 24 38 L 24 12 Z" fill="#00FF87" />
+    <text x="64" y="22" class="text-mono" font-weight="700" fill="#F8FAFC">IncuBrix</text>
+  </g>
+  <text x="1008" y="92" text-anchor="end" class="text-mono" font-weight="700" fill="#00F0FF">03 / 05</text>
+
+  <!-- Headline -->
+  <g transform="translate(540, 240)">
+    <g class="a a-head">
+      <text x="0" y="0" class="text-title">Unified API Platform</text>
+      <text x="0" y="90" class="text-title" fill="#00FF87">for Creator Growth.</text>
+    </g>
+  </g>
+
+  <!-- Supporting Body -->
+  <g transform="translate(540, 460)">
+    <g class="a a-body">
+      <text x="0" y="0" class="text-body">Connect SDKs, handle multi-tier attribution,</text>
+      <text x="0" y="50" class="text-body">and trigger automated payouts in 50 lines of code.</text>
+    </g>
+  </g>
+
+  <!-- Terminal Graphic Visual -->
+  <g transform="translate(100, 580)">
+    <g class="a a-code">
+      <!-- Window Frame -->
+      <rect x="0" y="0" width="880" height="460" rx="16" fill="#131B2E" stroke="#00F0FF" stroke-width="1.5" />
+      
+      <!-- Top Window Bar -->
+      <path d="M 0 0 L 880 0 L 880 50 L 0 50 Z" fill="#0F1626" />
+      <circle cx="35" cy="25" r="7" fill="#FF4B4B" />
+      <circle cx="60" cy="25" r="7" fill="#FFB800" />
+      <circle cx="85" cy="25" r="7" fill="#00FF87" />
+      <text x="440" y="32" text-anchor="middle" class="text-mono" font-size="20" fill="#94A3B8">incubrix-sdk.ts</text>
+
+      <!-- Code Text Block -->
+      <g transform="translate(40, 95)">
+        <text x="0" y="0" class="text-code"><tspan fill="#00F0FF">import</tspan> { IncuBrix } <tspan fill="#00F0FF">from</tspan> <tspan fill="#00FF87">'@incubrix/sdk'</tspan>;</text>
+        
+        <text x="0" y="45" class="text-code"><tspan fill="#00F0FF">const</tspan> brix = <tspan fill="#00F0FF">new</tspan> IncuBrix({ apiKey: process.env.BRIX_KEY });</text>
+        
+        <text x="0" y="105" class="text-code" fill="#94A3B8">// Track conversion &amp; execute instant payout</text>
+        <text x="0" y="150" class="text-code"><tspan fill="#00F0FF">await</tspan> brix.payouts.<tspan fill="#60EFFF">trigger</tspan>({</text>
+        <text x="30" y="195" class="text-code">creatorId: <tspan fill="#00FF87">'crt_99x2'</tspan>,</text>
+        <text x="30" y="240" class="text-code">amount: <tspan fill="#FFB800">1450.00</tspan>,</text>
+        <text x="30" y="285" class="text-code">tier: <tspan fill="#00FF87">'PLATINUM_AFFILIATE'</tspan></text>
+        <text x="0" y="330" class="text-code">});</text>
+      </g>
+
+      <!-- Execution Status Pill -->
+      <g transform="translate(620, 380)">
+        <rect x="0" y="0" width="220" height="50" rx="25" fill="#00FF87" opacity="0.15" />
+        <circle cx="25" cy="25" r="6" fill="#00FF87" />
+        <text x="45" y="33" class="text-mono" font-size="20" font-weight="700" fill="#00FF87">Status 200 OK</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Seam Object Right Edge (Node grid line crossing to Slide 4: x=1000..1080, y=850) -->
+  <g transform="translate(1000, 850)">
+    <path d="M 0 0 L 80 0 L 120 40" stroke="#00F0FF" stroke-width="3" fill="none" opacity="0.8" />
+    <circle cx="80" cy="0" r="5" fill="#00FF87" />
+  </g>
+
+  <!-- Swipe Cue Indicator -->
+  <g transform="translate(1008, 675)">
+    <g class="a a-pulse">
+      <path d="M 0 -16 L 16 0 L 0 16" stroke="#00F0FF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  </g>
+</svg>

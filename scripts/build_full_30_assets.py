@@ -490,12 +490,23 @@ def build_and_verify_30_assets():
 
         else: # Graphic
             print(f" -> Rendering Standalone Graphic Card: {asset_id}.png ...")
+            graphic_overrides = {
+                "INC-PST-002": "spotlight_sq.jpg",
+                "INC-PST-005": "analytics_sq.jpg",
+                "INC-PST-006": "tech_workspace_wide.jpg",
+                "INC-PST-007": "multi_platform.jpg",
+                "INC-PST-008": "voice_sq.jpg",
+                "INC-PST-010": "auto_subtitles.jpg",
+                "INC-PST-011": "hook_matrix.jpg",
+                "INC-PST-012": "spotlight_sq.jpg",
+            }
             g_path = renderer.render_graphic(
                 asset_id=asset_id,
                 title=hook,
                 body_text=caption,
                 pillar=pillar,
-                cta=cta
+                cta=cta,
+                feature_image_override=graphic_overrides.get(asset_id)
             )
             final_file_url = f"assets/final/graphics/{g_path.name}"
 

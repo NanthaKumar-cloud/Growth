@@ -1,0 +1,137 @@
+{
+  "title": "CreatorOps Studio 2026",
+  "brand": {
+    "name": "CreatorOps",
+    "tagline": "One unified studio for modern creators",
+    "website": "creatorops.in",
+    "handle": "@creatorops"
+  },
+  "voice": {
+    "name": "Kore",
+    "speaking_rate": 1.05,
+    "why": "Confident, energetic, and upbeat tone perfectly matches the fast-paced entrepreneurial vibe of Indian solo creators."
+  },
+  "world": "A modern creator's home studio desk transitioning from chaotic multi-screen clutter into a clean, unified dashboard on a glowing tablet screen.",
+  "design_system": {
+    "palette": {
+      "bg": "#0F172A",
+      "bg_alt": "#1E293B",
+      "primary": "#6366F1",
+      "secondary": "#EC4899",
+      "accent": "#10B981",
+      "ink": "#F8FAFC",
+      "paper": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Minimalist flat vector with vibrant purple and pink gradients, crisp white iconography, and smooth motion curves.",
+    "hero_element": "A glowing frosted-glass tablet displaying the CreatorOps studio dashboard with a dynamic green checkmark badge.",
+    "recurring_motifs": [
+      "Floating subscription price tags",
+      "Glowing connection lines",
+      "Minimalist creator desk setup"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 40,
+      "color_key": "secondary"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Why do solo creators burn out in twenty twenty six? Paying one hundred dollars a month across four fragmented tools.",
+      "on_screen_headline": "Stop Tool Burnout",
+      "on_screen_support": "Paying $100/mo across 4 apps?",
+      "visual_description": "Wide shot of a dark neon-lit creator desk. Four glowing app icons float above the desk, each displaying a monthly bill totaling one hundred dollars.",
+      "key_beats": [
+        {
+          "narration_fragment": "Why do solo creators burn out",
+          "visual_action": "Desk setup lights up with four floating billing icons in red."
+        },
+        {
+          "narration_fragment": "across four fragmented tools",
+          "visual_action": "Icons scatter apart, showing a heavy financial and mental drain."
+        }
+      ],
+      "mood": "Stressed, urgent, high-tech",
+      "background_color_key": "bg",
+      "opens_with": "Fresh frame with dark blue background and floating red billing tags.",
+      "closes_with": "Four red billing tags drifting towards the center of the screen.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "PROBLEM",
+      "narration": "Juggling separate apps for scheduling, analytics, emails, and notes wastes your precious time and energy every single day.",
+      "on_screen_headline": "Too Many Apps",
+      "on_screen_support": "Scattered workflows kill creativity",
+      "visual_description": "Medium close-up showing hands trying to catch four spinning app windows that keep slipping away, with a timer ticking down in the corner.",
+      "key_beats": [
+        {
+          "narration_fragment": "Juggling separate apps",
+          "visual_action": "App windows spin rapidly in a circle, colliding with each other."
+        },
+        {
+          "narration_fragment": "wastes your precious time and energy",
+          "visual_action": "A timer icon flashes red and drains down to zero."
+        }
+      ],
+      "mood": "Frantic, overwhelmed",
+      "background_color_key": "bg_alt",
+      "opens_with": "Four floating red billing tags merging into spinning app windows.",
+      "closes_with": "Spinning windows collapsing inward into a single central point.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 3,
+      "role": "SOLUTION",
+      "narration": "Switch to one unified CreatorOps studio. Everything you need to run your creative business in one powerful dashboard.",
+      "on_screen_headline": "One Unified Studio",
+      "on_screen_support": "CreatorOps replaces them all",
+      "visual_description": "Close-up as the chaotic windows merge into the hero tablet displaying the sleek CreatorOps dashboard with emerald green accent graphs.",
+      "key_beats": [
+        {
+          "narration_fragment": "Switch to one unified CreatorOps studio",
+          "visual_action": "Windows snap together into a pristine glowing frosted-glass tablet."
+        },
+        {
+          "narration_fragment": "Everything you need in one dashboard",
+          "visual_action": "Dashboard modules slide smoothly into place with satisfying checkmarks."
+        }
+      ],
+      "mood": "Relieved, sleek, professional",
+      "background_color_key": "bg",
+      "opens_with": "Collapsing windows forming the clean frosted-glass tablet.",
+      "closes_with": "Glowing tablet centered on screen with vibrant green analytics graphs.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 4,
+      "role": "CTA",
+      "narration": "Save time, cut costs, and create more. Visit creatorops dot in and start your free trial today at your creator ops.",
+      "on_screen_headline": "Claim Your Studio",
+      "on_screen_support": "creatorops.in | @creatorops",
+      "visual_description": "Vertical alignment of the glowing tablet, bold brand typography in white and pink, and a prominent 'Start Free Trial' button.",
+      "key_beats": [
+        {
+          "narration_fragment": "Save time, cut costs, and create more",
+          "visual_action": "Tablet pulses gently with an emerald green success aura."
+        },
+        {
+          "narration_fragment": "Visit creatorops dot in today",
+          "visual_action": "Website URL and social handle pop up in high-contrast crisp text."
+        }
+      ],
+      "mood": "Triumphant, inviting, action-oriented",
+      "background_color_key": "bg_alt",
+      "opens_with": "Glowing tablet from previous scene moving smoothly to the upper half.",
+      "closes_with": "Final brand lockup with website and handle cleanly framed.",
+      "transition_out": "fade"
+    }
+  ]
+}

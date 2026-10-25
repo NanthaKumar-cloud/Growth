@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="100%" height="100%">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&amp;family=Inter&amp;display=swap');
+.a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+.h { animation: rise 0.9s cubic-bezier(0.22,1,0.36,1) 0.5s forwards; }
+.sp { animation: rise 0.9s cubic-bezier(0.22,1,0.36,1) 1.2s forwards; }
+@keyframes rise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+</style>
+<rect width="1080" height="1920" fill="#F8F8F8"/>
+<rect x="907" y="1172" width="173" height="36" fill="#2196F3"/>
+<text x="72" y="100" font-size="32" font-weight="700" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">CreatorOps</text>
+<g class="a h"><text x="540" y="738" text-anchor="middle" font-size="88" font-weight="800" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">Burnout Is</text></g><g class="a h"><text x="540" y="843" text-anchor="middle" font-size="88" font-weight="800" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">Real.</text></g><g class="a sp"><text x="540" y="989" text-anchor="middle" font-size="44" fill="#FFC107" font-family="'Inter', Arial, sans-serif">Fragmented Tools, High Costs.</text></g>
+</svg>

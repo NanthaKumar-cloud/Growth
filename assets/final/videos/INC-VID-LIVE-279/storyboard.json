@@ -1,0 +1,161 @@
+{
+  "title": "Unleash Your Creator Power",
+  "brand": {
+    "name": "CreatorOps Studio",
+    "tagline": "Your Unified Creative Hub",
+    "website": "yourbrand.com",
+    "handle": "@yourbrand"
+  },
+  "voice": {
+    "name": "Leda",
+    "speaking_rate": 1.05,
+    "why": "Leda's youthful, bright, and approachable tone perfectly resonates with solo creators seeking a friendly, empowering solution to their workflow challenges."
+  },
+  "world": "The setting is a modern, minimalist home office or co-working space, always centered around a clean desk. The hero object is a sleek, glowing tablet device, representing the 'CreatorOps Studio'. A simplified, gender-neutral creator avatar is the recurring character, whose emotional state evolves from stressed to empowered. The time of day progresses from a busy morning feel to a calm, productive afternoon.",
+  "design_system": {
+    "palette": {
+      "bg": "#F2F9F8",
+      "bg_alt": "#E8F4F1",
+      "primary": "#3B82F6",
+      "secondary": "#F59E0B",
+      "accent": "#10B981",
+      "ink": "#1F2937",
+      "paper": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 16,
+    "illustration_style": "Flat, clean vector illustrations with subtle gradients and smooth, fluid animations. Emphasis on iconic representations, connecting lines, and glowing elements for clarity and modern appeal.",
+    "hero_element": "A sleek, rectangular tablet device with a thin, dark bezel and a vibrant, glowing screen. Its interface dynamically displays simplified app icons or workflow elements, radiating a soft, inviting light (accent color).",
+    "recurring_motifs": [
+      "Abstract connecting lines and nodes",
+      "Soft, radiating glows (accent color)",
+      "Simplified, iconic representations of tools or tasks",
+      "Fluid, organic transitions"
+    ],
+    "ribbon": {
+      "y_fraction": 0.62,
+      "thickness": 36,
+      "color_key": "accent"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Are you a solo creator feeling overwhelmed, juggling too many tools just to get things done?",
+      "on_screen_headline": "Stressed by Scattered Tools?",
+      "on_screen_support": "Solo creators, find your focus.",
+      "visual_description": "WIDE SHOT of a minimalist desk setup in a bright, modern room (bg_alt). In the center, a simplified creator avatar (ink/paper) sits hunched, surrounded by an array of glowing, fragmented app icons (various palette colours) hovering around their head like a chaotic cloud. A single, generic laptop is open, displaying multiple, overlapping browser tabs/windows.",
+      "key_beats": [
+        {
+          "narration_fragment": "Are you a solo creator feeling overwhelmed,",
+          "visual_action": "The creator avatar appears hunched and stressed, with a visible 'stress aura' (ink lines)."
+        },
+        {
+          "narration_fragment": "juggling too many tools just to get things done?",
+          "visual_action": "Multiple, distinct app icons (representing social media, project management, design, etc.) pop up and swirl chaotically around the creator's head."
+        }
+      ],
+      "mood": "Stressed, chaotic, relatable problem",
+      "background_color_key": "bg_alt",
+      "opens_with": "A clean, bright desk with a laptop and a stressed creator avatar, surrounded by swirling, chaotic app icons.",
+      "closes_with": "The creator avatar's head, still surrounded by swirling app icons, as the camera pushes slightly closer, focusing on the chaos.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "PROBLEM",
+      "narration": "Imagine paying hundreds every month across four different apps, each pulling you in a different direction.",
+      "on_screen_headline": "Fragmented & Costly Workflow?",
+      "on_screen_support": "Stop the subscription drain.",
+      "visual_description": "MEDIUM SHOT, closer on the desk (bg_alt). The chaotic app icons from the previous scene morph into four distinct, larger app icons arranged in a square, each with a generic currency symbol. Below them, a simplified wallet icon (secondary colour) has money (paper discs with currency symbols) flying out of it towards each app icon, indicating expense. The creator's hand (ink/paper) briefly enters the frame, looking frustrated.",
+      "key_beats": [
+        {
+          "narration_fragment": "Imagine paying hundreds every month across four different apps,",
+          "visual_action": "The four app icons are clearly visible. Generic money bags or currency symbols appear on each, and paper money discs fly from a wallet towards them."
+        },
+        {
+          "narration_fragment": "each pulling you in a different direction.",
+          "visual_action": "Subtle, elastic lines stretch from a central point (representing the creator) to each app icon, illustrating being pulled apart. The creator's hand shakes slightly in frustration."
+        }
+      ],
+      "mood": "Frustrated, financially draining",
+      "background_color_key": "bg_alt",
+      "opens_with": "The central desk area, focusing on the four distinct app icons and the wallet with money flying out.",
+      "closes_with": "The four app icons, now slightly dimmed, with the wallet still visible, as a soft glow (accent) begins to emanate from the right edge of the frame.",
+      "transition_out": "smoothleft"
+    },
+    {
+      "id": 3,
+      "role": "SOLUTION",
+      "narration": "What if one unified CreatorOps studio could bring everything together, simplifying your entire workflow?",
+      "on_screen_headline": "One Studio, Total Control.",
+      "on_screen_support": "Streamline your entire creative process.",
+      "visual_description": "CLOSE-UP on the desk (bg). A sleek, glowing 'CreatorOps Studio' tablet (hero_element, primary colour with accent glow) slides in from the right, pushing the four fragmented app icons off-screen to the left. As it settles in the center, a fluid animation shows the previous scattered icons (or their essence) being absorbed into its glowing screen. The screen lights up with a clean, organized, multi-pane interface (paper with subtle ink lines).",
+      "key_beats": [
+        {
+          "narration_fragment": "What if one unified CreatorOps studio could bring everything together,",
+          "visual_action": "The glowing CreatorOps tablet slides smoothly into frame, displacing the old icons. Its screen illuminates brightly."
+        },
+        {
+          "narration_fragment": "simplifying your entire workflow?",
+          "visual_action": "Abstract representations of the old, fragmented tools visually flow into the tablet's screen, which then transforms into a clean, organized, unified interface."
+        }
+      ],
+      "mood": "Hopeful, transformative, organized",
+      "background_color_key": "bg",
+      "opens_with": "The right side of the screen, where the CreatorOps tablet is just beginning to slide in, with a soft accent glow.",
+      "closes_with": "The CreatorOps tablet, now central, its screen displaying a perfectly organized, glowing interface, ready for interaction.",
+      "transition_out": "wipeleft"
+    },
+    {
+      "id": 4,
+      "role": "SENSORY DETAILS & FEATURES / PROOF",
+      "narration": "From content planning to client management, easily streamline your operations and reclaim your time and peace of mind.",
+      "on_screen_headline": "Beyond Simple. Truly Seamless.",
+      "on_screen_support": "Boost productivity, embrace calm.",
+      "visual_description": "MEDIUM SHOT, pulling back slightly (bg). The creator avatar (ink/paper) reappears, sitting upright and smiling, interacting confidently with the glowing CreatorOps tablet. On the tablet's screen, simplified icons for 'Content', 'Clients', 'Analytics' (representing unified features) animate smoothly, showing connection and flow (accent lines). In the background, a subtle, ethereal clock (paper with accent glow) spins forward smoothly, indicating efficient time use. A 'thumbs up' icon (accent colour) briefly appears near the creator's head.",
+      "key_beats": [
+        {
+          "narration_fragment": "From content planning to client management, easily streamline your operations",
+          "visual_action": "The creator avatar is now smiling, confidently tapping the tablet. Icons on the tablet screen (Content, Clients) animate smoothly, showing tasks being completed quickly."
+        },
+        {
+          "naration_fragment": "and reclaim your time and peace of mind.",
+          "visual_action": "The ethereal clock spins faster, and a 'thumbs up' appears near the creator's head, who leans back contentedly."
+        }
+      ],
+      "mood": "Productive, peaceful, empowered",
+      "background_color_key": "bg",
+      "opens_with": "The CreatorOps tablet, with the creator avatar just coming into view, reaching for it.",
+      "closes_with": "The smiling creator avatar, looking at the glowing tablet, with the background clock still subtly spinning. A subtle ripple of accent colour expands from the tablet's screen.",
+      "transition_out": "circleopen"
+    },
+    {
+      "id": 5,
+      "role": "OFFER / CTA",
+      "narration": "Discover the future of solo creation. Visit yourbrand dot com today and transform your creative journey.",
+      "on_screen_headline": "Unlock Your Creative Future.",
+      "on_screen_support": "yourbrand.com | @yourbrand",
+      "visual_description": "WIDE SHOT, similar to Scene 1 but with a much cleaner, brighter atmosphere (bg). The CreatorOps tablet (hero_element) is now prominently centered on the desk, radiating a strong, inviting glow (accent). The creator avatar is no longer hunched but stands confidently beside the desk, looking towards the viewer with a broad smile. The brand logo (ink/primary) appears above the tablet, followed by 'yourbrand.com' and '@yourbrand' (ink/paper) prominently displayed below. The initial chaotic app icons are replaced by subtle, positive accent-colored energy lines flowing outwards from the tablet.",
+      "key_beats": [
+        {
+          "narration_fragment": "Discover the future of solo creation.",
+          "visual_action": "The CreatorOps tablet glows intensely, and the creator avatar strikes a confident, open pose."
+        },
+        {
+          "narration_fragment": "Visit yourbrand dot com today and transform your creative journey.",
+          "visual_action": "The brand logo appears, then the website 'yourbrand.com' and '@yourbrand' animate onto the screen, accompanied by a final, expanding glow from the tablet."
+        }
+      ],
+      "mood": "Empowering, inspiring, conclusive",
+      "background_color_key": "bg",
+      "opens_with": "A soft, circular accent glow expanding from the center of the frame, revealing the glowing CreatorOps tablet.",
+      "closes_with": "The central CreatorOps tablet, brand logo, website, and handle, all glowing softly, with the confident creator avatar in the background, mirroring the initial scene's composition but with a positive transformation.",
+      "transition_out": "fade"
+    }
+  ]
+}

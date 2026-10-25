@@ -1,0 +1,114 @@
+{
+  "title": "CreatorOps Studio 2026",
+  "brand": {
+    "name": "CreatorOS",
+    "tagline": "One unified studio for modern creators",
+    "website": "creatoros.in",
+    "handle": "@creatoros"
+  },
+  "voice": {
+    "name": "Kore",
+    "speaking_rate": 1.05,
+    "why": "Confident, energetic tone fits the fast-paced entrepreneurial reality of solo creators in 2026."
+  },
+  "world": "A sleek digital workspace floating on a deep charcoal canvas, transitioning from a chaotic desk of scattered bills and app icons into a calm, unified glowing studio cube.",
+  "design_system": {
+    "palette": {
+      "bg": "#0D0F18",
+      "bg_alt": "#161B2E",
+      "primary": "#6366F1",
+      "secondary": "#A855F7",
+      "accent": "#22C55E",
+      "ink": "#F8FAFC",
+      "paper": "#1E293B"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Flat vector with soft radial gradients, glowing neon borders, and clean minimal UI wireframes.",
+    "hero_element": "A glowing isometric 3D-styled studio cube with a floating holographic play button on top.",
+    "recurring_motifs": [
+      "Floating invoice papers",
+      "Neon app subscription badges",
+      "Glowing interface ribbons"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 32,
+      "color_key": "primary"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Why do solo creators burn out paying one hundred dollars monthly across four fragmented tools?",
+      "on_screen_headline": "Stop the subscription leak",
+      "on_screen_support": "$100/mo wasted on 4 fragmented tools",
+      "visual_description": "Wide shot of dark workspace with four glowing red subscription bills floating up and away, burning cash icons.",
+      "key_beats": [
+        {
+          "narration_fragment": "Why do solo creators burn out",
+          "visual_action": "Four red app icons shake and drift apart on screen."
+        },
+        {
+          "narration_fragment": "paying one hundred dollars monthly across four fragmented tools?",
+          "visual_action": "Four distinct invoice cards fly in, each showing twenty-five dollars."
+        }
+      ],
+      "mood": "Frustrated, urgent, tense",
+      "background_color_key": "bg",
+      "opens_with": "Clean dark background with subtle grid lines.",
+      "closes_with": "Four red billing cards stacked on the right side.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "SOLUTION",
+      "narration": "Switch to CreatorOps Studio. Everything you need in one unified workspace.",
+      "on_screen_headline": "Meet CreatorOps Studio",
+      "on_screen_support": "All your workflows in one dashboard",
+      "visual_description": "Medium close-up where the four scattered billing cards are sucked into the center, melting together to form the glowing hero isometric studio cube.",
+      "key_beats": [
+        {
+          "narration_fragment": "Switch to CreatorOps Studio.",
+          "visual_action": "The red cards burst into green particles and form the hero studio cube."
+        },
+        {
+          "narration_fragment": "Everything you need in one unified workspace.",
+          "visual_action": "The cube opens up to reveal sleek scheduling, analytics, and revenue dashboards."
+        }
+      ],
+      "mood": "Relieved, high-tech, satisfying",
+      "background_color_key": "bg_alt",
+      "opens_with": "Four red billing cards from scene one sliding off left.",
+      "closes_with": "Glowing isometric studio cube centered, pulsing gently with green accent light.",
+      "transition_out": "fade"
+    },
+    {
+      "id": 3,
+      "role": "OFFER_CTA",
+      "narration": "Save time and money today. Visit creatoros dot in and claim your free trial.",
+      "on_screen_headline": "Build faster today",
+      "on_screen_support": "creatoros.in | @creatoros",
+      "visual_description": "Close-up hero studio cube centers itself, surrounded by floating success metric badges and a bold call-to-action button at the bottom.",
+      "key_beats": [
+        {
+          "narration_fragment": "Save time and money today.",
+          "visual_action": "A large green checkmark pulses over the studio cube."
+        },
+        {
+          "narration_fragment": "Visit creatoros dot in and claim your free trial.",
+          "visual_action": "URL tag creatoros.in pops up with a glowing border ribbon."
+        }
+      ],
+      "mood": "Optimistic, triumphant, inviting",
+      "background_color_key": "bg",
+      "opens_with": "Hero studio cube from scene two in the center of the frame.",
+      "closes_with": "Complete UI lockup with website and brand handle clearly visible.",
+      "transition_out": "fade"
+    }
+  ]
+}

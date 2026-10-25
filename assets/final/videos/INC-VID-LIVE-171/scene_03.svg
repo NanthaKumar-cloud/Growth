@@ -1,0 +1,176 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&amp;family=Inter:wght@400;600&amp;display=swap');
+
+.a {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-fill-mode: forwards;
+}
+
+.bg-mesh { animation: fadeIn 0.5s ease-out 0s forwards; }
+.brand-mark { opacity: 1; }
+
+.cube-start { animation: cubeOpenUp 1.0s cubic-bezier(0.34,1.56,0.64,1) 0.2s forwards, idleFloat 4s ease-in-out 1.2s infinite alternate; }
+.chart-rise { animation: chartSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.7s forwards; }
+
+.text-head-1 { animation: fadeSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.6s forwards; }
+.text-head-2 { animation: fadeSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.8s forwards; }
+
+.cta-badge { animation: scalePop 0.8s cubic-bezier(0.34,1.56,0.64,1) 2.2s forwards, pulseGlow 2.5s ease-in-out 3s infinite alternate; }
+.text-url { animation: fadeSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 2.4s forwards; }
+
+.ribbon-wave { animation: ribbonMove 6s ease-in-out 0s infinite alternate; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cubeOpenUp {
+  0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes idleFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-12px) rotate(0.5deg); }
+}
+
+@keyframes chartSlideUp {
+  0% { opacity: 0; transform: translateY(40px) scale(0.8); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scalePop {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseGlow {
+  0% { filter: drop-shadow(0 0 10px rgba(0,206,201,0.4)); }
+  100% { filter: drop-shadow(0 0 25px rgba(0,206,201,0.8)); }
+}
+
+@keyframes ribbonMove {
+  0% { d: path("M 173 1248 Q 540 1218 907 1248"); }
+  50% { d: path("M 173 1248 Q 540 1278 907 1248"); }
+  100% { d: path("M 173 1248 Q 540 1218 907 1248"); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+</style>
+
+<defs>
+  <radialGradient id="bgGrad" cx="50%" cy="40%" r="70%">
+    <stop offset="0%" stop-color="#1A1D2E" />
+    <stop offset="100%" stop-color="#0D0F18" />
+  </radialGradient>
+
+  <radialGradient id="cubeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#FF5722" stop-opacity="0.4" />
+    <stop offset="60%" stop-color="#00CEC9" stop-opacity="0.15" />
+    <stop offset="100%" stop-color="#0D0F18" stop-opacity="0" />
+  </radialGradient>
+
+  <linearGradient id="cubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#FF7043" />
+    <stop offset="100%" stop-color="#FF5722" />
+  </linearGradient>
+
+  <linearGradient id="cubeLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#7C6BEE" />
+    <stop offset="100%" stop-color="#6C5CE7" />
+  </linearGradient>
+
+  <linearGradient id="cubeRight" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#00F2EE" />
+    <stop offset="100%" stop-color="#00CEC9" />
+  </linearGradient>
+
+  <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#00CEC9" stop-opacity="0.5" />
+    <stop offset="100%" stop-color="#00CEC9" stop-opacity="0.0" />
+  </linearGradient>
+
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="24" result="blur" />
+    <feMerge>
+      <feMergeNode in="blur" />
+      <feMergeNode in="SourceGraphic" />
+    </feMerge>
+  </filter>
+
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.4" />
+  </filter>
+</defs>
+
+<rect width="1080" height="1920" fill="url(#bgGrad)" class="bg-mesh" />
+
+<circle cx="540" cy="480" r="320" fill="url(#cubeGlow)" class="a bg-mesh" />
+
+<text x="72" y="100" font-size="32" font-weight="700" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif" class="brand-mark">CreatorOS</text>
+
+<rect x="0" y="1232" width="173" height="32" fill="#6C5CE7" />
+
+<path d="M 173 1248 Q 540 1218 907 1248" fill="none" stroke="#6C5CE7" stroke-width="32" stroke-linecap="round" class="ribbon-wave" />
+
+<g transform="translate(540, 480)">
+  <g class="a cube-start" filter="url(#glow)">
+    <g filter="url(#softShadow)">
+      <path d="M 0 -130 L 130 -65 L 0 0 L -130 -65 Z" fill="url(#cubeTop)" />
+      <path d="M -130 -65 L 0 0 L 0 130 L -130 65 Z" fill="url(#cubeLeft)" />
+      <path d="M 0 0 L 130 -65 L 130 65 L 0 130 Z" fill="url(#cubeRight)" />
+      
+      <path d="M 0 -80 L 70 -45 L 70 20 L 0 55 Z" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-opacity="0.6" />
+      <circle cx="0" cy="-15" r="14" fill="#FFFFFF" fill-opacity="0.9" />
+      <path d="M -65 0 L -20 22 L -20 60 L -65 38 Z" fill="#FFFFFF" fill-opacity="0.25" />
+      <path d="M 40 -15 L 90 10" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.8" />
+      <path d="M 40 5 L 80 25" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.8" />
+    </g>
+  </g>
+  
+  <g class="a chart-rise">
+    <g transform="translate(0, -220)" filter="url(#softShadow)">
+      <rect x="-240" y="-100" width="480" height="160" rx="20" fill="#1A1D2E" stroke="#00CEC9" stroke-width="2" />
+      
+      <path d="M -200 20 L -140 -10 L -80 10 L -20 -40 L 40 -20 L 100 -70 L 180 -50 L 180 40 L -200 40 Z" fill="url(#chartGrad)" />
+      <path d="M -200 20 L -140 -10 L -80 10 L -20 -40 L 40 -20 L 100 -70 L 180 -50" fill="none" stroke="#00CEC9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+      
+      <circle cx="100" cy="-70" r="8" fill="#FFFFFF" />
+      <circle cx="100" cy="-70" r="14" fill="none" stroke="#00CEC9" stroke-width="3" />
+      
+      <text x="-190" y="-60" font-size="22" font-weight="600" fill="#A29BFE" font-family="'Inter', Arial, sans-serif">CREATOR GROWTH</text>
+      <text x="-190" y="-30" font-size="36" font-weight="800" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">+340% ARR</text>
+    </g>
+  </g>
+</g>
+
+<g class="a text-head-1">
+  <text x="540" y="780" text-anchor="middle" font-size="92" font-weight="800" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">Build Your Empire</text>
+</g>
+<g class="a text-head-2">
+  <text x="540" y="885" text-anchor="middle" font-size="52" font-weight="600" fill="#00CEC9" font-family="'Inter', Arial, sans-serif">One unified studio, zero burnout</text>
+</g>
+
+<g transform="translate(540, 1420)">
+  <g class="a cta-badge" filter="url(#softShadow)">
+    <rect x="-380" y="-60" width="760" height="120" rx="36" fill="#FF5722" />
+    <text x="0" y="16" text-anchor="middle" font-size="48" font-weight="800" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">Get Started Free</text>
+  </g>
+</g>
+
+<g class="a text-url">
+  <text x="540" y="1590" text-anchor="middle" font-size="40" font-weight="600" fill="#A29BFE" font-family="'Inter', Arial, sans-serif">creatorstudio.in | @creatoros</text>
+</g>
+
+</svg>

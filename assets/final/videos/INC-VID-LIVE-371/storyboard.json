@@ -1,0 +1,182 @@
+{
+  "title": "CreatorOps Studio 2026",
+  "brand": {
+    "name": "CreatorOps",
+    "tagline": "One unified studio for modern creators",
+    "website": "creatorops.in",
+    "handle": "@creatorops"
+  },
+  "voice": {
+    "name": "Kore",
+    "speaking_rate": 1.05,
+    "why": "Energetic and upbeat voice cuts through fatigue, perfectly matching the brisk revelation of creator pain points and the relief of a unified solution."
+  },
+  "world": "A modern, minimalist digital workspace in vibrant Indian tech-creator aesthetics, featuring a glowing modular desktop cube as the hero object. The time progresses from a chaotic midnight multi-tab desk setup to a clean, sunlit morning studio.",
+  "design_system": {
+    "palette": {
+      "bg": "#0D0F18",
+      "bg_alt": "#16192B",
+      "primary": "#6366F1",
+      "secondary": "#A855F7",
+      "accent": "#06B6D4",
+      "ink": "#FFFFFF",
+      "paper": "#1E2238"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Flat vector illustration with smooth gradients, clean geometric shapes, and subtle glowing outlines.",
+    "hero_element": "A floating modular 3D-styled cube with glowing edges representing the unified CreatorOps studio.",
+    "recurring_motifs": [
+      "floating notification badges",
+      "glowing interconnecting data lines"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 32,
+      "color_key": "accent"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Why do solo creators burn out fast in twenty twenty-six?",
+      "on_screen_headline": "The Creator Burnout Trap",
+      "on_screen_support": "Why do solo creators burn out?",
+      "visual_description": "A wide dark blue vertical frame showing a stressed creator silhouette buried under four floating red subscription bill icons.",
+      "key_beats": [
+        {
+          "narration_fragment": "Why do solo creators burn out",
+          "visual_action": "Creator silhouette tilts head in frustration under red billing alerts."
+        },
+        {
+          "narration_fragment": "fast in twenty twenty-six?",
+          "visual_action": "A bold twenty twenty-six text stamp flashes in red."
+        }
+      ],
+      "mood": "Tense and urgent",
+      "background_color_key": "bg",
+      "opens_with": "Blank dark canvas initializing with subtle grid lines.",
+      "closes_with": "Four red invoice cards floating on the left side.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "PROBLEM",
+      "narration": "Paying one hundred rupees a month across four fragmented tools instead of one.",
+      "on_screen_headline": "Hundred Dollars Gone",
+      "on_screen_support": "Across four fragmented tools",
+      "visual_description": "Medium shot of four separate software logos spinning and draining coins from a digital wallet counter.",
+      "key_beats": [
+        {
+          "narration_fragment": "Paying one hundred dollars a month",
+          "visual_action": "Coin counter spins rapidly down to minus one hundred."
+        },
+        {
+          "narration_fragment": "across four fragmented tools instead of one.",
+          "visual_action": "Four distinct app windows scatter apart chaotically."
+        }
+      ],
+      "mood": "Frustrated and costly",
+      "background_color_key": "bg_alt",
+      "opens_with": "Four red invoice cards sliding in from the previous scene.",
+      "closes_with": "Scattered app windows drifting towards the screen edges.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 3,
+      "role": "SOLUTION",
+      "narration": "Stop juggling tabs and switch to one unified CreatorOps studio.",
+      "on_screen_headline": "Meet CreatorOps",
+      "on_screen_support": "One unified studio for everything",
+      "visual_description": "The scattered windows magnetize inward, merging into a single glowing hero cube in the center of the frame.",
+      "key_beats": [
+        {
+          "narration_fragment": "Stop juggling tabs",
+          "visual_action": "Scattered windows snap together violently into a neat grid."
+        },
+        {
+          "narration_fragment": "and switch to one unified CreatorOps studio.",
+          "visual_action": "Hero cube pulses with vibrant purple and cyan light."
+        }
+      ],
+      "mood": "Relieved and transformative",
+      "background_color_key": "bg",
+      "opens_with": "Scattered app windows from scene two rushing inward.",
+      "closes_with": "The central glowing hero cube pulsing steadily.",
+      "transition_out": "smoothleft"
+    },
+    {
+      "id": 4,
+      "role": "FEATURES",
+      "narration": "Schedule content, track analytics, and manage brand deals in one powerful dashboard.",
+      "on_screen_headline": "All-In-One Power",
+      "on_screen_support": "Schedule, track, and monetize seamlessly",
+      "visual_description": "Close-up on the hero cube expanding into three clean interface panels showing a calendar, charts, and invoice manager.",
+      "key_beats": [
+        {
+          "narration_fragment": "Schedule content, track analytics,",
+          "visual_action": "Calendar and line graph icons slide out from the hero cube."
+        },
+        {
+          "narration_fragment": "and manage brand deals in one powerful dashboard.",
+          "visual_action": "A handshake deal badge pops up with a green checkmark."
+        }
+      ],
+      "mood": "Efficient and slick",
+      "background_color_key": "paper",
+      "opens_with": "The glowing hero cube from scene three centered in frame.",
+      "closes_with": "Three active dashboard modules neatly arranged vertically.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 5,
+      "role": "PROOF",
+      "narration": "Join thousands of creators saving time and growing faster every single day.",
+      "on_screen_headline": "Loved by Creators",
+      "on_screen_support": "Ten thousand active users worldwide",
+      "visual_description": "Medium shot displaying floating rating stars and glowing user avatar bubbles rising smoothly upwards.",
+      "key_beats": [
+        {
+          "narration_fragment": "Join thousands of creators",
+          "visual_action": "User profile bubbles multiply and drift upward in formation."
+        },
+        {
+          "narration_fragment": "saving time and growing faster every single day.",
+          "visual_action": "Five gold stars light up sequentially above a rising growth chart."
+        }
+      ],
+      "mood": "Confident and celebratory",
+      "background_color_key": "bg_alt",
+      "opens_with": "Dashboard modules minimizing into floating avatar circles.",
+      "closes_with": "A bright five-star rating badge shining in the center.",
+      "transition_out": "fade"
+    },
+    {
+      "id": 6,
+      "role": "CTA",
+      "narration": "Claim your studio today at creatorops dot in, at creator ops.",
+      "on_screen_headline": "Build Smarter Today",
+      "on_screen_support": "creatorops.in | @creatorops",
+      "visual_description": "Final frame showcasing the hero cube centered against a bright gradient background, flanked by bold website and handle text.",
+      "key_beats": [
+        {
+          "narration_fragment": "Claim your studio today",
+          "visual_action": "Hero cube opens slightly, radiating a welcoming light."
+        },
+        {
+          "narration_fragment": "at creatorops dot in, at creator ops.",
+          "visual_action": "Website URL and handle fade in cleanly at the bottom third."
+        }
+      ],
+      "mood": "Inspiring and decisive",
+      "background_color_key": "bg",
+      "opens_with": "Five-star rating badge transitioning into the glowing hero cube.",
+      "closes_with": "Final brand lockup with hero cube and CTA text fully visible.",
+      "transition_out": "fade"
+    }
+  ]
+}

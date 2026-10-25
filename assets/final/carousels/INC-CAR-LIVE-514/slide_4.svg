@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap');
+
+      .bg { fill: #0B0F19; }
+      .text-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 76px; fill: #F8FAFC; text-anchor: middle; }
+      .text-body { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 36px; fill: #94A3B8; text-anchor: middle; }
+      .text-stat { font-family: 'JetBrains Mono', monospace; font-size: 72px; font-weight: 700; fill: #00F0FF; text-anchor: middle; }
+      .text-mono { font-family: 'JetBrains Mono', monospace; font-size: 26px; }
+      
+      .a {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      @keyframes pulseGlow {
+        0% { opacity: 0.3; }
+        50% { opacity: 0.8; }
+        100% { opacity: 0.3; }
+      }
+
+      .a-bg { animation: fadeIn 0.4s ease-out 0s forwards; }
+      .a-head { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards; }
+      .a-body { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards; }
+      .a-stat1 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
+      .a-stat2 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
+      .a-stat3 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+      .a-pulse { animation: fadeIn 0.6s ease-out 2.2s forwards, pulseGlow 3s ease-in-out 2.8s infinite; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+  </defs>
+
+  <rect width="1080" height="1350" class="bg" />
+
+  <!-- Tech Grid Background -->
+  <g opacity="0.15">
+    <path d="M 0 100 L 1080 100 M 0 300 L 1080 300 M 0 500 L 1080 500 M 0 700 L 1080 700 M 0 900 L 1080 900 M 0 1100 L 1080 1100" stroke="#1E293B" stroke-width="1" />
+    <path d="M 180 0 L 180 1350 M 360 0 L 360 1350 M 540 0 L 540 1350 M 720 0 L 720 1350 M 900 0 L 900 1350" stroke="#1E293B" stroke-width="1" />
+  </g>
+
+  <!-- Continuous Seam Pipeline at Bottom -->
+  <path d="M 0 1180 L 1080 1180" stroke="#00F0FF" stroke-width="2" stroke-dasharray="12 8" opacity="0.6" />
+
+  <!-- Left Edge Seam Continuation from Slide 3 (x=-80..0, y=850) -->
+  <g transform="translate(-80, 850)">
+    <path d="M 0 0 L 80 0 L 120 40" stroke="#00F0FF" stroke-width="3" fill="none" opacity="0.8" />
+    <circle cx="80" cy="0" r="5" fill="#00FF87" />
+  </g>
+
+  <!-- Top UI Header -->
+  <g transform="translate(72, 70)">
+    <path d="M 0 0 L 24 -12 L 48 0 L 24 12 Z" fill="#00F0FF" />
+    <path d="M 0 0 L 24 12 L 24 38 L 0 26 Z" fill="#0072FF" />
+    <path d="M 48 0 L 48 26 L 24 38 L 24 12 Z" fill="#00FF87" />
+    <text x="64" y="22" class="text-mono" font-weight="700" fill="#F8FAFC">IncuBrix</text>
+  </g>
+  <text x="1008" y="92" text-anchor="end" class="text-mono" font-weight="700" fill="#00F0FF">04 / 05</text>
+
+  <!-- Headline -->
+  <g transform="translate(540, 240)">
+    <g class="a a-head">
+      <text x="0" y="0" class="text-title">10x Faster Launch.</text>
+      <text x="0" y="90" class="text-title" fill="#00F0FF">Zero Infra Bloat.</text>
+    </g>
+  </g>
+
+  <!-- Supporting Body -->
+  <g transform="translate(540, 460)">
+    <g class="a a-body">
+      <text x="0" y="0" class="text-body">High-growth SaaS founders trust IncuBrix to process</text>
+      <text x="0" y="50" class="text-body">millions in creator revenue seamlessly.</text>
+    </g>
+  </g>
+
+  <!-- Stat Metric Grid Visual -->
+  <g transform="translate(100, 580)">
+    <!-- Stat 1 -->
+    <g class="a a-stat1">
+      <rect x="0" y="0" width="270" height="260" rx="16" fill="#131B2E" stroke="#1E293B" stroke-width="1.5" />
+      <text x="135" y="110" class="text-stat">48H</text>
+      <text x="135" y="180" class="text-body" font-size="24" fill="#94A3B8">Integration</text>
+      <text x="135" y="215" class="text-body" font-size="24" fill="#94A3B8">Time</text>
+    </g>
+
+    <!-- Stat 2 -->
+    <g transform="translate(305, 0)">
+      <g class="a a-stat2">
+        <rect x="0" y="0" width="270" height="260" rx="16" fill="#131B2E" stroke="#00F0FF" stroke-width="1.5" />
+        <text x="135" y="110" class="text-stat" fill="#00FF87">99.99%</text>
+        <text x="135" y="180" class="text-body" font-size="24" fill="#94A3B8">Webhook</text>
+        <text x="135" y="215" class="text-body" font-size="24" fill="#94A3B8">Uptime SLA</text>
+      </g>
+    </g>
+
+    <!-- Stat 3 -->
+    <g transform="translate(610, 0)">
+      <g class="a a-stat3">
+        <rect x="0" y="0" width="270" height="260" rx="16" fill="#131B2E" stroke="#1E293B" stroke-width="1.5" />
+        <text x="135" y="110" class="text-stat">$12M+</text>
+        <text x="135" y="180" class="text-body" font-size="24" fill="#94A3B8">Tracked Creator</text>
+        <text x="135" y="215" class="text-body" font-size="24" fill="#94A3B8">Revenue</text>
+      </g>
+    </g>
+
+    <!-- Testimonial / Quote Pill -->
+    <g transform="translate(0, 290)">
+      <g class="a a-stat3">
+        <rect x="0" y="0" width="880" height="130" rx="16" fill="#131B2E" stroke="#1E293B" stroke-width="1.5" />
+        <text x="40" y="55" class="text-body" font-size="26" fill="#F8FAFC" text-anchor="start">"We launched creator payouts in 2 days. Saved 3 months of dev."</text>
+        <text x="40" y="95" class="text-mono" font-size="22" fill="#00F0FF" text-anchor="start">— VP Engineering, B2B SaaS Unicorn</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Seam Object Right Edge (Neon Flow crossing to Slide 5: x=1040..1120, y=600) -->
+  <g transform="translate(1040, 600)">
+    <path d="M 0 0 Q 40 -50 80 0" stroke="#00F0FF" stroke-width="4" fill="none" opacity="0.8" />
+  </g>
+
+  <!-- Swipe Cue Indicator -->
+  <g transform="translate(1008, 675)">
+    <g class="a a-pulse">
+      <path d="M 0 -16 L 16 0 L 0 16" stroke="#00F0FF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  </g>
+</svg>

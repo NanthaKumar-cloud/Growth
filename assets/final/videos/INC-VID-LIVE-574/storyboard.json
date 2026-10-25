@@ -1,0 +1,126 @@
+{
+  "title": "CreatorOps Studio Ad",
+  "brand": {
+    "name": "CreatorOps",
+    "tagline": "Your Unified Creative Hub",
+    "website": "yourbrand.com",
+    "handle": "@yourbrand"
+  },
+  "voice": {
+    "name": "Sulafat",
+    "speaking_rate": 1.0,
+    "why": "Sulafat's warm, welcoming, and reassuring tone perfectly addresses the problem of creator burnout, offering a sense of relief and a trusted solution."
+  },
+  "world": "The setting is a minimalist, modern creator's workspace, centered around a stylized, gender-neutral character at a desk. The hero object is their laptop, which evolves from showing fragmented chaos to a unified, efficient dashboard. The time progresses from a state of overwhelm to one of calm productivity.",
+  "design_system": {
+    "palette": {
+      "bg": "#F8F8F8",
+      "bg_alt": "#E0E0E0",
+      "primary": "#4CAF50",
+      "secondary": "#FFC107",
+      "accent": "#2196F3",
+      "ink": "#333333",
+      "paper": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 28,
+    "illustration_style": "Clean geometric vector illustration with subtle gradients, a friendly, minimalist aesthetic, and distinct outlines.",
+    "hero_element": "A stylized, gender-neutral 'Creator' character with short hair and simple clothing, seated at a modern, light-colored desk with a sleek, open laptop.",
+    "recurring_motifs": [
+      "Floating application icons (generic calendar, task, finance, communication symbols)",
+      "Streamlined dashboard UI elements (charts, lists, progress bars)",
+      "Positive growth symbols (money bags, upward-trending graphs)"
+    ],
+    "ribbon": {
+      "y_fraction": 0.62,
+      "thickness": 36,
+      "color_key": "accent"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Solo creators, juggling multiple apps, paying a fortune monthly? That's draining your energy.",
+      "on_screen_headline": "Burnout Is Real.",
+      "on_screen_support": "Fragmented Tools, High Costs.",
+      "visual_description": "A medium shot of the 'Creator' character at their desk, looking stressed, head in hands. Four distinct, generic app icons (e.g., a calendar, a to-do list, a dollar sign, a chat bubble) float chaotically around their head, each with a small 'X' mark. A thought bubble above their head shows '₹100+'. The background is a soft, light grey studio wall.",
+      "key_beats": [
+        {
+          "narration_fragment": "Solo creators, juggling multiple apps,",
+          "visual_action": "The creator character looks overwhelmed, surrounded by chaotic, floating app icons."
+        },
+        {
+          "narration_fragment": "paying a fortune monthly?",
+          "visual_action": "A thought bubble with '₹100+' appears above the creator's head."
+        },
+        {
+          "narration_fragment": "That's draining your energy.",
+          "visual_action": "The creator slumps slightly, conveying exhaustion."
+        }
+      ],
+      "mood": "Overwhelmed, frustrated",
+      "background_color_key": "bg",
+      "opens_with": "A clean shot of the creator at their desk, starting fresh.",
+      "closes_with": "The creator looking exhausted, surrounded by chaotic app icons and the '₹100+' thought bubble.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "SOLUTION",
+      "narration": "Imagine one CreatorOps studio, managing everything seamlessly, all in one intuitive place.",
+      "on_screen_headline": "One Studio. Total Control.",
+      "on_screen_support": "Simplify Your Workflow Instantly.",
+      "visual_description": "The scene continues from the previous, but the chaotic app icons now smoothly converge and shrink, being drawn into the screen of the laptop on the creator's desk. The laptop screen lights up to reveal a clean, integrated 'CreatorOps' dashboard UI. The 'Creator' character lifts their head, looking intrigued and slightly relieved. The '₹100+' thought bubble fades out.",
+      "key_beats": [
+        {
+          "narration_fragment": "Imagine one CreatorOps studio,",
+          "visual_action": "The chaotic app icons begin to converge and animate towards the laptop screen."
+        },
+        {
+          "narration_fragment": "managing everything seamlessly,",
+          "visual_action": "The laptop screen illuminates, showing a unified, clean dashboard UI, as the last app icons integrate."
+        },
+        {
+          "narration_fragment": "all in one intuitive place.",
+          "visual_action": "The creator character looks up, a small smile forming, showing relief and understanding."
+        }
+      ],
+      "mood": "Relief, clarity, hope",
+      "background_color_key": "bg",
+      "opens_with": "The creator still looking tired, with app icons beginning to move towards the laptop.",
+      "closes_with": "The laptop screen showing the unified dashboard, and the creator looking relieved.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 3,
+      "role": "CTA",
+      "narration": "Simplify your workflow, save big, and truly thrive. Visit your brand dot com.",
+      "on_screen_headline": "Thrive with CreatorOps!",
+      "on_screen_support": "yourbrand.com | @yourbrand",
+      "visual_description": "A slightly wider shot. The 'Creator' character is now smiling broadly, confidently working on their laptop, which has expanded to fill more of the frame. The dashboard UI is vibrant and shows positive growth (e.g., upward trending graphs, '₹' symbols). Happy, floating money bags and leafy growth symbols appear around the creator. The brand name 'CreatorOps' is subtly integrated into the dashboard or as a clean logo in the background. The website 'yourbrand.com' and handle '@yourbrand' appear prominently below the laptop.",
+      "key_beats": [
+        {
+          "narration_fragment": "Simplify your workflow, save big,",
+          "visual_action": "The creator is actively and happily working, positive growth symbols (money bags, graphs) animate around them."
+        },
+        {
+          "narration_fragment": "and truly thrive.",
+          "visual_action": "The creator leans back confidently, smiling, as the scene radiates success and ease."
+        },
+        {
+          "narration_fragment": "Visit your brand dot com.",
+          "visual_action": "The website 'yourbrand.com' and handle '@yourbrand' animate into the frame at the bottom, alongside the brand logo on the screen."
+        }
+      ],
+      "mood": "Success, joy, empowerment",
+      "background_color_key": "bg",
+      "opens_with": "The unified dashboard on the laptop and the relieved creator.",
+      "closes_with": "The happy creator, success symbols, brand name, website, and handle filling the screen.",
+      "transition_out": "fade"
+    }
+  ]
+}

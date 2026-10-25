@@ -1,0 +1,68 @@
+{
+  "title": "IncuBrix CreatorOps Platform Tamil Poster",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Unified CreatorOps Platform",
+    "website": "yourbrand.com",
+    "handle": "@yourbrand"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "உங்களின் படைப்பாற்றல் உலகம்",
+    "headline_emphasis": "படைப்பாற்றல்",
+    "support": "உள்ளடக்கத்தை உருவாக்குங்கள், மறுபயன்பாடு செய்யுங்கள் மற்றும் பல தளங்களில் வெளியிடுங்கள்.",
+    "cta": "இன்றே தொடங்குங்கள்",
+    "steps": [
+      "கண்டுபிடி",
+      "உருவாக்கு",
+      "வெளியிடு",
+      "கற்றுக்கொள"
+    ],
+    "stats": [
+      {
+        "value": "20",
+        "label": "குழு"
+      },
+      {
+        "value": "2",
+        "label": "நாடுகள்"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "A warm and elegant representation of a creator's workflow hub, showing connected nodes for discovery, creation, repurposing, and publishing in rich vector style.",
+  "design_system": {
+    "palette": {
+      "bg": "#1A100C",
+      "bg_alt": "#2D1B14",
+      "primary": "#E6B17E",
+      "secondary": "#C86D51",
+      "accent": "#F4D06F",
+      "ink": "#FFFFFF",
+      "paper": "#F9F6F0"
+    },
+    "fonts": {
+      "display": "Rozha One",
+      "body": "Baloo 2"
+    },
+    "headline_caps": false,
+    "corner_radius": 32,
+    "style": "warm vector illustration with rich layered gradients, glowing nodes, and soft shadows",
+    "lighting": "top-left warm amber light casting soft directional shadows and rim highlights"
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A central glowing golden orb connected by smooth curved gradient lines to four floating rounded rectangular nodes, each representing a content creation stage with an abstract icon.",
+    "props": [
+      "floating sparkle stars in the top right",
+      "soft glowing dust motes around the central hub",
+      "tiny diamond glints near the nodes",
+      "subtle light beams emanating from the top-left"
+    ],
+    "background": "Deep warm charcoal to rich terracotta gradient with a large subtle glowing aura behind the central hero.",
+    "decor": [
+      "large faint overlapping circles at the bottom corners",
+      "subtle diagonal gradient lines across the upper third"
+    ]
+  }
+}

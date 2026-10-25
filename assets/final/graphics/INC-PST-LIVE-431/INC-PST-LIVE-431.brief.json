@@ -1,0 +1,58 @@
+{
+  "title": "Automated Video Repurposing Poster",
+  "brand": {
+    "name": "Clippr",
+    "tagline": "Turn long videos into viral shorts",
+    "website": "clippr.ai",
+    "handle": "@clipprai"
+  },
+  "copy": {
+    "eyebrow": "Clippr CreatorOps",
+    "headline": "Repurpose videos in seconds",
+    "headline_emphasis": "seconds",
+    "support": "AI cuts your long-form videos into engaging viral clips instantly.",
+    "cta": "Try Free",
+    "steps": [
+      "Upload",
+      "Process",
+      "Export"
+    ],
+    "stats": [],
+    "offer": null
+  },
+  "concept": "A sleek vector illustration of a video play button transforming into multiple rising vertical shorts, conveying fast and automated content repurposing.",
+  "design_system": {
+    "palette": {
+      "bg": "#0F172A",
+      "bg_alt": "#1E293B",
+      "primary": "#6366F1",
+      "secondary": "#A855F7",
+      "accent": "#38BDF8",
+      "ink": "#F8FAFC",
+      "paper": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Archivo Black",
+      "body": "Inter"
+    },
+    "headline_caps": true,
+    "corner_radius": 24,
+    "style": "Modern flat vector with rich gradients, subtle inner glows, and layered depth",
+    "lighting": "Top-left studio lighting with a vibrant purple and blue glow behind the central icon"
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A central glowing horizontal video play button transitioning smoothly into three vertical smartphone outlines floating upward, styled with bright gradients of indigo and cyan, smooth rounded corners, and soft drop shadows.",
+    "props": [
+      "Sparkling star vector at top-right",
+      "Floating arrow icon at bottom-left",
+      "Abstract speed lines trailing upward behind the phones",
+      "Small circular dots floating near the edges"
+    ],
+    "background": "Deep navy vertical gradient from dark blue 0f172a to slate 1e293b with a faint radial glow in the center and subtle diagonal grid lines.",
+    "decor": [
+      "Large translucent rounded rectangle in the background",
+      "Faint outlined circle near the top edge"
+    ]
+  }
+}

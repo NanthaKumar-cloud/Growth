@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap');
+            /* Base styles for animations */
+            .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+            /* Animation Keyframes */
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            @keyframes subtleFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            @keyframes swipeHint {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(5px); }
+            }
+            @keyframes subtleGlow {
+                0%, 100% { filter: drop-shadow(0 0 0 rgba(255,193,7,0.4)); }
+                50% { filter: drop-shadow(0 0 8px rgba(255,193,7,0.7)); }
+            }
+
+            /* Specific Animation Classes */
+            .bg-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards; }
+            .main-shape-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+            .headline-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, pulse 3s ease-in-out 1.8s infinite; }
+            .body-anim { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+            .accent-anim-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+            .accent-anim-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6s forwards; }
+            .swipe-anim { animation: fadeIn 0.5s ease-out 2.8s forwards, swipeHint 1.5s ease-in-out 3.3s infinite; }
+            .logo-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .progress-anim { animation: fadeIn 0.5s ease-out 0.5s forwards; }
+            .line-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+            .float-anim { animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards, subtleFloat 4s ease-in-out 1.6s infinite alternate; }
+            .cta-button-anim { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.0s forwards, subtleGlow 3s ease-in-out 2.8s infinite; }
+
+
+            /* General styles */
+            .text-headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: middle; }
+            .text-body { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; }
+            .text-accent { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: middle; }
+            .text-small { font-family: 'Lato', sans-serif; font-weight: 400; fill: #343A40; text-anchor: middle; font-size: 28px; }
+
+            .progress-text { font-family: 'Lato', sans-serif; font-weight: 700; fill: #007B8C; text-anchor: end; }
+            .brand-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #0B2F3D; text-anchor: start; }
+            .brand-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 28px; }
+
+            @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+        </style>
+
+        <!-- Filters -->
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFC107" flood-opacity="0.6"/>
+        </filter>
+
+        <!-- Reusable IncuBrix "I" logo fragment -->
+        <g id="incuBrixLogo" transform="translate(0,0)">
+            <rect x="0" y="0" width="40" height="40" rx="8" ry="8" fill="#007B8C" />
+            <text x="20" y="30" class="brand-logo-text" text-anchor="middle" font-size="28">I</text>
+        </g>
+
+        <!-- Continuous line path definition, spanning multiple slides -->
+        <path id="continuousLinePathData" d="M 0 750 C 270 720 810 780 1080 750 C 1350 720 1890 780 2160 750 C 2430 720 2970 780 3240 750 C 3510 720 4050 780 4320 750 C 4590 720 5130 780 5400 750" />
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="1080" height="1350" fill="#F0F4F8" class="a bg-anim" />
+
+    <!-- Main Visual Element - Growth Chart / Network Expansion -->
+    <g class="a main-shape-anim" transform="translate(540, 600)">
+        <rect x="-250" y="-150" width="500" height="300" rx="12" ry="12" fill="#0B2F3D" filter="url(#shadow)" />
+        <path d="M -200 100 L -100 0 L 0 50 L 100 -50 L 200 0" stroke="#FFC107" stroke-width="12" fill="none" class="a float-anim" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="200" cy="0" r="20" fill="#FFC107" class="a accent-anim-1" />
+        <circle cx="-200" cy="100" r="20" fill="#007B8C" class="a accent-anim-1" />
+        <path d="M -200 100 C -150 150 150 150 200 100" stroke="#007B8C" stroke-width="8" fill="none" opacity="0.4" class="a accent-anim-2" />
+        <path d="M -200 50 C -150 100 150 100 200 50" stroke="#007B8C" stroke-width="6" fill="none" opacity="0.2" class="a accent-anim-2" />
+    </g>
+
+    <!-- Headline -->
+    <text x="540" y="280" font-size="96" class="a headline-anim text-headline">Unlock Growth. Try IncuBrix Free.</text>
+
+    <!-- Supporting Text -->
+    <text x="540" y="390" font-size="42" class="a body-anim text-body">Experience peak efficiency. Limited-time</text>
+    <text x="540" y="440" font-size="42" class="a body-anim text-body">trial for new users.</text>
+
+    <!-- Call to Action Button -->
+    <g class="a cta-button-anim">
+        <rect x="290" y="850" width="500" height="100" rx="20" ry="20" fill="#FFC107" filter="url(#shadow)" />
+        <text x="540" y="915" font-size="48" fill="#0B2F3D" font-family="'Montserrat', sans-serif" font-weight="700" text-anchor="middle">Start Your Free Trial!</text>
+    </g>
+
+    <!-- Brand Details -->
+    <text x="540" y="1050" font-size="36" fill="#007B8C" font-family="'Lato', sans-serif" font-weight="700" text-anchor="middle" class="a body-anim">incubrix.com</text>
+    <text x="540" y="1090" font-size="36" fill="#343A40" font-family="'Lato', sans-serif" font-weight="400" text-anchor="middle" class="a body-anim">@incubrix</text>
+
+
+    <!-- Progress Indicator -->
+    <text x="1008" y="100" font-size="36" class="a progress-anim progress-text">5 / 5</text>
+
+    <!-- Brand Mark -->
+    <g class="a logo-anim" transform="translate(72, 1254)">
+        <use href="#incuBrixLogo" />
+    </g>
+    <text x="125" y="1278" font-size="36" class="a logo-anim brand-text">IncuBrix</text>
+
+    <!-- No Swipe Cue on last slide -->
+</svg>

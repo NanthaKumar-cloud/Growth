@@ -1,0 +1,68 @@
+{
+  "title": "IncuBrix CreatorOps Platform Launch",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Unified CreatorOps Platform",
+    "website": "yourbrand.com",
+    "handle": "@yourbrand"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "Build better content together",
+    "headline_emphasis": "better",
+    "support": "Discover ideas, generate multi-format media, and publish everywhere effortlessly.",
+    "cta": "Start building",
+    "steps": [
+      "Discover",
+      "Create",
+      "Repurpose",
+      "Publish"
+    ],
+    "stats": [
+      {
+        "value": "20",
+        "label": "GLOBAL EXPERTS"
+      },
+      {
+        "value": "2",
+        "label": "HUB COUNTRIES"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "A sophisticated warm-toned illustration of an interconnected digital ecosystem, symbolising unified creation and global teamwork across Singapore and India.",
+  "design_system": {
+    "palette": {
+      "bg": "#231F20",
+      "bg_alt": "#382F31",
+      "primary": "#E28743",
+      "secondary": "#EEB902",
+      "accent": "#F4F1DE",
+      "ink": "#231F20",
+      "paper": "#FDFBF7"
+    },
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "Inter"
+    },
+    "headline_caps": false,
+    "corner_radius": 24,
+    "style": "warm vector illustration with rich gradients, smooth geometric node connections and subtle glowing highlights",
+    "lighting": "soft top-left warm illumination casting gentle ambient glows"
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A central glowing golden ring connected to four sleek floating rounded nodes representing discover, create, repurpose, and publish, with subtle inner gradients and crisp white icons.",
+    "props": [
+      "floating amber sparkle particles near top-left",
+      "subtle golden light flares near nodes",
+      "soft warm shadow beneath the central hub",
+      "tiny crisp diamond accents"
+    ],
+    "background": "Deep warm charcoal vertical gradient with a large subtle glowing amber radial aura behind the central hero.",
+    "decor": [
+      "large faint overlapping rounded rectangle behind hero",
+      "subtle diagonal ambient glow stripes"
+    ]
+  }
+}

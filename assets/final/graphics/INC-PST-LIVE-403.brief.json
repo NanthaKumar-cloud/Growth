@@ -1,0 +1,67 @@
+{
+  "title": "IncuBrix CreatorOps Platform Launch",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Unified CreatorOps Platform",
+    "website": "incubrix.io",
+    "handle": "@incubrix"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "Scale your creative workflow instantly",
+    "headline_emphasis": "Scale",
+    "support": "Discover, generate, repurpose, and publish content seamlessly across all platforms.",
+    "cta": "Start building",
+    "steps": [
+      "Discover",
+      "Generate",
+      "Repurpose",
+      "Publish"
+    ],
+    "stats": [
+      {
+        "value": "20",
+        "label": "EXPERTS"
+      },
+      {
+        "value": "2",
+        "label": "HUBS"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "An elegant hub-and-orbit visual metaphor showcasing the unified CreatorOps pipeline, rendered in warm gold and deep navy tones to project premium innovation.",
+  "design_system": {
+    "palette": {
+      "bg": "#0B132B",
+      "bg_alt": "#1C2541",
+      "primary": "#E0A96D",
+      "secondary": "#F4D35E",
+      "accent": "#EE6C4D",
+      "ink": "#FFFFFF",
+      "paper": "#F8F9FA"
+    },
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "DM Sans"
+    },
+    "headline_caps": false,
+    "corner_radius": 24,
+    "style": "Modern minimalist vector illustration with smooth gradients, soft drop shadows, and glowing accent rings.",
+    "lighting": "Top-left directional light casting subtle volumetric glows and soft radial depth."
+  },
+  "composition": {
+    "layout": "left",
+    "hero": "A central glowing golden orb representing the unified platform, surrounded by four interconnected floating orbital nodes in rich navy and amber representing Discover, Generate, Repurpose, and Publish stages.",
+    "props": [
+      "Floating golden sparkles around the core",
+      "Subtle connection arcs and data stream particles",
+      "Small geometric accent diamonds hovering near nodes"
+    ],
+    "background": "Deep indigo to midnight blue vertical gradient with large, faint overlapping translucent golden circles.",
+    "decor": [
+      "Large abstract gradient rings",
+      "Soft ambient background glow behind the central hero"
+    ]
+  }
+}

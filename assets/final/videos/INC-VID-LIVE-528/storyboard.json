@@ -1,0 +1,114 @@
+{
+  "title": "CreatorOps Studio 2026",
+  "brand": {
+    "name": "CreatorOps",
+    "tagline": "One Studio. Zero Burnout.",
+    "website": "creatorops.in",
+    "handle": "@creatorops_in"
+  },
+  "voice": {
+    "name": "Kore",
+    "speaking_rate": 1.05,
+    "why": "Confident, energetic, and upbeat voice perfectly matches the fast-paced entrepreneurial tone needed to address solo creator burnout."
+  },
+  "world": "A sleek, isometric 3D-vector home studio setup with a floating holographic desk, a glowing orange coffee mug, and modular app cards floating in the air. Time progresses from cluttered overload in scene one to clean, unified workspace in scene three.",
+  "design_system": {
+    "palette": {
+      "bg": "#0D1117",
+      "bg_alt": "#161B22",
+      "primary": "#FF5722",
+      "secondary": "#2196F3",
+      "accent": "#FFC107",
+      "ink": "#FFFFFF",
+      "paper": "#8B949E"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Flat vector with subtle isometric depth, clean geometric shapes, soft drop shadows, and high contrast accents.",
+    "hero_element": "A glowing orange coffee mug resting on a minimalist desk next to floating app windows.",
+    "recurring_motifs": [
+      "Floating modular app windows",
+      "Glowing orange coffee mug",
+      "Subtle grid background"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 40,
+      "color_key": "primary"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Why are you paying one hundred rupees every month across four fragmented tools just to run your solo channel?",
+      "on_screen_headline": "Stop Tool Overload",
+      "on_screen_support": "Paying for four apps is burning your cash.",
+      "visual_description": "Wide shot of a dark minimalist desk. Four separate glowing app icons float above the desk like a chaotic puzzle, accompanied by floating invoice receipts totaling one hundred dollars. The orange coffee mug sits in the center.",
+      "key_beats": [
+        {
+          "narration_fragment": "Why are you paying one hundred rupees every month",
+          "visual_action": "Four chaotic app windows and invoice bills pop up over the desk."
+        },
+        {
+          "narration_fragment": "across four fragmented tools just to run your solo channel?",
+          "visual_action": "Icons scatter in frustration as the coffee mug steam wiggles angrily."
+        }
+      ],
+      "mood": "Frustrated, urgent, eye-opening",
+      "background_color_key": "bg",
+      "opens_with": "Fresh opening showing a dark minimalist desk with the hero orange coffee mug.",
+      "closes_with": "Four floating fragmented app icons that will transition into a unified stack.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "PROBLEM_TO_SOLUTION",
+      "narration": "Juggling scattered apps leads straight to burnout. You need one unified CreatorOps studio instead.",
+      "on_screen_headline": "Meet CreatorOps",
+      "on_screen_support": "All your workflows in one powerful studio.",
+      "visual_description": "Medium close-up shot. The four fragmented app icons snap together magnetically into a single, glowing, organized dashboard window above the desk. The coffee mug stays centered, looking much happier with gentle steam.",
+      "key_beats": [
+        {
+          "narration_fragment": "Juggling scattered apps leads straight to burnout.",
+          "visual_action": "The four chaotic app icons shake and start colliding."
+        },
+        {
+          "narration_fragment": "You need one unified CreatorOps studio instead.",
+          "visual_action": "Icons merge into a single sleek dashboard interface with a green checkmark."
+        }
+      ],
+      "mood": "Relieving, triumphant, clear",
+      "background_color_key": "bg_alt",
+      "opens_with": "Four fragmented app icons from the end of scene one sliding in from the right.",
+      "closes_with": "A single unified CreatorOps studio dashboard floating above the orange coffee mug.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 3,
+      "role": "OFFER_CTA",
+      "narration": "Save time and money today. Visit creatorops dot in or check out handle at creatorops underscore in.",
+      "on_screen_headline": "Build Without Burnout",
+      "on_screen_support": "creatorops.in | @creatorops_in",
+      "visual_description": "Close-up shot of the desk. The unified studio dashboard displays a huge celebratory rocket launch graphic next to the hero orange coffee mug. Bold typography clearly shows the web address and social handle.",
+      "key_beats": [
+        {
+          "narration_fragment": "Save time and money today.",
+          "visual_action": "A friendly vector rocket launches out of the dashboard."
+        },
+        {
+          "narration_fragment": "Visit creatorops dot in or check out handle at creatorops underscore in.",
+          "visual_action": "Website and handle text animate cleanly onto the screen below the ribbon."
+        }
+      ],
+      "mood": "Empowering, welcoming, final",
+      "background_color_key": "bg",
+      "opens_with": "The unified dashboard and orange coffee mug carrying over from scene two.",
+      "closes_with": "Final brand lockup with website, handle, and the hero orange coffee mug.",
+      "transition_out": "fade"
+    }
+  ]
+}

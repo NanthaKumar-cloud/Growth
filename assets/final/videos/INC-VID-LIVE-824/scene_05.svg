@@ -1,0 +1,249 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Poppins:wght@600;700;800&amp;display=swap');
+
+  .bg-fill { fill: #0D1117; }
+  .text-ink { fill: #F0F6FC; }
+  .text-paper { fill: #8B949E; }
+  .text-primary { fill: #58A6FF; }
+  .text-secondary { fill: #3FB950; }
+
+  .a {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-120px) scale(0.95); }
+    100% { opacity: 1; transform: translateX(0) scale(1); }
+  }
+
+  @keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(120px) scale(0.95); }
+    100% { opacity: 1; transform: translateX(0) scale(1); }
+  }
+
+  @keyframes scalePop {
+    0% { opacity: 0; transform: scale(0.7); }
+    70% { transform: scale(1.08); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes ribbonWave {
+    0%, 100% { transform: translateY(0) scaleX(1); }
+    50% { transform: translateY(-5px) scaleX(1.03); }
+  }
+
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+</style>
+
+<defs>
+  <filter id="glow-primary" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="16" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+
+  <filter id="glow-secondary" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="12" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+
+  <filter id="card-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6" />
+  </filter>
+
+  <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#161B22" />
+    <stop offset="100%" stop-color="#0D1117" />
+  </linearGradient>
+
+  <linearGradient id="card-grad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1F242D" />
+    <stop offset="100%" stop-color="#161B22" />
+  </linearGradient>
+
+  <linearGradient id="badge-grad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#238636" />
+    <stop offset="100%" stop-color="#2EA043" />
+  </linearGradient>
+
+  <linearGradient id="ribbon-grad" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#58A6FF" stop-opacity="0" />
+    <stop offset="20%" stop-color="#58A6FF" stop-opacity="0.8" />
+    <stop offset="80%" stop-color="#3FB950" stop-opacity="0.8" />
+    <stop offset="100%" stop-color="#3FB950" stop-opacity="0" />
+  </linearGradient>
+</defs>
+
+<!-- Background -->
+<rect width="1080" height="1920" class="bg-fill" />
+
+<!-- Background grid lines for technical minimal look -->
+<g class="a" style="animation: fadeIn 1s ease-out 0.1s forwards;">
+  <path d="M0 320 H1080 M0 640 H1080 M0 960 H1080 M0 1280 H1080 M0 1600 H1080" stroke="#21262D" stroke-width="2" />
+  <path d="M216 0 V1920 M432 0 V1920 M648 0 V1920 M864 0 V1920" stroke="#21262D" stroke-width="2" />
+</g>
+
+<!-- Persistent brand mark -->
+<g transform="translate(80, 80)">
+  <circle cx="20" cy="20" r="16" fill="#58A6FF" opacity="0.2" />
+  <circle cx="20" cy="20" r="8" fill="#58A6FF" />
+  <text x="52" y="27" font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="700" fill="#F0F6FC" letter-spacing="1">CreatorOps</text>
+</g>
+
+<!-- Localized Ribbon Accent -->
+<g transform="translate(390, 1250)">
+  <g class="a" style="animation: fadeIn 0.8s ease-out 0.2s forwards;">
+    <path d="M 0 16 Q 150 -16 300 16" fill="none" stroke="url(#ribbon-grad)" stroke-width="32" stroke-linecap="round" filter="url(#glow-primary)" style="animation: ribbonWave 4s ease-in-out infinite;" />
+  </g>
+</g>
+
+<!-- TYPOGRAPHY / HEADLINE (Scene Focus) -->
+<g transform="translate(540, 200)">
+  <!-- Headline -->
+  <g class="a" style="animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.2s forwards;">
+    <text x="0" y="0" font-family="'Poppins', Arial, sans-serif" font-size="64" font-weight="800" fill="#F0F6FC" text-anchor="middle" letter-spacing="-1">Loved by Creators</text>
+  </g>
+
+  <!-- Supporting text -->
+  <g class="a" style="animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.35s forwards;">
+    <text x="0" y="65" font-family="'Inter', Arial, sans-serif" font-size="28" font-weight="400" fill="#8B949E" text-anchor="middle">Saving 10+ hours and $80 every single month</text>
+  </g>
+</g>
+
+<!-- SOCIAL PROOF CARDS STACKED -->
+<g transform="translate(540, 580)">
+
+  <!-- CARD 1 (Top Left offset) -->
+  <g class="a" style="animation: slideInLeft 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards, floatSlow 6s ease-in-out infinite 1s;">
+    <g transform="translate(-40, -100)">
+      <rect x="-420" y="0" width="840" height="170" rx="24" fill="url(#card-grad)" stroke="#30363D" stroke-width="2" filter="url(#card-shadow)" />
+      
+      <!-- Avatar 1 -->
+      <circle cx="-340" cy="55" r="32" fill="#58A6FF" opacity="0.2" />
+      <circle cx="-340" cy="55" r="26" fill="#1F242D" stroke="#58A6FF" stroke-width="2" />
+      <text x="-340" y="63" font-family="'Poppins', Arial, sans-serif" font-size="20" font-weight="700" fill="#58A6FF" text-anchor="middle">MK</text>
+
+      <!-- Stars -->
+      <g transform="translate(-280, 35)">
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(30, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(60, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(90, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(120, 0) scale(0.5)" />
+      </g>
+
+      <text x="-280" y="90" font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="600" fill="#F0F6FC">"Saved me 12 hours a week instantly."</text>
+      <text x="-280" y="120" font-family="'Inter', Arial, sans-serif" font-size="16" font-weight="400" fill="#8B949E">Marcus K. — Solo YouTuber</text>
+
+      <!-- Verified Badge -->
+      <g transform="translate(360, 55)">
+        <circle cx="0" cy="0" r="20" fill="#3FB950" opacity="0.2" />
+        <circle cx="0" cy="0" r="14" fill="#3FB950" />
+        <path d="M -5 0 L -1 4 L 6 -4" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </g>
+
+  <!-- CARD 2 (Center offset) -->
+  <g class="a" style="animation: slideInRight 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.55s forwards, floatSlow 6s ease-in-out infinite 2s;">
+    <g transform="translate(40, 100)">
+      <rect x="-420" y="0" width="840" height="170" rx="24" fill="url(#card-grad)" stroke="#30363D" stroke-width="2" filter="url(#card-shadow)" />
+      
+      <!-- Avatar 2 -->
+      <circle cx="-340" cy="55" r="32" fill="#3FB950" opacity="0.2" />
+      <circle cx="-340" cy="55" r="26" fill="#1F242D" stroke="#3FB950" stroke-width="2" />
+      <text x="-340" y="63" font-family="'Poppins', Arial, sans-serif" font-size="20" font-weight="700" fill="#3FB950" text-anchor="middle">SL</text>
+
+      <!-- Stars -->
+      <g transform="translate(-280, 35)">
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(30, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(60, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(90, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(120, 0) scale(0.5)" />
+      </g>
+
+      <text x="-280" y="90" font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="600" fill="#F0F6FC">"Cancelled 5 tools. Best workflow ever."</text>
+      <text x="-280" y="120" font-family="'Inter', Arial, sans-serif" font-size="16" font-weight="400" fill="#8B949E">Sarah L. — Newsletter Creator</text>
+
+      <!-- Verified Badge -->
+      <g transform="translate(360, 55)">
+        <circle cx="0" cy="0" r="20" fill="#3FB950" opacity="0.2" />
+        <circle cx="0" cy="0" r="14" fill="#3FB950" />
+        <path d="M -5 0 L -1 4 L 6 -4" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </g>
+
+  <!-- CARD 3 (Bottom offset) -->
+  <g class="a" style="animation: slideInLeft 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.7s forwards, floatSlow 6s ease-in-out infinite 3s;">
+    <g transform="translate(-20, 300)">
+      <rect x="-420" y="0" width="840" height="170" rx="24" fill="url(#card-grad)" stroke="#30363D" stroke-width="2" filter="url(#card-shadow)" />
+      
+      <!-- Avatar 3 -->
+      <circle cx="-340" cy="55" r="32" fill="#F85149" opacity="0.2" />
+      <circle cx="-340" cy="55" r="26" fill="#1F242D" stroke="#F85149" stroke-width="2" />
+      <text x="-340" y="63" font-family="'Poppins', Arial, sans-serif" font-size="20" font-weight="700" fill="#F85149" text-anchor="middle">AJ</text>
+
+      <!-- Stars -->
+      <g transform="translate(-280, 35)">
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(30, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(60, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(90, 0) scale(0.5)" />
+        <path d="M 0 10 L 6 24 L 21 26 L 10 37 L 13 52 L 0 44 L -13 52 L -10 37 L -21 26 L -6 24 Z" fill="#E3B341" transform="translate(120, 0) scale(0.5)" />
+      </g>
+
+      <text x="-280" y="90" font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="600" fill="#F0F6FC">"The automated CRM alone pays for itself."</text>
+      <text x="-280" y="120" font-family="'Inter', Arial, sans-serif" font-size="16" font-weight="400" fill="#8B949E">Alex J. — Podcaster &amp; Coach</text>
+
+      <!-- Verified Badge -->
+      <g transform="translate(360, 55)">
+        <circle cx="0" cy="0" r="20" fill="#3FB950" opacity="0.2" />
+        <circle cx="0" cy="0" r="14" fill="#3FB950" />
+        <path d="M -5 0 L -1 4 L 6 -4" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </g>
+
+</g>
+
+<!-- SAVINGS & USER METRICS HIGHLIGHT BADGE -->
+<g transform="translate(540, 1480)">
+  <g class="a" style="animation: scalePop 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.85s forwards;">
+    <rect x="-420" y="0" width="840" height="150" rx="30" fill="url(#badge-grad)" filter="url(#glow-secondary)" />
+    
+    <g transform="translate(0, 75)">
+      <!-- Savings Icon / Coin -->
+      <g transform="translate(-320, 0)">
+        <circle cx="0" cy="0" r="35" fill="#FFFFFF" opacity="0.2" />
+        <circle cx="0" cy="0" r="25" fill="#FFFFFF" />
+        <text x="0" y="9" font-family="'Poppins', Arial, sans-serif" font-size="26" font-weight="800" fill="#238636" text-anchor="middle">$</text>
+      </g>
+
+      <text x="-250" y="-8" font-family="'Poppins', Arial, sans-serif" font-size="36" font-weight="800" fill="#FFFFFF">$80+ Saved Every Month</text>
+      <text x="-250" y="24" font-family="'Inter', Arial, sans-serif" font-size="18" font-weight="500" fill="#E6FFED">Join 10,000+ active creators scaling their workflow</text>
+    </g>
+  </g>
+</g>
+
+</svg>

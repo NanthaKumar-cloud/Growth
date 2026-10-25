@@ -1,0 +1,214 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&amp;family=Inter:wght@400;700&amp;display=swap');
+
+  .a {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-fill-mode: forwards;
+  }
+
+  /* Entrance animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scalePop {
+    0% { opacity: 0; transform: scale(0.8); }
+    60% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes swirlIn {
+    0% { opacity: 0; transform: translate(0, 0) scale(0); }
+    30% { opacity: 1; transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(var(--rot)); }
+    100% { opacity: 1; transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--rot)); }
+  }
+
+  /* Looping animations */
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes stressAppearAndFlicker {
+    0% { opacity: 0; stroke-dashoffset: 20; }
+    50% { opacity: 1; stroke-dashoffset: 0; }
+    100% { opacity: 1; stroke-dashoffset: -20; }
+  }
+
+  @keyframes swirlFloat {
+    0%, 100% { transform: translate(var(--dx), var(--dy)) scale(var(--s)) rotate(var(--rot)); }
+    50% { transform: translate(calc(var(--dx) + 5px), calc(var(--dy) + 3px)) scale(calc(var(--s) + 0.02)) rotate(calc(var(--rot) + 2deg)); }
+  }
+
+  @keyframes overallDriftScale {
+    0% { transform: translate(0,0) scale(1); }
+    100% { transform: translate(0, -30px) scale(1.05); }
+  }
+
+  /* Animation classes */
+  .fade-in-brand { animation: fadeIn 0.8s ease-out 0.2s forwards; }
+  .slide-in-headline { animation: slideInUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.55s forwards; }
+  .slide-in-support { animation: slideInUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.65s forwards; }
+
+  .avatar-entrance { animation: scalePop 1s cubic-bezier(0.34,1.56,0.64,1) 0.55s forwards, bob 3s ease-in-out 1.55s infinite alternate; }
+  .stress-aura-entrance { animation: stressAppearAndFlicker 2s ease-out 0.7s forwards, stressAppearAndFlicker 2s ease-in-out 2.7s infinite alternate; }
+  .laptop-entrance { animation: slideInUp 1s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards; }
+  .desk-entrance { animation: slideInUp 1s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards; }
+
+  .icon-swirl-1 { --dx: -120px; --dy: -250px; --rot: 10deg; --s: 0.9; animation: swirlIn 1s cubic-bezier(0.34,1.56,0.64,1) 2.95s forwards, swirlFloat 4s ease-in-out 3.95s infinite alternate; }
+  .icon-swirl-2 { --dx: 100px; --dy: -280px; --rot: -15deg; --s: 1.1; animation: swirlIn 1s cubic-bezier(0.34,1.56,0.64,1) 3.1s forwards, swirlFloat 4s ease-in-out 4.1s infinite alternate; }
+  .icon-swirl-3 { --dx: -200px; --dy: -180px; --rot: 5deg; --s: 0.8; animation: swirlIn 1s cubic-bezier(0.34,1.56,0.64,1) 3.25s forwards, swirlFloat 4s ease-in-out 4.25s infinite alternate; }
+  .icon-swirl-4 { --dx: 180px; --dy: -150px; --rot: 20deg; --s: 1; animation: swirlIn 1s cubic-bezier(0.34,1.56,0.64,1) 3.4s forwards, swirlFloat 4s ease-in-out 4.4s infinite alternate; }
+  .icon-swirl-5 { --dx: -80px; --dy: -350px; --rot: -5deg; --s: 0.7; animation: swirlIn 1s cubic-bezier(0.34,1.56,0.64,1) 3.55s forwards, swirlFloat 4s ease-in-out 4.55s infinite alternate; }
+  .icon-swirl-6 { --dx: 220px; --dy: -220px; --rot: -25deg; --s: 0.95; animation: swirlIn 1s cubic-bezier(0.34,1.56,0.64,1) 3.7s forwards, swirlFloat 4s ease-in-out 4.7s infinite alternate; }
+
+  .overall-drift-scale-group {
+    animation: overallDriftScale 6s ease-in-out 0.5s forwards;
+  }
+  .fade-in-ribbon { animation: fadeIn 0.8s ease-out 0.2s forwards; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .a {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<defs>
+  <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1F2937" flood-opacity="0.15"/>
+  </filter>
+</defs>
+
+<!-- Background -->
+<rect x="0" y="0" width="1080" height="1920" fill="#E8F4F1" />
+
+<!-- Ribbon Right Stub (STATIC) -->
+<rect x="907" y="1172" width="173" height="36" fill="#10B981" />
+
+<!-- Brand Mark -->
+<text x="72" y="100" font-family="'Poppins', Arial, sans-serif" font-size="30" font-weight="700" fill="#1F2937" text-anchor="start">CreatorOps Studio</text>
+
+<!-- Main content group for overall drift and scale -->
+<g class="overall-drift-scale-group">
+
+  <!-- Desk -->
+  <g class="a desk-entrance">
+    <rect x="72" y="1400" width="936" height="150" rx="16" ry="16" fill="#FFFFFF" filter="url(#softShadow)" />
+    <rect x="100" y="1550" width="50" height="150" rx="8" ry="8" fill="#D1D5DB" />
+    <rect x="930" y="1550" width="50" height="150" rx="8" ry="8" fill="#D1D5DB" />
+  </g>
+
+  <!-- Laptop -->
+  <g class="a laptop-entrance">
+    <rect x="340" y="1050" width="400" height="280" rx="16" ry="16" fill="#FFFFFF" filter="url(#softShadow)" />
+    <!-- Laptop screen base -->
+    <rect x="350" y="1060" width="380" height="200" rx="12" ry="12" fill="#1F2937" />
+    <!-- Overlapping browser tabs/windows - simplified -->
+    <rect x="365" y="1075" width="180" height="120" rx="8" ry="8" fill="#3B82F6" opacity="0.7" />
+    <rect x="420" y="1100" width="180" height="120" rx="8" ry="8" fill="#F59E0B" opacity="0.7" />
+    <rect x="475" y="1125" width="180" height="120" rx="8" ry="8" fill="#10B981" opacity="0.7" />
+    <!-- Keyboard/trackpad -->
+    <rect x="350" y="1270" width="380" height="50" rx="8" ry="8" fill="#E5E7EB" />
+  </g>
+
+  <!-- Creator Avatar (Base position fixed with parent group, animation on child group) -->
+  <g transform="translate(540, 900)">
+    <g class="a avatar-entrance">
+      <!-- Body (hunched) -->
+      <path d="M-100,50 C-120,0 -80,-50 0,-50 C80,-50 120,0 100,50 L80,150 L-80,150 Z" fill="#FFFFFF" filter="url(#softShadow)"/>
+      <!-- Head -->
+      <circle cx="0" cy="-100" r="60" fill="#FFFFFF" filter="url(#softShadow)"/>
+      <!-- Neck -->
+      <rect x="-20" y="-40" width="40" height="60" fill="#FFFFFF" />
+      <!-- Simple face details (stressed) -->
+      <path d="M-20,-115 C-10,-125 10,-125 20,-115" stroke="#1F2937" stroke-width="5" stroke-linecap="round" fill="none" />
+      <path d="M-25,-90 C-15,-95 -5,-95 0,-90" stroke="#1F2937" stroke-width="5" stroke-linecap="round" fill="none" />
+      <path d="M5,-90 C15,-95 25,-95 30,-90" stroke="#1F2937" stroke-width="5" stroke-linecap="round" fill="none" />
+
+      <!-- Stress Aura (ink lines) -->
+      <g class="a stress-aura-entrance" stroke="#1F2937" stroke-width="4" stroke-linecap="round" stroke-dasharray="20 10">
+        <path d="M-80,-180 C-120,-220 -150,-150 -100,-100" fill="none" />
+        <path d="M80,-180 C120,-220 150,-150 100,-100" fill="none" />
+        <path d="M-130,-130 C-180,-100 -180,-50 -130,-30" fill="none" />
+        <path d="M130,-130 C180,-100 180,-50 130,-30" fill="none" />
+      </g>
+    </g>
+  </g>
+
+  <!-- App Icons (chaotic cloud) around avatar's head -->
+  <g transform="translate(540, 800)">
+    <g class="a icon-swirl-1">
+      <rect x="-20" y="-20" width="40" height="40" rx="8" fill="#3B82F6" />
+      <path d="M-10,-5 L-10,10 L0,15 L10,10 L10,-5 L0,-10 Z" fill="#FFFFFF" />
+    </g>
+    <g class="a icon-swirl-2">
+      <circle cx="0" cy="0" r="25" fill="#F59E0B" />
+      <path d="M-12,-5 L-5,-12 L0,-5 L5,-12 L12,-5 L5,0 L12,5 L5,12 L0,5 L-5,12 L-12,5 L-5,0 Z" fill="#FFFFFF" />
+    </g>
+    <g class="a icon-swirl-3">
+      <rect x="-20" y="-20" width="40" height="40" rx="8" fill="#10B981" />
+      <path d="M-10,-10 L10,-10 L10,10 L-10,10 Z M0,-5 L0,5" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+      <circle cx="-5" cy="0" r="2" fill="#FFFFFF" />
+      <circle cx="5" cy="0" r="2" fill="#FFFFFF" />
+    </g>
+    <g class="a icon-swirl-4">
+      <path d="M0,-25 L25,0 L0,25 L-25,0 Z" fill="#3B82F6" />
+      <path d="M-8,-8 L8,-8 L8,8 L-8,8 Z" fill="#FFFFFF" />
+    </g>
+    <g class="a icon-swirl-5">
+      <circle cx="0" cy="0" r="25" fill="#F59E0B" />
+      <path d="M-10,0 C-10,-10 10,-10 10,0 C10,10 -10,10 -10,0 Z M-5,-5 L5,5 M-5,5 L5,-5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" />
+    </g>
+    <g class="a icon-swirl-6">
+      <rect x="-20" y="-20" width="40" height="40" rx="8" fill="#10B981" />
+      <path d="M-10,0 L0,-10 L10,0 L0,10 Z M0,-10 L0,10 M-10,0 L10,0" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- Headline -->
+  <g class="a slide-in-headline">
+    <text x="540" y="270" font-family="'Poppins', Arial, sans-serif" font-size="88" font-weight="700" fill="#1F2937" text-anchor="middle">Stressed by</text>
+    <text x="540" y="370" font-family="'Poppins', Arial, sans-serif" font-size="88" font-weight="700" fill="#1F2937" text-anchor="middle">Scattered Tools?</text>
+  </g>
+
+  <!-- Supporting Text -->
+  <g class="a slide-in-support">
+    <text x="540" y="470" font-family="'Inter', Arial, sans-serif" font-size="46" fill="#1F2937" text-anchor="middle">Solo creators, find your focus.</text>
+  </g>
+
+</g>
+
+<!-- Ribbon middle part - animates -->
+<g class="a fade-in-ribbon">
+  <path id="ribbon-path" fill="#10B981"
+        d="M 0 1172
+           C 200 1172, 300 1182, 540 1178
+           C 780 1174, 880 1172, 1080 1172
+           L 1080 1208
+           C 880 1208, 780 1212, 540 1210
+           C 300 1206, 200 1208, 0 1208 Z">
+    <animate attributeName="d"
+             values="M 0 1172 C 200 1172, 300 1182, 540 1178 C 780 1174, 880 1172, 1080 1172 L 1080 1208 C 880 1208, 780 1212, 540 1210 C 300 1206, 200 1208, 0 1208 Z;
+                     M 0 1172 C 200 1182, 300 1172, 540 1176 C 780 1180, 880 1182, 1080 1172 L 1080 1208 C 880 1208, 780 1204, 540 1206 C 300 1198, 200 1198, 0 1208 Z;
+                     M 0 1172 C 200 1172, 300 1182, 540 1178 C 780 1174, 880 1172, 1080 1172 L 1080 1208 C 880 1208, 780 1212, 540 1210 C 300 1206, 200 1208, 0 1208 Z"
+             keyTimes="0; 0.5; 1"
+             dur="4s"
+             repeatCount="indefinite"
+             calcMode="spline"
+             keySplines="0.4 0 0.2 1; 0.4 0 0.2 1"/>
+  </path>
+</g>
+
+</svg>

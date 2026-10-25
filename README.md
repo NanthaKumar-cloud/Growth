@@ -1,8 +1,9 @@
 # IncuBrix Growth Engine — AI Content & Repurposing Pipeline
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Tests](https://img.shields.io/badge/tests-13%20passed-brightgreen.svg)]()
-[![Model](https://img.shields.io/badge/model-Gemini%202.5%20Flash-orange.svg)]()
+[![Tests](https://img.shields.io/badge/tests-44%20passed-brightgreen.svg)]()
+[![Model](https://img.shields.io/badge/model-Gemini%202.5%20%2F%203.6%20Flash-orange.svg)]()
+[![Voice](https://img.shields.io/badge/voice-GCP%20Chirp%203%20HD-blueviolet.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-purple.svg)]()
 
 > **Submission for IncuBrix Private Limited — 2027 Graduate Hiring**  
@@ -100,6 +101,93 @@ python src/main.py --input data/inputs/sample_longform_case_study.md --count 10 
 
 ---
 
+## Interactive Web Application & Workspace UI
+
+The IncuBrix Growth Engine features a production-grade, zero-build React 18 single-page application served by an asynchronous FastAPI backend.
+
+### Launching the Web Workspace
+```bash
+python src/server.py
+# or
+python -m uvicorn src.server:app --host 127.0.0.1 --port 8080 --reload
+```
+Once launched, open **[http://127.0.0.1:8080](http://127.0.0.1:8080)** in any browser.
+
+### Key Workspaces Included (13 Dedicated Views)
+1. **Overview Dashboard**: High-level KPI summary, asset pipeline status, platform mix, and quick action launchpad.
+2. **AI Content Engine**: 7-column input workspace with word count telemetry, editorial tone toggles, and multi-platform selection.
+3. **Animated SVG Carousel Studio**: Live unclipped vector renderer, seamless seam cross-slide inspector, 60fps CSS animation replay, and PDF/MP4 exports.
+4. **Short-Form Video Studio (9:16)**: Vertical video previewer, timeline scrubber, 3-scene narrative breakdown (Hook $\to$ Body $\to$ CTA), and licensing audits.
+5. **Content Calendar**: Omnichannel publishing schedule with month/week/list views, platform filters, date rescheduling, and CSV download.
+6. **Strategy & Brand Voice**: 5 core content pillars, Tier-1 geo allocation, brand guidelines, and approved vs. forbidden claim matrix.
+7. **Production Asset Library**: Searchable grid of all 30 assets with input-to-output traceability and direct editing links.
+8. **Competitor & Peer Audit**: Exhaustive teardowns of Opus Clip, Buffer, Descript, Taplio, and Klap with IncuBrix counter-positioning.
+9. **Analytics & Audience Experiments**: Pipeline performance telemetry (112s runtime, $0.0018 cost) vs. Option B 24-person empirical preference test.
+10. **Publishing Queue & CSV Export**: Verified 30-item queue with one-click download for `IncuBrix_Content_Calendar.csv` (all 23 official workbook columns).
+11. **System & Environment Settings**: Real-time health checks for Gemini 3.6 Flash / 2.5 Flash, FFmpeg, and storage paths.
+12. **Assessment Readiness Verification**: Interactive modal auditing all 15 assessment compliance gates with live proof links.
+13. **Asset Detail & Quality Studio**: Full asset editor with real-time recalculation of the 12-point quality score checklist.
+
+---
+
+## Animated SVG Motion Carousel Engine (Gemini 3.6 Flash)
+
+The repository integrates a dedicated animated SVG motion carousel generator located in [`src/animated_svg_carousel.py`](file:///c:/Users/Lenovo/Documents/IncuBrix-Growth-Engine/src/animated_svg_carousel.py).
+
+### How It Works
+* **Vector Code Generation**: Employs Gemini 3.6 Flash with strict geometric and narrative prompts to generate self-contained 1080×1350 SVGs per slide.
+* **Seamless Seam Continuity**: Visual elements (ribbons, paths, progress bands) cross the right edge of slide $k$ and continue seamlessly from the left edge of slide $k+1$ using pixel-exact 1080px offsets.
+* **Non-Degraded CSS Animations**: Uses isolated `@keyframes` and cubic-bezier easing to orchestrate staggered slide entrances ($0.3\text{s}$ to $1.6\text{s}$) with subtle idle ambient floating.
+* **Interactive Preview Player**: Automatically outputs an unclipped `preview.html` with swipe/keyboard controls and a motion replay trigger.
+
+### CLI Usage
+```bash
+python -m src.animated_svg_carousel --use-case "Solo Creator Tool Bloat: Why paying for 4 separate apps is slowing creators down" --slides 7 --output-dir assets/final/carousels/DEMO_CAROUSEL
+```
+
+---
+
+## Animated-SVG Ad Video Generation Engine (GCP Chirp 3 HD)
+
+The repository integrates a complete 5-stage automated video generation pipeline located in [`src/ad_video_maker.py`](file:///c:/Users/Lenovo/Documents/IncuBrix-Growth-Engine/src/ad_video_maker.py):
+
+### Pipeline Architecture
+```mermaid
+flowchart LR
+    A["1. DIRECTOR<br/>(Gemini Storyboard)"] --> B["2. VOICE<br/>(GCP Chirp 3 HD)"]
+    B --> C["3. ANIMATOR<br/>(Animated SVGs)"]
+    C --> D["4. RENDERER<br/>(Playwright Chromium)"]
+    D --> E["5. ASSEMBLER<br/>(FFmpeg xfade + loudnorm)"]
+```
+
+1. **DIRECTOR (Gemini)**: Transforms a use-case or prompt into a cinematic storyboard JSON featuring a unified design system, exact narration scripts, visual beats, and character continuity.
+2. **VOICE (Google Cloud Text-to-Speech)**: Synthesizes narration clips using Google's **Chirp 3 HD** high-fidelity neural voices (e.g., Puck, Aoede, Fenrir, Kore), deriving exact per-scene audio durations and sentence cue timings.
+3. **ANIMATOR (Gemini)**: Writes vector-animated SVGs per scene timed to the narration clock, featuring cubic-bezier entrances, continuous seam-crossing ribbon elements, and linted CSS transforms.
+4. **RENDERER (Playwright Chromium)**: Steps through SVGs frame-by-frame deterministically at 30 FPS with burned-in kinetic subtitles, piping raw frames directly into FFmpeg.
+5. **ASSEMBLER (FFmpeg)**: Glues scenes with smooth `xfade` sliding transitions (`slideleft`, `smoothleft`, `fade`), positions the master narration track, and normalizes audio to broadcasting standards (`loudnorm=I=-16:TP=-1.5:LRA=11`).
+
+### CLI Usage
+```bash
+python -m src.ad_video_maker "Dosa corner shop with crispy ghee roast and 3 chutneys" --aspect 9:16 --seconds 15 --voice Puck
+```
+
+### Python API Integration
+```python
+from src.ad_video_maker import generate_animated_ad_video
+
+result = generate_animated_ad_video(
+    use_case="Solo Creator Tool Bloat: Why paying for 4 separate apps is slowing creators down",
+    output_dir="assets/final/videos/INC-VID-LIVE-001",
+    asset_id="INC-VID-LIVE-001",
+    aspect="9:16",
+    seconds=15.0,
+    voice="Puck"
+)
+print("Final Video:", result["video_path"])
+```
+
+---
+
 ## Automated Test Suite
 
 Run the full pytest suite:
@@ -107,7 +195,9 @@ Run the full pytest suite:
 pytest -v
 ```
 
-### Test Coverage (13 / 13 Passing)
+### Test Coverage (27 / 27 Passing)
+* `tests/test_ad_video_maker.py`: Validates storyboard normalization, cue timing calculations, Chirp 3 HD voice candidate selection, SVG XML well-formedness, auto-fixing transform conflicts in nested `<g>`, and fallback scene generation.
+* `tests/test_animated_svg_carousel.py`: Validates use-case parsing, slide count deduction, SVG slide block extraction, and interactive HTML preview runner assembly.
 * `tests/test_ingest.py`: Valid text parsing, empty inputs, short-text rejection, missing file handling.
 * `tests/test_validator.py`: Required field checks, prohibited hype claims (`"make $10,000"`, `"overnight riches"`), video 60-second duration limits.
 * `tests/test_deduplicator.py`: Exact SHA256 duplicate detection, token Jaccard similarity thresholding.

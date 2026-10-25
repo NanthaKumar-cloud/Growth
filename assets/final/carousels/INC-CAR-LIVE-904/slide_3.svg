@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0E17"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap');
+    
+    .bg { fill: url(#bg-grad); }
+    .card { fill: #111827; stroke: #1F293D; stroke-width: 2; rx: 16px; }
+    .text-title { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 80px; text-anchor: middle; }
+    .text-accent { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: #FF3B00; font-size: 80px; text-anchor: middle; }
+    .text-body { font-family: 'Inter', Arial, sans-serif; font-weight: 400; fill: #94A3B8; font-size: 36px; text-anchor: middle; }
+    .text-brand { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: #00F0FF; font-size: 28px; }
+    .text-meta { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 600; fill: #64748B; font-size: 28px; }
+    .text-swipe { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 600; fill: #00F0FF; font-size: 30px; letter-spacing: 2px; }
+
+    .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+    .a1 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+    .a2 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+    .a3 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes scaleUp { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+    @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+  </style>
+
+  <rect width="1080" height="1350" class="bg"/>
+
+  <!-- Top Navigation UI -->
+  <g transform="translate(72, 80)">
+    <rect width="260" height="48" rx="24" fill="#00F0FF" fill-opacity="0.1" stroke="#00F0FF" stroke-width="1.5"/>
+    <text x="130" y="33" text-anchor="middle" class="text-brand">IncuBrix // Ops</text>
+  </g>
+  <text x="1008" y="113" text-anchor="end" class="text-meta">03 / 15</text>
+
+  <!-- Title -->
+  <g transform="translate(540, 260)">
+    <g class="a a1">
+      <text x="0" y="0" class="text-accent">40+ Hours Wasted</text>
+      <text x="0" y="95" class="text-title">Every Single Campaign</text>
+    </g>
+  </g>
+
+  <!-- Wasted Time Breakdown Card -->
+  <g transform="translate(140, 480)">
+    <g class="a a3">
+      <rect x="0" y="0" width="800" height="360" class="card"/>
+      <g transform="translate(50, 45)">
+        <text x="0" y="30" font-family="'Space Grotesk', sans-serif" font-weight="700" fill="#FF3B00" font-size="28">WEEKLY TIME WASTE</text>
+        
+        <rect x="0" y="50" width="700" height="20" rx="10" fill="#1F293D"/>
+        <rect x="0" y="50" width="580" height="20" rx="10" fill="#FF3B00"/>
+
+        <g transform="translate(0, 110)">
+          <text x="0" y="0" font-family="'Inter', sans-serif" font-size="28" fill="#FFFFFF">Manual Creator Vetting &amp; Outreach</text>
+          <text x="700" y="0" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="28" fill="#FF3B00" text-anchor="end">18 hrs</text>
+          
+          <text x="0" y="50" font-family="'Inter', sans-serif" font-size="28" fill="#FFFFFF">Spreadsheet Link &amp; Code Management</text>
+          <text x="700" y="50" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="28" fill="#FF3B00" text-anchor="end">12 hrs</text>
+
+          <text x="0" y="100" font-family="'Inter', sans-serif" font-size="28" fill="#FFFFFF">Manual PayPal &amp; Wire Payouts</text>
+          <text x="700" y="100" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="28" fill="#FF3B00" text-anchor="end">10+ hrs</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Body Text -->
+  <g transform="translate(540, 960)">
+    <g class="a a2">
+      <text x="0" y="0" class="text-body">Manual creator vetting, scattered tracking links, and payout</text>
+      <text x="0" y="50" class="text-body">headaches drain high-value engineering resources.</text>
+    </g>
+  </g>
+
+  <!-- Seamless Seam Line (Enter y=880, Exit y=920) -->
+  <path d="M 0 880 C 300 860, 700 940, 1080 920" fill="none" stroke="#00F0FF" stroke-width="3" opacity="0.6"/>
+
+  <!-- Swipe Cue -->
+  <g transform="translate(540, 1220)">
+    <text x="0" y="0" text-anchor="middle" class="text-swipe">SWIPE FOR THE SOLUTION &#x2192;</text>
+  </g>
+</svg>

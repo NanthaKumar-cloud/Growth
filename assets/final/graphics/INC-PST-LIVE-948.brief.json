@@ -1,0 +1,67 @@
+{
+  "title": "IncuBrix CreatorOps Burnout Cure",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "The Unified CreatorOps Studio",
+    "website": "yourbrand.com",
+    "handle": "@yourbrand"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "Stop paying for scattered tools",
+    "headline_emphasis": "scattered",
+    "support": "Replace four fragmented subscriptions with one unified creator studio.",
+    "cta": "Start free",
+    "steps": [
+      "Plan",
+      "Create",
+      "Publish"
+    ],
+    "stats": [
+      {
+        "value": "$100",
+        "label": "SAVED MONTHLY"
+      },
+      {
+        "value": "1",
+        "label": "UNIFIED STUDIO"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "A high-contrast visual metaphor showing four separate leaking subscription boxes merging into one glowing, efficient central creator studio hub, emphasizing the transition from costly fragmentation to seamless unity.",
+  "design_system": {
+    "palette": {
+      "bg": "#0D0F18",
+      "bg_alt": "#16192B",
+      "primary": "#6366F1",
+      "secondary": "#EC4899",
+      "accent": "#10B981",
+      "ink": "#FFFFFF",
+      "paper": "#F8FAFC"
+    },
+    "fonts": {
+      "display": "Archivo Black",
+      "body": "Inter"
+    },
+    "headline_caps": true,
+    "corner_radius": 28,
+    "style": "bold flat vector with rich gradients, clean geometric shapes, soft drop shadows and glowing accent highlights",
+    "lighting": "top-left studio lighting casting subtle soft glows and sharp edge highlights"
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A central glowing rounded cube representing the unified studio, surrounded by four smaller fading disconnected app icons in red-tinted containers being pulled inward by glowing cyan and pink energy streams.",
+    "props": [
+      "floating sparkle icons top right",
+      "coins dropping out of broken tool boxes bottom left",
+      "glowing connection lines radiating from center",
+      "tiny abstract UI wireframes floating around the hub"
+    ],
+    "background": "Deep dark navy radial gradient with a large soft violet glow in the center behind the hero",
+    "decor": [
+      "two large faint semi-transparent floating rings in the background",
+      "subtle diagonal grid lines across the lower canvas"
+    ]
+  }
+}

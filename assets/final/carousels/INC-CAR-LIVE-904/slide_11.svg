@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0E17"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cyan-purple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap');
+    
+    .bg { fill: url(#bg-grad); }
+    .card { fill: #111827; stroke: #1F293D; stroke-width: 2; rx: 16px; }
+    .text-title { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 80px; text-anchor: middle; }
+    .text-gradient { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: url(#cyan-purple); font-size: 80px; text-anchor: middle; }
+    .text-body { font-family: 'Inter', Arial, sans-serif; font-weight: 400; fill: #94A3B8; font-size: 36px; text-anchor: middle; }
+    .text-brand { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: #00F0FF; font-size: 28px; }
+    .text-meta { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 600; fill: #64748B; font-size: 28px; }
+    .text-swipe { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 600; fill: #00F0FF; font-size: 30px; letter-spacing: 2px; }
+
+    .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+    .a1 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+    .a2 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+    .a3 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes scaleUp { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+    @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+  </style>
+
+  <rect width="1080" height="1350" class="bg"/>
+
+  <!-- Top Navigation UI -->
+  <g transform="translate(72, 80)">
+    <rect width="260" height="48" rx="24" fill="#00F0FF" fill-opacity="0.1" stroke="#00F0FF" stroke-width="1.5"/>
+    <text x="130" y="33" text-anchor="middle" class="text-brand">IncuBrix // Ops</text>
+  </g>
+  <text x="1008" y="113" text-anchor="end" class="text-meta">11 / 15</text>
+
+  <!-- Title -->
+  <g transform="translate(540, 260)">
+    <g class="a a1">
+      <text x="0" y="0" class="text-gradient">3.8x ROI</text>
+      <text x="0" y="95" class="text-title">For High-Growth SaaS</text>
+    </g>
+  </g>
+
+  <!-- Proof Stat Display -->
+  <g transform="translate(140, 480)">
+    <g class="a a3">
+      <rect x="0" y="0" width="800" height="380" class="card"/>
+      <g transform="translate(80, 70)">
+        <text x="0" y="80" font-family="'Space Grotesk', sans-serif" font-weight="700" fill="#00F0FF" font-size="96">3.8x</text>
+        <text x="0" y="130" font-family="'Inter', sans-serif" font-weight="600" fill="#FFFFFF" font-size="28">AVERAGE CAMPAIGN ROI</text>
+
+        <line x1="320" y1="20" x2="320" y2="200" stroke="#1F293D" stroke-width="2"/>
+
+        <g transform="translate(360, 0)">
+          <text x="0" y="80" font-family="'Space Grotesk', sans-serif" font-weight="700" fill="#8B5CF6" font-size="96">85%</text>
+          <text x="0" y="130" font-family="'Inter', sans-serif" font-weight="600" fill="#FFFFFF" font-size="28">HOURS SAVED PER MO</text>
+        </g>
+      </g>
+      <rect x="40" y="270" width="720" height="70" rx="12" fill="#161F33"/>
+      <text x="400" y="313" font-family="'Inter', sans-serif" font-size="24" fill="#94A3B8" text-anchor="middle">Verified benchmark across 250+ active SaaS growth teams</text>
+    </g>
+  </g>
+
+  <!-- Body Text -->
+  <g transform="translate(540, 960)">
+    <g class="a a2">
+      <text x="0" y="0" class="text-body">Scale campaign volume by 10x while eliminating 85% of manual</text>
+      <text x="0" y="50" class="text-body">operational overhead for your growth team.</text>
+    </g>
+  </g>
+
+  <!-- Seamless Seam Line (Enter y=930, Exit y=870) -->
+  <path d="M 0 930 C 300 910, 700 890, 1080 870" fill="none" stroke="#00F0FF" stroke-width="3" opacity="0.6"/>
+
+  <!-- Swipe Cue -->
+  <g transform="translate(540, 1220)">
+    <text x="0" y="0" text-anchor="middle" class="text-swipe">SEE FOUNDER TESTIMONIAL &#x2192;</text>
+  </g>
+</svg>

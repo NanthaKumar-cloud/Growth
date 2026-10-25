@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="100%" height="100%">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&amp;family=Inter:wght@400;600&amp;display=swap');
+
+.a {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-fill-mode: forwards;
+}
+
+.bg-mesh { animation: fadeIn 0.5s ease-out 0s forwards; }
+.brand-mark { opacity: 1; }
+
+.app-dissolve-1 { animation: dissolveIcon 0.8s cubic-bezier(0.22,1,0.36,1) 0.55s forwards; }
+.app-dissolve-2 { animation: dissolveIcon 0.8s cubic-bezier(0.22,1,0.36,1) 0.65s forwards; }
+.app-dissolve-3 { animation: dissolveIcon 0.8s cubic-bezier(0.22,1,0.36,1) 0.75s forwards; }
+.app-dissolve-4 { animation: dissolveIcon 0.8s cubic-bezier(0.22,1,0.36,1) 0.85s forwards; }
+
+.cube-enter { animation: cubePop 1.0s cubic-bezier(0.34,1.56,0.64,1) 1.5s forwards, idleFloat 4s ease-in-out 2.5s infinite alternate; }
+
+.text-head-1 { animation: fadeSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 1.6s forwards; }
+.text-head-2 { animation: fadeSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 1.75s forwards; }
+.text-sub { animation: fadeSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 3.3s forwards; }
+
+.ribbon-wave { animation: ribbonMove 6s ease-in-out 0s infinite alternate; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dissolveIcon {
+  0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { opacity: 0.8; transform: scale(1.1) rotate(15deg); filter: blur(2px); }
+  100% { opacity: 0; transform: translate(0, -120px) scale(0.2) rotate(45deg); filter: blur(8px); }
+}
+
+@keyframes cubePop {
+  0% { opacity: 0; transform: scale(0.4) translateY(60px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes idleFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-16px) rotate(1deg); }
+}
+
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ribbonMove {
+  0% { d: path("M 173 1248 Q 540 1218 907 1248"); }
+  50% { d: path("M 173 1248 Q 540 1278 907 1248"); }
+  100% { d: path("M 173 1248 Q 540 1218 907 1248"); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+</style>
+
+<defs>
+  <radialGradient id="bgGrad" cx="50%" cy="40%" r="70%">
+    <stop offset="0%" stop-color="#1A1D2E" />
+    <stop offset="100%" stop-color="#0D0F18" />
+  </radialGradient>
+
+  <radialGradient id="cubeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#FF5722" stop-opacity="0.4" />
+    <stop offset="60%" stop-color="#00CEC9" stop-opacity="0.15" />
+    <stop offset="100%" stop-color="#0D0F18" stop-opacity="0" />
+  </radialGradient>
+
+  <linearGradient id="cubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#FF7043" />
+    <stop offset="100%" stop-color="#FF5722" />
+  </linearGradient>
+
+  <linearGradient id="cubeLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#7C6BEE" />
+    <stop offset="100%" stop-color="#6C5CE7" />
+  </linearGradient>
+
+  <linearGradient id="cubeRight" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#00F2EE" />
+    <stop offset="100%" stop-color="#00CEC9" />
+  </linearGradient>
+
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="24" result="blur" />
+    <feMerge>
+      <feMergeNode in="blur" />
+      <feMergeNode in="SourceGraphic" />
+    </feMerge>
+  </filter>
+
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.4" />
+  </filter>
+</defs>
+
+
+<rect width="1080" height="1920" fill="url(#bgGrad)" class="bg-mesh" />
+
+
+<circle cx="540" cy="560" r="320" fill="url(#cubeGlow)" class="a bg-mesh" />
+
+
+<text x="72" y="100" font-size="32" font-weight="700" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif" class="brand-mark" opacity="0.9">CreatorOS</text>
+
+
+<rect x="0" y="1232" width="173" height="32" fill="#6C5CE7" />
+<rect x="907" y="1232" width="173" height="32" fill="#6C5CE7" />
+
+
+<path d="M 173 1248 Q 540 1218 907 1248" fill="none" stroke="#6C5CE7" stroke-width="32" stroke-linecap="round" class="ribbon-wave" />
+
+
+<g transform="translate(540, 560)">
+  
+  <g class="a app-dissolve-1">
+    <rect x="-180" y="-140" width="80" height="80" rx="20" fill="#2D3250" filter="url(#softShadow)" />
+    <path d="M-150 -110 h20 v20 h-20 z" fill="#00CEC9" />
+  </g>
+  
+  <g class="a app-dissolve-2">
+    <rect x="100" y="-160" width="80" height="80" rx="20" fill="#2D3250" filter="url(#softShadow)" />
+    <path d="M120 -130 h40 v8 h-40 z M120 -114 h30 v8 h-30 z" fill="#FF5722" />
+  </g>
+  
+  <g class="a app-dissolve-3">
+    <rect x="-150" y="80" width="80" height="80" rx="20" fill="#2D3250" filter="url(#softShadow)" />
+    <path d="M-130 100 h16 v40 h-16 z M-102 100 h16 v24 h-16 z" fill="#6C5CE7" />
+  </g>
+  
+  <g class="a app-dissolve-4">
+    <rect x="80" y="100" width="80" height="80" rx="20" fill="#2D3250" filter="url(#softShadow)" />
+    <circle cx="120" cy="140" r="16" fill="#00CEC9" />
+  </g>
+</g>
+
+
+<g transform="translate(540, 560)"><g class="a cube-enter" filter="url(#glow)">
+  <g filter="url(#softShadow)">
+    
+    <path d="M 0 -130 L 130 -65 L 0 0 L -130 -65 Z" fill="url(#cubeTop)" />
+    
+    <path d="M -130 -65 L 0 0 L 0 130 L -130 65 Z" fill="url(#cubeLeft)" />
+    
+    <path d="M 0 0 L 130 -65 L 130 65 L 0 130 Z" fill="url(#cubeRight)" />
+    
+    
+    <path d="M 0 -80 L 70 -45 L 70 20 L 0 55 Z" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-opacity="0.6" />
+    <circle cx="0" cy="-15" r="14" fill="#FFFFFF" fill-opacity="0.9" />
+    <path d="M -65 0 L -20 22 L -20 60 L -65 38 Z" fill="#FFFFFF" fill-opacity="0.25" />
+    <path d="M 40 -15 L 90 10" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.8" />
+    <path d="M 40 5 L 80 25" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.8" />
+  </g>
+</g>
+
+
+</g><g class="a text-head-1">
+  <text x="540" y="860" text-anchor="middle" font-size="92" font-weight="800" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">Meet CreatorOps</text>
+</g>
+<g class="a text-head-2">
+  <text x="540" y="965" text-anchor="middle" font-size="92" font-weight="800" fill="#FF5722" font-family="'Poppins', Arial, sans-serif">Studio</text>
+</g>
+
+<g class="a text-sub">
+  <text x="540" y="1100" text-anchor="middle" font-size="46" font-weight="600" fill="#A29BFE" font-family="'Inter', Arial, sans-serif">One unified studio for 2026</text>
+</g>
+
+</svg>

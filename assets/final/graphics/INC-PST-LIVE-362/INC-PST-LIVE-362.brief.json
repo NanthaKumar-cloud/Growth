@@ -1,0 +1,67 @@
+{
+  "title": "CreatorOps Studio Unified Poster",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "The all-in-one CreatorOps studio",
+    "website": "incubrix.com",
+    "handle": "@incubrix"
+  },
+  "copy": {
+    "eyebrow": "STOP PAYING FOR FRAGMENTED",
+    "headline": "One unified studio replaces four subscriptions",
+    "headline_emphasis": "unified",
+    "support": "Manage your entire creator business from a single powerful dashboard.",
+    "cta": "Start Free",
+    "steps": [
+      "Plan",
+      "Create",
+      "Publish",
+      "Monetize"
+    ],
+    "stats": [
+      {
+        "value": "$100",
+        "label": "SAVED MONTHLY"
+      },
+      {
+        "value": "1",
+        "label": "UNIFIED APP"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "Clean, modern, and airy illustration showing four floating app windows merging smoothly into one bright, central creative studio hub representing unified CreatorOps.",
+  "design_system": {
+    "palette": {
+      "bg": "#F8FAFC",
+      "bg_alt": "#EDF2F7",
+      "primary": "#6366F1",
+      "secondary": "#3B82F6",
+      "accent": "#EC4899",
+      "ink": "#1E293B",
+      "paper": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "headline_caps": false,
+    "corner_radius": 24,
+    "style": "clean modern vector illustration with soft gradients, layered rounded shapes, and subtle drop shadows",
+    "lighting": "bright top-left studio illumination casting soft downward shadows"
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A central glowing rounded rectangle studio window in primary blue, surrounded by four smaller translucent app cards converging inward via curved dotted arrows, all rendered in vector gradients.",
+    "props": [
+      "floating sparkle icons near the center hub",
+      "tiny productivity pills floating around the edges",
+      "soft colored gradient blur circles behind the hero"
+    ],
+    "background": "Soft vertical gradient from top F8FAFC to bottom EDF2F7 with faint large abstract rounded rectangles in the corners.",
+    "decor": [
+      "large pale indigo faint pill shape on top right",
+      "large pale pink soft blur circle on bottom left"
+    ]
+  }
+}

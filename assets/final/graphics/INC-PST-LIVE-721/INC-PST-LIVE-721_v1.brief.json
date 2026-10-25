@@ -1,0 +1,71 @@
+{
+  "title": "IncuBrix CreatorOps Platform Launch",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Unified CreatorOps Platform",
+    "website": "yourbrand.com",
+    "handle": "@yourbrand"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "Crea contenido sin límites",
+    "headline_emphasis": "límites",
+    "support": "Descubre ideas, produce en audio y video, y publica en todas partes.",
+    "cta": "Empieza gratis",
+    "steps": [
+      "Descubrir",
+      "Crear",
+      "Publicar"
+    ],
+    "stats": [
+      {
+        "value": "20",
+        "label": "EQUIPO EXPERTO"
+      },
+      {
+        "value": "2",
+        "label": "CENTROS GLOBAL"
+      },
+      {
+        "value": "100%",
+        "label": "UNIFICADO"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "Un bucle elegante y tecnológico que representa el flujo continuo de la creación de contenido, desde la idea inicial hasta la distribución multicanal con IA.",
+  "design_system": {
+    "palette": {
+      "bg": "#121824",
+      "bg_alt": "#1E293B",
+      "primary": "#F59E0B",
+      "secondary": "#3B82F6",
+      "accent": "#EC4899",
+      "ink": "#FFFFFF",
+      "paper": "#94A3B8"
+    },
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "Inter"
+    },
+    "headline_caps": false,
+    "corner_radius": 24,
+    "style": "Modern vector illustration with rich layered gradients, glowing nodes, and clean geometric shapes.",
+    "lighting": "Top-left warm sunlight illuminating a deep midnight background with soft rim lights."
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A central glowing hub-and-orbit ring system rendered in 3D-style vector layers. A large central golden sphere emitting subtle cyan rays, surrounded by three orbiting nodes representing text, audio and video production.",
+    "props": [
+      "Floating sparkles near nodes",
+      "Small glowing triangles drifting on the right",
+      "Gradient spheres floating left",
+      "Light dust motes scattered across the center"
+    ],
+    "background": "Deep radial gradient from dark navy to midnight black with a warm amber glow directly behind the hero.",
+    "decor": [
+      "Large faint translucent circles",
+      "Abstract diagonal vector waves in the lower section"
+    ]
+  }
+}

@@ -1,0 +1,357 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500;700&amp;family=Poppins:wght@600;800;900&amp;display=swap');
+
+      /* Camera Zoom Wrapper */
+      .cam {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: cameraZoom 5.40s ease-out forwards;
+      }
+
+      /* Base Entrance Class */
+      .a {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation-fill-mode: forwards;
+      }
+
+      /* Entrance Modifiers */
+      .e-box-top {
+        animation: boxTopAnim 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+      }
+      .e-box-bot {
+        animation: boxBotAnim 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+      }
+      .e-flash {
+        animation: sliceFlash 1.2s cubic-bezier(0.1, 0.9, 0.2, 1) 0.70s forwards;
+      }
+      .e-steam {
+        animation: drawSteam 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.60s forwards;
+      }
+      .e-sparks {
+        animation: sparkExplode 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.80s forwards;
+      }
+      .e-head {
+        animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.00s forwards;
+      }
+      .e-supp {
+        animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.00s forwards;
+      }
+
+      /* Idle Loop Classes */
+      .i-bob {
+        animation: floatBob 3.2s ease-in-out infinite alternate;
+      }
+      .i-shimmer {
+        animation: sparkShimmer 1.5s ease-in-out infinite alternate;
+      }
+      .i-pulse {
+        animation: heatPulse 2.0s ease-in-out infinite alternate;
+      }
+
+      /* Keyframes */
+      @keyframes cameraZoom {
+        0% { transform: scale(1.0); }
+        100% { transform: scale(1.04); }
+      }
+      @keyframes slideUp {
+        0% { opacity: 0; transform: translateY(45px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes boxTopAnim {
+        0% { opacity: 0; transform: scale(0.85) translate(0, 0); }
+        20% { opacity: 1; transform: scale(1) translate(0, 0); }
+        35% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+        85%, 100% { opacity: 0; transform: translate(160px, -150px) rotate(18deg) scale(0.75); }
+      }
+      @keyframes boxBotAnim {
+        0% { opacity: 0; transform: scale(0.85) translate(0, 0); }
+        20% { opacity: 1; transform: scale(1) translate(0, 0); }
+        35% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+        85%, 100% { opacity: 0; transform: translate(-100px, 120px) rotate(-14deg) scale(0.75); }
+      }
+      @keyframes sliceFlash {
+        0% { opacity: 0; stroke-dashoffset: 1400; }
+        25% { opacity: 1; stroke-dashoffset: 0; }
+        65% { opacity: 1; stroke-dashoffset: 0; }
+        100% { opacity: 0; stroke-dashoffset: -1400; }
+      }
+      @keyframes drawSteam {
+        0% { opacity: 0; stroke-dashoffset: 2400; }
+        20% { opacity: 1; }
+        100% { opacity: 0.95; stroke-dashoffset: 0; }
+      }
+      @keyframes sparkExplode {
+        0% { opacity: 0; transform: scale(0.1) rotate(-30deg); }
+        40% { opacity: 1; transform: scale(1.15) rotate(5deg); }
+        100% { opacity: 1; transform: scale(1.0) rotate(0deg); }
+      }
+      @keyframes floatBob {
+        0% { transform: translateY(0px) rotate(0deg); }
+        100% { transform: translateY(-10px) rotate(2deg); }
+      }
+      @keyframes sparkShimmer {
+        0% { transform: scale(0.88); opacity: 0.7; }
+        100% { transform: scale(1.12); opacity: 1; }
+      }
+      @keyframes heatPulse {
+        0% { opacity: 0.35; transform: scale(0.95); }
+        100% { opacity: 0.75; transform: scale(1.08); }
+      }
+    </style>
+
+    <!-- Filters -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+
+    <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="steam-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" result="blur1" />
+      <feGaussianBlur stdDeviation="6" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur1" />
+        <feMergeNode in="blur2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <radialGradient id="burstCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F2A922" stop-opacity="0.9" />
+      <stop offset="45%" stop-color="#E74C3C" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#0F2C2E" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="steamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2A922" stop-opacity="0.95" />
+      <stop offset="40%" stop-color="#FFF8E7" stop-opacity="0.9" />
+      <stop offset="75%" stop-color="#E74C3C" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#F2A922" stop-opacity="0.3" />
+    </linearGradient>
+
+    <linearGradient id="flashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2A922" stop-opacity="0" />
+      <stop offset="25%" stop-color="#FFF8E7" stop-opacity="1" />
+      <stop offset="75%" stop-color="#F2A922" stop-opacity="1" />
+      <stop offset="100%" stop-color="#E74C3C" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="gheeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEB7A" />
+      <stop offset="100%" stop-color="#F2A922" />
+    </linearGradient>
+
+    <!-- Clip Paths for Diagonal Slice -->
+    <!-- Cut line passes through (700, 360) to (1800, 640) -->
+    <clipPath id="cut-top">
+      <polygon points="700,0 1800,0 1800,640 700,360" />
+    </clipPath>
+    <clipPath id="cut-bot">
+      <polygon points="700,360 1800,640 1800,1000 700,1000" />
+    </clipPath>
+  </defs>
+
+  <!-- CAMERA WRAPPER -->
+  <g class="cam">
+
+    <!-- FULL-BLEED BACKGROUND -->
+    <rect width="1920" height="1080" fill="#0F2C2E" />
+
+    <!-- Ambient Teal Depth Lighting -->
+    <circle cx="1280" cy="520" r="750" fill="#1A4346" opacity="0.35" />
+    <circle cx="1280" cy="520" r="480" fill="#0F2C2E" opacity="0.6" />
+
+    <!-- GOLDEN BURST BACKGROUND GLOW (Triggered on slice) -->
+    <g transform="translate(1280, 500)">
+      <g class="a e-sparks">
+        <g class="i-pulse">
+          <circle cx="0" cy="0" r="380" fill="url(#burstCore)" filter="url(#glow-gold)" />
+        </g>
+      </g>
+    </g>
+
+    <!-- DULL GRAY CARDBOARD TAKEOUT CONTAINER (Sliced Diagonally) -->
+    <!-- Positioned around center X=1280, Y=500 -->
+
+    <!-- TOP HALF OF SLICED BOX -->
+    <g class="a e-box-top">
+      <g clip-path="url(#cut-top)">
+        <g transform="translate(1060, 280)">
+          <!-- Main Box Outer Shadow &amp; Shadow Base -->
+          <rect x="0" y="0" width="440" height="380" rx="20" fill="#3A4552" filter="url(#shadow)" />
+          <!-- Box Top Lid Flaps -->
+          <path d="M 0 100 L 220 10 L 440 100 Z" fill="#5A6578" />
+          <path d="M 0 100 L 220 80 L 440 100 Z" fill="#2C3540" opacity="0.7" />
+          <!-- Box Main Body Face -->
+          <rect x="15" y="95" width="410" height="270" rx="10" fill="#4A5568" />
+          <!-- Unappetizing Label Sticker -->
+          <rect x="110" y="150" width="220" height="110" rx="12" fill="#2D3748" stroke="#606F7B" stroke-width="2" />
+          <text x="220" y="200" font-family="'Noto Sans', sans-serif" font-size="28" font-weight="700" fill="#A0AEC0" text-anchor="middle">
+            BLAND
+          </text>
+          <text x="220" y="235" font-family="'Noto Sans', sans-serif" font-size="24" font-weight="500" fill="#718096" text-anchor="middle">
+            TAKEOUT
+          </text>
+          <!-- Tape Strips -->
+          <rect x="190" y="40" width="60" height="70" fill="#718096" opacity="0.4" />
+        </g>
+      </g>
+    </g>
+
+    <!-- BOTTOM HALF OF SLICED BOX -->
+    <g class="a e-box-bot">
+      <g clip-path="url(#cut-bot)">
+        <g transform="translate(1060, 280)">
+          <!-- Main Box Outer Base -->
+          <rect x="0" y="0" width="440" height="380" rx="20" fill="#3A4552" filter="url(#shadow)" />
+          <!-- Box Main Body Face -->
+          <rect x="15" y="95" width="410" height="270" rx="10" fill="#4A5568" />
+          <!-- Unappetizing Label Sticker Bottom Portion -->
+          <rect x="110" y="150" width="220" height="110" rx="12" fill="#2D3748" stroke="#606F7B" stroke-width="2" />
+          <text x="220" y="200" font-family="'Noto Sans', sans-serif" font-size="28" font-weight="700" fill="#A0AEC0" text-anchor="middle">
+            BLAND
+          </text>
+          <text x="220" y="235" font-family="'Noto Sans', sans-serif" font-size="24" font-weight="500" fill="#718096" text-anchor="middle">
+            TAKEOUT
+          </text>
+          <!-- Base Rim Highlight -->
+          <line x1="20" y1="355" x2="420" y2="355" stroke="#2D3748" stroke-width="6" stroke-linecap="round" />
+        </g>
+      </g>
+    </g>
+
+    <!-- DIAGONAL SLICE LASER FLASH BEAM -->
+    <g class="a e-flash">
+      <path d="M 750 372 L 1750 628" fill="none" stroke="url(#flashGrad)" stroke-width="28" stroke-linecap="round" filter="url(#glow-gold)" />
+      <path d="M 750 372 L 1750 628" fill="none" stroke="#FFF8E7" stroke-width="10" stroke-linecap="round" />
+    </g>
+
+    <!-- EXPLODING VIBRANT SPICE SPARKS &amp; GHEE DROPLETS -->
+    <g class="a e-sparks">
+      <g class="i-shimmer">
+        <!-- Turmeric &amp; Chili Burst Particles -->
+        <circle cx="1280" cy="480" r="18" fill="url(#gheeGrad)" filter="url(#glow-gold)" />
+        <circle cx="1380" cy="420" r="12" fill="#E74C3C" />
+        <circle cx="1180" cy="540" r="15" fill="#F2A922" filter="url(#glow-gold)" />
+        <circle cx="1450" cy="560" r="22" fill="url(#gheeGrad)" filter="url(#glow-gold)" />
+        <circle cx="1120" cy="440" r="10" fill="#FFF8E7" />
+        <circle cx="1320" cy="590" r="14" fill="#E74C3C" />
+
+        <!-- Starburst Sparks -->
+        <!-- Spark 1 -->
+        <path d="M 1240 400 L 1245 420 L 1265 425 L 1245 430 L 1240 450 L 1235 430 L 1215 425 L 1235 420 Z" fill="#FFF8E7" filter="url(#glow-gold)" />
+        <!-- Spark 2 -->
+        <path d="M 1420 480 L 1423 495 L 1438 498 L 1423 501 L 1420 516 L 1417 501 L 1402 498 L 1417 495 Z" fill="#F2A922" />
+        <!-- Spark 3 -->
+        <path d="M 1160 500 L 1163 510 L 1173 513 L 1163 516 L 1160 526 L 1157 516 L 1147 513 L 1157 510 Z" fill="#E74C3C" />
+        <!-- Spark 4 -->
+        <path d="M 1350 360 L 1354 375 L 1369 379 L 1354 383 L 1350 398 L 1346 383 L 1331 379 L 1346 375 Z" fill="#FFF8E7" />
+
+        <!-- Energy Rings -->
+        <circle cx="1280" cy="500" r="140" fill="none" stroke="#F2A922" stroke-width="3" opacity="0.5" />
+        <circle cx="1280" cy="500" r="220" fill="none" stroke="#E74C3C" stroke-width="2" stroke-dasharray="12 12" opacity="0.4" />
+      </g>
+    </g>
+
+    <!-- THROUGH-LINE ELEMENT: GLOWING TURMERIC-GOLD STEAM RIBBON -->
+    <!-- Carried over from Scene 1, slices across box, curves around to set up Scene 3 -->
+    <g class="a e-steam">
+      <g class="i-bob">
+        <!-- Outer Glowing Steam Ribbon -->
+        <path d="M -50 220 
+                 C 400 120, 750 320, 1080 410 
+                 C 1260 460, 1420 560, 1620 490 
+                 C 1820 420, 1880 680, 1680 840 
+                 C 1480 1000, 1180 880, 1280 720" 
+              fill="none" 
+              stroke="url(#steamGrad)" 
+              stroke-width="44" 
+              stroke-linecap="round" 
+              stroke-dasharray="2400" 
+              stroke-dashoffset="2400" 
+              filter="url(#steam-glow)" 
+              opacity="0.9" />
+
+        <!-- Inner Core Steam Ribbon -->
+        <path d="M -50 220 
+                 C 400 120, 750 320, 1080 410 
+                 C 1260 460, 1420 560, 1620 490 
+                 C 1820 420, 1880 680, 1680 840 
+                 C 1480 1000, 1180 880, 1280 720" 
+              fill="none" 
+              stroke="#FFF8E7" 
+              stroke-width="12" 
+              stroke-linecap="round" 
+              stroke-dasharray="2400" 
+              stroke-dashoffset="2400" 
+              opacity="0.95" />
+      </g>
+    </g>
+
+    <!-- ON-SCREEN TEXT (LEFT SIDE) -->
+
+    <!-- Headline: "Tired Of Boring Lunch?" (Entrance at t=1.00s) -->
+    <g transform="translate(120, 420)">
+      <g class="a e-head">
+        <g class="i-bob">
+          <!-- Backing Card for Maximum Legibility -->
+          <rect x="-30" y="-95" width="680" height="230" rx="20" fill="#0F2C2E" opacity="0.80" />
+          
+          <text font-family="'Poppins', Arial, sans-serif" font-size="88" font-weight="900" fill="#FFF8E7" x="0" y="0" filter="url(#shadow)">
+            Tired Of
+          </text>
+          <text font-family="'Poppins', Arial, sans-serif" font-size="88" font-weight="900" fill="#E74C3C" x="0" y="100" filter="url(#glow-gold)">
+            Boring Lunch?
+          </text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Supporting Text: "Say goodbye to bland meals" (Entrance at t=2.00s) -->
+    <g transform="translate(120, 660)">
+      <g class="a e-supp">
+        <!-- Sub-card container -->
+        <rect x="-24" y="-42" width="620" height="72" rx="16" fill="#1A4346" opacity="0.88" stroke="#F2A922" stroke-width="1.5" />
+        <text font-family="'Noto Sans', sans-serif" font-size="44" font-weight="700" fill="#FFF8E7" x="0" y="10">
+          Say goodbye to bland meals
+        </text>
+      </g>
+    </g>
+
+    <!-- PERSISTENT UI ELEMENTS (NO ENTRANCE ANIMATION - Visible at t=0) -->
+
+    <!-- Top-Left Pill Badge ("The Dosa Corner") -->
+    <g transform="translate(80, 52)">
+      <rect x="0" y="0" width="320" height="64" rx="20" fill="#1A4346" stroke="#F2A922" stroke-width="2" filter="url(#shadow)" />
+      
+      <!-- Logo Icon: Mini Golden Dosa Cone -->
+      <g transform="translate(24, 16)">
+        <path d="M 4 28 L 28 4 L 32 24 Z" fill="#F2A922" />
+        <path d="M 8 26 L 26 8" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" />
+        <circle cx="28" cy="24" r="3" fill="#FFF8E7" />
+      </g>
+
+      <!-- Brand Name Text -->
+      <text font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="800" fill="#F2A922" x="72" y="40" letter-spacing="0.5">
+        THE DOSA CORNER
+      </text>
+    </g>
+
+    <!-- Bottom Progress Bar (Segment 2 of 7 Highlighted: width ~548px) -->
+    <g transform="translate(0, 1066)">
+      <!-- Full Track -->
+      <rect x="0" y="0" width="1920" height="14" fill="#1A4346" />
+      <!-- Active Segment 2 (2/7th width = ~548px) -->
+      <rect x="0" y="0" width="548" height="14" rx="7" fill="#F2A922" filter="url(#glow-gold)" />
+    </g>
+
+  </g> <!-- /Camera Wrapper -->
+</svg>

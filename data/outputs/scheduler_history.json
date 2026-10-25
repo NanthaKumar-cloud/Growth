@@ -1,0 +1,538 @@
+[
+  {
+    "timestamp": "2026-10-24T17:56:39.615293",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792864599-1",
+        "AUTO-CAR-1792864599-2",
+        "AUTO-IMG-1792864599-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T18:10:48.052349",
+    "event_type": "AUTO_PUBLISH",
+    "details": {
+      "asset_id": "INC-PST-LIVE-362",
+      "platform": "Stories",
+      "url": "https://www.facebook.com/1387253494470730_122095184517529857",
+      "status": "SUCCESS"
+    }
+  },
+  {
+    "timestamp": "2026-10-24T18:21:52.641615",
+    "event_type": "AUTO_PUBLISH",
+    "details": {
+      "asset_id": "INC-PST-LIVE-948",
+      "platform": "Stories",
+      "url": "https://www.facebook.com/1387253494470730_122095188891529857",
+      "status": "SUCCESS"
+    }
+  },
+  {
+    "timestamp": "2026-10-24T18:39:41.173527",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792867181-1",
+        "AUTO-CAR-1792867181-2",
+        "AUTO-IMG-1792867181-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T18:42:45.414470",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792867365-1",
+        "AUTO-CAR-1792867365-2",
+        "AUTO-IMG-1792867365-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T18:53:37.338418",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792868017-1",
+        "AUTO-CAR-1792868017-2",
+        "AUTO-IMG-1792868017-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T19:01:35.221910",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792868495-1",
+        "AUTO-CAR-1792868495-2",
+        "AUTO-IMG-1792868495-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T19:06:08.211989",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792868768-1",
+        "AUTO-CAR-1792868768-2",
+        "AUTO-IMG-1792868768-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T19:08:39.096014",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792868919-1",
+        "AUTO-CAR-1792868919-2",
+        "AUTO-IMG-1792868919-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T19:52:19.860880",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792871539-1",
+        "AUTO-CAR-1792871539-2",
+        "AUTO-IMG-1792871539-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T19:53:34.763692",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792871614-1",
+        "AUTO-CAR-1792871614-2",
+        "AUTO-IMG-1792871614-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T19:54:29.171208",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792871669-1",
+        "AUTO-CAR-1792871669-2",
+        "AUTO-IMG-1792871669-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:28:27.475236",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792873707-1",
+        "AUTO-CAR-1792873707-2",
+        "AUTO-IMG-1792873707-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:47:37.933404",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:48:57.516593",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:50:17.547879",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:51:21.273396",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:51:40.257037",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:52:42.962203",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:52:47.192631",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:53:31.059044",
+    "event_type": "AUTO_PUBLISH",
+    "details": {
+      "asset_id": "INC-CAR-006",
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/p/De5CT3EknKv/",
+      "status": "SUCCESS"
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:54:57.914422",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:55:15.490696",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:55:57.923538",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-CAR-006",
+      "error": "Failed to publish Instagram carousel: {'error': {'message': 'Media ID is not available', 'type': 'OAuthException', 'code': 9007, 'error_subcode': 2207027, 'is_transient': False, 'error_user_title': '\u0bb5\u0bc6\u0bb3\u0bbf\u0baf\u0bbf\u0b9f \u0bae\u0bc1\u0b9f\u0bbf\u0baf\u0bb5\u0bbf\u0bb2\u0bcd\u0bb2\u0bc8', 'error_user_msg': '\u0bae\u0bc0\u0b9f\u0bbf\u0baf\u0bbe \u0bb5\u0bc6\u0bb3\u0bbf\u0baf\u0bbf\u0b9f\u0ba4\u0bcd \u0ba4\u0baf\u0bbe\u0bb0\u0bbe\u0b95 \u0b87\u0bb2\u0bcd\u0bb2\u0bc8, \u0b9a\u0bbf\u0bb1\u0bbf\u0ba4\u0bc1\u0ba8\u0bc7\u0bb0\u0bae\u0bcd \u0b95\u0bbe\u0ba4\u0bcd\u0ba4\u0bbf\u0bb0\u0bc1\u0b99\u0bcd\u0b95\u0bb3\u0bcd', 'fbtrace_id': 'AGJ0Bl--rck8vhAKHuZ4Wj-'}}"
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:57:01.133975",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:57:04.742147",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:58:02.581846",
+    "event_type": "AUTO_PUBLISH",
+    "details": {
+      "asset_id": "INC-CAR-006",
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/p/De5C03mkqyn/",
+      "status": "SUCCESS"
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:59:08.428486",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T20:59:14.330256",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:00:16.998294",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:00:19.055338",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:01:21.203598",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:01:25.396143",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:10:28.301220",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:10:33.815554",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:11:40.298428",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:11:45.983103",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:13:09.989211",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:13:18.777893",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:14:58.897987",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:15:10.203225",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:20:30.905104",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:20:34.347739",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:21:53.789885",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:21:57.452929",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:23:22.628133",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:23:42.279561",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:24:46.610692",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:24:50.143518",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:25:54.070763",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:25:57.267112",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:29:29.564742",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:29:55.488669",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:31:05.820275",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:31:15.048332",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:33:11.543429",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-24T21:33:35.722201",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "error": "YouTube Daily Upload Limit Exceeded: YouTube has placed a 24-hour limit on video uploads for this channel. This quota resets automatically every 24 hours. You can also unlock higher daily upload limits by verifying your phone number in YouTube Studio (studio.youtube.com -> Settings -> Channel -> Feature Eligibility)."
+    }
+  },
+  {
+    "timestamp": "2026-10-25T04:57:21.579258",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "error": "YouTube upload failed: Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project."
+    }
+  },
+  {
+    "timestamp": "2026-10-25T04:57:25.246978",
+    "event_type": "AUTO_PUBLISH",
+    "details": {
+      "asset_id": "INC-VID-002",
+      "platform": "YouTube Shorts",
+      "url": "https://youtube.com/shorts/Iwj5RmKXDOg",
+      "status": "SUCCESS"
+    }
+  },
+  {
+    "timestamp": "2026-10-25T04:58:39.170507",
+    "event_type": "AUTO_PUBLISH",
+    "details": {
+      "asset_id": "INC-YO-002",
+      "platform": "youtube",
+      "url": "https://youtube.com/shorts/mmCAww-lPjM",
+      "status": "SUCCESS"
+    }
+  }
+]

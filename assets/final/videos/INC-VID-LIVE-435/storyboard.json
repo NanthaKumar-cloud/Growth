@@ -1,0 +1,159 @@
+{
+  "title": "The Unified CreatorOps Studio",
+  "brand": {
+    "name": "Studiowave",
+    "tagline": "One studio for all your creator needs",
+    "website": "studiowave.io",
+    "handle": "@studiowave"
+  },
+  "voice": {
+    "name": "Kore",
+    "speaking_rate": 1.05,
+    "why": "Confident and energetic tone fits the fast-paced callout on creator efficiency."
+  },
+  "world": "A sleek, isometric creator workspace featuring a glowing purple studio orb as the hero object, transitioning from a cluttered multi-tab monitor setup to a clean, unified floating control panel in dark mode.",
+  "design_system": {
+    "palette": {
+      "bg": "#0B0F19",
+      "bg_alt": "#161E2E",
+      "primary": "#7C3AED",
+      "secondary": "#06B6D4",
+      "accent": "#F59E0B",
+      "ink": "#F8FAFC",
+      "paper": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Outfit",
+      "body": "Plus Jakarta Sans"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Minimalist isometric vector with smooth gradients and glowing neon accents",
+    "hero_element": "A floating glowing purple studio orb with three interconnected data rings",
+    "recurring_motifs": [
+      "Floating UI cards",
+      "Subtle neon grid lines"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 40,
+      "color_key": "primary"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Why do solo creators burn out paying one hundred dollars every month across four fragmented tools?",
+      "on_screen_headline": "Stop Tool Fatigue",
+      "on_screen_support": "Four apps is three too many.",
+      "visual_description": "Wide isometric view of a desk showing four separate glowing billing invoices floating up in red, with a frustrated creator avatar in the center.",
+      "key_beats": [
+        {
+          "narration_fragment": "Why do solo creators burn out",
+          "visual_action": "Creator avatar rubs temples in front of a cluttered monitor."
+        },
+        {
+          "narration_fragment": "paying one hundred dollars every month across four fragmented tools?",
+          "visual_action": "Four red invoice cards pop up with rising dollar amounts."
+        }
+      ],
+      "mood": "Frustrated, urgent",
+      "background_color_key": "bg",
+      "opens_with": "Clean dark isometric desk surface extending from the bottom edge.",
+      "closes_with": "Four red invoice cards stacked vertically on the right side of the screen.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "PROBLEM",
+      "narration": "Switching tabs and losing focus kills your momentum faster than algorithm changes.",
+      "on_screen_headline": "Constant Context Switching",
+      "on_screen_support": "Kills creative momentum instantly.",
+      "visual_description": "Medium shot zooming into the four red cards as they blur and collide, creating chaos with tangled yellow data lines across the dark screen.",
+      "key_beats": [
+        {
+          "narration_fragment": "Switching tabs and losing focus",
+          "visual_action": "Browser tabs frantically shuffle back and forth."
+        },
+        {
+          "narration_fragment": "kills your momentum faster than algorithm changes.",
+          "visual_action": "Tangled neon lines snap and flash warning symbols."
+        }
+      ],
+      "mood": "Chaotic, high energy",
+      "background_color_key": "bg_alt",
+      "opens_with": "The four red invoice cards from scene one sliding off the left edge.",
+      "closes_with": "Tangled neon data lines converging toward the center of the frame.",
+      "transition_out": "smoothleft"
+    },
+    {
+      "id": 3,
+      "role": "SOLUTION",
+      "narration": "Meet Studiowave. One unified CreatorOps studio designed to run your entire digital business.",
+      "on_screen_headline": "Enter Studiowave",
+      "on_screen_support": "Your entire business in one dashboard.",
+      "visual_description": "Close up as the chaotic lines dissolve into the glowing purple studio orb, expanding smoothly into a pristine, unified modular control panel.",
+      "key_beats": [
+        {
+          "narration_fragment": "Meet Studiowave.",
+          "visual_action": "The hero glowing purple studio orb pulses and clears the screen."
+        },
+        {
+          "narration_fragment": "One unified CreatorOps studio designed to run your entire digital business.",
+          "visual_action": "Modular dashboard cards snap neatly into place around the orb."
+        }
+      ],
+      "mood": "Relief, sleek, premium",
+      "background_color_key": "bg",
+      "opens_with": "The glowing purple studio orb emerging from the center of the tangled lines.",
+      "closes_with": "A fully structured dashboard interface glowing with cyan and purple highlights.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 4,
+      "role": "PROOF",
+      "narration": "Automate workflows, manage brand deals, and track earnings without ever opening another browser tab.",
+      "on_screen_headline": "All-In-One Power",
+      "on_screen_support": "Automate workflows and track revenue.",
+      "visual_description": "Dynamic panning across three distinct mini-widgets inside the studio: an automation gear turning, a calendar scheduling posts, and a rising revenue graph in cyan.",
+      "key_beats": [
+        {
+          "narration_fragment": "Automate workflows, manage brand deals,",
+          "visual_action": "Workflow gears mesh smoothly while a brand contract icon gets checked off."
+        },
+        {
+          "narration_fragment": "and track earnings without ever opening another browser tab.",
+          "visual_action": "Cyan revenue graph shoots upward with glowing data points."
+        }
+      ],
+      "mood": "Productive, triumphant",
+      "background_color_key": "bg_alt",
+      "opens_with": "The right edge of the unified dashboard from scene three.",
+      "closes_with": "The glowing cyan revenue graph centered prominently in the frame.",
+      "transition_out": "fade"
+    },
+    {
+      "id": 5,
+      "role": "OFFER_CTA",
+      "narration": "Consolidate your stack today. Visit studiowave dot io and use handle at studiowave to get started free.",
+      "on_screen_headline": "Consolidate Your Stack",
+      "on_screen_support": "studiowave.io | @studiowave",
+      "visual_description": "The dashboard minimizes into the hero glowing purple studio orb at the top, while a bold call-to-action button and brand handle appear on a clean dark backdrop.",
+      "key_beats": [
+        {
+          "narration_fragment": "Consolidate your stack today.",
+          "visual_action": "Dashboard elements fold back into the glowing purple studio orb."
+        },
+        {
+          "narration_fragment": "Visit studiowave dot io and use handle at studiowave to get started free.",
+          "visual_action": "A pulsing neon CTA button highlights the website and handle."
+        }
+      ],
+      "mood": "Empowering, inviting",
+      "background_color_key": "bg",
+      "opens_with": "The glowing purple studio orb floating down to center stage.",
+      "closes_with": "Final brand lockup with logo, website, and handle fully resolved.",
+      "transition_out": "fade"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "title": "The Dosa Corner - Golden Crisp & Spice",
+  "narration_language": "en-IN",
+  "brand": {
+    "name": "The Dosa Corner",
+    "tagline": "Golden Crispy, Hot & Delicious",
+    "website": "dosacorner.com",
+    "handle": "@thedosacorner"
+  },
+  "concept": "A high-sensory visual journey that opens with an explosive sizzle on a hot iron tawa, follows a glowing steam ribbon through crispy dosa varieties and fresh chutneys, and concludes with an irresistible value offer.",
+  "visual_world": "A warm, glowing street-bento aesthetic featuring dark teal backdrop walls (#0F2C2E), rich turmeric yellow highlights (#F2A922), spicy chili accents (#E74C3C), and glowing golden steam vector curves.",
+  "hero_motif": "The iconic, ultra-crispy golden conical paper-roast dosa.",
+  "through_line": "A glowing turmeric-gold vector steam ribbon that spirals up from the hot tawa and weaves through every scene, connecting dishes, text callouts, and the final feast.",
+  "design_system": {
+    "palette": {
+      "bg": "#0F2C2E",
+      "bg2": "#1A4346",
+      "primary": "#F2A922",
+      "accent": "#E74C3C",
+      "text": "#FFF8E7"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Noto Sans"
+    },
+    "corner_radius": 20,
+    "shadow_style": "0px 12px 32px rgba(0, 0, 0, 0.35)",
+    "illustration_style": "Vibrant layered vector illustration with subtle warm gradients, tactile spice splashes, and clean geometric lighting highlights.",
+    "motion_style": "Sizzling, fluid, and appetisingly snappy motion with smooth spring eases.",
+    "persistent_ui": "Top-left pill badge displaying 'The Dosa Corner' logo icon in turmeric gold, with a thin amber progress bar along the bottom edge."
+  },
+  "voice": {
+    "name": "Gacrux",
+    "speaking_rate": 0.98,
+    "persona": "Warm, enthusiastic, and friendly Indian storyteller voice with a conversational rhythm."
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "hook",
+      "narration": "Listen to that sizzle... that is the sound of pure, golden crunch.",
+      "on_screen_text": {
+        "headline": "Hear That Golden Sizzle?",
+        "support": "Fresh off the blazing cast-iron tawa"
+      },
+      "visual_brief": "Macro top-down view of a dark cast-iron tawa. Smooth white batter swirls outward in a fast vector spiral while droplets of golden ghee pop with energetic spark graphics and steam curves surge upward.",
+      "carry_over": "",
+      "transition_to_next": "wiperight",
+      "min_duration": 4.0
+    },
+    {
+      "id": 2,
+      "role": "problem",
+      "narration": "Forget dry, dull everyday lunches.",
+      "on_screen_text": {
+        "headline": "Tired Of Boring Lunch?",
+        "support": "Say goodbye to bland meals"
+      },
+      "visual_brief": "A dull gray cardboard takeout container appears on screen but is instantly sliced diagonally by the glowing turmeric steam ribbon, dissolving the drab box into vibrant amber sparks.",
+      "carry_over": "The glowing turmeric steam ribbon sweeps across from Scene 1, slicing through the frame.",
+      "transition_to_next": "zoomin",
+      "min_duration": 4.0
+    },
+    {
+      "id": 3,
+      "role": "solution",
+      "narration": "Welcome to The Dosa Corner, where every crepe is spun fresh and laced with pure ghee.",
+      "on_screen_text": {
+        "headline": "Welcome To The Dosa Corner",
+        "support": "Golden, crispy, and cooked fresh"
+      },
+      "visual_brief": "Hero visual of a towering, golden conical paper-roast dosa rising smoothly off the tawa. Micro-droplets of glistening ghee shine on its crisp lattice texture against a warm glowing backdrop.",
+      "carry_over": "The steam ribbon wraps around the base of the rising cone paper-roast dosa.",
+      "transition_to_next": "slideleft",
+      "min_duration": 5.0
+    },
+    {
+      "id": 4,
+      "role": "feature",
+      "narration": "From ultra-thin paper roasts to spiced potato masala and fiery ghee podi specials.",
+      "on_screen_text": {
+        "headline": "Paper Roast, Masala & Ghee Podi",
+        "support": "Crafted with authentic spices"
+      },
+      "visual_brief": "A dynamic 3-card carousel featuring three house specials: classic paper roast cone, folded spiced potato masala dosa, and a brilliant red podi-dusted dosa with melting butter.",
+      "carry_over": "The golden cone dosa morphs into the center card, anchored by the steam ribbon weaving through the three dosa variants.",
+      "transition_to_next": "smoothleft",
+      "min_duration": 5.5
+    },
+    {
+      "id": 5,
+      "role": "feature",
+      "narration": "Dipped into three handcrafted chutneys and piping hot sambar.",
+      "on_screen_text": {
+        "headline": "3 Fresh Chutneys + Hot Sambar",
+        "support": "Coconut, spicy tomato, and mint dips"
+      },
+      "visual_brief": "Top-down geometric layout featuring three colorful ceramic chutney pots—creamy white coconut, vibrant orange tomato-onion, mint green—encircling a steaming bowl of aromatic sambar with mustard seed garnish.",
+      "carry_over": "The steam ribbon loops down from the dosa tray to swirl around the central sambar bowl and three chutney pots.",
+      "transition_to_next": "slideright",
+      "min_duration": 5.0
+    },
+    {
+      "id": 6,
+      "role": "offer",
+      "narration": "Crafted from fresh-ground batter daily—combos start at just ninety-nine rupees!",
+      "on_screen_text": {
+        "headline": "Combos From ₹99",
+        "support": "100% daily fresh batter"
+      },
+      "visual_brief": "A bold, sunburst value badge pops into the frame showing '₹99 Special'. Stylized vector rice grains and urad dal float gently in an orbital motion around the offer stamp.",
+      "carry_over": "The steam ribbon loops into a circular badge holding the price tag while batter ingredients float around it.",
+      "transition_to_next": "zoomin",
+      "min_duration": 5.0
+    },
+    {
+      "id": 7,
+      "role": "cta",
+      "narration": "Visit The Dosa Corner today, or order online at dosacorner.com!",
+      "on_screen_text": {
+        "headline": "The Dosa Corner",
+        "support": "Order now at dosacorner.com | @thedosacorner"
+      },
+      "visual_brief": "Grand final platter on a vibrant green banana leaf displaying the golden cone dosa, all three chutneys, hot sambar, and a 'Combos from ₹99' sticker. Bold brand logo and clear web address frame the bottom.",
+      "carry_over": "The steam ribbon lands onto the final banana leaf feast, returning full circle to the cast-iron tawa icon in the top corner.",
+      "transition_to_next": "fade",
+      "min_duration": 6.5
+    }
+  ]
+}

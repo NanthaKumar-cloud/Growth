@@ -105,15 +105,23 @@ class ContentEnginePipeline:
                     )
                     final_file_url = f"assets/final/videos/{v_path.name}"
                 elif fmt == "carousel":
-                    c_path = self.renderer.render_carousel_slide(
+                    c_paths = self.renderer.render_carousel_package(
                         asset_id=asset_id,
-                        slide_idx=1,
-                        total_slides=5,
-                        title=item.get("hook", ""),
-                        body_text=item.get("caption", ""),
-                        pillar=pillar
+                        pillar=pillar,
+                        slides_content=item.get("slides", [
+                            {"title": item.get("hook", "Carousel Slide"), "body": item.get("caption", "")}
+                        ]),
+                        use_case_override={
+                            "brand": "IncuBrix — Automated CreatorOps Engine",
+                            "goal": f"drive engagement and signups on {item.get('platform', 'LinkedIn')}",
+                            "audience": "growth teams, video creators, and SaaS founders",
+                            "tone": "sharp, high-authority, technical SaaS engineering",
+                            "offer": item.get("cta", "Start free at app.incubrix.com"),
+                            "num_slides": 5,
+                            "context": f"Pillar: {pillar}. Hook: {item.get('hook', '')}. Caption: {item.get('caption', '')}"
+                        }
                     )
-                    final_file_url = f"assets/final/carousels/{c_path.name}"
+                    final_file_url = f"assets/final/carousels/{asset_id}/{asset_id}.pdf"
                 else:
                     g_path = self.renderer.render_graphic(
                         asset_id=asset_id,

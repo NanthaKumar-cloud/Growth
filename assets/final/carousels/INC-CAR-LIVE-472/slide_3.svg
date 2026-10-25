@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+
+      * { box-sizing: border-box; }
+      text { font-family: 'Inter', Arial, sans-serif; }
+      .title-text { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; }
+
+      .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+      .a1 { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+      .a2 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+      .a3 { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+      .a4 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards, float 4s ease-in-out 1.8s infinite; }
+      .a5 { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards; }
+
+      @keyframes fadeIn { to { opacity: 1; } }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes scaleUp { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0F17"/>
+      <stop offset="100%" stop-color="#131B2A"/>
+    </linearGradient>
+
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+
+    <filter id="greenGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="url(#bgGrad)"/>
+
+  <!-- Grid Tech Lines Overlay -->
+  <g opacity="0.05">
+    <line x1="0" y1="270" x2="1080" y2="270" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="540" x2="1080" y2="540" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="810" x2="1080" y2="810" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="0" y1="1080" x2="1080" y2="1080" stroke="#FFFFFF" stroke-width="1"/>
+  </g>
+
+  <!-- Continuous Seam Flow Path (Enters left at y=960, exits right at y=910) -->
+  <path d="M 0,960 C 300,900 700,980 1080,910" stroke="#F59E0B" stroke-width="4" fill="none" opacity="0.6" filter="url(#greenGlow)"/>
+  <path d="M 0,960 C 300,900 700,980 1080,910" stroke="#FBBF24" stroke-width="2" fill="none" opacity="0.9"/>
+
+  <!-- Top Navigation / Persistent UI -->
+  <g class="a a1">
+    <text x="72" y="100" fill="#F59E0B" font-size="24" font-weight="700" letter-spacing="2">SULLAN MADHAN x INCUBRIX</text>
+    <rect x="912" y="72" width="96" height="40" rx="20" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="960" y="98" fill="#94A3B8" font-size="22" font-weight="600" text-anchor="middle">3 / 5</text>
+  </g>
+
+  <!-- Main Title Block -->
+  <g class="a a2">
+    <text x="540" y="240" fill="#FFFFFF" font-size="80" class="title-text" text-anchor="middle">The Three Signature</text>
+    <text x="540" y="335" fill="url(#greenGrad)" font-size="80" class="title-text" text-anchor="middle" filter="url(#greenGlow)">Chutneys of Growth</text>
+  </g>
+
+  <!-- Subtitle -->
+  <g class="a a3">
+    <text x="540" y="420" fill="#94A3B8" font-size="34" font-weight="400" text-anchor="middle">Mint for Retention, Coconut for Zero Latency, Chili for Acquisition.</text>
+  </g>
+
+  <!-- Solution Visual: 3 Node Chutney Architecture -->
+  <g class="a a4">
+    <!-- Node 1: Mint (Green / Retention) -->
+    <g transform="translate(120, 520)">
+      <rect x="0" y="0" width="840" height="130" rx="20" fill="#1E293B" stroke="#10B981" stroke-width="2" filter="url(#shadow)"/>
+      <circle cx="75" cy="65" r="40" fill="#10B981" opacity="0.2"/>
+      <circle cx="75" cy="65" r="24" fill="#10B981" filter="url(#greenGlow)"/>
+      <text x="140" y="55" fill="#FFFFFF" font-size="32" class="title-text">1. Mint Engine // High Retention</text>
+      <text x="140" y="95" fill="#94A3B8" font-size="24">Keeps user engagement sticky with zero drop-off.</text>
+      <rect x="680" y="40" width="120" height="50" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="1"/>
+      <text x="740" y="72" fill="#10B981" font-size="22" font-weight="700" text-anchor="middle">+94%</text>
+    </g>
+
+    <!-- Node 2: Coconut (White / Zero Latency) -->
+    <g transform="translate(120, 680)">
+      <rect x="0" y="0" width="840" height="130" rx="20" fill="#1E293B" stroke="#F8FAFC" stroke-width="1.5" filter="url(#shadow)"/>
+      <circle cx="75" cy="65" r="40" fill="#F8FAFC" opacity="0.15"/>
+      <circle cx="75" cy="65" r="24" fill="#F8FAFC"/>
+      <text x="140" y="55" fill="#FFFFFF" font-size="32" class="title-text">2. Coconut Cache // Sub-10ms Speed</text>
+      <text x="140" y="95" fill="#94A3B8" font-size="24">Smooth, ultra-fast data serving under heavy load.</text>
+      <rect x="680" y="40" width="120" height="50" rx="10" fill="#0F172A" stroke="#F8FAFC" stroke-width="1"/>
+      <text x="740" y="72" fill="#F8FAFC" font-size="22" font-weight="700" text-anchor="middle">4ms</text>
+    </g>
+
+    <!-- Node 3: Chili (Red / Acquisition) -->
+    <g transform="translate(120, 840)">
+      <rect x="0" y="0" width="840" height="130" rx="20" fill="#1E293B" stroke="#EF4444" stroke-width="1.5" filter="url(#shadow)"/>
+      <circle cx="75" cy="65" r="40" fill="#EF4444" opacity="0.2"/>
+      <circle cx="75" cy="65" r="24" fill="#EF4444"/>
+      <text x="140" y="55" fill="#FFFFFF" font-size="32" class="title-text">3. Red Chili Pipeline // Acquisition</text>
+      <text x="140" y="95" fill="#94A3B8" font-size="24">Spicy, high-converting growth triggers and viral loops.</text>
+      <rect x="680" y="40" width="120" height="50" rx="10" fill="#0F172A" stroke="#EF4444" stroke-width="1"/>
+      <text x="740" y="72" fill="#EF4444" font-size="22" font-weight="700" text-anchor="middle">12x</text>
+    </g>
+  </g>
+
+  <!-- Bottom Swipe Bar Callout -->
+  <g class="a a5">
+    <rect x="360" y="1120" width="360" height="64" rx="32" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="520" y="1160" fill="#FFFFFF" font-size="28" font-weight="600" text-anchor="middle">See Proof Data</text>
+    <path d="M 640,1152 L 652,1152 L 646,1146 M 652,1152 L 646,1158" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Brand Footer -->
+  <text x="540" y="1280" fill="#64748B" font-size="24" text-anchor="middle">incubrix.com • Sullan Madhan Masterclass</text>
+</svg>

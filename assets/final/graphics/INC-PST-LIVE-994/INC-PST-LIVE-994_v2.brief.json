@@ -1,0 +1,67 @@
+{
+  "title": "IncuBrix CreatorOps Tamil",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Unified CreatorOps Platform",
+    "website": "incubrix.io",
+    "handle": "@incubrix"
+  },
+  "copy": {
+    "eyebrow": "IncuBrix CreatorOps",
+    "headline": "உங்களுக்கு பிடித்த உள்ளடக்கத்தை உருவாக்குங்கள்",
+    "headline_emphasis": "உருவாக்குங்கள்",
+    "support": "கருத்துகளை உரை, ஆடியோ மற்றும் வீடியோவாக மாற்றி அனைத்து தளங்களிலும் பகிரவும்.",
+    "cta": "இப்போது தொடங்கவும்",
+    "steps": [
+      "கண்டறி",
+      "உருவாக்கு",
+      "மறுபயன்பாட",
+      "வெளியிடு"
+    ],
+    "stats": [
+      {
+        "value": "20",
+        "label": "குழு"
+      },
+      {
+        "value": "2",
+        "label": "நாடுகள்"
+      }
+    ],
+    "offer": null
+  },
+  "concept": "A warm, elegant hub-and-orbit visual metaphor showing a central glowing creation orb connected to four floating nodes representing discovery, generation, repurposing, and publishing, set against a rich deep plum and amber gradient background.",
+  "design_system": {
+    "palette": {
+      "bg": "#231123",
+      "bg_alt": "#3B183B",
+      "primary": "#E2847A",
+      "secondary": "#F8C630",
+      "accent": "#FFB703",
+      "ink": "#FFFFFF",
+      "paper": "#231123"
+    },
+    "fonts": {
+      "display": "Baloo 2",
+      "body": "Inter"
+    },
+    "headline_caps": false,
+    "corner_radius": 32,
+    "style": "rich vector illustration with smooth gradients, soft glowing shadows, and clean geometric node shapes",
+    "lighting": "top-left warm studio lighting casting soft dimensional shadows"
+  },
+  "composition": {
+    "layout": "stack",
+    "hero": "A central luminous golden orb (radius 120px) positioned at center (x: 540, y: 850) with four interconnected orbital nodes placed at top, bottom, left, and right, each featuring a distinct warm coral and amber gradient fill and a soft drop shadow.",
+    "props": [
+      "floating golden sparkles near the central orb",
+      "tiny geometric diamond shapes drifting upwards",
+      "soft glowing rings around the orbital paths"
+    ],
+    "background": "Deep plum gradient background from top-left (3B183B) to dark burgundy (231123) with a large centered warm amber radial glow.",
+    "decor": [
+      "a large faint semi-transparent abstract rounded rectangle in the upper third",
+      "a large soft curved wave shape at the bottom edge"
+    ]
+  }
+}

@@ -1,0 +1,444 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500;700;800&amp;family=Poppins:wght@600;800;900&amp;display=swap');
+
+      /* Whole-scene slow camera drift */
+      .cam {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: cameraScale 8.07s ease-out forwards;
+      }
+
+      /* Base entrance class */
+      .a {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation-fill-mode: forwards;
+      }
+
+      /* Entrance Modifiers */
+      .e-cone-morph {
+        animation: coneMorphIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.70s forwards;
+      }
+      .e-card-left {
+        animation: cardPopLeft 1.0s cubic-bezier(0.16, 1, 0.3, 1) 1.10s forwards;
+      }
+      .e-card-right {
+        animation: cardPopRight 1.0s cubic-bezier(0.16, 1, 0.3, 1) 1.35s forwards;
+      }
+      .e-steam-flow {
+        animation: steamWeave 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.70s forwards;
+        opacity: 0.95;
+      }
+      .e-headline {
+        animation: fadeSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.00s forwards;
+      }
+      .e-support {
+        animation: fadeSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.65s forwards;
+      }
+      .e-spice-spark {
+        animation: spicePop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1.80s forwards;
+      }
+
+      /* Subtle Idle Loops */
+      .i-drift {
+        animation: cardDrift 3.6s ease-in-out infinite alternate;
+      }
+      .i-bob-center {
+        animation: heroBob 3.0s ease-in-out infinite alternate;
+      }
+      .i-melt {
+        animation: butterMelt 2.2s ease-in-out infinite alternate;
+      }
+      .i-steam-idle {
+        animation: steamPulse 3.4s ease-in-out infinite alternate;
+      }
+      .i-glow {
+        animation: heatGlow 2.5s ease-in-out infinite alternate;
+      }
+
+      /* Keyframes */
+      @keyframes cameraScale {
+        0% { transform: scale(1.0); }
+        100% { transform: scale(1.04); }
+      }
+      @keyframes fadeSlideUp {
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes coneMorphIn {
+        0% { opacity: 0.5; transform: scale(1.2) translateY(50px); }
+        100% { opacity: 1; transform: scale(1.0) translateY(0); }
+      }
+      @keyframes cardPopLeft {
+        0% { opacity: 0; transform: translateX(-60px) scale(0.92); }
+        100% { opacity: 1; transform: translateX(0) scale(1); }
+      }
+      @keyframes cardPopRight {
+        0% { opacity: 0; transform: translateX(60px) scale(0.92); }
+        100% { opacity: 1; transform: translateX(0) scale(1); }
+      }
+      @keyframes steamWeave {
+        0% { opacity: 0.3; transform: scale(0.9) translateY(20px); }
+        100% { opacity: 0.95; transform: scale(1.0) translateY(0); }
+      }
+      @keyframes spicePop {
+        0% { opacity: 0; transform: scale(0.4) rotate(-15deg); }
+        100% { opacity: 1; transform: scale(1) rotate(0deg); }
+      }
+      @keyframes cardDrift {
+        0% { transform: translateY(0px) rotate(-0.5deg); }
+        100% { transform: translateY(-8px) rotate(0.5deg); }
+      }
+      @keyframes heroBob {
+        0% { transform: translateY(0px); }
+        100% { transform: translateY(-12px); }
+      }
+      @keyframes butterMelt {
+        0% { transform: scale(0.97) translateY(0); }
+        100% { transform: scale(1.03) translateY(3px); }
+      }
+      @keyframes steamPulse {
+        0% { opacity: 0.8; stroke-width: 38px; }
+        100% { opacity: 1; stroke-width: 46px; }
+      }
+      @keyframes heatGlow {
+        0% { opacity: 0.45; transform: scale(0.95); }
+        100% { opacity: 0.8; transform: scale(1.06); }
+      }
+    </style>
+
+    <!-- Filters -->
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+
+    <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="steam-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="20" result="b1" />
+      <feGaussianBlur stdDeviation="7" result="b2" />
+      <feMerge>
+        <feMergeNode in="b1" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F2A922" stop-opacity="0.32" />
+      <stop offset="60%" stop-color="#E74C3C" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#0F2C2E" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A4346" />
+      <stop offset="100%" stop-color="#0F2C2E" />
+    </linearGradient>
+
+    <linearGradient id="cardGradCenter" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#24585C" />
+      <stop offset="100%" stop-color="#113336" />
+    </linearGradient>
+
+    <linearGradient id="steamGrad" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#FFF8E7" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#F2A922" stop-opacity="0.9" />
+      <stop offset="70%" stop-color="#E74C3C" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#F2A922" stop-opacity="0.4" />
+    </linearGradient>
+
+    <linearGradient id="dosaCrust" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E7" />
+      <stop offset="25%" stop-color="#F2A922" />
+      <stop offset="60%" stop-color="#D97A1E" />
+      <stop offset="85%" stop-color="#B84918" />
+      <stop offset="100%" stop-color="#FFF8E7" />
+    </linearGradient>
+
+    <linearGradient id="masalaGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD659" />
+      <stop offset="100%" stop-color="#DE890C" />
+    </linearGradient>
+
+    <linearGradient id="podiRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5A43" />
+      <stop offset="50%" stop-color="#E74C3C" />
+      <stop offset="100%" stop-color="#8F170D" />
+    </linearGradient>
+
+    <linearGradient id="butterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFAD1" />
+      <stop offset="50%" stop-color="#FFE066" />
+      <stop offset="100%" stop-color="#F2A922" />
+    </linearGradient>
+  </defs>
+
+  <!-- CAMERA WRAPPER -->
+  <g class="cam">
+
+    <!-- FULL BLEED BACKGROUND -->
+    <rect x="0" y="0" width="1920" height="1080" fill="#0F2C2E" />
+
+    <!-- Ambient Teal Lighting -->
+    <circle cx="960" cy="540" r="820" fill="#1A4346" opacity="0.3" />
+    <circle cx="960" cy="620" r="500" fill="url(#bgGlow)" />
+
+    <!-- CARD 1: LEFT - SPICED MASALA DOSA -->
+    <g transform="translate(140, 420)">
+      <g class="a e-card-left">
+        <g class="i-drift">
+          <!-- Card Body -->
+          <rect x="0" y="0" width="480" height="570" rx="20" fill="url(#cardGrad)" stroke="#1A4346" stroke-width="3" filter="url(#shadow)" />
+          <!-- Inner Highlight Line -->
+          <rect x="8" y="8" width="464" height="554" rx="14" fill="none" stroke="#FFF8E7" stroke-opacity="0.08" stroke-width="1.5" />
+
+          <!-- Card Graphic Container -->
+          <g transform="translate(240, 240)">
+            <!-- Warm Aura -->
+            <ellipse cx="0" cy="20" rx="190" ry="140" fill="#F2A922" opacity="0.12" filter="url(#glow-gold)" />
+
+            <!-- Folded Masala Dosa Body (Golden Crescent/Fold) -->
+            <path d="M -180 80 C -150 -60, -30 -130, 160 -40 C 140 60, 40 120, -180 80 Z" 
+                  fill="url(#dosaCrust)" filter="url(#shadow)" />
+            <!-- Crisp Fold Ridge -->
+            <path d="M -175 75 C -100 15, 30 -40, 155 -38" fill="none" stroke="#FFF8E7" stroke-width="4" stroke-linecap="round" opacity="0.8" />
+            <path d="M -160 82 C -80 30, 20 -20, 130 -25" fill="none" stroke="#B84918" stroke-width="3" opacity="0.6" />
+
+            <!-- Spiced Potato Masala Filling Peeking Out -->
+            <path d="M -90 55 C -60 10, 40 5, 80 45 C 50 75, -40 85, -90 55 Z" fill="url(#masalaGold)" />
+            <!-- Potato Chunks &amp; Spices -->
+            <circle cx="-50" cy="45" r="14" fill="#FFEAA7" />
+            <circle cx="-10" cy="35" r="18" fill="#F39C12" />
+            <circle cx="35" cy="50" r="13" fill="#FFEAA7" />
+            <!-- Mustard Seeds &amp; Curry Leaf Garnish -->
+            <circle cx="-35" cy="35" r="3.5" fill="#2C3E50" />
+            <circle cx="-5" cy="52" r="3.5" fill="#2C3E50" />
+            <circle cx="20" cy="38" r="4" fill="#2C3E50" />
+            <circle cx="48" cy="44" r="3" fill="#2C3E50" />
+            <!-- Curry Leaf -->
+            <path d="M 0 32 C 10 20, 25 22, 28 35 C 18 36, 8 38, 0 32 Z" fill="#27AE60" />
+
+            <!-- Crispy Texture Dots -->
+            <circle cx="-120" cy="20" r="3" fill="#B84918" opacity="0.7" />
+            <circle cx="-140" cy="45" r="4" fill="#B84918" opacity="0.7" />
+            <circle cx="90" cy="-5" r="3.5" fill="#B84918" opacity="0.7" />
+            <circle cx="120" cy="15" r="3" fill="#B84918" opacity="0.7" />
+          </g>
+
+          <!-- Variant Title Badge -->
+          <g transform="translate(40, 470)">
+            <rect x="0" y="0" width="400" height="66" rx="16" fill="#0F2C2E" stroke="#F2A922" stroke-width="2" />
+            <text font-family="'Poppins', Arial, sans-serif" font-size="34" font-weight="800" fill="#FFF8E7" x="200" y="44" text-anchor="middle" letter-spacing="1.5">
+              SPICED MASALA
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- CARD 2: CENTER - HERO CONE PAPER ROAST (Morph Carry-over) -->
+    <g transform="translate(720, 380)">
+      <g class="a e-cone-morph">
+        <g class="i-bob-center">
+          <!-- Card Body with Premium Gold Border -->
+          <rect x="0" y="0" width="480" height="610" rx="20" fill="url(#cardGradCenter)" stroke="#F2A922" stroke-width="3.5" filter="url(#shadow)" />
+          <rect x="8" y="8" width="464" height="594" rx="14" fill="none" stroke="#F2A922" stroke-opacity="0.3" stroke-width="1.5" />
+
+          <!-- Center Aura Glow -->
+          <circle cx="240" cy="250" r="190" fill="url(#bgGlow)" filter="url(#glow-gold)" />
+
+          <!-- Golden Conical Paper-Roast Dosa -->
+          <g transform="translate(240, 420)">
+            <!-- Crispy Cone Silhouette -->
+            <path d="M -130 0 C -105 -150, -65 -300, 0 -380 C 65 -300, 105 -150, 130 0 Z" 
+                  fill="url(#dosaCrust)" filter="url(#shadow)" />
+
+            <!-- Crispy Lattice Texture Rings -->
+            <path d="M -115 -40 L 115 -40" stroke="#FFF8E7" stroke-width="2" opacity="0.4" />
+            <path d="M -95 -100 L 95 -100" stroke="#FFF8E7" stroke-width="2" opacity="0.35" />
+            <path d="M -75 -160 L 75 -160" stroke="#FFF8E7" stroke-width="2" opacity="0.35" />
+            <path d="M -55 -220 L 55 -220" stroke="#FFF8E7" stroke-width="2" opacity="0.3" />
+            <path d="M -35 -280 L 35 -280" stroke="#FFF8E7" stroke-width="1.5" opacity="0.25" />
+
+            <!-- Vertical Roast Ridges -->
+            <path d="M 0 -380 L -70 0" stroke="#FFF8E7" stroke-width="2.5" opacity="0.4" />
+            <path d="M 0 -380 L 0 0" stroke="#FFF8E7" stroke-width="3" opacity="0.5" />
+            <path d="M 0 -380 L 70 0" stroke="#FFF8E7" stroke-width="2.5" opacity="0.4" />
+
+            <!-- Glistening Ghee Pearls -->
+            <circle cx="-35" cy="-140" r="7" fill="#FFEAA7" filter="url(#glow-gold)" />
+            <circle cx="45" cy="-200" r="8" fill="#FFEAA7" filter="url(#glow-gold)" />
+            <circle cx="15" cy="-80" r="6" fill="#FFEAA7" filter="url(#glow-gold)" />
+            <circle cx="-10" cy="-290" r="5" fill="#FFEAA7" />
+          </g>
+
+          <!-- Featured Tag Badge -->
+          <g transform="translate(140, -18)">
+            <rect x="0" y="0" width="200" height="38" rx="19" fill="#E74C3C" filter="url(#shadow)" />
+            <text font-family="'Poppins', Arial, sans-serif" font-size="18" font-weight="900" fill="#FFF8E7" x="100" y="25" text-anchor="middle" letter-spacing="2">
+              SIGNATURE
+            </text>
+          </g>
+
+          <!-- Variant Title Badge -->
+          <g transform="translate(40, 508)">
+            <rect x="0" y="0" width="400" height="68" rx="16" fill="#F2A922" filter="url(#shadow)" />
+            <text font-family="'Poppins', Arial, sans-serif" font-size="36" font-weight="900" fill="#0F2C2E" x="200" y="47" text-anchor="middle" letter-spacing="1.5">
+              PAPER ROAST
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- CARD 3: RIGHT - FIERY GHEE PODI DOSA -->
+    <g transform="translate(1300, 420)">
+      <g class="a e-card-right">
+        <g class="i-drift">
+          <!-- Card Body -->
+          <rect x="0" y="0" width="480" height="570" rx="20" fill="url(#cardGrad)" stroke="#1A4346" stroke-width="3" filter="url(#shadow)" />
+          <rect x="8" y="8" width="464" height="554" rx="14" fill="none" stroke="#FFF8E7" stroke-opacity="0.08" stroke-width="1.5" />
+
+          <!-- Card Graphic Container -->
+          <g transform="translate(240, 240)">
+            <!-- Fiery Chili Aura -->
+            <ellipse cx="0" cy="20" rx="190" ry="140" fill="#E74C3C" opacity="0.18" filter="url(#glow-gold)" />
+
+            <!-- Golden Folded Dosa Base -->
+            <path d="M -170 70 C -120 -80, 50 -110, 170 -10 C 120 100, -30 110, -170 70 Z" 
+                  fill="url(#dosaCrust)" filter="url(#shadow)" />
+
+            <!-- Podi Powder Coating Layer (Brilliant Crimson Spiced Dust) -->
+            <path d="M -140 50 C -95 -50, 40 -70, 135 5 C 95 75, -20 85, -140 50 Z" 
+                  fill="url(#podiRed)" opacity="0.88" />
+
+            <!-- Tactile Podi Granules / Spice Texture -->
+            <g opacity="0.85">
+              <circle cx="-100" cy="25" r="4.5" fill="#FFF8E7" />
+              <circle cx="-80" cy="5" r="3.5" fill="#F2A922" />
+              <circle cx="-50" cy="30" r="5" fill="#FFEAA7" />
+              <circle cx="-25" cy="-10" r="4" fill="#F2A922" />
+              <circle cx="10" cy="20" r="4.5" fill="#FFF8E7" />
+              <circle cx="45" cy="-5" r="5" fill="#FFEAA7" />
+              <circle cx="70" cy="30" r="3.5" fill="#F2A922" />
+              <circle cx="95" cy="15" r="4.5" fill="#FFF8E7" />
+            </g>
+
+            <!-- Melting Butter Pat &amp; Ghee Drizzle (Animated Idle) -->
+            <g transform="translate(0, 5)">
+              <g class="i-melt">
+                <!-- Ghee Melt Pool -->
+                <ellipse cx="0" cy="25" rx="55" ry="24" fill="url(#butterGrad)" opacity="0.7" filter="url(#glow-gold)" />
+                <path d="M -20 25 C -10 45, 10 50, 15 65 C 20 50, 35 40, 30 25 Z" fill="#FFE066" opacity="0.85" />
+
+                <!-- Butter Cube Isometric Shape -->
+                <path d="M 0 -15 L 28 0 L 0 15 L -28 0 Z" fill="#FFFAD1" />
+                <path d="M -28 0 L 0 15 L 0 40 L -28 25 Z" fill="#FFE066" />
+                <path d="M 0 15 L 28 0 L 28 25 L 0 40 Z" fill="#F2A922" />
+              </g>
+            </g>
+
+            <!-- Spice Sprinkle Accents -->
+            <g class="a e-spice-spark">
+              <circle cx="130" cy="-60" r="5" fill="#E74C3C" filter="url(#glow-gold)" />
+              <circle cx="150" cy="-40" r="3.5" fill="#F2A922" />
+              <circle cx="-130" cy="-50" r="4" fill="#E74C3C" />
+            </g>
+          </g>
+
+          <!-- Variant Title Badge -->
+          <g transform="translate(40, 470)">
+            <rect x="0" y="0" width="400" height="66" rx="16" fill="#0F2C2E" stroke="#E74C3C" stroke-width="2" />
+            <text font-family="'Poppins', Arial, sans-serif" font-size="34" font-weight="800" fill="#FFF8E7" x="200" y="44" text-anchor="middle" letter-spacing="1.5">
+              GHEE PODI
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- THROUGH-LINE ELEMENT: GLOWING TURMERIC-GOLD STEAM RIBBON -->
+    <!-- Weaves smoothly across the three dosa cards, exiting downward towards next scene's sambar setup -->
+    <g class="a e-steam-flow">
+      <g class="i-steam-idle">
+        <!-- Outer Golden Glow Ribbon -->
+        <path d="M 120 780 
+                 C 280 620, 380 720, 580 640 
+                 C 740 580, 800 360, 960 320 
+                 C 1120 280, 1180 540, 1340 600 
+                 C 1520 660, 1680 580, 1820 680 
+                 C 1920 750, 1780 920, 1540 980
+                 C 1300 1040, 1050 960, 960 1080" 
+              fill="none" 
+              stroke="url(#steamGrad)" 
+              stroke-width="42" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+              filter="url(#steam-glow)" />
+
+        <!-- Core White-Hot Heat Filament -->
+        <path d="M 120 780 
+                 C 280 620, 380 720, 580 640 
+                 C 740 580, 800 360, 960 320 
+                 C 1120 280, 1180 540, 1340 600 
+                 C 1520 660, 1680 580, 1820 680 
+                 C 1920 750, 1780 920, 1540 980
+                 C 1300 1040, 1050 960, 960 1080" 
+              fill="none" 
+              stroke="#FFF8E7" 
+              stroke-width="12" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+              opacity="0.9" />
+      </g>
+    </g>
+
+    <!-- ON-SCREEN HEADLINE &amp; SUPPORT TEXT (TOP AREA) -->
+    <!-- Headline: "Paper Roast, Masala &amp; Ghee Podi" -->
+    <g transform="translate(960, 190)">
+      <g class="a e-headline">
+        <!-- Subtle Backing Glow Card for Superior Readability -->
+        <rect x="-700" y="-85" width="1400" height="185" rx="20" fill="#0F2C2E" opacity="0.85" filter="url(#shadow)" />
+        <text font-family="'Poppins', Arial, sans-serif" font-size="86" font-weight="900" fill="#FFF8E7" x="0" y="0" text-anchor="middle" filter="url(#shadow)">
+          Paper Roast, Masala &amp; Ghee Podi
+        </text>
+        <text font-family="'Noto Sans', sans-serif" font-size="44" font-weight="700" fill="#F2A922" x="0" y="68" text-anchor="middle" letter-spacing="1.5">
+          Crafted with authentic spices
+        </text>
+      </g>
+    </g>
+
+    <!-- PERSISTENT UI: Top-Left Pill Badge (Same position and styling as Scene 3) -->
+    <g transform="translate(80, 52)">
+      <rect x="0" y="0" width="320" height="64" rx="20" fill="#1A4346" stroke="#F2A922" stroke-width="2" filter="url(#shadow)" />
+      
+      <!-- Mini Golden Dosa Cone Icon -->
+      <g transform="translate(24, 16)">
+        <path d="M 4 28 L 28 4 L 32 24 Z" fill="#F2A922" />
+        <path d="M 8 26 L 26 8" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" />
+        <circle cx="28" cy="24" r="3" fill="#FFF8E7" />
+      </g>
+
+      <!-- Brand Name -->
+      <text font-family="'Poppins', Arial, sans-serif" font-size="22" font-weight="800" fill="#F2A922" x="72" y="40" letter-spacing="0.5">
+        THE DOSA CORNER
+      </text>
+    </g>
+
+    <!-- PERSISTENT UI: Bottom Progress Bar (Segment 4 of 7 = 4/7 * 1920 ≈ 1097px) -->
+    <g transform="translate(0, 1066)">
+      <!-- Full Track -->
+      <rect x="0" y="0" width="1920" height="14" fill="#1A4346" />
+      <!-- Active Progress Segment 4 of 7 -->
+      <rect x="0" y="0" width="1097" height="14" rx="7" fill="#F2A922" filter="url(#glow-gold)" />
+    </g>
+
+  </g> <!-- /Camera Wrapper -->
+</svg>

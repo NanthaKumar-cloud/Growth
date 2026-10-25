@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IncuBrix Animated Carousel — TEST-CAR-DOSA</title>
+<style>
+  :root {
+    --bg-dark: #090D16;
+    --card-bg: #111827;
+    --border: #1F2937;
+    --accent: #6366F1;
+    --accent-glow: rgba(99, 102, 241, 0.35);
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+  }
+  header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #A5B4FC;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .controls-bar {
+    display: flex;
+    gap: 12px;
+  }
+  button {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  button:hover {
+    background: #1F2937;
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  button.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  /* Main Stage - Unclipped Full Frame Display */
+  .stage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+  .viewport-card {
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 4 / 5;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    transition: max-width 0.25s ease;
+  }
+  .viewport-card.native-size {
+    max-width: 1080px;
+    width: 1080px;
+    height: 1350px;
+  }
+  .slide-stage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: visible;
+  }
+  .slide-stage svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+  /* Panoramic Seamless Mode - Unclipped */
+  .panoramic-mode {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 20px 0;
+  }
+  .panoramic-strip {
+    display: flex;
+    gap: 0;
+    width: max-content;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    border-radius: 0;
+    overflow: visible;
+  }
+  .panoramic-strip .pano-slide {
+    width: 480px;
+    height: 600px;
+    flex-shrink: 0;
+    overflow: visible;
+    border-right: 1px dashed rgba(255,255,255,0.25);
+  }
+  .panoramic-strip .pano-slide svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+  /* Bottom Navigation */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .dots-container {
+    display: flex;
+    gap: 8px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .slide-role-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h2 style="font-size:18px; font-weight:700;">IncuBrix Live Carousel Viewer</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Asset ID: TEST-CAR-DOSA • 7 Seamless Animated Slides</p>
+  </div>
+  <div class="controls-bar">
+    <button id="toggleNativeBtn" onclick="toggleNativeScale()">&#x2921; 100% Native (1080&times;1350)</button>
+    <button id="replayBtn" onclick="replayCurrentSlide()">&#x21bb; Replay Motion</button>
+    <button id="togglePanoBtn" onclick="togglePanoramicView()">&#x2922; Seamless Seam View</button>
+  </div>
+</header>
+
+<div class="stage-container" id="singleStageView">
+  <div class="viewport-card">
+    <div class="slide-stage" id="slideStage"></div>
+  </div>
+
+  <div class="slide-role-label" id="roleLabel">Slide 1 of 7</div>
+
+  <div class="nav-bar">
+    <button onclick="prevSlide()" id="prevBtn">&larr; Previous</button>
+    <div class="dots-container" id="dotsContainer"></div>
+    <button onclick="nextSlide()" id="nextBtn">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="panoramic-mode" id="panoramicView">
+  <div style="margin-bottom:12px; font-size:14px; color:var(--text-secondary);">
+    &#x2728; <strong>Seamless Swipe Verification:</strong> Notice how crossing elements continue across slide edges at the exact same height.
+  </div>
+  <div class="panoramic-strip" id="panoStrip"></div>
+</div>
+
+<script>
+  const slidesData = [
+    {
+      index: 1,
+      role: "Slide 1",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+        </filter>
+        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light); stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--color-background-dark); stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="dosaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:var(--color-primary)" />
+        </linearGradient>
+        <linearGradient id="chutneyGreenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ECC71" />
+            <stop offset="100%" style="stop-color:var(--color-accent1)" />
+        </linearGradient>
+        <linearGradient id="chutneyOrangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:#D35400" />
+        </linearGradient>
+        <linearGradient id="chutneyWhiteGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light)" />
+            <stop offset="100%" style="stop-color:#ECF0F1" />
+        </linearGradient>
+    </defs>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap');
+        :root {
+            --color-primary: #E74C3C;
+            --color-secondary: #F39C12;
+            --color-accent1: #27AE60;
+            --color-accent2: #FFD700;
+            --color-background-light: #FDFBF7;
+            --color-background-dark: #F5EEDD;
+            --color-dark: #333333;
+            --color-light: #CCCCCC;
+            --color-text: #333333;
+            --color-wood: #8B4513;
+        }
+        .a {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+        @keyframes steamRise {
+            0% { transform: translateY(0) scaleY(0); opacity: 0; }
+            100% { transform: translateY(-30px) scaleY(1); opacity: 0.8; }
+        }
+
+        .a-bg { animation: fadeIn 0.8s ease-out 0s forwards; }
+        .a-shape-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+        .a-shape-2 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+        .a-shape-3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards; }
+        .a-headline { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, subtlePulse 3s ease-in-out 3.8s infinite alternate; }
+        .a-subtext { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+        .a-accent-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+        .a-accent-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards; }
+        .a-brand { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-progress { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-swipe { animation: slideInRight 0.8s ease-out 2.8s forwards, gentleFloat 2s ease-in-out 4s infinite alternate; }
+        .a-steam { animation: steamRise 1.5s ease-out 1.5s forwards, gentleFloat 4s ease-in-out 3s infinite alternate; transform-origin: center bottom; }
+
+        .headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-dark); text-anchor: middle; }
+        .subtext { font-family: 'Lato', sans-serif; font-weight: 400; fill: var(--color-dark); text-anchor: middle; }
+        .brand-text { font-family: 'Lato', sans-serif; font-weight: 700; font-size: 36px; fill: var(--color-dark); }
+        .progress-dot { fill: var(--color-light); }
+        .progress-dot.active { fill: var(--color-primary); }
+        .swipe-arrow { fill: var(--color-dark); }
+        .button-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-accent2); text-anchor: middle; }
+        
+        @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+    </style>
+
+    <rect x="0" y="0" width="1080" height="1350" fill="url(#backgroundGradient)" class="a a-bg"/>
+
+    <g class="a a-shape-1" filter="url(#shadow)">
+        <path fill="var(--color-wood)" d="M 0 800 C 150 780 400 750 600 770 C 800 790 1000 770 1280 750 L 1280 1350 L 0 1350 Z"/>
+    </g>
+
+    <g class="a a-shape-2">
+        <ellipse cx="580" cy="850" rx="380" ry="200" fill="#EAEAEA"/>
+        <path d="M 580,650 A 200,200 0 0 1 780,850 C 780,960 580,1050 380,850 A 200,200 0 0 1 580,650 Z" fill="url(#dosaGradient)" filter="url(#shadow)"/>
+        <circle cx="580" cy="850" r="100" fill="url(#dosaGradient)"/>
+    </g>
+
+    <g class="a a-steam">
+        <path d="M 560 620 C 550 580 570 560 580 520 C 590 560 610 580 600 620 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+        <path d="M 590 600 C 580 560 600 540 610 500 C 620 540 640 560 630 600 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+    </g>
+
+    <g class="a a-headline">
+        <text x="540" y="240" font-size="80" class="headline">Craving a Weekend Dosa Feast?</text>
+    </g>
+    <g class="a a-subtext">
+        <text x="540" y="320" font-size="44" class="subtext">Your perfect Saturday or Sunday just got better.</text>
+    </g>
+
+    <g class="a a-brand">
+        <text x="72" y="1278" font-size="36" text-anchor="start" class="brand-text">Dosa House</text>
+    </g>
+
+    <g class="a a-progress">
+        <circle cx="890" cy="1270" r="10" class="progress-dot active"/>
+        <circle cx="920" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="950" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="980" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1010" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1040" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1070" cy="1270" r="10" class="progress-dot"/>
+    </g>
+
+    <g class="a a-swipe">
+        <path d="M 1030 675 L 1050 695 L 1030 715 L 1035 705 L 1010 705 L 1010 685 L 1035 685 Z" class="swipe-arrow"/>
+    </g>
+</svg>`
+    },
+    {
+      index: 2,
+      role: "Slide 2",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+        </filter>
+        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light); stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--color-background-dark); stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="dosaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:var(--color-primary)" />
+        </linearGradient>
+        <linearGradient id="chutneyGreenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ECC71" />
+            <stop offset="100%" style="stop-color:var(--color-accent1)" />
+        </linearGradient>
+        <linearGradient id="chutneyOrangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:#D35400" />
+        </linearGradient>
+        <linearGradient id="chutneyWhiteGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light)" />
+            <stop offset="100%" style="stop-color:#ECF0F1" />
+        </linearGradient>
+    </defs>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap');
+        :root {
+            --color-primary: #E74C3C;
+            --color-secondary: #F39C12;
+            --color-accent1: #27AE60;
+            --color-accent2: #FFD700;
+            --color-background-light: #FDFBF7;
+            --color-background-dark: #F5EEDD;
+            --color-dark: #333333;
+            --color-light: #CCCCCC;
+            --color-text: #333333;
+            --color-wood: #8B4513;
+        }
+        .a {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+        @keyframes steamRise {
+            0% { transform: translateY(0) scaleY(0); opacity: 0; }
+            100% { transform: translateY(-30px) scaleY(1); opacity: 0.8; }
+        }
+
+        .a-bg { animation: fadeIn 0.8s ease-out 0s forwards; }
+        .a-shape-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+        .a-shape-2 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+        .a-shape-3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards; }
+        .a-headline { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, subtlePulse 3s ease-in-out 3.8s infinite alternate; }
+        .a-subtext { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+        .a-accent-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+        .a-accent-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards; }
+        .a-brand { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-progress { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-swipe { animation: slideInRight 0.8s ease-out 2.8s forwards, gentleFloat 2s ease-in-out 4s infinite alternate; }
+        .a-steam { animation: steamRise 1.5s ease-out 1.5s forwards, gentleFloat 4s ease-in-out 3s infinite alternate; transform-origin: center bottom; }
+
+        .headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-dark); text-anchor: middle; }
+        .subtext { font-family: 'Lato', sans-serif; font-weight: 400; fill: var(--color-dark); text-anchor: middle; }
+        .brand-text { font-family: 'Lato', sans-serif; font-weight: 700; font-size: 36px; fill: var(--color-dark); }
+        .progress-dot { fill: var(--color-light); }
+        .progress-dot.active { fill: var(--color-primary); }
+        .swipe-arrow { fill: var(--color-dark); }
+        .button-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-accent2); text-anchor: middle; }
+        
+        @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+    </style>
+
+    <rect x="0" y="0" width="1080" height="1350" fill="url(#backgroundGradient)" class="a a-bg"/>
+
+    <g class="a a-shape-1" filter="url(#shadow)">
+        <path fill="var(--color-wood)" d="M -1080 800 C -930 780 -680 750 -480 770 C -280 790 -80 770 200 750 L 200 1350 L -1080 1350 Z"/>
+    </g>
+
+    <g class="a a-shape-2">
+        <rect x="150" y="800" width="400" height="200" rx="20" ry="20" fill="#EAEAEA" filter="url(#shadow)"/>
+        <rect x="180" y="830" width="340" height="140" rx="10" ry="10" fill="#CCCCCC"/>
+        <path d="M 250 850 C 260 840 280 840 290 850 C 300 860 300 880 290 890 C 280 900 260 900 250 890 Z" fill="#999999"/>
+        <path d="M 350 870 C 360 860 380 860 390 870 C 400 880 400 900 390 910 C 380 920 360 920 350 910 Z" fill="#999999"/>
+    </g>
+
+    <g class="a a-headline">
+        <text x="540" y="240" font-size="80" class="headline">Tired of Bland Takeout?</text>
+    </g>
+    <g class="a a-subtext">
+        <text x="540" y="320" font-size="44" class="subtext">Elevate your weekend with authentic South Indian flavors.</text>
+    </g>
+
+    <g class="a a-brand">
+        <text x="72" y="1278" font-size="36" text-anchor="start" class="brand-text">Dosa House</text>
+    </g>
+
+    <g class="a a-progress">
+        <circle cx="890" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="920" cy="1270" r="10" class="progress-dot active"/>
+        <circle cx="950" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="980" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1010" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1040" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1070" cy="1270" r="10" class="progress-dot"/>
+    </g>
+
+    <g class="a a-swipe">
+        <path d="M 1030 675 L 1050 695 L 1030 715 L 1035 705 L 1010 705 L 1010 685 L 1035 685 Z" class="swipe-arrow"/>
+    </g>
+</svg>`
+    },
+    {
+      index: 3,
+      role: "Slide 3",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+        </filter>
+        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light); stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--color-background-dark); stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="dosaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:var(--color-primary)" />
+        </linearGradient>
+        <linearGradient id="chutneyGreenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ECC71" />
+            <stop offset="100%" style="stop-color:var(--color-accent1)" />
+        </linearGradient>
+        <linearGradient id="chutneyOrangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:#D35400" />
+        </linearGradient>
+        <linearGradient id="chutneyWhiteGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light)" />
+            <stop offset="100%" style="stop-color:#ECF0F1" />
+        </linearGradient>
+    </defs>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap');
+        :root {
+            --color-primary: #E74C3C;
+            --color-secondary: #F39C12;
+            --color-accent1: #27AE60;
+            --color-accent2: #FFD700;
+            --color-background-light: #FDFBF7;
+            --color-background-dark: #F5EEDD;
+            --color-dark: #333333;
+            --color-light: #CCCCCC;
+            --color-text: #333333;
+            --color-wood: #8B4513;
+        }
+        .a {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+        @keyframes steamRise {
+            0% { transform: translateY(0) scaleY(0); opacity: 0; }
+            100% { transform: translateY(-30px) scaleY(1); opacity: 0.8; }
+        }
+
+        .a-bg { animation: fadeIn 0.8s ease-out 0s forwards; }
+        .a-shape-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+        .a-shape-2 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+        .a-shape-3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards; }
+        .a-headline { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, subtlePulse 3s ease-in-out 3.8s infinite alternate; }
+        .a-subtext { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+        .a-accent-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+        .a-accent-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards; }
+        .a-brand { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-progress { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-swipe { animation: slideInRight 0.8s ease-out 2.8s forwards, gentleFloat 2s ease-in-out 4s infinite alternate; }
+        .a-steam { animation: steamRise 1.5s ease-out 1.5s forwards, gentleFloat 4s ease-in-out 3s infinite alternate; transform-origin: center bottom; }
+
+        .headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-dark); text-anchor: middle; }
+        .subtext { font-family: 'Lato', sans-serif; font-weight: 400; fill: var(--color-dark); text-anchor: middle; }
+        .brand-text { font-family: 'Lato', sans-serif; font-weight: 700; font-size: 36px; fill: var(--color-dark); }
+        .progress-dot { fill: var(--color-light); }
+        .progress-dot.active { fill: var(--color-primary); }
+        .swipe-arrow { fill: var(--color-dark); }
+        .button-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-accent2); text-anchor: middle; }
+        
+        @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+    </style>
+
+    <rect x="0" y="0" width="1080" height="1350" fill="url(#backgroundGradient)" class="a a-bg"/>
+
+    <g class="a a-shape-1" filter="url(#shadow)">
+        <path fill="var(--color-wood)" d="M -1080 800 C -930 780 -680 750 -480 770 C -280 790 -80 770 200 750 L 200 1350 L -1080 1350 Z"/>
+    </g>
+
+    <g class="a a-shape-2">
+        <ellipse cx="650" cy="850" rx="380" ry="200" fill="#EAEAEA"/>
+        <path d="M 650,650 A 200,200 0 0 1 850,850 C 850,960 650,1050 450,850 A 200,200 0 0 1 650,650 Z" fill="url(#dosaGradient)" filter="url(#shadow)"/>
+        <circle cx="650" cy="850" r="100" fill="url(#dosaGradient)"/>
+    </g>
+
+    <g class="a a-accent-1">
+        <circle cx="450" cy="950" r="60" fill="url(#chutneyGreenGradient)" filter="url(#shadow)"/>
+        <path d="M 450 950 L 460 960 L 440 960 Z M 450 940 L 460 950 L 440 950 Z M 450 960 L 460 970 L 440 970 Z" fill="#FFFFFF"/>
+    </g>
+    
+    <g class="a a-headline">
+        <text x="540" y="240" font-size="80" class="headline">Dosa House Delivers Joy!</text>
+    </g>
+    <g class="a a-subtext">
+        <text x="540" y="320" font-size="44" class="subtext">Fresh, crispy dosas, handmade just for you.</text>
+    </g>
+
+    <g class="a a-brand">
+        <text x="72" y="1278" font-size="36" text-anchor="start" class="brand-text">Dosa House</text>
+    </g>
+
+    <g class="a a-progress">
+        <circle cx="890" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="920" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="950" cy="1270" r="10" class="progress-dot active"/>
+        <circle cx="980" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1010" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1040" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1070" cy="1270" r="10" class="progress-dot"/>
+    </g>
+
+    <g class="a a-swipe">
+        <path d="M 1030 675 L 1050 695 L 1030 715 L 1035 705 L 1010 705 L 1010 685 L 1035 685 Z" class="swipe-arrow"/>
+    </g>
+</svg>`
+    },
+    {
+      index: 4,
+      role: "Slide 4",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+        </filter>
+        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light); stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--color-background-dark); stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="dosaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:var(--color-primary)" />
+        </linearGradient>
+        <linearGradient id="chutneyGreenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ECC71" />
+            <stop offset="100%" style="stop-color:var(--color-accent1)" />
+        </linearGradient>
+        <linearGradient id="chutneyOrangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:#D35400" />
+        </linearGradient>
+        <linearGradient id="chutneyWhiteGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light)" />
+            <stop offset="100%" style="stop-color:#ECF0F1" />
+        </linearGradient>
+    </defs>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap');
+        :root {
+            --color-primary: #E74C3C;
+            --color-secondary: #F39C12;
+            --color-accent1: #27AE60;
+            --color-accent2: #FFD700;
+            --color-background-light: #FDFBF7;
+            --color-background-dark: #F5EEDD;
+            --color-dark: #333333;
+            --color-light: #CCCCCC;
+            --color-text: #333333;
+            --color-wood: #8B4513;
+        }
+        .a {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+        @keyframes steamRise {
+            0% { transform: translateY(0) scaleY(0); opacity: 0; }
+            100% { transform: translateY(-30px) scaleY(1); opacity: 0.8; }
+        }
+
+        .a-bg { animation: fadeIn 0.8s ease-out 0s forwards; }
+        .a-shape-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+        .a-shape-2 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+        .a-shape-3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards; }
+        .a-headline { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, subtlePulse 3s ease-in-out 3.8s infinite alternate; }
+        .a-subtext { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+        .a-accent-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+        .a-accent-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards; }
+        .a-brand { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-progress { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-swipe { animation: slideInRight 0.8s ease-out 2.8s forwards, gentleFloat 2s ease-in-out 4s infinite alternate; }
+        .a-steam { animation: steamRise 1.5s ease-out 1.5s forwards, gentleFloat 4s ease-in-out 3s infinite alternate; transform-origin: center bottom; }
+
+        .headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-dark); text-anchor: middle; }
+        .subtext { font-family: 'Lato', sans-serif; font-weight: 400; fill: var(--color-dark); text-anchor: middle; }
+        .brand-text { font-family: 'Lato', sans-serif; font-weight: 700; font-size: 36px; fill: var(--color-dark); }
+        .progress-dot { fill: var(--color-light); }
+        .progress-dot.active { fill: var(--color-primary); }
+        .swipe-arrow { fill: var(--color-dark); }
+        .button-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-accent2); text-anchor: middle; }
+        
+        @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+    </style>
+
+    <rect x="0" y="0" width="1080" height="1350" fill="url(#backgroundGradient)" class="a a-bg"/>
+
+    <g class="a a-shape-1" filter="url(#shadow)">
+        <path fill="var(--color-wood)" d="M 0 800 C 150 780 400 750 600 770 C 800 790 1000 770 1280 750 L 1280 1350 L 0 1350 Z"/>
+    </g>
+
+    <g class="a a-shape-2">
+        <ellipse cx="450" cy="850" rx="380" ry="200" fill="#EAEAEA"/>
+        <path d="M 450,650 A 200,200 0 0 1 650,850 C 650,960 450,1050 250,850 A 200,200 0 0 1 450,650 Z" fill="url(#dosaGradient)" filter="url(#shadow)"/>
+        <circle cx="450" cy="850" r="100" fill="url(#dosaGradient)"/>
+    </g>
+
+    <g class="a a-accent-1" filter="url(#shadow)">
+        <circle cx="750" cy="800" r="60" fill="url(#chutneyGreenGradient)"/>
+        <circle cx="850" cy="900" r="60" fill="url(#chutneyOrangeGradient)"/>
+        <circle cx="700" cy="980" r="60" fill="url(#chutneyWhiteGradient)"/>
+    </g>
+
+    <g class="a a-headline">
+        <text x="540" y="240" font-size="80" class="headline">Our Weekend Special: Dosa Duo!</text>
+    </g>
+    <g class="a a-subtext">
+        <text x="540" y="320" font-size="44" class="subtext">Any crispy dosa &amp; 3 fresh, vibrant chutneys for $8.99.</text>
+    </g>
+    
+    <g class="a a-accent-2" transform="translate(540,400)">
+        <rect x="-150" y="-30" width="300" height="60" rx="16" ry="16" fill="var(--color-primary)"/>
+        <text x="0" y="20" font-size="48" fill="var(--color-accent2)" text-anchor="middle" font-family="'Montserrat', sans-serif" font-weight="700">$8.99!</text>
+    </g>
+
+    <g class="a a-brand">
+        <text x="72" y="1278" font-size="36" text-anchor="start" class="brand-text">Dosa House</text>
+    </g>
+
+    <g class="a a-progress">
+        <circle cx="890" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="920" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="950" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="980" cy="1270" r="10" class="progress-dot active"/>
+        <circle cx="1010" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1040" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1070" cy="1270" r="10" class="progress-dot"/>
+    </g>
+
+    <g class="a a-swipe">
+        <path d="M 1030 675 L 1050 695 L 1030 715 L 1035 705 L 1010 705 L 1010 685 L 1035 685 Z" class="swipe-arrow"/>
+    </g>
+</svg>`
+    },
+    {
+      index: 5,
+      role: "Slide 5",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+        </filter>
+        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light); stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--color-background-dark); stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="dosaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:var(--color-primary)" />
+        </linearGradient>
+        <linearGradient id="chutneyGreenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ECC71" />
+            <stop offset="100%" style="stop-color:var(--color-accent1)" />
+        </linearGradient>
+        <linearGradient id="chutneyOrangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:#D35400" />
+        </linearGradient>
+        <linearGradient id="chutneyWhiteGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light)" />
+            <stop offset="100%" style="stop-color:#ECF0F1" />
+        </linearGradient>
+    </defs>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap');
+        :root {
+            --color-primary: #E74C3C;
+            --color-secondary: #F39C12;
+            --color-accent1: #27AE60;
+            --color-accent2: #FFD700;
+            --color-background-light: #FDFBF7;
+            --color-background-dark: #F5EEDD;
+            --color-dark: #333333;
+            --color-light: #CCCCCC;
+            --color-text: #333333;
+            --color-wood: #8B4513;
+        }
+        .a {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+        @keyframes steamRise {
+            0% { transform: translateY(0) scaleY(0); opacity: 0; }
+            100% { transform: translateY(-30px) scaleY(1); opacity: 0.8; }
+        }
+
+        .a-bg { animation: fadeIn 0.8s ease-out 0s forwards; }
+        .a-shape-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+        .a-shape-2 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+        .a-shape-3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards; }
+        .a-headline { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, subtlePulse 3s ease-in-out 3.8s infinite alternate; }
+        .a-subtext { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+        .a-accent-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+        .a-accent-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards; }
+        .a-brand { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-progress { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-swipe { animation: slideInRight 0.8s ease-out 2.8s forwards, gentleFloat 2s ease-in-out 4s infinite alternate; }
+        .a-steam { animation: steamRise 1.5s ease-out 1.5s forwards, gentleFloat 4s ease-in-out 3s infinite alternate; transform-origin: center bottom; }
+
+        .headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-dark); text-anchor: middle; }
+        .subtext { font-family: 'Lato', sans-serif; font-weight: 400; fill: var(--color-dark); text-anchor: middle; }
+        .brand-text { font-family: 'Lato', sans-serif; font-weight: 700; font-size: 36px; fill: var(--color-dark); }
+        .progress-dot { fill: var(--color-light); }
+        .progress-dot.active { fill: var(--color-primary); }
+        .swipe-arrow { fill: var(--color-dark); }
+        .button-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-accent2); text-anchor: middle; }
+        
+        @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+    </style>
+
+    <rect x="0" y="0" width="1080" height="1350" fill="url(#backgroundGradient)" class="a a-bg"/>
+
+    <g class="a a-shape-1" filter="url(#shadow)">
+        <path fill="var(--color-wood)" d="M -1080 800 C -930 780 -680 750 -480 770 C -280 790 -80 770 200 750 L 200 1350 L -1080 1350 Z"/>
+    </g>
+
+    <g class="a a-shape-2">
+        <ellipse cx="600" cy="850" rx="380" ry="200" fill="#EAEAEA"/>
+        <path d="M 600,650 A 200,200 0 0 1 800,850 C 800,960 600,1050 400,850 A 200,200 0 0 1 600,650 Z" fill="url(#dosaGradient)" filter="url(#shadow)" transform="translate(100, -50) rotate(5 600 850)"/>
+        <circle cx="600" cy="850" r="100" fill="url(#dosaGradient)" transform="translate(100, -50) rotate(5 600 850)"/>
+
+        <circle cx="350" cy="950" r="60" fill="url(#chutneyGreenGradient)" filter="url(#shadow)" transform="translate(100, -50) rotate(5 600 850)"/>
+        <circle cx="500" cy="1000" r="60" fill="url(#chutneyOrangeGradient)" filter="url(#shadow)" transform="translate(100, -50) rotate(5 600 850)"/>
+    </g>
+
+    <g class="a a-headline">
+        <text x="540" y="240" font-size="80" class="headline">Taste the Tradition, Effortlessly!</text>
+    </g>
+    <g class="a a-subtext">
+        <text x="540" y="320" font-size="44" class="subtext">Experience authentic South Indian taste delivered to your door.</text>
+    </g>
+
+    <g class="a a-accent-1" transform="translate(300, 420)">
+        <rect x="-100" y="-30" width="200" height="60" rx="16" ry="16" fill="var(--color-primary)" filter="url(#shadow)"/>
+        <text x="0" y="18" font-size="36" fill="var(--color-accent2)" text-anchor="middle" font-family="'Lato', sans-serif" font-weight="700">Quick</text>
+        <path fill="var(--color-accent2)" d="M-80 -8 L -65 -8 L -65 -23 L -80 -23 Z M -65 -8 C -65 -15 -70 -20 -75 -20 C -80 -20 -85 -15 -85 -8 C -85 -1 -80 4 -75 4 C -70 4 -65 -1 -65 -8 Z M -65 -8 L -50 -8 M -50 -8 L -50 -23 M -50 -23 L -65 -23 M -65 -23 L -65 -8 "/> <!-- Clock icon (simplified) -->
+    </g>
+    <g class="a a-accent-2" transform="translate(780, 420)">
+        <rect x="-100" y="-30" width="200" height="60" rx="16" ry="16" fill="var(--color-accent1)" filter="url(#shadow)"/>
+        <text x="0" y="18" font-size="36" fill="var(--color-background-light)" text-anchor="middle" font-family="'Lato', sans-serif" font-weight="700">Fresh</text>
+        <path fill="var(--color-background-light)" d="M-80 0 L -60 20 L -40 0 L -50 0 L -60 10 L -70 0 Z"/> <!-- Checkmark icon (simplified) -->
+    </g>
+
+    <g class="a a-brand">
+        <text x="72" y="1278" font-size="36" text-anchor="start" class="brand-text">Dosa House</text>
+    </g>
+
+    <g class="a a-progress">
+        <circle cx="890" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="920" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="950" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="980" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1010" cy="1270" r="10" class="progress-dot active"/>
+        <circle cx="1040" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1070" cy="1270" r="10" class="progress-dot"/>
+    </g>
+
+    <g class="a a-swipe">
+        <path d="M 1030 675 L 1050 695 L 1030 715 L 1035 705 L 1010 705 L 1010 685 L 1035 685 Z" class="swipe-arrow"/>
+    </g>
+</svg>`
+    },
+    {
+      index: 6,
+      role: "Slide 6",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+        </filter>
+        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light); stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--color-background-dark); stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="dosaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:var(--color-primary)" />
+        </linearGradient>
+        <linearGradient id="chutneyGreenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ECC71" />
+            <stop offset="100%" style="stop-color:var(--color-accent1)" />
+        </linearGradient>
+        <linearGradient id="chutneyOrangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:#D35400" />
+        </linearGradient>
+        <linearGradient id="chutneyWhiteGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light)" />
+            <stop offset="100%" style="stop-color:#ECF0F1" />
+        </linearGradient>
+    </defs>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap');
+        :root {
+            --color-primary: #E74C3C;
+            --color-secondary: #F39C12;
+            --color-accent1: #27AE60;
+            --color-accent2: #FFD700;
+            --color-background-light: #FDFBF7;
+            --color-background-dark: #F5EEDD;
+            --color-dark: #333333;
+            --color-light: #CCCCCC;
+            --color-text: #333333;
+            --color-wood: #8B4513;
+        }
+        .a {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+        @keyframes steamRise {
+            0% { transform: translateY(0) scaleY(0); opacity: 0; }
+            100% { transform: translateY(-30px) scaleY(1); opacity: 0.8; }
+        }
+
+        .a-bg { animation: fadeIn 0.8s ease-out 0s forwards; }
+        .a-shape-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+        .a-shape-2 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+        .a-shape-3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards; }
+        .a-headline { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, subtlePulse 3s ease-in-out 3.8s infinite alternate; }
+        .a-subtext { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+        .a-accent-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+        .a-accent-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards; }
+        .a-brand { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-progress { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-swipe { animation: slideInRight 0.8s ease-out 2.8s forwards, gentleFloat 2s ease-in-out 4s infinite alternate; }
+        .a-steam { animation: steamRise 1.5s ease-out 1.5s forwards, gentleFloat 4s ease-in-out 3s infinite alternate; transform-origin: center bottom; }
+
+        .headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-dark); text-anchor: middle; }
+        .subtext { font-family: 'Lato', sans-serif; font-weight: 400; fill: var(--color-dark); text-anchor: middle; }
+        .brand-text { font-family: 'Lato', sans-serif; font-weight: 700; font-size: 36px; fill: var(--color-dark); }
+        .progress-dot { fill: var(--color-light); }
+        .progress-dot.active { fill: var(--color-primary); }
+        .swipe-arrow { fill: var(--color-dark); }
+        .button-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-accent2); text-anchor: middle; }
+        
+        @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+    </style>
+
+    <rect x="0" y="0" width="1080" height="1350" fill="url(#backgroundGradient)" class="a a-bg"/>
+
+    <g class="a a-shape-1" filter="url(#shadow)">
+        <path fill="var(--color-wood)" d="M 0 800 C 150 780 400 750 600 770 C 800 790 1000 770 1280 750 L 1280 1350 L 0 1350 Z"/>
+    </g>
+
+    <g class="a a-shape-2" filter="url(#shadow)">
+        <rect x="300" y="700" width="480" height="300" rx="30" ry="30" fill="#EEEEEE"/>
+        <path d="M 350 750 L 730 750 L 730 920 L 350 920 Z M 750 760 L 750 900 C 750 920 730 920 730 920 L 730 750 L 750 750 Z" fill="#999999"/>
+        <circle cx="680" cy="780" r="20" fill="#EAEAEA"/>
+        <circle cx="710" cy="800" r="10" fill="#EAEAEA"/>
+    </g>
+    
+    <g class="a a-accent-1" transform="translate(540,850)">
+        <circle cx="0" cy="0" r="80" fill="var(--color-accent2)"/>
+        <text x="0" y="25" font-size="80" fill="var(--color-primary)" text-anchor="middle" font-family="'Montserrat', sans-serif" font-weight="700">$0</text>
+    </g>
+
+    <g class="a a-headline">
+        <text x="540" y="240" font-size="80" class="headline">Free Delivery on Orders Over $20!</text>
+    </g>
+    <g class="a a-subtext">
+        <text x="540" y="320" font-size="44" class="subtext">Gather your friends, we'll handle the rest. Weekend only.</text>
+    </g>
+
+    <g class="a a-brand">
+        <text x="72" y="1278" font-size="36" text-anchor="start" class="brand-text">Dosa House</text>
+    </g>
+
+    <g class="a a-progress">
+        <circle cx="890" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="920" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="950" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="980" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1010" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1040" cy="1270" r="10" class="progress-dot active"/>
+        <circle cx="1070" cy="1270" r="10" class="progress-dot"/>
+    </g>
+
+    <g class="a a-swipe">
+        <path d="M 1030 675 L 1050 695 L 1030 715 L 1035 705 L 1010 705 L 1010 685 L 1035 685 Z" class="swipe-arrow"/>
+    </g>
+</svg>`
+    },
+    {
+      index: 7,
+      role: "Slide 7",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+    <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+        </filter>
+        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light); stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--color-background-dark); stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="dosaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:var(--color-primary)" />
+        </linearGradient>
+        <linearGradient id="chutneyGreenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ECC71" />
+            <stop offset="100%" style="stop-color:var(--color-accent1)" />
+        </linearGradient>
+        <linearGradient id="chutneyOrangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-secondary)" />
+            <stop offset="100%" style="stop-color:#D35400" />
+        </linearGradient>
+        <linearGradient id="chutneyWhiteGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--color-background-light)" />
+            <stop offset="100%" style="stop-color:#ECF0F1" />
+        </linearGradient>
+    </defs>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap');
+        :root {
+            --color-primary: #E74C3C;
+            --color-secondary: #F39C12;
+            --color-accent1: #27AE60;
+            --color-accent2: #FFD700;
+            --color-background-light: #FDFBF7;
+            --color-background-dark: #F5EEDD;
+            --color-dark: #333333;
+            --color-light: #CCCCCC;
+            --color-text: #333333;
+            --color-wood: #8B4513;
+        }
+        .a {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+        @keyframes steamRise {
+            0% { transform: translateY(0) scaleY(0); opacity: 0; }
+            100% { transform: translateY(-30px) scaleY(1); opacity: 0.8; }
+        }
+
+        .a-bg { animation: fadeIn 0.8s ease-out 0s forwards; }
+        .a-shape-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards; }
+        .a-shape-2 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; }
+        .a-shape-3 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards; }
+        .a-headline { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards, subtlePulse 3s ease-in-out 3.8s infinite alternate; }
+        .a-subtext { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.6s forwards; }
+        .a-accent-1 { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards; }
+        .a-accent-2 { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards; }
+        .a-button { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.2s forwards, subtlePulse 3s ease-in-out 5s infinite alternate; }
+        .a-cta-text { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards; }
+        .a-brand { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-progress { animation: fadeIn 0.8s ease-out 2.8s forwards; }
+        .a-steam { animation: steamRise 1.5s ease-out 1.5s forwards, gentleFloat 4s ease-in-out 3s infinite alternate; transform-origin: center bottom; }
+
+        .headline { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-dark); text-anchor: middle; }
+        .subtext { font-family: 'Lato', sans-serif; font-weight: 400; fill: var(--color-dark); text-anchor: middle; }
+        .brand-text { font-family: 'Lato', sans-serif; font-weight: 700; font-size: 36px; fill: var(--color-dark); }
+        .progress-dot { fill: var(--color-light); }
+        .progress-dot.active { fill: var(--color-primary); }
+        .swipe-arrow { fill: var(--color-dark); }
+        .button-text { font-family: 'Montserrat', sans-serif; font-weight: 700; fill: var(--color-accent2); text-anchor: middle; }
+        
+        @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+    </style>
+
+    <rect x="0" y="0" width="1080" height="1350" fill="url(#backgroundGradient)" class="a a-bg"/>
+
+    <g class="a a-shape-1" filter="url(#shadow)">
+        <path fill="var(--color-wood)" d="M -1080 800 C -930 780 -680 750 -480 770 C -280 790 -80 770 200 750 L 200 1350 L -1080 1350 Z"/>
+    </g>
+
+    <g class="a a-shape-2">
+        <ellipse cx="580" cy="850" rx="380" ry="200" fill="#EAEAEA"/>
+        <path d="M 580,650 A 200,200 0 0 1 780,850 C 780,960 580,1050 380,850 A 200,200 0 0 1 580,650 Z" fill="url(#dosaGradient)" filter="url(#shadow)"/>
+        <circle cx="580" cy="850" r="100" fill="url(#dosaGradient)"/>
+    </g>
+
+    <g class="a a-steam">
+        <path d="M 560 620 C 550 580 570 560 580 520 C 590 560 610 580 600 620 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+        <path d="M 590 600 C 580 560 600 540 610 500 C 620 540 640 560 630 600 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+    </g>
+
+    <g class="a a-headline">
+        <text x="540" y="240" font-size="80" class="headline">Your Weekend Dosa Awaits!</text>
+    </g>
+    <g class="a a-subtext">
+        <text x="540" y="320" font-size="44" class="subtext">Order now for an unforgettable South Indian experience.</text>
+    </g>
+    
+    <g class="a a-button" transform="translate(540, 470)">
+        <rect x="-180" y="-45" width="360" height="90" rx="16" ry="16" fill="var(--color-primary)" filter="url(#shadow)"/>
+        <text x="0" y="15" font-size="60" class="button-text">Order Now!</text>
+    </g>
+
+    <g class="a a-cta-text">
+        <text x="540" y="1100" font-size="44" fill="var(--color-dark)" text-anchor="middle" font-family="'Lato', sans-serif" font-weight="400">yourbrand.com</text>
+        <text x="540" y="1150" font-size="44" fill="var(--color-dark)" text-anchor="middle" font-family="'Lato', sans-serif" font-weight="400">@yourbrand</text>
+    </g>
+
+    <g class="a a-brand">
+        <text x="72" y="1278" font-size="36" text-anchor="start" class="brand-text">Dosa House</text>
+    </g>
+
+    <g class="a a-progress">
+        <circle cx="890" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="920" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="950" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="980" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1010" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1040" cy="1270" r="10" class="progress-dot"/>
+        <circle cx="1070" cy="1270" r="10" class="progress-dot active"/>
+    </g>
+</svg>`
+    },
+  ];
+
+  let currentIndex = 0;
+  const stage = document.getElementById("slideStage");
+  const roleLabel = document.getElementById("roleLabel");
+  const dotsContainer = document.getElementById("dotsContainer");
+
+  function init() {
+    // Render dots
+    dotsContainer.innerHTML = "";
+    slidesData.forEach((_, i) => {
+      const d = document.createElement("div");
+      d.className = "dot" + (i === 0 ? " active" : "");
+      d.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(d);
+    });
+
+    // Populate panoramic strip
+    const panoStrip = document.getElementById("panoStrip");
+    panoStrip.innerHTML = "";
+    slidesData.forEach((s) => {
+      const container = document.createElement("div");
+      container.className = "pano-slide";
+      container.innerHTML = s.svg;
+      panoStrip.appendChild(container);
+    });
+
+    renderSlide(0);
+  }
+
+  function renderSlide(index) {
+    currentIndex = index;
+    const slide = slidesData[index];
+    // Re-inject HTML to re-trigger CSS keyframe animations fresh
+    stage.innerHTML = slide.svg;
+    roleLabel.textContent = `Slide ${slide.index} of ${slidesData.length} - ${slide.role}`;
+
+    document.querySelectorAll(".dot").forEach((d, i) => {
+      d.className = "dot" + (i === index ? " active" : "");
+    });
+
+    document.getElementById("prevBtn").disabled = index === 0;
+    document.getElementById("nextBtn").disabled = index === slidesData.length - 1;
+  }
+
+  function nextSlide() {
+    if (currentIndex < slidesData.length - 1) {
+      renderSlide(currentIndex + 1);
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex > 0) {
+      renderSlide(currentIndex - 1);
+    }
+  }
+
+  function goToSlide(index) {
+    renderSlide(index);
+  }
+
+  function replayCurrentSlide() {
+    renderSlide(currentIndex);
+  }
+
+  let panoActive = false;
+  function togglePanoramicView() {
+    panoActive = !panoActive;
+    const single = document.getElementById("singleStageView");
+    const pano = document.getElementById("panoramicView");
+    const btn = document.getElementById("togglePanoBtn");
+
+    if (panoActive) {
+      single.style.display = "none";
+      pano.style.display = "block";
+      btn.classList.add("active");
+    } else {
+      single.style.display = "flex";
+      pano.style.display = "none";
+      btn.classList.remove("active");
+    }
+  }
+
+  let isNative = false;
+  function toggleNativeScale() {
+    isNative = !isNative;
+    const card = document.querySelector(".viewport-card");
+    const btn = document.getElementById("toggleNativeBtn");
+    if (isNative) {
+      card.classList.add("native-size");
+      btn.classList.add("active");
+      btn.innerHTML = "&#x2922; Fit Scale";
+    } else {
+      card.classList.remove("native-size");
+      btn.classList.remove("active");
+      btn.innerHTML = "&#x2921; 100% Native (1080&times;1350)";
+    }
+  }
+
+  // Keyboard navigation
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "r" || e.key === "R") replayCurrentSlide();
+  });
+
+  init();
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0E17"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cyan-purple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap');
+    
+    .bg { fill: url(#bg-grad); }
+    .card { fill: #111827; stroke: #1F293D; stroke-width: 2; rx: 16px; }
+    .text-title { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: #FFFFFF; font-size: 80px; text-anchor: middle; }
+    .text-gradient { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: url(#cyan-purple); font-size: 80px; text-anchor: middle; }
+    .text-body { font-family: 'Inter', Arial, sans-serif; font-weight: 400; fill: #94A3B8; font-size: 36px; text-anchor: middle; }
+    .text-brand { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; fill: #00F0FF; font-size: 28px; }
+    .text-meta { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 600; fill: #64748B; font-size: 28px; }
+    .text-swipe { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 600; fill: #00F0FF; font-size: 30px; letter-spacing: 2px; }
+
+    .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+    .a1 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+    .a2 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+    .a3 { animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes scaleUp { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+    @media (prefers-reduced-motion: reduce) { .a { animation: none !important; opacity: 1 !important; transform: none !important; } }
+  </style>
+
+  <rect width="1080" height="1350" class="bg"/>
+
+  <!-- Top Navigation UI -->
+  <g transform="translate(72, 80)">
+    <rect width="260" height="48" rx="24" fill="#00F0FF" fill-opacity="0.1" stroke="#00F0FF" stroke-width="1.5"/>
+    <text x="130" y="33" text-anchor="middle" class="text-brand">IncuBrix // Ops</text>
+  </g>
+  <text x="1008" y="113" text-anchor="end" class="text-meta">04 / 15</text>
+
+  <!-- Title -->
+  <g transform="translate(540, 260)">
+    <g class="a a1">
+      <text x="0" y="0" class="text-title">The Shift To</text>
+      <text x="0" y="95" class="text-gradient">Engine-Driven CreatorOps</text>
+    </g>
+  </g>
+
+  <!-- Paradigm Shift Diagram -->
+  <g transform="translate(140, 480)">
+    <g class="a a3">
+      <rect x="0" y="0" width="800" height="380" class="card"/>
+      <g transform="translate(60, 60)">
+        <!-- Old Way -->
+        <rect x="0" y="0" width="310" height="260" rx="16" fill="#161F33" stroke="#1F293D" stroke-width="2"/>
+        <text x="155" y="45" font-family="'Space Grotesk', sans-serif" font-weight="700" fill="#FF3B00" font-size="24" text-anchor="middle">OLD WAY: MANUAL</text>
+        <text x="155" y="100" font-family="'Inter', sans-serif" font-size="22" fill="#94A3B8" text-anchor="middle">Spreadsheets &amp; DMs</text>
+        <text x="155" y="140" font-family="'Inter', sans-serif" font-size="22" fill="#94A3B8" text-anchor="middle">Manual Bank Wires</text>
+        <text x="155" y="180" font-family="'Inter', sans-serif" font-size="22" fill="#94A3B8" text-anchor="middle">Broken Promo Links</text>
+        <text x="155" y="220" font-family="'Inter', sans-serif" font-size="22" fill="#FF3B00" text-anchor="middle">Zero API Control</text>
+
+        <!-- Arrow -->
+        <path d="M 330 130 L 350 130" stroke="#00F0FF" stroke-width="3"/>
+
+        <!-- New Way -->
+        <rect x="370" y="0" width="310" height="260" rx="16" fill="#161F33" stroke="#00F0FF" stroke-width="2"/>
+        <text x="525" y="45" font-family="'Space Grotesk', sans-serif" font-weight="700" fill="#00F0FF" font-size="24" text-anchor="middle">NEW WAY: API ENGINE</text>
+        <text x="525" y="100" font-family="'Inter', sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">Automated Vetting</text>
+        <text x="525" y="140" font-family="'Inter', sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">Programmatic Payouts</text>
+        <text x="525" y="180" font-family="'Inter', sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">Real-time Attribution</text>
+        <text x="525" y="220" font-family="'Inter', sans-serif" font-size="22" fill="#00F0FF" text-anchor="middle">100% Webhooks</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Body Text -->
+  <g transform="translate(540, 960)">
+    <g class="a a2">
+      <text x="0" y="0" class="text-body">Modern SaaS growth requires programmatic workflows, real-time</text>
+      <text x="0" y="50" class="text-body">attribution tracking, and instant developer APIs.</text>
+    </g>
+  </g>
+
+  <!-- Seamless Seam Line (Enter y=920, Exit y=850) -->
+  <path d="M 0 920 C 300 900, 700 870, 1080 850" fill="none" stroke="#00F0FF" stroke-width="3" opacity="0.6"/>
+
+  <!-- Swipe Cue -->
+  <g transform="translate(540, 1220)">
+    <text x="0" y="0" text-anchor="middle" class="text-swipe">MEET INCUBRIX &#x2192;</text>
+  </g>
+</svg>

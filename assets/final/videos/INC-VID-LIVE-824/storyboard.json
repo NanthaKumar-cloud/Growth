@@ -1,0 +1,182 @@
+{
+  "title": "CreatorOps Studio 2026",
+  "brand": {
+    "name": "CreatorOps",
+    "tagline": "One unified studio for modern creators",
+    "website": "creatorops.in",
+    "handle": "@creatorops"
+  },
+  "voice": {
+    "name": "Kore",
+    "speaking_rate": 1.05,
+    "why": "Energetic and upbeat delivery perfectly matches the fast-paced entrepreneurial tone of modern solo creators."
+  },
+  "world": "A clean, modern minimal creator desk setup with floating vector apps, a glowing central CreatorOps hub orb, and a friendly floating productivity mascot. Progresses from messy fragmentation to organized flow.",
+  "design_system": {
+    "palette": {
+      "bg": "#0D1117",
+      "bg_alt": "#161B22",
+      "primary": "#58A6FF",
+      "secondary": "#3FB950",
+      "accent": "#F85149",
+      "ink": "#F0F6FC",
+      "paper": "#8B949E"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Flat modern vector with subtle neon glow highlights, clean linework, and smooth geometric shapes.",
+    "hero_element": "A glowing cyan and green CreatorOps hub orb that transforms fragmented icons into unified workflows.",
+    "recurring_motifs": [
+      "Floating floating subscription bill cards",
+      "Glowing data connection lines"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 32,
+      "color_key": "primary"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "Why do solo creators burn out paying one hundred dollars every month across four messy tools?",
+      "on_screen_headline": "Stop Tool Burnout",
+      "on_screen_support": "Paying $100/mo across 4 fragmented apps?",
+      "visual_description": "A dark desk vector background in 9:16. Four colorful app icons drift apart, each trailing a small red dollar bill vector. A calendar icon floats center-stage looking stressed.",
+      "key_beats": [
+        {
+          "narration_fragment": "Why do solo creators burn out",
+          "visual_action": "Four scattered app icons pulse with red warning outlines."
+        },
+        {
+          "narration_fragment": "paying one hundred dollars every month across four messy tools?",
+          "visual_action": "Dollar bills fly away from a central wallet icon."
+        }
+      ],
+      "mood": "Stressed, chaotic, attention-grabbing",
+      "background_color_key": "bg",
+      "opens_with": "Clean dark screen with subtle grid lines.",
+      "closes_with": "Four separated app icons hovering on the left and right edges.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "PROBLEM",
+      "narration": "Juggling scattered apps kills your focus, wastes your time, and drains your hard earned cash.",
+      "on_screen_headline": "Fragmented Workflow",
+      "on_screen_support": "Wasting time and money on disconnected software",
+      "visual_description": "The four app icons are tied together by tangled knot vectors in red and yellow. A tired vector avatar head holds its hands to its temples in frustration.",
+      "key_beats": [
+        {
+          "narration_fragment": "Juggling scattered apps kills your focus",
+          "visual_action": "Tangled red lines twist between the floating icons."
+        },
+        {
+          "narration_fragment": "wastes your time, and drains your hard earned cash.",
+          "visual_action": "A coin counter ticks down rapidly into negative red numbers."
+        }
+      ],
+      "mood": "Frustrated, overwhelming",
+      "background_color_key": "bg_alt",
+      "opens_with": "App icons carried over from scene one.",
+      "closes_with": "Tangled lines gathering toward the center of the screen.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 3,
+      "role": "SOLUTION",
+      "narration": "Meet CreatorOps studio, the all in one platform built specifically for twenty twenty six creators.",
+      "on_screen_headline": "CreatorOps Studio",
+      "on_screen_support": "The ultimate all-in-one platform for 2026",
+      "visual_description": "The tangled lines snap and dissolve into a bright blue and green glowing orb (the hero element). The brand name CreatorOps appears in crisp bold white typography.",
+      "key_beats": [
+        {
+          "narration_fragment": "Meet CreatorOps studio",
+          "visual_action": "The glowing cyan hero orb expands from the center, clearing the clutter."
+        },
+        {
+          "narration_fragment": "the all in one platform built specifically for twenty twenty six creators.",
+          "visual_action": "Clean module icons for scheduling, analytics, and finance snap neatly around the orb."
+        }
+      ],
+      "mood": "Relieving, bright, innovative",
+      "background_color_key": "bg",
+      "opens_with": "Tangled lines collapsing into a single point.",
+      "closes_with": "Hero orb pulsing in the center with neat modules orbiting it.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 4,
+      "role": "SENSORY_FEATURES",
+      "narration": "Manage content, automation, client chats, and revenue streams from a single lightning fast dashboard.",
+      "on_screen_headline": "Unified Dashboard",
+      "on_screen_support": "Content, chats, and revenue in one place",
+      "visual_description": "A sleek vector smartphone and desktop mockup interface slides up. Green checkmarks flash smoothly next to streamlined workflow rows.",
+      "key_beats": [
+        {
+          "narration_fragment": "Manage content, automation, client chats",
+          "visual_action": "UI panels slide into place with smooth vector animations."
+        },
+        {
+          "narration_fragment": "and revenue streams from a single lightning fast dashboard.",
+          "visual_action": "A green revenue growth chart shoots upward smoothly."
+        }
+      ],
+      "mood": "Productive, sleek, satisfying",
+      "background_color_key": "bg_alt",
+      "opens_with": "Hero orb expanding to form the dashboard UI frame.",
+      "closes_with": "Fully assembled dashboard screen filling the center frame.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 5,
+      "role": "PROOF",
+      "narration": "Join thousands of solo creators saving hours every week while keeping their subscription costs low.",
+      "on_screen_headline": "Loved by Creators",
+      "on_screen_support": "Saving 10+ hours and $80 every single month",
+      "visual_description": "Three glowing rating cards slide past with five star icons and positive quote snippets. A counter badge highlights ten thousand active users.",
+      "key_beats": [
+        {
+          "narration_fragment": "Join thousands of solo creators saving hours every week",
+          "visual_action": "Rating cards stack up with cheerful green check badges."
+        },
+        {
+          "narration_fragment": "while keeping their subscription costs low.",
+          "visual_action": "A savings meter badge pops up reading eighty dollars saved per month."
+        }
+      ],
+      "mood": "Confident, social proof, trustworthy",
+      "background_color_key": "bg",
+      "opens_with": "Dashboard interface minimizes into a badge in the corner.",
+      "closes_with": "Large highlighted savings badge centered on screen.",
+      "transition_out": "fade"
+    },
+    {
+      "id": 6,
+      "role": "OFFER_CTA",
+      "narration": "Upgrade your workflow today. Visit creatorops dot in and start your free trial now.",
+      "on_screen_headline": "Start Free Trial",
+      "on_screen_support": "creatorops.in | @creatorops",
+      "visual_description": "The glowing hero orb returns front and center, radiating a warm cyan aura. A prominent CTA button pulses invitingly below the brand URL.",
+      "key_beats": [
+        {
+          "narration_fragment": "Upgrade your workflow today.",
+          "visual_action": "The hero orb pulses brightly, casting light across the frame."
+        },
+        {
+          "narration_fragment": "Visit creatorops dot in and start your free trial now.",
+          "visual_action": "The website domain creatorops.in and handle @creatorops light up in neon green."
+        }
+      ],
+      "mood": "Action-oriented, inspiring, triumphant",
+      "background_color_key": "bg",
+      "opens_with": "Hero orb fading back in from the previous scene.",
+      "closes_with": "Final static brand lockup with website and handle.",
+      "transition_out": "fade"
+    }
+  ]
+}

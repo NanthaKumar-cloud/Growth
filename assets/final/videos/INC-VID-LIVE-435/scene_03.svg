@@ -1,0 +1,243 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@500;700&amp;display=swap');
+
+      .a {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation-fill-mode: forwards;
+      }
+
+      .bg-fade { animation: fadeIn 0.6s ease-out 0s forwards; }
+      .brand-fade { animation: fadeIn 0.8s ease-out 0.2s forwards; }
+      
+      .text-in-1 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s forwards; }
+      .text-in-2 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.7s forwards; }
+
+      .orb-expand { animation: scaleUpOvershoot 1.0s cubic-bezier(0.34,1.56,0.64,1) 0.8s forwards, floatIdle 4s ease-in-out 1.8s infinite alternate; }
+      
+      .card-snap-1 { animation: snapInRight 0.8s cubic-bezier(0.34,1.56,0.64,1) 1.2s forwards, floatCard1 4.5s ease-in-out 2.0s infinite alternate; }
+      .card-snap-2 { animation: snapInLeft 0.8s cubic-bezier(0.34,1.56,0.64,1) 1.4s forwards, floatCard2 5s ease-in-out 2.2s infinite alternate; }
+      .card-snap-3 { animation: snapInBottom 0.8s cubic-bezier(0.34,1.56,0.64,1) 1.6s forwards, floatCard3 4.2s ease-in-out 2.4s infinite alternate; }
+
+      .ring-rot-1 { animation: spinSlow 20s linear infinite; }
+      .ring-rot-2 { animation: spinReverse 25s linear infinite; }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes scaleUpOvershoot {
+        from { opacity: 0; transform: scale(0.3); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      @keyframes snapInRight {
+        from { opacity: 0; transform: translate(120px, 0px) scale(0.8); }
+        to { opacity: 1; transform: translate(0px, 0px) scale(1); }
+      }
+
+      @keyframes snapInLeft {
+        from { opacity: 0; transform: translate(-120px, 0px) scale(0.8); }
+        to { opacity: 1; transform: translate(0px, 0px) scale(1); }
+      }
+
+      @keyframes snapInBottom {
+        from { opacity: 0; transform: translate(0px, 120px) scale(0.8); }
+        to { opacity: 1; transform: translate(0px, 0px) scale(1); }
+      }
+
+      @keyframes floatIdle {
+        0% { transform: translateY(0px) rotate(0deg); }
+        100% { transform: translateY(-10px) rotate(0.5deg); }
+      }
+
+      @keyframes floatCard1 {
+        0% { transform: translateY(0px); }
+        100% { transform: translateY(-8px); }
+      }
+
+      @keyframes floatCard2 {
+        0% { transform: translateY(0px); }
+        100% { transform: translateY(8px); }
+      }
+
+      @keyframes floatCard3 {
+        0% { transform: translateY(0px); }
+        100% { transform: translateY(-6px); }
+      }
+
+      @keyframes spinSlow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes spinReverse {
+        from { transform: rotate(360deg); }
+        to { transform: rotate(0deg); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="35" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="card-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#161E2E" />
+      <stop offset="100%" stop-color="#0B0F19" />
+    </linearGradient>
+
+    <linearGradient id="orb-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="40%" stop-color="#7C3AED" />
+      <stop offset="100%" stop-color="#1E1B4B" />
+    </linearGradient>
+
+    <linearGradient id="cyan-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <g class="a bg-fade">
+    <g>
+      <rect width="1080" height="1920" fill="url(#bg-grad)" />
+    </g>
+  </g>
+
+  <!-- Subtle Isometric Grid -->
+  <g class="a bg-fade">
+    <g opacity="0.12">
+      <path d="M 0,300 L 1080,300 M 0,600 L 1080,600 M 0,900 L 1080,900 M 0,1200 L 1080,1200 M 0,1500 L 1080,1500" stroke="#06B6D4" stroke-width="2" />
+      <path d="M 270,0 L 270,1920 M 540,0 L 540,1920 M 810,0 L 810,1920" stroke="#7C3AED" stroke-width="2" />
+      <circle cx="540" cy="880" r="400" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="8 8" />
+    </g>
+  </g>
+
+  <!-- Persistent Brand Mark (Top Left) -->
+  <g transform="translate(72, 100)">
+    <g class="a brand-fade">
+      <circle cx="24" cy="24" r="24" fill="#7C3AED" />
+      <path d="M 16 24 L 22 30 L 34 18" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="64" y="32" fill="#F8FAFC" font-family="'Outfit', Arial, sans-serif" font-weight="700" font-size="28" letter-spacing="1">Studiowave</text>
+    </g>
+  </g>
+  
+  <!-- Ribbon Seam Links -->
+  <rect x="0" y="1228" width="173" height="40" fill="#7C3AED" />
+  <rect x="907" y="1228" width="173" height="40" fill="#7C3AED" />
+  
+  <g class="a brand-fade">
+    <path d="M 0,1248 Q 270,1190 540,1248 T 1080,1248" fill="none" stroke="#7C3AED" stroke-width="40" opacity="0.9" />
+  </g>
+
+  <!-- Headline Text -->
+  <g transform="translate(72, 240)">
+    <g class="a text-in-1">
+      <text x="0" y="0" fill="#F8FAFC" font-family="'Outfit', Arial, sans-serif" font-weight="800" font-size="96" letter-spacing="-1">Enter Studiowave</text>
+    </g>
+  </g>
+
+  <g transform="translate(72, 350)">
+    <g class="a text-in-2">
+      <text x="0" y="0" fill="#06B6D4" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="44">Your entire business in one dashboard.</text>
+    </g>
+  </g>
+
+  <!-- HERO OBJECT: Floating glowing purple studio orb with data rings -->
+  <g transform="translate(540, 850)">
+    <g class="a orb-expand">
+      <!-- Glow background -->
+      <circle cx="0" cy="0" r="220" fill="#7C3AED" opacity="0.25" filter="url(#glow)" />
+      
+      <!-- Interconnected Data Rings -->
+      <g class="ring-rot-1">
+        <ellipse cx="0" cy="0" rx="240" ry="90" fill="none" stroke="#06B6D4" stroke-width="4" opacity="0.8" stroke-dasharray="120 40 40 40" />
+      </g>
+      <g class="ring-rot-2">
+        <ellipse cx="0" cy="0" rx="260" ry="100" fill="none" stroke="#7C3AED" stroke-width="3" opacity="0.6" stroke-dasharray="80 60 120 40" />
+      </g>
+      
+      <!-- Central Core Orb -->
+      <circle cx="0" cy="0" r="130" fill="url(#orb-grad)" filter="url(#card-shadow)" />
+      <circle cx="0" cy="0" r="130" fill="none" stroke="#06B6D4" stroke-width="3" opacity="0.8" />
+      
+      <!-- Internal studio core graphic details -->
+      <circle cx="-40" cy="-30" r="22" fill="#F8FAFC" opacity="0.95" />
+      <circle cx="45" cy="30" r="14" fill="#F59E0B" opacity="0.9" />
+      <rect x="-35" y="20" width="60" height="36" rx="10" fill="#161E2E" stroke="#06B6D4" stroke-width="2" />
+      <path d="M -20 38 L -5 30 L 15 42" fill="none" stroke="#06B6D4" stroke-width="3" stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- MODULAR DASHBOARD CARDS SNAP IN AROUND THE ORB -->
+  <!-- Top-Left Widget: Automation & Stream -->
+  <g transform="translate(80, 520)">
+    <g class="a card-snap-1" filter="url(#card-shadow)">
+      <rect x="0" y="0" width="380" height="150" rx="24" fill="#161E2E" stroke="#06B6D4" stroke-width="2.5" />
+      <circle cx="45" cy="45" r="22" fill="#06B6D4" opacity="0.2" />
+      <path d="M 45 33 L 45 57 M 33 45 L 57 45" stroke="#06B6D4" stroke-width="3.5" stroke-linecap="round" />
+      <text x="85" y="42" fill="#F8FAFC" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="26">CreatorOps Hub</text>
+      <text x="85" y="75" fill="#06B6D4" font-family="'Outfit', Arial, sans-serif" font-weight="700" font-size="22">All workflows active</text>
+      
+      <!-- Mini waveform preview inside card -->
+      <path d="M 35 115 L 75 95 L 115 120 L 155 85 L 195 110 L 235 90 L 340 100" fill="none" stroke="url(#cyan-grad)" stroke-width="3.5" stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- Top-Right Widget: Audience Sync -->
+  <g transform="translate(620, 500)">
+    <g class="a card-snap-2" filter="url(#card-shadow)">
+      <rect x="0" y="0" width="380" height="150" rx="24" fill="#161E2E" stroke="#7C3AED" stroke-width="2.5" />
+      <circle cx="45" cy="45" r="22" fill="#7C3AED" opacity="0.25" />
+      <circle cx="45" cy="40" r="8" fill="#7C3AED" />
+      <path d="M 31 58 C 31 50 37 48 45 48 C 53 48 59 50 59 58" fill="none" stroke="#7C3AED" stroke-width="3" stroke-linecap="round" />
+      <text x="85" y="42" fill="#F8FAFC" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="26">Audience Sync</text>
+      <text x="85" y="75" fill="#7C3AED" font-family="'Outfit', Arial, sans-serif" font-weight="700" font-size="22">1.2M Reach Connected</text>
+      
+      <!-- Avatar stack visual -->
+      <g transform="translate(35, 95)">
+        <circle cx="15" cy="15" r="15" fill="#06B6D4" />
+        <circle cx="40" cy="15" r="15" fill="#7C3AED" />
+        <circle cx="65" cy="15" r="15" fill="#F59E0B" />
+        <circle cx="90" cy="15" r="15" fill="#161E2E" stroke="#F8FAFC" stroke-width="2" />
+        <text x="90" y="22" fill="#F8FAFC" font-family="'Outfit', Arial, sans-serif" font-weight="700" font-size="14" text-anchor="middle">+4</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom-Center Widget: Unified Revenue Control -->
+  <g transform="translate(260, 1020)">
+    <g class="a card-snap-3" filter="url(#card-shadow)">
+      <rect x="0" y="0" width="560" height="140" rx="24" fill="#161E2E" stroke="#F59E0B" stroke-width="2.5" />
+      <circle cx="45" cy="45" r="22" fill="#F59E0B" opacity="0.25" />
+      <path d="M 35 52 L 43 52 L 48 36 L 53 54 L 57 45 L 65 45" fill="none" stroke="#F59E0B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="85" y="42" fill="#F8FAFC" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="26">Revenue Stream Consolidated</text>
+      <text x="85" y="75" fill="#F59E0B" font-family="'Outfit', Arial, sans-serif" font-weight="700" font-size="22">$48,290.00 / mo • Fully Unified</text>
+      
+      <g transform="translate(35, 95)">
+        <rect x="0" y="0" width="490" height="8" rx="4" fill="#0B0F19" />
+        <rect x="0" y="0" width="410" height="8" rx="4" fill="url(#cyan-grad)" />
+      </g>
+    </g>
+  </g>
+
+</svg>

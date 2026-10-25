@@ -1,0 +1,203 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Poppins:wght@700;800&amp;display=swap');
+
+  .a {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-fill-mode: forwards;
+  }
+
+  /* Base Animations */
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes scaleIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes pulseIdle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  @keyframes floatIdle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1.5deg); }
+  }
+
+  @keyframes floatIdleAlt {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-16px) rotate(-2deg); }
+  }
+
+  @keyframes alertFlash {
+    0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+    60% { opacity: 1; transform: scale(1.1) rotate(3deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  /* Specific Animation Classes */
+  .a-bg { animation: fadeUp 0.8s ease-out 0s forwards; }
+  .a-brand { animation: fadeUp 0.6s ease-out 0.1s forwards; }
+  .a-head { animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.5s forwards; }
+  .a-supp { animation: fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.7s forwards; }
+  
+  .a-creator { animation: fadeUp 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.5s forwards, floatIdle 6s ease-in-out 1.4s infinite; }
+  
+  .a-card1 { animation: scaleIn 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.6s forwards, floatIdle 5s ease-in-out 1.3s infinite; }
+  .a-card2 { animation: scaleIn 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.7s forwards, floatIdleAlt 5.5s ease-in-out 1.4s infinite; }
+  .a-card3 { animation: scaleIn 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.8s forwards, floatIdle 4.8s ease-in-out 1.5s infinite; }
+  .a-card4 { animation: scaleIn 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.9s forwards, floatIdleAlt 5.2s ease-in-out 1.6s infinite; }
+
+  .a-stamp { animation: alertFlash 0.7s cubic-bezier(0.34,1.56,0.64,1) 2.2s forwards, pulseIdle 3s ease-in-out 2.9s infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .a { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+</style>
+
+<defs>
+  <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#16192B" />
+    <stop offset="100%" stop-color="#0D0F18" />
+  </linearGradient>
+
+  <linearGradient id="cardGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1E2238" stop-opacity="0.95" />
+    <stop offset="100%" stop-color="#16192B" stop-opacity="0.95" />
+  </linearGradient>
+
+  <linearGradient id="redGlow" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#EF4444" />
+    <stop offset="100%" stop-color="#991B1B" />
+  </linearGradient>
+
+  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="15" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+
+  <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+    <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.5" />
+  </filter>
+
+  <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#EF4444" flood-opacity="0.15" />
+  </filter>
+</defs>
+
+<g class="a a-bg">
+  <rect width="1080" height="1920" fill="url(#bgGrad)" />
+</g>
+
+<g class="a a-bg" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+  <line x1="0" y1="300" x2="1080" y2="300" />
+  <line x1="0" y1="600" x2="1080" y2="600" />
+  <line x1="0" y1="900" x2="1080" y2="900" />
+  <line x1="0" y1="1200" x2="1080" y2="1200" />
+  <line x1="0" y1="1500" x2="1080" y2="1500" />
+  <line x1="270" y1="0" x2="270" y2="1920" />
+  <line x1="540" y1="0" x2="540" y2="1920" />
+  <line x1="810" y1="0" x2="810" y2="1920" />
+</g>
+
+<g transform="translate(72, 100)">
+  <g class="a a-brand">
+    <circle cx="20" cy="20" r="20" fill="#6366F1" />
+    <text x="20" y="27" font-family="'Poppins', Arial, sans-serif" font-weight="800" font-size="22" fill="#FFFFFF" text-anchor="middle">C</text>
+    <text x="56" y="28" font-family="'Poppins', Arial, sans-serif" font-weight="700" font-size="26" fill="#FFFFFF" letter-spacing="0.5">CreatorOps</text>
+  </g>
+</g>
+
+<g transform="translate(540, 950)">
+  <g class="a a-creator" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="180" fill="#6366F1" fill-opacity="0.08" filter="url(#glow)" />
+    <ellipse cx="0" cy="220" rx="280" ry="40" fill="#1E2238" fill-opacity="0.6" />
+    <rect x="-240" y="220" width="480" height="6" rx="3" fill="#6366F1" fill-opacity="0.4" />
+    <path d="M -130 220 C -130 130 -80 100 0 100 C 80 100 130 130 130 220 Z" fill="#16192B" />
+    <path d="M -110 220 C -110 140 -70 120 0 120 C 70 120 110 140 110 220 Z" fill="#1E2238" />
+    <rect x="-22" y="35" width="44" height="75" rx="14" fill="#1E2238" />
+    <circle cx="0" cy="-20" r="65" fill="#1E2238" />
+    <path d="M -60 -20 C -60 -70 60 -70 60 -20" fill="none" stroke="#6366F1" stroke-width="8" stroke-linecap="round" />
+    <circle cx="-62" cy="-15" r="14" fill="#06B6D4" />
+    <circle cx="62" cy="-15" r="14" fill="#06B6D4" />
+    <path d="M -30 -35 L -10 -25" stroke="#A855F7" stroke-width="6" stroke-linecap="round" />
+    <path d="M 30 -35 L 10 -25" stroke="#A855F7" stroke-width="6" stroke-linecap="round" />
+    <path d="M -85 -20 C -110 -20 -115 15 -90 35" fill="none" stroke="#1E2238" stroke-width="16" stroke-linecap="round" />
+    <path d="M 85 -20 C 110 -20 115 15 90 35" fill="none" stroke="#1E2238" stroke-width="16" stroke-linecap="round" />
+    <circle cx="-90" cy="35" r="12" fill="#1E2238" />
+    <circle cx="90" cy="35" r="12" fill="#1E2238" />
+    <rect x="-90" y="160" width="180" height="12" rx="6" fill="#06B6D4" filter="url(#glow)" opacity="0.8" />
+  </g>
+</g>
+
+<g transform="translate(180, 680)">
+  <g class="a a-card1" filter="url(#cardShadow)">
+    <rect x="-110" y="-70" width="220" height="140" rx="20" fill="url(#cardGrad)" stroke="#EF4444" stroke-width="2" />
+    <circle cx="-65" cy="-25" r="22" fill="#EF4444" fill-opacity="0.2" />
+    <path d="M -73 -30 L -57 -30 M -73 -20 L -57 -20 M -65 -38 L -65 -12" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
+    <text x="-35" y="-18" font-family="'Inter', Arial, sans-serif" font-weight="600" font-size="22" fill="#FFFFFF">$49.00</text>
+    <text x="-35" y="12" font-family="'Inter', Arial, sans-serif" font-weight="400" font-size="16" fill="#9CA3AF">Cloud Host</text>
+    <rect x="-85" y="32" width="170" height="6" rx="3" fill="#EF4444" />
+  </g>
+</g>
+
+<g transform="translate(900, 720)">
+  <g class="a a-card2" filter="url(#cardShadow)">
+    <rect x="-110" y="-70" width="220" height="140" rx="20" fill="url(#cardGrad)" stroke="#EF4444" stroke-width="2" />
+    <circle cx="-65" cy="-25" r="22" fill="#EF4444" fill-opacity="0.2" />
+    <path d="M -75 -25 C -75 -33 -55 -33 -55 -25 C -55 -17 -75 -17 -75 -9 C -55 -9 -55 -9 -55 -9" fill="none" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
+    <text x="-35" y="-18" font-family="'Inter', Arial, sans-serif" font-weight="600" font-size="22" fill="#FFFFFF">$129.00</text>
+    <text x="-35" y="12" font-family="'Inter', Arial, sans-serif" font-weight="400" font-size="16" fill="#9CA3AF">Video Suite</text>
+    <rect x="-85" y="32" width="170" height="6" rx="3" fill="#EF4444" />
+  </g>
+</g>
+
+<g transform="translate(220, 1150)">
+  <g class="a a-card3" filter="url(#cardShadow)">
+    <rect x="-110" y="-70" width="220" height="140" rx="20" fill="url(#cardGrad)" stroke="#EF4444" stroke-width="2" />
+    <circle cx="-65" cy="-25" r="22" fill="#EF4444" fill-opacity="0.2" />
+    <path d="M -73 -32 L -57 -18 M -73 -18 L -57 -32" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
+    <text x="-35" y="-18" font-family="'Inter', Arial, sans-serif" font-weight="600" font-size="22" fill="#FFFFFF">$299.00</text>
+    <text x="-35" y="12" font-family="'Inter', Arial, sans-serif" font-weight="400" font-size="16" fill="#9CA3AF">CRM Pro</text>
+    <rect x="-85" y="32" width="170" height="6" rx="3" fill="#EF4444" />
+  </g>
+</g>
+
+<g transform="translate(860, 1180)">
+  <g class="a a-card4" filter="url(#cardShadow)">
+    <rect x="-110" y="-70" width="220" height="140" rx="20" fill="url(#cardGrad)" stroke="#EF4444" stroke-width="2" />
+    <circle cx="-65" cy="-25" r="22" fill="#EF4444" fill-opacity="0.2" />
+    <rect x="-75" y="-35" width="20" height="20" rx="4" fill="none" stroke="#EF4444" stroke-width="4" />
+    <text x="-35" y="-18" font-family="'Inter', Arial, sans-serif" font-weight="600" font-size="22" fill="#FFFFFF">$89.00</text>
+    <text x="-35" y="12" font-family="'Inter', Arial, sans-serif" font-weight="400" font-size="16" fill="#9CA3AF">Automation</text>
+    <rect x="-85" y="32" width="170" height="6" rx="3" fill="#EF4444" />
+  </g>
+</g>
+
+<g transform="translate(540, 280)">
+  <text x="0" y="0" font-family="'Poppins', Arial, sans-serif" font-weight="800" font-size="88" fill="#FFFFFF" text-anchor="middle" class="a a-head" filter="url(#shadow)">The Creator Burnout Trap</text>
+  <text x="0" y="80" font-family="'Inter', Arial, sans-serif" font-weight="600" font-size="44" fill="#A855F7" text-anchor="middle" class="a a-supp">Why do solo creators burn out?</text>
+</g>
+
+<g transform="translate(540, 520)">
+  <g class="a a-stamp" filter="url(#glow)">
+    <rect x="-240" y="-45" width="480" height="90" rx="45" fill="#EF4444" fill-opacity="0.15" stroke="#EF4444" stroke-width="3" />
+    <text x="0" y="13" font-family="'Poppins', Arial, sans-serif" font-weight="800" font-size="46" fill="#EF4444" text-anchor="middle" letter-spacing="4">2026 REALITY CHECK</text>
+  </g>
+</g>
+
+<g class="a a-bg">
+  <g opacity="0.95">
+    <path d="M 0 1248 C 200 1200, 400 1300, 540 1248 C 680 1196, 880 1296, 1080 1248" fill="none" stroke="#06B6D4" stroke-width="32" stroke-linecap="round" filter="url(#glow)" />
+  </g>
+</g>
+
+<rect x="907" y="1232" width="173" height="32" fill="#06B6D4" />
+
+</svg>
