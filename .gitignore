@@ -61,3 +61,7 @@ library_youtube_btns.png
 schedule_modal.png
 video_studio_page.png
 video_studio_youtube_btn.png
+
+# Generated runtime batch media
+assets/final/*-GEN-*
+assets/final/*/*-GEN-*

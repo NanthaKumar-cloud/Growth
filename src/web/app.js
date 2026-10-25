@@ -1430,11 +1430,11 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
                           />
                           <div className="absolute top-2 right-2 bg-black/75 backdrop-blur text-white px-2 py-0.5 rounded text-[9px] font-mono flex items-center gap-1 border border-white/10 pointer-events-none">
                             <Icon name="volume-2" className="w-3 h-3 text-cyan-400" />
-                            <span>12s MP4</span>
+                            <span>{asset.tools_used && asset.tools_used.includes('Chirp') ? 'Chirp 3 HD' : '9:16 MP4'}</span>
                           </div>
                         </div>
                         <div className="flex items-center justify-between text-[11px] px-1 text-slate-500">
-                          <span className="font-mono">1080x1920 &bull; Synthwave Audio</span>
+                          <span className="font-mono">{asset.tools_used && asset.tools_used.includes('Chirp') ? '1080x1920 • GCP Chirp 3 HD Voice' : '1080x1920 • Multi-Scene Ad Video'}</span>
                           <a 
                             href={asset.stream_url || `/media/videos/${aid}.mp4`} 
                             download={`${aid}.mp4`}

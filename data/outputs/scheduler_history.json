@@ -800,5 +800,87 @@
       "asset_id": "INC-VID-010",
       "scheduled_date": "2026-10-25T15:00:00"
     }
+  },
+  {
+    "timestamp": "2026-10-25T08:45:49.800477",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "TEST-STUDIO-API-PST",
+      "error": "('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))"
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:47:50.210759",
+    "event_type": "PUBLISH_ERROR",
+    "details": {
+      "asset_id": "TEST-STUDIO-CAR-01",
+      "error": "('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))"
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:47:53.441487",
+    "event_type": "AUTO_PUBLISH",
+    "details": {
+      "asset_id": "TEST-STUDIO-VID-01",
+      "platform": "YouTube Shorts",
+      "url": "https://youtube.com/shorts/1ttSBY9HyB4",
+      "status": "SUCCESS"
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:58:47.311045",
+    "event_type": "AUDIT_TEST_EVENT",
+    "details": {
+      "asset_id": "INC-VID-010",
+      "scheduled_date": "2026-10-25T15:00:00"
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:58:58.213761",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792918738-1",
+        "AUTO-CAR-1792918738-2",
+        "AUTO-IMG-1792918738-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:58:58.761570",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792918738-1",
+        "AUTO-CAR-1792918738-2",
+        "AUTO-IMG-1792918738-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:59:52.280989",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792918792-1",
+        "AUTO-CAR-1792918792-2",
+        "AUTO-IMG-1792918792-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:59:52.821775",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792918792-1",
+        "AUTO-CAR-1792918792-2",
+        "AUTO-IMG-1792918792-3"
+      ]
+    }
   }
 ]

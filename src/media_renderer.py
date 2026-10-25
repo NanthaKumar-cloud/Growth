@@ -868,10 +868,11 @@ class MediaRenderer:
                 draw.rounded_rectangle([margin, center_y, margin + center_w, center_y + center_h], radius=32, fill=(15, 23, 42, 225), outline=(239, 68, 68), width=3)
                 
                 draw.rounded_rectangle([margin + 30, center_y + 40, width - margin - 30, center_y + 120], radius=20, fill=(15, 23, 42), outline=(239, 68, 68), width=2)
-                draw.text((margin + 60, center_y + 58), "[!]  THE 14-HOUR CREATOR BOTTLENECK", font=font_card_title, fill=(239, 68, 68))
+                scene1_title = f"[!] {hook[:32].upper()}" if hook else "[!] KEY CHALLENGE & TAKEAWAY"
+                draw.text((margin + 60, center_y + 58), scene1_title, font=font_card_title, fill=(239, 68, 68))
 
                 dia_y = center_y + 160
-                draw.text((margin + 50, dia_y), "WHAT CREATORS ARE JUGGLING:", font=font_card_title, fill=theme["cyan"])
+                draw.text((margin + 50, dia_y), "WHAT YOU NEED TO KNOW:", font=font_card_title, fill=theme["cyan"])
                 dia_lines = self._wrap_text(str(caption), max_chars=32)
                 cur_y = dia_y + 60
                 for dl in dia_lines[:7]:
@@ -880,25 +881,26 @@ class MediaRenderer:
 
                 draw.rounded_rectangle([margin + 50, center_y + center_h - 110, width - margin - 50, center_y + center_h - 40], radius=20, fill=(15, 23, 42), outline=theme["accent"], width=2)
                 self._draw_diamond(draw, margin + 75, center_y + center_h - 75, 7, theme["cyan"])
-                draw.text((margin + 95, center_y + center_h - 88), "WATCH THE REPURPOSING SPEEDRUN", font=font_card_title, fill=theme["cyan"])
+                draw.text((margin + 95, center_y + center_h - 88), "EXPLORE THE BREAKDOWN", font=font_card_title, fill=theme["cyan"])
                 self._draw_arrow(draw, width - margin - 90, center_y + center_h - 83, 20, 16, theme["cyan"], width=2)
 
             elif scene_idx == 2:
-                # --- SCENE 2: THE PRODUCT WORKFLOW & BROWSER MOCKUP ---
-                self._draw_browser_mockup(draw, margin, center_y, center_w, center_h, "app.incubrix.com/editor", theme)
+                # --- SCENE 2: THE PRODUCT WORKFLOW & ACTIONABLE STRATEGY ---
+                self._draw_browser_mockup(draw, margin, center_y, center_w, center_h, "app.incubrix.com/engine", theme)
                 
                 inside_y = center_y + 90
                 draw.rounded_rectangle([margin + 30, inside_y, width - margin - 30, inside_y + 90], radius=20, fill=(15, 23, 42), outline=theme["accent"], width=2)
                 self._draw_diamond(draw, margin + 60, inside_y + 45, 8, theme["cyan"])
-                draw.text((margin + 80, inside_y + 30), "PROMPT VIDEO EDITOR & VOICE HUB", font=font_card_title, fill=theme["cyan"])
+                draw.text((margin + 80, inside_y + 30), "CORE MECHANISM & EXECUTION", font=font_card_title, fill=theme["cyan"])
 
                 self._draw_audio_waveform(draw, margin + 40, inside_y + 120, center_w - 80, 110, theme, bars_count=24)
 
                 step_y = inside_y + 260
+                cap_words = str(caption).split(". ")
                 steps = [
-                    "1. Ingest raw 15-min podcast or transcript",
-                    "2. Prompt editor auto-cuts pauses & trims",
-                    "3. 1-to-10 multi-platform clips extracted"
+                    f"1. {cap_words[0][:40]}" if len(cap_words) > 0 and cap_words[0] else "1. Ingest core topic & strategic pillars",
+                    f"2. {cap_words[1][:40]}" if len(cap_words) > 1 and cap_words[1] else "2. Extract tailored social narratives",
+                    f"3. {cap_words[2][:40]}" if len(cap_words) > 2 and cap_words[2] else "3. Deploy to YouTube, IG & Facebook"
                 ]
                 for s in steps:
                     draw.rounded_rectangle([margin + 40, step_y, width - margin - 40, step_y + 65], radius=16, fill=(15, 23, 42), outline=(71, 85, 105), width=2)
@@ -910,18 +912,20 @@ class MediaRenderer:
                 draw.rounded_rectangle([margin, center_y, margin + center_w, center_y + center_h], radius=32, fill=(15, 23, 42, 225), outline=theme["cyan"], width=3)
                 
                 draw.rounded_rectangle([margin + 40, center_y + 40, width - margin - 40, center_y + 190], radius=24, fill=(15, 23, 42), outline=theme["accent"], width=3)
-                font_stat = get_font(64, bold=True)
-                draw.text((margin + 70, center_y + 55), "85% TIME SAVED", font=font_stat, fill=theme["accent"])
-                draw.text((margin + 70, center_y + 135), "Weekly production dropped from 14h to 2h", font=font_pill, fill=(203, 213, 225))
+                font_stat = get_font(52, bold=True)
+                draw.text((margin + 70, center_y + 55), hook[:30].upper() if hook else "KEY TAKEAWAY", font=font_stat, fill=theme["accent"])
+                draw.text((margin + 70, center_y + 135), caption[:50] if caption else "Engineered for maximum audience engagement", font=font_pill, fill=(203, 213, 225))
 
                 draw.rounded_rectangle([margin + 40, center_y + 220, width - margin - 40, center_y + 370], radius=24, fill=(15, 23, 42), outline=theme["cyan"], width=3)
-                draw.text((margin + 70, center_y + 235), "+312% REACH SPIKE", font=font_stat, fill=theme["cyan"])
+                draw.text((margin + 70, center_y + 235), "AI CREATION PIPELINE", font=font_stat, fill=theme["cyan"])
                 draw.text((margin + 70, center_y + 315), "Compounding distribution across Shorts & Reels", font=font_pill, fill=(203, 213, 225))
 
                 cta_y = center_y + 420
                 draw.rounded_rectangle([margin + 40, cta_y, width - margin - 40, cta_y + 100], radius=24, fill=theme["accent"], outline=(255, 255, 255), width=3)
                 self._draw_arrow(draw, margin + 70, cta_y + 40, 26, 20, (255, 255, 255), width=3)
-                draw.text((margin + 115, cta_y + 30), "CLAIM YOUR STUDIO AT INCUBRIX.COM", font=font_cta, fill=(255, 255, 255))
+                draw.text((margin + 115, cta_y + 30), "TEST THE ENGINE AT INCUBRIX.COM", font=font_cta, fill=(255, 255, 255))
+
+                draw.text((margin + 80, cta_y + 130), "YouTube Shorts  //  Instagram Reels  //  Facebook Pages", font=font_pill, fill=(148, 163, 184))
 
                 draw.text((margin + 80, cta_y + 130), "YouTube Shorts  //  Instagram Reels  //  Facebook Pages", font=font_pill, fill=(148, 163, 184))
 
