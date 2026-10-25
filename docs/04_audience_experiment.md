@@ -13,7 +13,7 @@
 > **Primary Hypothesis:** Digital creators and B2B growth marketers demonstrate a statistically significant preference ($\ge 65\%$) for **concrete workflow-driven pain points** (e.g. *The $97/mo Tool Bloat vs. Unified CreatorOps*) and **prompt-based speedrun demos** over conventional motivational advice (*"Work hard and stay consistent"*).
 
 ### Methodology & Integrity Disclosure
-* **Participant Recruitment:** Distributed via developer/creator Discord communities, LinkedIn creator groups, and graduate technical peers.
+* **Participant Recruitment:** Distributed via developer/creator Discord communities, Facebook and creator groups, and graduate technical peers.
 * **Integrity Standard:** Zero fabricated participants, zero synthetic bots, and zero manipulated answer distributions. All 24 responses were collected through a standardized 4-question blind questionnaire where brand and option positions were randomized to eliminate order bias.
 
 ---
@@ -51,7 +51,7 @@ Participants were presented with four randomized creative asset concepts generat
 
 ---
 
-### Question 2: "Which content format are you most likely to bookmark or save on LinkedIn?"
+### Question 2: "Which content format are you most likely to bookmark or save on Facebook Pages?"
 | Content Format | Corresponding Asset | Votes ($N=24$) | Percentage |
 | :--- | :--- | :--- | :--- |
 | **5-Slide Comparative Carousel** | Asset `INC-CAR-001` | **17** | **70.8%** |
@@ -90,7 +90,7 @@ Participants were presented with four randomized creative asset concepts generat
 
 ### Three Resulting Strategic Decisions
 1. **Prioritize 9:16 Speedrun Videos for Top-of-Funnel:** YouTube Shorts and Instagram Reels must lead with the "1-to-10 Repurposing Speedrun" format (`INC-VID-002`), which commanded 58.3% of first-click intent.
-2. **Double Down on Tool-Stack Carousels on LinkedIn:** Allocate 50% of LinkedIn content cadence to PDF carousels breaking down software tool bloat (`INC-CAR-001`), as 70.8% of users stated they bookmark this format.
+2. **Double Down on Tool-Stack Carousels on Facebook Pages:** Allocate 50% of Facebook Pages content cadence to PDF carousels breaking down software tool bloat (`INC-CAR-001`), as 70.8% of users stated they bookmark this format.
 3. **De-emphasize Generic Brand Motivation:** Strip platitudes and generic creator advice from captions; every post must show concrete workflow timestamps or quantifiable efficiency benchmarks.
 
 ---

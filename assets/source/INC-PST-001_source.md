@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-PST-001
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Graphic
 - **Pillar:** CreatorOps & Tool Consolidation
 - **Target Metric:** Impressions (>= 2k)
@@ -22,4 +22,4 @@ Stop managing subscriptions. Start managing growth.
 See how CreatorOps automates your workflow at incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-001&utm_term=creatorops_and_tool_consolidation
+https://incubrix.com/?utm_source=facebook&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-001&utm_term=creatorops_and_tool_consolidation

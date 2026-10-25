@@ -40,8 +40,8 @@
   * `/editor/:sessionId`: Interactive multi-modal project editor.
   * `/thought-inbox`: Quick-capture buffer for unrefined ideas and voice memos.
 * **Supporting Evidence:** Route registry and router definitions in `bootstrap-BalIdyWz.js`.
-* **Marketing Implication:** IncuBrix can satisfy diverse creator archetypes (text-first writers on LinkedIn, video-first creators on YouTube, audio-first podcasters on Spotify).
-* **Potential Growth Opportunity:** Segment-specific onboarding campaigns (e.g., "From Shower Thought to LinkedIn Post in 90 Seconds via Thought-Inbox").
+* **Marketing Implication:** IncuBrix can satisfy diverse creator archetypes (text-first writers on Facebook Pages, video-first creators on YouTube, audio-first podcasters on Spotify).
+* **Potential Growth Opportunity:** Segment-specific onboarding campaigns (e.g., "From Shower Thought to Facebook Pages post in 90 Seconds via Thought-Inbox").
 * **Limitations or Uncertainties:** Initial client bundle size (6.34 MB) requires optimization (code-splitting / lazy-loading) to prevent bounce rates on mobile web connections.
 
 ---
@@ -52,11 +52,11 @@
 * **Action Performed:** Audited publishing handlers, OAuth callback structures, and destination components in the frontend bundle.
 * **Expected Result:** Basic webhook exporter or manual copy-paste modal.
 * **Actual Result:** Native integration architecture for three primary platforms:
-  * `/publishing/linkedin`: Direct API publication for articles, carousels, and status updates.
+  * `/publishing/facebook`: Direct API publication for articles, carousels, and status updates.
   * `/publishing/instagram`: Reels and carousel scheduling endpoints.
   * `/publishing/youtube`: Shorts and long-form video dispatch.
   * `/connections`: OAuth account connection management interface.
-* **Supporting Evidence:** Identified routes `/publishing/linkedin`, `/publishing/instagram`, `/publishing/youtube`, and `/connections` in `bootstrap-BalIdyWz.js`.
+* **Supporting Evidence:** Identified routes `/publishing/facebook`, `/publishing/instagram`, `/publishing/youtube`, and `/connections` in `bootstrap-BalIdyWz.js`.
 * **Marketing Implication:** Exactly aligns with our assessment's tier-1 platform focus (LinkedIn, Instagram, YouTube Shorts).
 * **Potential Growth Opportunity:** Create "Publish Once, Dominate Everywhere" product demos showcasing real-time synchronized publishing across all three networks.
 * **Limitations or Uncertainties:** Direct API scheduling features require active third-party platform API tokens and developer verification, which may experience periodic platform-side API changes.
@@ -98,5 +98,5 @@
 | :--- | :--- | :--- | :--- |
 | **Ideation** | `/thought-inbox` enables rapid voice/text thought capture. | Unclear how thoughts automatically map to scheduled calendar slots. | Build educational short videos demonstrating "Thought to Published Post in 60s". |
 | **Creation** | 4 specialized pipelines (`text`, `audio`, `video`, `clips`). | High initial interface complexity for first-time users. | Promote single-click "Repurpose Recipe" templates to reduce cognitive load. |
-| **Publishing** | Native endpoints for LinkedIn, Instagram, and YouTube. | Creator reluctance to connect personal social accounts without seeing value. | Offer a "Sandbox Export" (download ready-to-post CSV + assets) before forcing OAuth login. |
+| **Publishing** | Native endpoints for YouTube Shorts, Facebook Pages, and Instagram. | Creator reluctance to connect personal social accounts without seeing value. | Offer a "Sandbox Export" (download ready-to-post CSV + assets) before forcing OAuth login. |
 | **Monetization** | Credit-based model with Free tier and Scaling plans. | Credit consumption rates per video/audio generation are not visibly benchmarked upfront. | Implement an interactive "ROI & Credit Calculator" on the marketing site. |

@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-CAR-001
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Carousel
 - **Pillar:** CreatorOps & Tool Consolidation
 - **Target Metric:** Saves & Bookmarks (>= 5%)
@@ -16,4 +16,4 @@ Are you paying for 4 separate apps just to produce 1 video? Descript ($24) + Opu
 Swipe through and click link to consolidate your stack at incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-001&utm_term=creatorops_and_tool_consolidation
+https://incubrix.com/?utm_source=facebook&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-001&utm_term=creatorops_and_tool_consolidation

@@ -15,7 +15,14 @@ class ContentValidator:
         "get 100k followers in 7 days",
     ]
 
-    ALLOWED_PLATFORMS = ["linkedin", "youtube", "instagram", "tiktok", "x"]
+    ALLOWED_PLATFORMS = [
+        "youtube",
+        "youtube shorts",
+        "youtube video",
+        "facebook",
+        "facebook pages",
+        "instagram",
+    ]
     ALLOWED_FORMATS = ["short_video", "carousel", "text_post", "graphic"]
 
     def __init__(self, ground_truth_text: str = ""):

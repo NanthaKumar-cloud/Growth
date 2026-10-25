@@ -2,7 +2,7 @@
 
 **Launch Date:** Next Monday (Week 1 Day 1)  
 **Lead Owner:** Senior Growth Engineer  
-**Operational Objective:** Execute a disciplined 30-day omnichannel growth sprint across LinkedIn, YouTube Shorts, and Instagram to acquire 250+ verified trial sign-ups and establish IncuBrix as the premier CreatorOps platform.
+**Operational Objective:** Execute a disciplined 30-day omnichannel growth sprint across YouTube Shorts, Facebook Pages, and Instagram to acquire 250+ verified trial sign-ups and establish IncuBrix as the premier CreatorOps platform.
 
 ---
 
@@ -44,21 +44,21 @@ flowchart TD
 ```
 
 ### Week 1: Foundation, Connections & Initial Dispatch
-* **Monday (Day 1):** Connect social channels (`/connections`) on LinkedIn, Instagram, and YouTube. Verify OAuth tokens.
+* **Monday (Day 1):** Connect social channels (`/connections`) on YouTube Shorts, Facebook Pages, and Instagram. Verify OAuth tokens.
 * **Tuesday (Day 2):** Ingest 2 core founder teardowns into `python src/main.py`. Export calendar CSV for the week.
-* **Wednesday (Day 3):** Publish `INC-VID-001` (YouTube Shorts) and `INC-CAR-001` (LinkedIn). Monitor early retention.
-* **Thursday (Day 4):** Publish `INC-PST-001` (LinkedIn) and `INC-VID-003` (Instagram Reels).
+* **Wednesday (Day 3):** Publish `INC-VID-001` (YouTube Shorts) and `INC-CAR-001` (Facebook Pages). Monitor early retention.
+* **Thursday (Day 4):** Publish `INC-PST-001` (Facebook Pages) and `INC-VID-003` (Instagram Reels).
 * **Friday (Day 5):** Conduct weekly UTM tracking validation. Review Google Analytics 4 attribution.
 
 ### Week 2: The "1-to-10 Repurposing Speedrun" Blitz
 * **Goal:** Maximize top-of-funnel viral reach via short-form speedrun screen recordings.
-* **Publishing Cadence:** 3 YouTube Shorts (`INC-VID-002`, `INC-VID-004`, `INC-VID-006`), 2 Instagram Reels (`INC-VID-005`, `INC-VID-007`), and 2 LinkedIn carousels (`INC-CAR-002`, `INC-CAR-003`).
+* **Publishing Cadence:** 3 YouTube Shorts (`INC-VID-002`, `INC-VID-004`, `INC-VID-006`), 2 Instagram Reels (`INC-VID-005`, `INC-VID-007`), and 2 Facebook Pages carousels (`INC-CAR-002`, `INC-CAR-003`).
 * **Milestone:** Achieve 10k cumulative views across video feeds; maintain $\ge 40\%$ retention at 30 seconds.
 
 ### Week 3: The "All-in-One CreatorOps vs. Tool Bloat" B2B Push
 * **Goal:** Drive direct high-intent trial conversions among growth marketers and boutique agencies.
-* **Publishing Cadence:** 3 LinkedIn carousels (`INC-CAR-004`, `INC-CAR-005`, `INC-CAR-007`), 4 thought leadership posts (`INC-PST-002`, `INC-PST-004`, `INC-PST-007`, `INC-PST-009`).
-* **Milestone:** Generate 100+ tracked UTM clicks to `app.incubrix.com/create`; engage in 30+ qualified LinkedIn comment discussions.
+* **Publishing Cadence:** 3 Facebook Pages carousels (`INC-CAR-004`, `INC-CAR-005`, `INC-CAR-007`), 4 thought leadership posts (`INC-PST-002`, `INC-PST-004`, `INC-PST-007`, `INC-PST-009`).
+* **Milestone:** Generate 100+ tracked UTM clicks to `app.incubrix.com/create`; engage in 30+ qualified Facebook Page comment discussions.
 
 ### Week 4: Algorithm Playbooks, Funnel Optimization & Retargeting
 * **Goal:** Leverage the Creator Growth Score to publish data-driven benchmark reports.
@@ -89,7 +89,7 @@ flowchart TD
 
 ## 6. Thirty-Day Numerical Success Targets
 
-* **Cumulative Social Reach:** $\ge 150,000$ verified impressions across LinkedIn, Shorts, and Instagram.
+* **Cumulative Social Reach:** $\ge 150,000$ verified impressions across YouTube Shorts, Facebook Pages, and Instagram.
 * **Short-Form Video Retention:** Average View-Through Rate $\ge 42\%$ at 30 seconds.
 * **Tracked UTM Referral Traffic:** $\ge 250$ verified clicks directly to `incubrix.com`.
 * **Platform Free-Trial Sign-ups:** $\ge 45$ newly registered creators in `app.incubrix.com`.

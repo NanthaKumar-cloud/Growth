@@ -399,7 +399,7 @@ class MediaRenderer:
         raw_bullets = [b.lstrip("-•*✓ ").strip() for b in str(body_text).split("\n") if b.strip()]
         clean_bullets = [b for b in raw_bullets if len(b) > 8][:3]
         if not clean_bullets:
-            clean_bullets = ["Unified CreatorOps studio with zero context switching.", "85% reduction in weekly video production time.", "Direct automated publishing across Shorts, Reels & LinkedIn."]
+            clean_bullets = ["Unified CreatorOps studio with zero context switching.", "85% reduction in weekly video production time.", "Direct automated publishing across Shorts, Reels & Facebook Pages."]
 
         line_y = card_y + 20
         for b in clean_bullets:
@@ -618,7 +618,7 @@ class MediaRenderer:
                 "Audit your monthly creator subscriptions (stop tool bloat)",
                 "Capture voice ideas into IncuBrix Thought Inbox",
                 "Edit video transcripts with 1-click prompt directives",
-                "Syndicate across LinkedIn, Shorts & Reels from 1 screen"
+                "Syndicate across Facebook, Shorts & Reels from 1 screen"
             ]
             for item in checklist:
                 draw.rounded_rectangle([margin + 30, check_y, width - margin - 30, check_y + 60], radius=14, fill=(15, 23, 42))
@@ -653,7 +653,7 @@ class MediaRenderer:
           - N self-contained animated SVGs with CSS motion & 1080px seamless swipe continuity
           - Interactive HTML preview player (preview.html)
           - Live animated MP4 video clips per slide
-          - Resting-state high-res PNGs and multi-page LinkedIn PDF
+          - Resting-state high-res PNGs and multi-page document PDF
         Falls back to PIL rasterizer if API is offline.
         """
         carousel_folder = self.final_carousels_dir / asset_id
@@ -708,7 +708,7 @@ class MediaRenderer:
             rendered_paths.append(subfolder_path)
             pil_images.append(img.convert("RGB"))
 
-        # Compile multi-page LinkedIn PDF
+        # Compile multi-page document PDF
         pdf_path = self.final_carousels_dir / f"{asset_id}.pdf"
         if pil_images:
             pil_images[0].save(pdf_path, "PDF", save_all=True, append_images=pil_images[1:])
@@ -904,7 +904,7 @@ class MediaRenderer:
                 self._draw_arrow(draw, margin + 70, cta_y + 40, 26, 20, (255, 255, 255), width=3)
                 draw.text((margin + 115, cta_y + 30), "CLAIM YOUR STUDIO AT INCUBRIX.COM", font=font_cta, fill=(255, 255, 255))
 
-                draw.text((margin + 80, cta_y + 130), "YouTube Shorts  //  Instagram Reels  //  LinkedIn", font=font_pill, fill=(148, 163, 184))
+                draw.text((margin + 80, cta_y + 130), "YouTube Shorts  //  Instagram Reels  //  Facebook Pages", font=font_pill, fill=(148, 163, 184))
 
             # 4. Animated Scene Progress Bar at Bottom
             progress_y = height - 140

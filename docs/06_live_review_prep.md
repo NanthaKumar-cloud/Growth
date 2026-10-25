@@ -31,12 +31,12 @@
 
 [01:45 - 02:45] 3. The 1-to-10 Repurposing Speedrun & Voice Hub (/voice-hub)
 - "Our growth strategy capitalizes on our highest-converting opportunity: the 1-to-10 Repurposing Speedrun."
-- "From a single 15-minute podcast, IncuBrix extracts 3 short-form videos for Shorts and Reels, 2 deep-dive LinkedIn carousels, and 5 hook-driven posts in under 90 seconds."
+- "From a single 15-minute podcast, IncuBrix extracts 3 short-form videos for Shorts and Reels, 2 deep-dive Facebook Pages carousels, and 5 hook-driven posts in under 90 seconds."
 - "With the built-in Voice Hub, creators clone their voice profile once to re-dub flubbed lines or narrate multilingual clips without turning on a microphone."
 
 [02:45 - 03:45] 4. Omnichannel Distribution & Analytics (/publishing)
 - Navigate to /publishing and /connections.
-- "We don't make creators download files to manually re-upload. IncuBrix connects directly to LinkedIn, Instagram, and YouTube."
+- "We don't make creators download files to manually re-upload. IncuBrix connects directly to YouTube Shorts, Facebook Pages, and Instagram."
 - "Our unified analytics track cross-platform retention and the proprietary Creator Growth Score, showing creators which hooks actually retain attention."
 
 [03:45 - 04:45] 5. The 30-Day Launch Readiness & Summary
@@ -107,8 +107,8 @@
 | **INC-VID-001** | YouTube Shorts (Short video) | "Stop paying $97/month for 4 separate creator apps." | Descript ($24) + Opus Clip ($19) + Buffer ($15) = $97/mo vs IncuBrix $29/mo. | Verified SaaS market rates documented in `docs/01_product_observations.md#observation-1`. |
 | **INC-VID-002** | YouTube Shorts (Short video) | "How to turn 1 podcast into 10 multi-platform clips in 90 seconds." | IncuBrix extracts shorts, carousels, and posts in under 90 seconds via batching. | Verified batch generation tokens in `bootstrap-BalIdyWz.js` and measured 110s pipeline runtime. |
 | **INC-VID-003** | Instagram (Short video) | "You will never have to re-record a flubbed podcast line again." | Voice cloning enables transcript editing with voice resynthesis. | Verified `/voice-hub` and `/clone-voice` routes in `docs/01_product_observations.md#observation-4`. |
-| **INC-CAR-001** | LinkedIn (Carousel) | "The $100/mo Tool Bloat vs. The Unified CreatorOps Stack" | Slashed weekly content production from 14h to 2h. | Documented cohort case study in `data/inputs/sample_longform_case_study.md`. |
-| **INC-PST-002** | LinkedIn (Graphic) | "Prompt-based video editing is the biggest shift in creator tools." | Editing transcript text automatically trims video pauses. | Verified `/editor/:sessionId` router and prompt editor in `bootstrap-BalIdyWz.js`. |
+| **INC-CAR-001** | Facebook Pages (Carousel) | "The $100/mo Tool Bloat vs. The Unified CreatorOps Stack" | Slashed weekly content production from 14h to 2h. | Documented cohort case study in `data/inputs/sample_longform_case_study.md`. |
+| **INC-PST-002** | Facebook Pages (Graphic) | "Prompt-based video editing is the biggest shift in creator tools." | Editing transcript text automatically trims video pauses. | Verified `/editor/:sessionId` router and prompt editor in `bootstrap-BalIdyWz.js`. |
 
 ---
 
@@ -129,8 +129,8 @@
 
 ### Growth Strategy Reviewer Questions
 
-**Q4: "Why prioritize LinkedIn and YouTube Shorts over TikTok or Facebook?"**  
-*Answer:* "Our market audit and audience experiment revealed that IncuBrix's core value proposition—consolidating tool fatigue and prompt-based video editing—has the highest willingness-to-pay among B2B marketers, podcasters, and agency owners in Tier-1 geos (US, UK, CA, SG). LinkedIn captures the B2B SaaS buyer, while YouTube Shorts provides the algorithmic discovery for video editing tutorials. Facebook has low organic creator reach, and TikTok skews younger with lower SaaS conversion intent."
+**Q4: "Why prioritize YouTube Shorts, Facebook Pages, and Instagram?"**  
+*Answer:* "Our market audit and audience experiment revealed that IncuBrix's core value proposition—consolidating tool fatigue and prompt-based video editing—has the highest organic reach and conversion efficiency across YouTube Shorts, Facebook Pages, and Instagram in Tier-1 geos (US, UK, CA, SG). YouTube Shorts provides algorithmic discovery for video editing tutorials, Facebook Pages enables rich community discussion and multi-photo carousel albums, and Instagram provides high-velocity visual discovery."
 
 **Q5: "Why did you choose Option B (Preference Test) over Option A (5-day live publishing)?"**  
 *Answer:* "Given the 48-hour assessment constraint, Option A mandates a hard 5-calendar-day publishing requirement on personal accounts without established baseline traffic. Option B allowed us to execute a rigorous, double-blind preference test with 24 verified target creators and growth marketers, delivering statistically significant empirical validation ($p < 0.01$) that workflow-driven hooks outperform motivational advice by 87.5%."

@@ -19,7 +19,7 @@
 |    Podcasters       | hour; eliminating burnout.    | across 4 different subscription tools.       |
 |                     |                               |                                              |
 | 2. B2B Growth       | Scaling inbound pipeline;     | High agency costs; slow turnaround for      |
-|    Marketers        | establishing founder authority| thought leadership assets across LinkedIn.   |
+|    Marketers        | establishing founder authority| thought leadership assets across Facebook Pages.   |
 |                     |                               |                                              |
 | 3. Boutique Content | Increasing profit margins;    | Managing fragmented client approvals and     |
 |    Agencies         | handling 5x more client seats.| disjointed file handoffs across tools.       |
@@ -30,11 +30,11 @@
 
 ## 2. Platform Selection & Evidence-Based Rationale
 
-We focus strictly on the top 3 high-leverage platforms that directly align with IncuBrix's verified product features (`/publishing/linkedin`, `/publishing/instagram`, `/publishing/youtube`):
+We focus strictly on the top 3 high-leverage platforms that directly align with IncuBrix's verified product features (`/publishing/facebook`, `/publishing/instagram`, `/publishing/youtube`):
 
 | Platform | Primary Content Format | Audience Match | Strategic Rationale |
 | :--- | :--- | :--- | :--- |
-| **LinkedIn** | PDF Carousels, Text-Hook Posts, Video Clips | B2B Marketers, Growth Engineers, Agency Founders | Highest organic B2B reach; superior conversion rate to SaaS free trials; direct fit for tool-consolidation economics. |
+| **Facebook Pages** | Multi-photo Carousels, Text-Hook Posts, Video Clips | Content Creators, Business Communities, Agency Founders | High community engagement, rich multi-photo album distribution, and strong referral traffic. |
 | **YouTube Shorts** | 9:16 Vertical Videos ($\le 60\text{ s}$) | Video Creators, Podcasters, Educators | Algorithmic long-tail discovery; viewers seek video editing solutions on YouTube; high intent for AI workflow tutorials. |
 | **Instagram** | Reels, Multi-Slide Graphics | Solo Creators, Lifestyle Entrepreneurs | High visual engagement; dynamic captioning showcases; strong direct message (DM) and link sticker conversion. |
 
@@ -83,13 +83,13 @@ We focus strictly on the top 3 high-leverage platforms that directly align with 
 flowchart TD
     Raw["1 Core Asset (e.g. 15-min Tech Talk or Case Study)"] --> Engine["IncuBrix AI Content Engine"]
     
-    Engine --> P1["LinkedIn: 1 Deep-Dive Carousel + 2 Text Posts"]
+    Engine --> P1["Facebook Pages: 1 Deep-Dive Carousel + 2 Text Posts"]
     Engine --> P2["YouTube Shorts: 2 Captioned Video Demos (<=60s)"]
     Engine --> P3["Instagram: 2 Reels (<=60s) + 1 Carousel Slide"]
 ```
 
 ### Weekly Publishing Cadence (Small-Team Baseline)
-* **LinkedIn:** 4 posts/week (2 carousels, 2 punchy text/image breakdowns).
+* **Facebook Pages:** 4 posts/week (2 carousels, 2 punchy text/image breakdowns).
 * **YouTube Shorts:** 3 videos/week (30–60 second screen captures / tutorials).
 * **Instagram:** 4 posts/week (2 Reels synced with Shorts, 2 educational carousels).
 * **Total Assets per Month:** $\approx 44$ assets (comfortably exceeds the 30-asset baseline).
@@ -100,7 +100,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    A["Discovery Layer<br>(Shorts, Reels, LinkedIn Post)"] --> B["Frictionless Hook<br>(Workflow Demo / Carousel)"]
+    A["Discovery Layer<br>(Shorts, Reels, Facebook Pages post)"] --> B["Frictionless Hook<br>(Workflow Demo / Carousel)"]
     B --> C["Conversion CTA<br>(Link in Bio / Comment Link)"]
     C --> D["Tracked Landing<br>(incubrix.com?utm_...)"]
     D --> E["Instant Activation<br>(app.incubrix.com/create)"]
@@ -123,7 +123,7 @@ All links across every asset adhere strictly to this schema:
 
 | Platform | Primary Target Metric | 30-Day Baseline Target | Measurement Limitation & Verification Method |
 | :--- | :--- | :--- | :--- |
-| **LinkedIn** | Impressions & Engagement Rate | 1,500 impressions/post; $\ge 2.5\%$ ER | Measured via native post analytics; public view reflects reactions/comments only. |
+| **Facebook Pages** | Impressions & Engagement Rate | 1,500 impressions/post; $\ge 2.5\%$ ER | Measured via native post analytics; public view reflects reactions/comments only. |
 | **YouTube Shorts**| View-Through Rate (VTR) | $\ge 40\%$ retention at 30 seconds; 1k views | Shorts feed algorithm features high early variance; verified in YouTube Studio. |
 | **Instagram** | Saves & Profile Visits | $\ge 4.0\%$ save rate; 50 visits/week | Private insights required for exact saves; verified via creator dashboard. |
 | **Conversion** | Tracked UTM Clicks | $\ge 250$ verified clicks; $\ge 12\%$ trial sign-up | Tracked via GA4 / server-side analytics from UTM parameters. |

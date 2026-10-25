@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-LI-002
 
-- **Platform:** linkedin
+- **Platform:** Facebook Pages
 - **Format:** carousel
 - **Pillar:** CreatorOps & Tool Consolidation
 - **Target Metric:** Saves
@@ -22,4 +22,4 @@ slide_7: {'title': 'Transform Your Content Workflow. Try IncuBrix.', 'body': 'St
 Ready to unify your workflow? Explore IncuBrix at incubrix.com
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-LI-002&utm_term=creatorops_and_tool_consolidation
+https://incubrix.com/?utm_source=facebook&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-LI-002&utm_term=creatorops_and_tool_consolidation

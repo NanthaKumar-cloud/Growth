@@ -64,7 +64,7 @@ class ContentEnginePipeline:
                 else:
                     item[field] = str(val) if val is not None else ""
 
-            platform = item.get("platform", "linkedin").lower()
+            platform = item.get("platform", "facebook").lower()
             fmt = item.get("format", "text_post").lower()
             asset_id = f"{asset_id_prefix}-{platform[:2].upper()}-{idx:03d}"
             item["asset_id"] = asset_id
@@ -113,7 +113,7 @@ class ContentEnginePipeline:
                         ]),
                         use_case_override={
                             "brand": "IncuBrix — Automated CreatorOps Engine",
-                            "goal": f"drive engagement and signups on {item.get('platform', 'LinkedIn')}",
+                            "goal": f"drive engagement and signups on {item.get('platform', 'Facebook Pages')}",
                             "audience": "growth teams, video creators, and SaaS founders",
                             "tone": "sharp, high-authority, technical SaaS engineering",
                             "offer": item.get("cta", "Start free at app.incubrix.com"),

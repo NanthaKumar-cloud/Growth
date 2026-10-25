@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-CAR-008
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Carousel
 - **Pillar:** Growth Analytics & Algorithm Benchmarks
 - **Target Metric:** Reposts & Comments
@@ -16,4 +16,4 @@ How long does a post live on social media? X: 4-6 hours. LinkedIn: 48-72 hours. 
 Read our full distribution benchmark study at incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-008&utm_term=growth_analytics_and_algorithm_benchmarks
+https://incubrix.com/?utm_source=facebook&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-008&utm_term=growth_analytics_and_algorithm_benchmarks

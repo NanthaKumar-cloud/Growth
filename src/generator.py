@@ -87,8 +87,8 @@ SOURCE CONTENT:
 
 MANDATORY ASSET MIX REQUIREMENTS:
 1. Minimum 3 Short-form Videos (<= 60 seconds duration, ~120-150 spoken words max). Format: "short_video". Platforms: "youtube" or "instagram".
-2. Minimum 2 Multi-slide Carousels (5 to 7 slides breakdown). Format: "carousel". Platforms: "linkedin" or "instagram".
-3. Remaining assets distributed across "text_post" on "linkedin" or "graphic" on "instagram".
+2. Minimum 2 Multi-slide Carousels (5 to 7 slides breakdown). Format: "carousel". Platforms: "facebook" or "instagram".
+3. Remaining assets distributed across "text_post" on "facebook" or "graphic" on "facebook" or "instagram".
 4. Every short_video script must include clear Visual Cues [Visual: ...], Audio notes, and Spoken dialogue that can be voiced in under 60 seconds.
 5. Every carousel must have a slide-by-slide structure with Slide 1 (Cover Hook) to Slide 7 (CTA).
 6. Target Audience Geos: US, UK, CA, IE, AU, NZ, SG.
@@ -105,7 +105,7 @@ Return a JSON object with this exact structure:
   "assets": [
     {{
       "asset_id_suffix": "001",
-      "platform": "linkedin" | "youtube" | "instagram",
+      "platform": "facebook" | "youtube" | "instagram",
       "format": "short_video" | "carousel" | "text_post" | "graphic",
       "content_pillar": "CreatorOps & Tool Consolidation",
       "hook": "Opening hook text (first 3 seconds or line 1)",

@@ -12,14 +12,14 @@ def test_pipeline_export_structure(tmp_path):
     sample_text = """# Test Title
 IncuBrix is an AI-powered CreatorOps platform that unifies ideation, video editing, voice cloning, and social publishing into a single dashboard.
 It cuts weekly production time from 14 hours down to 2 hours by automating repurposing.
-Creators can schedule directly to LinkedIn, Instagram, and YouTube Shorts from one screen.
+Creators can schedule directly to Facebook Pages, Instagram, and YouTube Shorts from one screen.
 With unified analytics, creators can track their Creator Growth Score without switching tabs.
 This comprehensive case study demonstrates that engineering-driven creator workflows consistently outperform fragmented tool subscriptions.
 """
 
     mock_assets = [
         {
-            "platform": "linkedin",
+            "platform": "facebook",
             "format": "text_post",
             "content_pillar": "CreatorOps & Tool Consolidation",
             "hook": "Stop wasting 12 hours on video editing.",
@@ -57,7 +57,7 @@ def test_pipeline_failure_recovery():
     }
 
     mock_success_response = MagicMock()
-    mock_success_response.text = '{"assets": [{"platform": "linkedin", "format": "text_post", "content_pillar": "CreatorOps", "hook": "Recovered hook", "caption": "Recovered caption", "cta": "Try IncuBrix"}]}'
+    mock_success_response.text = '{"assets": [{"platform": "facebook", "format": "text_post", "content_pillar": "CreatorOps", "hook": "Recovered hook", "caption": "Recovered caption", "cta": "Try IncuBrix"}]}'
     mock_success_response.usage_metadata = MagicMock(prompt_token_count=100, candidates_token_count=50)
 
     # Simulate attempt 1 throwing a 503 Network Timeout, then attempt 2 succeeding

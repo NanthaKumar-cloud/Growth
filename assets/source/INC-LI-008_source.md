@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-LI-008
 
-- **Platform:** linkedin
+- **Platform:** Facebook Pages
 - **Format:** text_post
 - **Pillar:** CreatorOps & Tool Consolidation
 - **Target Metric:** Impressions
@@ -26,4 +26,4 @@ Stop the fragmentation. Start the growth. What would you do with an extra 12 hou
 Reclaim your time and budget. See how at incubrix.com
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=text_post&utm_campaign=growth_engine_q1&utm_content=INC-LI-008&utm_term=creatorops_and_tool_consolidation
+https://incubrix.com/?utm_source=facebook&utm_medium=text_post&utm_campaign=growth_engine_q1&utm_content=INC-LI-008&utm_term=creatorops_and_tool_consolidation

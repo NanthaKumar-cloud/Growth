@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-PST-011
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Graphic
 - **Pillar:** CreatorOps & Tool Consolidation
 - **Target Metric:** Reactions & Bookmarks
@@ -18,4 +18,4 @@ Unify your focus with IncuBrix.
 Experience unified CreatorOps at incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-011&utm_term=creatorops_and_tool_consolidation
+https://incubrix.com/?utm_source=facebook&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-011&utm_term=creatorops_and_tool_consolidation

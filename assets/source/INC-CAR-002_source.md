@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-CAR-002
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Carousel
 - **Pillar:** Repurposing Recipes
 - **Target Metric:** Reposts & Saves
@@ -16,4 +16,4 @@ How to turn 1 podcast into 10 multi-platform assets. Layer 1: 3 Shorts. Layer 2:
 Save this carousel and try the repurposing engine at incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-002&utm_term=repurposing_recipes
+https://incubrix.com/?utm_source=facebook&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-002&utm_term=repurposing_recipes

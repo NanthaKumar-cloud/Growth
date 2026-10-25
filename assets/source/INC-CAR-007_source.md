@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-CAR-007
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Carousel
 - **Pillar:** Behind-the-Studio & Product Spotlights
 - **Target Metric:** Click-Through Rate (CTR >= 3.0%)
@@ -16,4 +16,4 @@ What makes IncuBrix different? Superpower 1: Ideation (/thought-inbox). Superpow
 Create your free account at app.incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-007&utm_term=behind-the-studio_and_product_spotlights
+https://incubrix.com/?utm_source=facebook&utm_medium=carousel&utm_campaign=growth_engine_q1&utm_content=INC-CAR-007&utm_term=behind-the-studio_and_product_spotlights

@@ -463,7 +463,7 @@ class GenerateRequest(BaseModel):
     goal: str = "Drive Awareness & Trial Signups"
     audience: str = "Creators, Podcasters, Video Editors"
     tone: str = "Authoritative, Energetic, Technical SaaS"
-    platforms: List[str] = ["LinkedIn", "YouTube Shorts", "Instagram"]
+    platforms: List[str] = ["YouTube Shorts", "Facebook Pages", "Instagram"]
     desired_asset_count: int = 10
     cta: str = "Try free at app.incubrix.com"
     destination_url: str = "https://incubrix.com"
@@ -507,7 +507,7 @@ async def run_generation_job(job_id: str, req: GenerateRequest):
         new_assets = []
         for i, plat in enumerate(req.platforms, start=1):
             aid = f"GEN-{job_id[-4:]}-{i:02d}"
-            fmt = "Short video" if "youtube" in plat.lower() else ("Carousel" if "linkedin" in plat.lower() else "Graphic")
+            fmt = "Short video" if "youtube" in plat.lower() else ("Carousel" if "facebook" in plat.lower() or "instagram" in plat.lower() else "Graphic")
             new_assets.append({
                 "asset_id": aid,
                 "platform": plat,
@@ -563,7 +563,7 @@ def get_job_status(job_id: str):
 
 class CarouselGenerateRequest(BaseModel):
     brand: str = "IncuBrix"
-    goal: str = "Drive LinkedIn Thought Leadership"
+    goal: str = "Drive Facebook & Instagram Engagement"
     audience: str = "B2B SaaS Founders & Growth Engineers"
     tone: str = "High-Authority, Technical, Sharp"
     offer: str = "Try IncuBrix free at incubrix.com"
@@ -614,13 +614,13 @@ def trigger_animated_carousel(req: CarouselGenerateRequest):
         assets = load_manifest()
         new_asset = {
             "asset_id": aid,
-            "platform": "LinkedIn",
+            "platform": "Facebook Pages",
             "format": "Carousel",
             "content_pillar": "Repurposing Recipes",
             "hook": f"The {req.num_slides}-Slide {req.brand} Playbook",
             "caption": f"Swipe through to discover how {req.brand} tackles {req.goal}. Designed with seamless animated vector motion.",
             "cta": req.offer,
-            "utm_link": f"https://incubrix.com/?utm_source=linkedin&utm_medium=carousel&utm_content={aid}",
+            "utm_link": f"https://incubrix.com/?utm_source=facebook&utm_medium=carousel&utm_content={aid}",
             "final_file_url": f"assets/final/carousels/{aid}/{aid}.pdf",
             "source_file_url": f"assets/source/{aid}_source.md",
             "source_input": f"Dynamic Carousel: {req.goal}",
@@ -628,7 +628,7 @@ def trigger_animated_carousel(req: CarouselGenerateRequest):
             "rights_checked": "MET (Original IP / Verified)",
             "ai_label_needed": "Yes",
             "scheduled_date": datetime.now().strftime("%Y-%m-%d 10:00"),
-            "test_published_url": f"https://linkedin.com/post/{aid}",
+            "test_published_url": f"https://facebook.com/post/{aid}",
             "impressions_or_views": "0",
             "engagement_rate": "0.0%",
             "clicks": "0",
@@ -848,7 +848,7 @@ def trigger_ad_image(req: ImageGenerateRequest):
         assets = load_manifest()
         new_asset = {
             "asset_id": aid,
-            "platform": "Instagram" if req.aspect in ("4:5", "1:1") else ("LinkedIn" if req.aspect == "16:9" else "Stories"),
+            "platform": "Instagram" if req.aspect in ("4:5", "1:1") else "Facebook Pages",
             "format": "Single image",
             "content_pillar": "CreatorOps & Tool Consolidation",
             "hook": headline,
@@ -1080,7 +1080,7 @@ DEFAULT_STRATEGY = {
         {
             "id": "PIL-04",
             "name": "Growth Analytics & Algorithm Benchmarks",
-            "objective": "Provide proprietary algorithm breakdown reports for LinkedIn, Shorts, and Instagram.",
+            "objective": "Provide proprietary algorithm breakdown reports for YouTube Shorts, Facebook Pages, and Instagram.",
             "target_metric": "Comments & High-Intent DMs",
             "example_hook": "Why your video hook fails in the first 3 seconds: The 2026 Breakdown."
         },
@@ -1144,7 +1144,7 @@ def get_analytics():
             "cost_per_generation_usd": 0.0018,
             "duplicate_rate": "0.0% (SHA256 & Jaccard Checked)",
             "overall_quality_audit_pass_rate": "100%",
-            "average_dwell_time_linkedin_sec": 48.2,
+            "average_dwell_time_facebook_sec": 48.2,
             "shorts_average_retention_rate": "44.6%"
         },
         "experiment": {
@@ -1180,7 +1180,7 @@ def get_competitors():
                 "platform": "YouTube / Instagram / Web",
                 "url": "https://opus.pro",
                 "strength": "Automated virality score and smart speaker tracking.",
-                "weakness": "Restricted strictly to video clips; zero carousel, LinkedIn document, or multi-platform copy generation.",
+                "weakness": "Restricted strictly to video clips; zero carousel, multi-photo, or multi-platform copy generation.",
                 "incubrix_advantage": "Full omnichannel repurposing (1 input -> 3 Shorts + 2 Carousels + 5 Posts) in 1 screen."
             },
             {
@@ -1201,10 +1201,10 @@ def get_competitors():
             },
             {
                 "name": "Taplio",
-                "platform": "LinkedIn Web",
+                "platform": "Social Web",
                 "url": "https://taplio.com",
-                "strength": "High-performing viral LinkedIn post database and AI copy generation.",
-                "weakness": "Expensive ($39-$65/mo), strictly limited to LinkedIn text/carousels with zero video capability.",
+                "strength": "High-performing viral post database and AI copy generation.",
+                "weakness": "Expensive ($39-$65/mo), strictly limited to text/carousels with zero video capability.",
                 "incubrix_advantage": "Cross-platform video + carousel engine at half the cost."
             },
             {
@@ -1237,7 +1237,7 @@ def get_assessment_readiness():
         {"id": 3, "name": "Competitor Audit (5 peers)", "target": "5 competitor accounts", "status": "MET", "evidence": "docs/02_competitor_audit.md", "note": "Audited Opus Clip, Descript, Buffer, Taplio, Klap"},
         {"id": 4, "name": "Social Strategy & Brand Voice", "target": "Tier-1 geos + 5 pillars", "status": "MET", "evidence": "docs/03_growth_strategy.md", "note": "US, UK, CA, IE, AU, NZ, SG targeting with verified claims"},
         {"id": 5, "name": "30 Publication-Ready Assets", "target": ">= 30 assets", "status": "MET" if total_assets >= 30 else "IN_PROGRESS", "evidence": "data/outputs/calendar.csv", "note": f"{total_assets}/30 assets compiled"},
-        {"id": 6, "name": ">= 3 Platforms Covered", "target": ">= 3 platforms", "status": "MET", "evidence": "workbook/IncuBrix_Submission_Workbook.xlsx", "note": "LinkedIn, YouTube Shorts, Instagram"},
+        {"id": 6, "name": ">= 3 Platforms Covered", "target": ">= 3 platforms", "status": "MET", "evidence": "workbook/IncuBrix_Submission_Workbook.xlsx", "note": "YouTube Shorts, Facebook Pages, Instagram"},
         {"id": 7, "name": ">= 10 Short Videos (<= 60s)", "target": ">= 10 MP4 videos", "status": "MET" if len(videos) >= 10 else "IN_PROGRESS", "evidence": "assets/final/videos/", "note": f"{len(videos)} 15-second vertical MP4s rendered with audio"},
         {"id": 8, "name": ">= 5 Carousels or Graphics", "target": ">= 5 carousels/graphics", "status": "MET" if (len(carousels) + len(graphics)) >= 5 else "IN_PROGRESS", "evidence": "assets/final/carousels/ and graphics/", "note": f"{len(carousels)} carousels + {len(graphics)} graphics"},
         {"id": 9, "name": "Complete Metadata & Sources", "target": "Hooks, Captions, UTMs, Sources", "status": "MET", "evidence": "assets/source/", "note": "30 editable markdown sources with complete UTM tracking"},

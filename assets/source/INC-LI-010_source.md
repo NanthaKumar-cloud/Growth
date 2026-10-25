@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-LI-010
 
-- **Platform:** linkedin
+- **Platform:** Facebook Pages
 - **Format:** text_post
 - **Pillar:** Growth Analytics & Algorithm Benchmarks
 - **Target Metric:** CTR
@@ -24,4 +24,4 @@ Our early users saw a 312% expansion in overall reach because they finally under
 Get your Creator Growth Score. Visit incubrix.com/analytics
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=text_post&utm_campaign=growth_engine_q1&utm_content=INC-LI-010&utm_term=growth_analytics_and_algorithm_benchmarks
+https://incubrix.com/?utm_source=facebook&utm_medium=text_post&utm_campaign=growth_engine_q1&utm_content=INC-LI-010&utm_term=growth_analytics_and_algorithm_benchmarks

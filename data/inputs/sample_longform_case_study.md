@@ -1,7 +1,7 @@
 # Case Study: How CreatorOps and IncuBrix Slashed 12 Hours of Weekly Content Production
 
 ## Executive Summary
-For the modern digital creator, podcaster, and growth marketer, content production has reached a point of acute fatigue. The average solo creator or small B2B marketing team currently maintains between four and six distinct social platform channels—typically LinkedIn, YouTube Shorts, Instagram Reels, and X/Threads. 
+For the modern digital creator, podcaster, and growth marketer, content production has reached a point of acute fatigue. The average solo creator or small B2B marketing team currently maintains between four and six distinct social platform channels—typically YouTube Shorts, Facebook Pages, and Instagram Reels. 
 
 However, maintaining this omnichannel presence has historically required what we call the "Fragmented Creator Tool Stack":
 1. Descript or Premiere Pro for raw video transcription and rough cutting ($24/month).
@@ -26,18 +26,18 @@ IncuBrix incorporates built-in voice cloning and audio dubbing capabilities. Onc
 ### 4. Single-Input Multi-Destination Repurposing (`/publishing`)
 From a single 20-minute podcast or webinar recording, IncuBrix's underlying generation engine extracts:
 - Three high-retention short vertical videos (under 60 seconds) with burned-in dynamic captions for YouTube Shorts and Instagram Reels.
-- Two multi-slide educational carousels formatted for LinkedIn PDF slides.
-- Four punchy, hook-driven text posts for LinkedIn and X.
+- Two multi-slide educational carousels formatted for Facebook Pages and Instagram slides.
+- Four punchy, hook-driven text posts for Facebook Pages and Instagram.
 - A long-form newsletter recap.
 
 ### 5. Unified Analytics and the Creator Growth Score
-Rather than checking separate metrics across YouTube Studio, LinkedIn Analytics, and Meta Business Suite, IncuBrix provides a unified dashboard tracking cross-platform impressions, engagement rate, link clicks, and an aggregate "Creator Growth Score." This provides empirical feedback on which hooks and formats generate actual audience retention.
+Rather than checking separate metrics across YouTube Studio, Meta Business Suite, and Instagram Insights, IncuBrix provides a unified dashboard tracking cross-platform impressions, engagement rate, link clicks, and an aggregate "Creator Growth Score." This provides empirical feedback on which hooks and formats generate actual audience retention.
 
 ## Measured Results & Efficiency Gains
 In operational testing across a 30-day cohort of early-stage creators and B2B growth marketers:
 - Weekly production time dropped from 14.2 hours to 2.1 hours (an 85% reduction in manual editing time).
-- Publishing frequency increased from 2.4 posts per week to 9.8 posts per week across LinkedIn, YouTube Shorts, and Instagram.
-- Overall reach expanded by 312% due to algorithmic diversification across both vertical video feeds and LinkedIn professional feeds.
+- Publishing frequency increased from 2.4 posts per week to 9.8 posts per week across YouTube Shorts, Facebook Pages, and Instagram.
+- Overall reach expanded by 312% due to algorithmic diversification across both vertical video feeds and Facebook community feeds.
 - Total software subscription spend was consolidated from $97/month down to IncuBrix's single $29/month Creator tier.
 
 ## Conclusion

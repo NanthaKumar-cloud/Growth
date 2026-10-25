@@ -8,8 +8,7 @@ const { useState, useEffect, useMemo, useRef } = React;
 const BRAND_ICONS = {
   youtube: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/>',
   instagram: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>',
-  facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
-  linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>'
+  facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>'
 };
 
 function Icon({ name, className = "w-4 h-4", ...props }) {
@@ -771,19 +770,19 @@ function ContentEnginePage({ onAssetGenerated, onOpenAsset }) {
   const [inputText, setInputText] = useState(`The 2026 Solo Creator Bottleneck:
 Why solo creators are burning out in 2026 is not because they lack brilliant ideas. It is because for every 1 hour of recording, they spend 14 hours wrestling with formatting, transcription, audio sync, thumbnail creation, and context switching across Descript ($24), Opus Clip ($19), and Buffer ($15). That is a 9:1 ratio of logistics to creation. 
 
-IncuBrix changes this by consolidating ideation, text-prompt video editing, automated silence removal, and multi-format distribution into one unified CreatorOps studio. One master recording transforms into 3 vertical shorts, 2 LinkedIn document carousels, and 5 hook-optimized thought-leadership posts in under 2 minutes.`);
+IncuBrix changes this by consolidating ideation, text-prompt video editing, automated silence removal, and multi-format distribution into one unified CreatorOps studio. One master recording transforms into 3 vertical shorts, 2 Facebook & Instagram carousels, and 5 hook-optimized thought-leadership posts in under 2 minutes.`);
 
   const [sourceType, setSourceType] = useState('transcript');
   const [title, setTitle] = useState('Solo Creator 2026 Bottleneck & Tool Consolidation');
   const [goal, setGoal] = useState('Drive Awareness & SaaS Trial Signups');
   const [tone, setTone] = useState('Authoritative, Energetic, Technical SaaS');
-  const [selectedPlatforms, setSelectedPlatforms] = useState(['LinkedIn', 'YouTube Shorts', 'Instagram']);
+  const [selectedPlatforms, setSelectedPlatforms] = useState(['YouTube Shorts', 'Facebook Pages', 'Instagram']);
   const [isGenerating, setIsGenerating] = useState(false);
   const [jobProgress, setJobProgress] = useState(0);
   const [jobStage, setJobStage] = useState('');
   const [generatedResults, setGeneratedResults] = useState([]);
 
-  const platformsList = ['LinkedIn', 'YouTube Shorts', 'Instagram', 'Twitter / X', 'Threads', 'TikTok'];
+  const platformsList = ['YouTube Shorts', 'Facebook Pages', 'Instagram'];
 
   const togglePlatform = (p) => {
     if (selectedPlatforms.includes(p)) {
@@ -1514,7 +1513,7 @@ function CarouselStudioPage({ initialCarouselId, onSaved, onScheduleAsset, onPub
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Seamless animated SVGs with 1080px crossing seams, CSS keyframe motion, and multi-page LinkedIn PDF export.
+            Seamless animated SVGs with 1080px crossing seams, CSS keyframe motion, and multi-page document export for Facebook Pages & Instagram.
           </p>
         </div>
 
@@ -2836,9 +2835,8 @@ function ContentCalendarPage({ onOpenAsset, onScheduleAsset, onPublishNow, onRef
           >
             <option value="all">All Platforms</option>
             <option value="youtube">YouTube Shorts</option>
+            <option value="facebook">Facebook Pages</option>
             <option value="instagram">Instagram</option>
-            <option value="facebook">Facebook</option>
-            <option value="linkedin">LinkedIn</option>
           </select>
 
           <a 
@@ -3078,8 +3076,8 @@ function AssetLibraryPage({ assets, onOpenAsset, onOpenCarousel, onOpenVideo, on
             className="px-3 py-1.5 text-xs bg-white border border-slate-300 rounded-lg"
           >
             <option value="all">All Platforms</option>
-            <option value="linkedin">LinkedIn</option>
             <option value="youtube">YouTube Shorts</option>
+            <option value="facebook">Facebook Pages</option>
             <option value="instagram">Instagram</option>
           </select>
 
@@ -3624,8 +3622,8 @@ function ScheduleModal({ asset, onClose, onUpdated }) {
               <option value="YouTube Shorts">YouTube Shorts (#Shorts Vertical 9:16)</option>
               <option value="YouTube Video">YouTube Video (Standard 16:9 / Full Video)</option>
               <option value="Instagram">Instagram (Reels / Carousel / Feed)</option>
-              <option value="Facebook">Facebook (Facebook Page Direct Post)</option>
-              <option value="Multi-Platform">All Platforms (Cross-Post Syndication)</option>
+              <option value="Facebook Pages">Facebook Pages (Page Direct Video / Post)</option>
+              <option value="Multi-Platform">All 3 Platforms (Cross-Post Syndication)</option>
             </select>
             <p className="text-[10px] text-slate-400 mt-1">
               Automatically selects suitable media container: 9:16 Shorts for Video, Multi-slide Carousel for Instagram/FB, or High-res Poster.

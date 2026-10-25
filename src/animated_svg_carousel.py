@@ -2,7 +2,7 @@
 IncuBrix Animated SVG Carousel Engine
 Powered by Gemini 3.6 Flash & Playwright Chromium
 
-Generates production-grade, seamless, multi-slide Instagram/LinkedIn carousels
+Generates production-grade, seamless, multi-slide Instagram / Facebook Pages carousels
 as self-contained animated SVGs with CSS keyframe motion, seam-crossing swipe continuity,
 interactive HTML preview runners, rendered animated MP4 clips, and resting-state PDFs.
 """
@@ -649,7 +649,7 @@ def render_live_animated_media(
     3. Uses headless Chrome via Playwright to:
        - Record live animated MP4 video clips (entrance + idle motion).
        - Snapshot high-res resting-state PNGs at t=3.2s.
-    4. Compiles multi-page PDF for LinkedIn and cover PNG.
+    4. Compiles multi-page document PDF and cover PNG.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
     video_dir = output_dir / "video_clips"
@@ -729,7 +729,7 @@ def render_live_animated_media(
     except Exception as e:
         print(f"[Warning] Headless browser rendering encountered an error: {e}")
 
-    # 4. Compile multi-page LinkedIn PDF from resting-state PNGs
+    # 4. Compile multi-page document PDF from resting-state PNGs
     pdf_path = output_dir / f"{asset_id}.pdf"
     cover_path = output_dir / f"{asset_id}_cover.png"
 

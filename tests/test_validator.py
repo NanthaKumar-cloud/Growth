@@ -4,8 +4,8 @@ from src.validator import ContentValidator
 def test_validate_valid_asset():
     validator = ContentValidator()
     asset = {
-        "asset_id": "INC-LI-001",
-        "platform": "linkedin",
+        "asset_id": "INC-FB-001",
+        "platform": "facebook",
         "format": "text_post",
         "content_pillar": "CreatorOps & Tool Consolidation",
         "hook": "Stop wasting 12 hours every week switching between 4 editing tools.",
@@ -19,8 +19,8 @@ def test_validate_valid_asset():
 def test_validate_missing_field():
     validator = ContentValidator()
     asset = {
-        "asset_id": "INC-LI-002",
-        "platform": "linkedin",
+        "asset_id": "INC-FB-002",
+        "platform": "facebook",
         # Missing format, hook, caption, cta
     }
     is_valid, issues = validator.validate_asset(asset)
@@ -30,8 +30,8 @@ def test_validate_missing_field():
 def test_validate_forbidden_claims():
     validator = ContentValidator()
     asset = {
-        "asset_id": "INC-LI-003",
-        "platform": "linkedin",
+        "asset_id": "INC-FB-003",
+        "platform": "facebook",
         "format": "text_post",
         "content_pillar": "CreatorOps",
         "hook": "How to make $10,000 with overnight riches and guaranteed viral posts!",

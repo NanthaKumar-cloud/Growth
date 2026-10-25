@@ -20,7 +20,7 @@ The **IncuBrix Growth Engine** is an end-to-end, reproducible marketing and cont
 
 It unifies:
 1. **Product & Competitor Insight:** Empirical audit of the IncuBrix web app (`app.incubrix.com`) and 5 direct competitors (Opus Clip, Buffer, Descript, Taplio, Klap).
-2. **Growth Strategy & Tracking:** 5 core pillars targeting Tier-1 English-speaking geos (US, UK, CA, IE, AU, NZ, SG) across LinkedIn, YouTube Shorts, and Instagram with standardized UTM tracking.
+2. **Growth Strategy & Tracking:** 5 core pillars targeting Tier-1 English-speaking geos (US, UK, CA, IE, AU, NZ, SG) across YouTube Shorts, Facebook Pages, and Instagram with standardized UTM tracking.
 3. **Automated AI Content Engine:** A modular Python pipeline transforming 1 long-form input (podcast, case study, transcript) into $\ge 10$ platform-specific assets in under 2 minutes ($110.8\text{ seconds}$ measured, costing $<\$0.002$).
 4. **Programmatic Media Rendering:** Automated rendering of 9:16 vertical short videos via local FFmpeg and multi-slide carousels via Pillow with 0 external API cost.
 5. **Audience Experiment:** A 24-person preference test (Option B) validating that workflow-driven comparative hooks win **87.5% preference** over generic creator advice.

@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-PST-009
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Graphic
 - **Pillar:** Repurposing Recipes
 - **Target Metric:** Saves & Engagement Rate
@@ -22,4 +22,4 @@ IncuBrix builds these slides automatically from any raw article or transcript.
 Generate your first carousel in 60s at incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-009&utm_term=repurposing_recipes
+https://incubrix.com/?utm_source=facebook&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-009&utm_term=repurposing_recipes

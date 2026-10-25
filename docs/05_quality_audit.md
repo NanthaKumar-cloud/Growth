@@ -36,17 +36,17 @@ Each sampled asset is evaluated across 10 deterministic quality gates:
 | **INC-VID-007** | Instagram | Short video | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
 | **INC-VID-008** | YouTube Shorts | Short video | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
 | **INC-VID-010** | YouTube Shorts | Short video | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-CAR-001** | LinkedIn | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-CAR-002** | LinkedIn | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-CAR-003** | LinkedIn | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-CAR-001** | Facebook Pages | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-CAR-002** | Facebook Pages | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-CAR-003** | Facebook Pages | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
 | **INC-CAR-004** | Instagram | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-CAR-005** | LinkedIn | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-CAR-007** | LinkedIn | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-PST-001** | LinkedIn | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-PST-002** | LinkedIn | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-CAR-005** | Facebook Pages | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-CAR-007** | Facebook Pages | Carousel | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-PST-001** | Facebook Pages | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-PST-002** | Facebook Pages | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
 | **INC-PST-003** | Instagram | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-PST-004** | LinkedIn | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
-| **INC-PST-005** | LinkedIn | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-PST-004** | Facebook Pages | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
+| **INC-PST-005** | Facebook Pages | Graphic | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **100% PASS** |
 
 ---
 
@@ -65,4 +65,4 @@ Each sampled asset is evaluated across 10 deterministic quality gates:
 Every asset produced and cataloged in the IncuBrix content engine conforms strictly to commercial distribution rights:
 * **Video Media:** Synthesized programmatically via local FFmpeg using open-source audio null/ambient tracks and custom styling. Zero copyrighted background music or protected third-party footage used.
 * **Graphic Media:** Rendered using Pillow with geometric shapes, modern slate color palettes, and system typography.
-* **AI Disclosure:** All assets are marked with `ai_label_needed = Yes` in the submission workbook and export CSV, adhering to platform-specific AI-generated media disclosure mandates (YouTube AI label, Instagram AI info tag, LinkedIn transparency).
+* **AI Disclosure:** All assets are marked with `ai_label_needed = Yes` in the submission workbook and export CSV, adhering to platform-specific AI-generated media disclosure mandates (YouTube AI label, Instagram AI info tag, Facebook Page transparency).

@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-LI-004
 
-- **Platform:** linkedin
+- **Platform:** Facebook Pages
 - **Format:** text_post
 - **Pillar:** Repurposing Recipes
 - **Target Metric:** Impressions
@@ -29,4 +29,4 @@ Ready to turn one idea into a multi-platform distribution engine? Learn more abo
 Discover IncuBrix's repurposing engine at incubrix.com/publishing
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=text_post&utm_campaign=growth_engine_q1&utm_content=INC-LI-004&utm_term=repurposing_recipes
+https://incubrix.com/?utm_source=facebook&utm_medium=text_post&utm_campaign=growth_engine_q1&utm_content=INC-LI-004&utm_term=repurposing_recipes

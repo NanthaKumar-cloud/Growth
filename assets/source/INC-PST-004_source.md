@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-PST-004
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Graphic
 - **Pillar:** Repurposing Recipes
 - **Target Metric:** Impressions & Saves
@@ -22,4 +22,4 @@ IncuBrix automates this entire extraction in under 3 minutes.
 Turn your next recording into a 10-asset campaign at incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-004&utm_term=repurposing_recipes
+https://incubrix.com/?utm_source=facebook&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-004&utm_term=repurposing_recipes

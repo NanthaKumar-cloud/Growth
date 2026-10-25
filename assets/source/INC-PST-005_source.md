@@ -1,6 +1,6 @@
 # Editable Source Asset: INC-PST-005
 
-- **Platform:** LinkedIn
+- **Platform:** Facebook Pages
 - **Format:** Graphic
 - **Pillar:** Growth Analytics & Algorithm Benchmarks
 - **Target Metric:** Comments & Qualified Inquiries
@@ -21,4 +21,4 @@ When your content retains audience attention, algorithm reach takes care of itse
 Calculate your Creator Growth Score at incubrix.com.
 
 ## Tracked Link
-https://incubrix.com/?utm_source=linkedin&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-005&utm_term=growth_analytics_and_algorithm_benchmarks
+https://incubrix.com/?utm_source=facebook&utm_medium=graphic&utm_campaign=growth_engine_q1&utm_content=INC-PST-005&utm_term=growth_analytics_and_algorithm_benchmarks

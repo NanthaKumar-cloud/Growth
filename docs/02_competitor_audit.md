@@ -15,7 +15,7 @@
 
 | Channel | Profile URL | Status / Follower Range | Posting Cadence | Primary Content Format | Recurring Topics |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **LinkedIn** | `linkedin.com/company/incubrix` | Emerging (< 500 followers) | Intermittent (1–2 posts/mo) | Static graphics, launch announcements | Platform vision, hiring, company incorporation |
+| **LinkedIn** | `facebook.com/incubrix` | Emerging (< 500 followers) | Intermittent (1–2 posts/mo) | Static graphics, launch announcements | Platform vision, hiring, company incorporation |
 | **Instagram** | `@incubrix_official` | Emerging (< 250 followers) | Intermittent (1–3 posts/mo) | Static cards, product teasers | Feature highlights, creator quotes |
 | **Facebook** | `facebook.com/people/IncuBrix/61583095167915` | Emerging (< 100 followers) | Synced with Instagram | Mirrored Instagram graphics | General announcements |
 
@@ -59,7 +59,7 @@
   * **X / Twitter:** `@buffer` (~910k followers). Cadence: Daily threads and updates.
 * **Content Formats:** Educational multi-slide PDF carousels, data visualization charts, workplace transparency reports, relatable creator memes.
 * **Key Topics:** "State of Social Media 2026", algorithm change breakdowns, optimal posting frequency guides, creator burnout advice.
-* **Calculated Engagement Baseline:** ~2.2% on LinkedIn carousels; highest bookmark/save rates on data-backed benchmark infographics.
+* **Calculated Engagement Baseline:** ~2.2% on Facebook Pages carousels; highest bookmark/save rates on data-backed benchmark infographics.
 
 ### Competitor 3: Descript (`descript.com`)
 * **Positioning:** All-in-one audio and video editor with text-based editing and AI voice cloning (Overdub).
@@ -73,13 +73,13 @@
 * **Calculated Engagement Baseline:** ~1.5% engagement; high retention on YouTube tutorials ($\ge 50\%$ average percentage viewed).
 
 ### Competitor 4: Taplio (`taplio.com`)
-* **Positioning:** Dedicated AI-powered LinkedIn growth and personal branding toolkit.
+* **Positioning:** Dedicated AI-powered social growth and personal branding toolkit.
 * **Audience:** Founders, B2B consultants, growth marketers, sales leaders.
 * **Channels & Metrics (Observed Public Footprints, Oct 2026):**
   * **LinkedIn:** High personal-brand distribution via founders (Alex Berman, Thibault Louis) + corporate page (~62k followers). Cadence: 2–3 text/image posts/day.
   * **X / Twitter:** `@TaplioHQ` (~42k followers). Cadence: 3–5 daily tweets/threads.
 * **Content Formats:** Short punchy text hooks with line breaks, screenshot breakdowns of viral posts, 6-slide carousel playbooks.
-* **Key Topics:** "How to write a $10k LinkedIn post", viral hook teardowns, reverse-engineering the LinkedIn algorithm.
+* **Key Topics:** "How to write a $10k Facebook Pages post", viral hook teardowns, reverse-engineering social video algorithms.
 * **Calculated Engagement Baseline:** ~3.1% engagement rate on text + image posts; very high comment volume driven by controversial hot takes and giveaway lead magnets.
 
 ### Competitor 5: Klap (`klap.app`)
@@ -100,28 +100,28 @@
 ### Opportunity 1: The "1-to-10 Repurposing Speedrun" (Short-Form Video Engine)
 * **Evidence from Audit:** Both Opus Clip and Klap acquired $> 80\%$ of their top-of-funnel users by demonstrating a single high-contrast before-and-after: pasting 1 long piece of content and generating 10 finished, styled vertical clips in under 60 seconds.
 * **Intended Audience:** Solo podcasters, webinar creators, educators, and B2B marketers across target geos (US, UK, CA, SG).
-* **Proposed Action:** Produce high-pacing, 30–60 second screen-capture videos showing IncuBrix transforming a raw transcript or recording into 10 multi-platform assets (YouTube Shorts, Instagram Reels, LinkedIn posts) simultaneously.
+* **Proposed Action:** Produce high-pacing, 30–60 second screen-capture videos showing IncuBrix transforming a raw transcript or recording into 10 multi-platform assets (YouTube Shorts, Instagram Reels, Facebook Pages posts) simultaneously.
 * **Expected Outcome:** High viral reach on YouTube Shorts and Instagram Reels, driving self-serve free trials directly to `app.incubrix.com/create`.
 * **Success Metric:** Video View-Through Rate ($\ge 38\%$ at 30 seconds) and Click-Through Rate (CTR $\ge 3.5\%$ via tracked UTM links).
 
 ---
 
-### Opportunity 2: The "All-in-One CreatorOps Stack vs. The $100/mo Tool Bloat" (LinkedIn Carousels)
-* **Evidence from Audit:** Taplio and Buffer achieve their highest bookmark and save rates on LinkedIn using comparative infographics that break down software stacks, operational costs, and workflow friction.
+### Opportunity 2: The "All-in-One CreatorOps Stack vs. The $100/mo Tool Bloat" (Facebook Pages carousels)
+* **Evidence from Audit:** Taplio and Buffer achieve their highest bookmark and save rates on Facebook Pages using comparative infographics that break down software stacks, operational costs, and workflow friction.
 * **Intended Audience:** Growth engineers, startup founders, agency leads, and professional creators who are suffering from "subscription sprawl".
 * **Proposed Action:** Design 5-to-7 slide PDF carousels breaking down the math:
   * Traditional Stack: Descript (\$24) + Opus Clip (\$19) + Buffer (\$15) + Copy.ai (\$36) = **\$94/month and 4 disjointed logins**.
   * IncuBrix Stack: Ideation + Prompt Editing + Omnichannel Publishing + Analytics = **\$29/month in 1 unified workspace**.
 * **Expected Outcome:** High repost rate among B2B thought leaders and agency owners; positioning IncuBrix as an engineering-driven productivity upgrade.
-* **Success Metric:** Bookmark / Save rate ($\ge 5.0\%$) and verified sign-ups from LinkedIn UTM links.
+* **Success Metric:** Bookmark / Save rate ($\ge 5.0\%$) and verified sign-ups from Facebook Pages UTM links.
 
 ---
 
-### Opportunity 3: "Creator Growth Benchmarks & Algorithm Playbooks" (Data-Driven Authority on LinkedIn & X)
-* **Evidence from Audit:** Buffer's annual "State of Social" and Taplio's "LinkedIn Benchmarks" generate hundreds of thousands of organic impressions, premium backlinks, and enduring brand equity because creators are starving for empirical data rather than generic marketing advice.
+### Opportunity 3: "Creator Growth Benchmarks & Algorithm Playbooks" (Data-Driven Authority on Facebook Pages & X)
+* **Evidence from Audit:** Buffer's annual "State of Social" and industry Creator Benchmarks generate hundreds of thousands of organic impressions, premium backlinks, and enduring brand equity because creators are starving for empirical data rather than generic marketing advice.
 * **Intended Audience:** Content strategists, corporate marketing directors, and serious creators aiming to grow in 2026/2027.
 * **Proposed Action:** Capitalize on IncuBrix's upcoming "Creator Growth Score" and publishing analytics by publishing weekly data-driven teardowns:
   * "We analyzed 500 short-form video hooks: here are the top 3 patterns that drive 70%+ retention."
-  * "The 2026 Multi-Platform Repurposing Decay Curve: how long does a LinkedIn post take to peak vs. a YouTube Short?"
+  * "The 2026 Multi-Platform Repurposing Decay Curve: how long does a Facebook Pages post take to peak vs. a YouTube Short?"
 * **Expected Outcome:** Establishes IncuBrix as the authoritative CreatorOps intelligence platform, driving high-LTV creator sign-ups.
 * **Success Metric:** Qualified comments ($\ge 15$ per post) and newsletter / lead-magnet conversion rate ($\ge 4.0\%$).

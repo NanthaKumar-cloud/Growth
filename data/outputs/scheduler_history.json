@@ -534,5 +534,29 @@
       "url": "https://youtube.com/shorts/mmCAww-lPjM",
       "status": "SUCCESS"
     }
+  },
+  {
+    "timestamp": "2026-10-25T06:21:33.665634",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792909293-1",
+        "AUTO-CAR-1792909293-2",
+        "AUTO-IMG-1792909293-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T06:23:38.052682",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792909418-1",
+        "AUTO-CAR-1792909418-2",
+        "AUTO-IMG-1792909418-3"
+      ]
+    }
   }
 ]
