@@ -280,9 +280,11 @@ Live URL: ${data.primary_url}`);
             <ContentEnginePage 
               onAssetGenerated={(newAsset) => {
                 fetchData();
-                openAssetDetail(newAsset.asset_id);
               }}
               onOpenAsset={openAssetDetail}
+              onScheduleAsset={(a) => setScheduleTarget(a)}
+              onPublishNow={handleQuickPublish}
+              onSaved={fetchData}
             />
           )}
 
@@ -870,7 +872,7 @@ function OverviewPage({ data, onOpenAsset, onNavigate, onOpenVideo, onOpenCarous
 // PAGE 2: AI CONTENT ENGINE (MAIN WORKSPACE FEATURE)
 // -----------------------------------------------------------------------------
 
-function ContentEnginePage({ onAssetGenerated, onOpenAsset }) {
+function ContentEnginePage({ onAssetGenerated, onOpenAsset, onScheduleAsset, onPublishNow, onSaved }) {
   const [inputText, setInputText] = useState(`The 2026 Solo Creator Bottleneck:
 Why solo creators are burning out in 2026 is not because they lack brilliant ideas. It is because for every 1 hour of recording, they spend 14 hours wrestling with formatting, transcription, audio sync, thumbnail creation, and context switching across Descript ($24), Opus Clip ($19), and Buffer ($15). That is a 9:1 ratio of logistics to creation. 
 
@@ -886,7 +888,34 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
   const [jobStage, setJobStage] = useState('');
   const [generatedResults, setGeneratedResults] = useState([]);
 
+  // Filter tabs: 'all' | 'video' | 'carousel' | 'graphic'
+  const [formatFilter, setFormatFilter] = useState('all');
+
+  // Selected asset IDs for bulk publishing
+  const [selectedAssetIds, setSelectedAssetIds] = useState(new Set());
+
+  // Publishing states per asset: { [aid]: { status: 'idle'|'publishing'|'published'|'failed', url?: string, message?: string, error?: string } }
+  const [publishingStates, setPublishingStates] = useState({});
+
+  // Carousel slide tracking: { [aid]: activeSlide (1..5) }
+  const [carouselSlideIndices, setCarouselSlideIndices] = useState({});
+
+  // Copy indicator
+  const [copiedId, setCopiedId] = useState(null);
+
   const platformsList = ['YouTube Shorts', 'Facebook Pages', 'Instagram'];
+
+  // Load existing generated batch on mount
+  useEffect(() => {
+    fetch('/api/generate/latest')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data && data.assets && data.assets.length > 0) {
+          setGeneratedResults(data.assets);
+        }
+      })
+      .catch(err => console.error("Error loading latest batch:", err));
+  }, []);
 
   const togglePlatform = (p) => {
     if (selectedPlatforms.includes(p)) {
@@ -905,6 +934,7 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
     setIsGenerating(true);
     setJobProgress(15);
     setJobStage('Reading source text & extracting core claims...');
+    setSelectedAssetIds(new Set());
 
     try {
       const res = await fetch('/api/generate', {
@@ -933,23 +963,24 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
           const statusRes = await fetch(`/api/generate/status/${job_id}`);
           if (statusRes.ok) {
             const statusData = await statusRes.json();
-            setJobProgress(statusData.progress || 50);
+            setJobProgress(statusData.progress || 30);
             setJobStage(statusData.stage || 'Processing assets...');
 
             if (statusData.status === 'completed') {
               clearInterval(pollInterval);
               setIsGenerating(false);
               setGeneratedResults(statusData.generated_assets || []);
+              if (onSaved) onSaved();
             } else if (statusData.status === 'failed') {
               clearInterval(pollInterval);
               setIsGenerating(false);
-              alert("Generation failed: " + statusData.error);
+              alert("Generation failed: " + (statusData.error || "Unknown error"));
             }
           }
         } catch (e) {
           console.error(e);
         }
-      }, 1500);
+      }, 900);
 
     } catch (err) {
       setIsGenerating(false);
@@ -957,8 +988,100 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
     }
   };
 
+  // Selective single asset publishing
+  const handlePublishSingle = async (asset) => {
+    const aid = asset.asset_id;
+    const targetPlatform = asset.platform;
+
+    setPublishingStates(prev => ({
+      ...prev,
+      [aid]: { status: 'publishing', message: `Dispatching to ${targetPlatform}...` }
+    }));
+
+    try {
+      const res = await fetch(`/api/publish/${aid}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ platform: targetPlatform })
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.detail || `Publishing to ${targetPlatform} failed.`);
+      }
+
+      const publishedUrl = data.primary_url || (data.results && data.results[0] && data.results[0].published_url) || data.test_published_url || `https://${targetPlatform.toLowerCase().replace(/ /g, '')}.com/post/${aid}`;
+      setPublishingStates(prev => ({
+        ...prev,
+        [aid]: {
+          status: 'published',
+          url: publishedUrl,
+          message: `Published to ${targetPlatform}!`
+        }
+      }));
+      if (onSaved) onSaved();
+    } catch (err) {
+      setPublishingStates(prev => ({
+        ...prev,
+        [aid]: { status: 'failed', error: err.message }
+      }));
+    }
+  };
+
+  // Bulk publishing for selected assets
+  const handlePublishSelected = async () => {
+    const assetsToPublish = filteredResults.filter(a => selectedAssetIds.has(a.asset_id));
+    if (assetsToPublish.length === 0) return;
+
+    for (const a of assetsToPublish) {
+      await handlePublishSingle(a);
+    }
+  };
+
+  const toggleSelectAsset = (aid) => {
+    setSelectedAssetIds(prev => {
+      const next = new Set(prev);
+      if (next.has(aid)) next.delete(aid);
+      else next.add(aid);
+      return next;
+    });
+  };
+
+  const selectAll = () => {
+    setSelectedAssetIds(new Set(filteredResults.map(a => a.asset_id)));
+  };
+
+  const deselectAll = () => {
+    setSelectedAssetIds(new Set());
+  };
+
+  const setCarouselSlide = (aid, idx) => {
+    setCarouselSlideIndices(prev => ({ ...prev, [aid]: idx }));
+  };
+
+  const copyText = (text, id) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    }
+  };
+
+  // Filtered results
+  const filteredResults = useMemo(() => {
+    if (formatFilter === 'all') return generatedResults;
+    if (formatFilter === 'video') return generatedResults.filter(a => (a.format || '').toLowerCase().includes('video'));
+    if (formatFilter === 'carousel') return generatedResults.filter(a => (a.format || '').toLowerCase().includes('carousel'));
+    if (formatFilter === 'graphic') return generatedResults.filter(a => (a.format || '').toLowerCase().includes('graphic'));
+    return generatedResults;
+  }, [generatedResults, formatFilter]);
+
+  const videoCount = generatedResults.filter(a => (a.format || '').toLowerCase().includes('video')).length;
+  const carouselCount = generatedResults.filter(a => (a.format || '').toLowerCase().includes('carousel')).length;
+  const graphicCount = generatedResults.filter(a => (a.format || '').toLowerCase().includes('graphic')).length;
+
   return (
-    <div className="max-w-7xl mx-auto space-y-8">
+    <div className="max-w-7xl mx-auto space-y-8 pb-16">
       {/* Title */}
       <div className="pb-4 border-b border-slate-200">
         <h2 className="text-2xl font-bold text-slate-900 tracking-tight">AI Content & Repurposing Engine</h2>
@@ -1104,59 +1227,420 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
 
           {/* Live Progress Card (Visible during generation) */}
           {isGenerating && (
-            <div className="bg-slate-900 text-white p-5 rounded-xl border border-slate-800 space-y-3">
+            <div className="bg-slate-900 text-white p-5 rounded-xl border border-slate-800 space-y-4 shadow-lg">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-mono text-indigo-400 font-semibold uppercase">Live Generation Progress</span>
-                <span className="font-mono">{jobProgress}%</span>
+                <span className="font-mono text-indigo-400 font-semibold uppercase flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
+                  <span>Live Pipeline Orchestrator</span>
+                </span>
+                <span className="font-mono text-cyan-300 font-bold">{jobProgress}%</span>
               </div>
-              <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                <div className="bg-indigo-500 h-full transition-all duration-300" style={{ width: `${jobProgress}%` }}></div>
+              <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                <div className="bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 h-full transition-all duration-300" style={{ width: `${jobProgress}%` }}></div>
               </div>
-              <p className="text-xs text-slate-300 font-mono flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
-                <span>{jobStage}</span>
+              <p className="text-xs text-slate-200 font-mono leading-relaxed bg-slate-950/60 p-2.5 rounded-lg border border-slate-800">
+                {jobStage}
               </p>
+
+              {/* Progress Milestones */}
+              <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-800/80 text-[11px] font-mono">
+                <div className={`p-2 rounded flex flex-col items-center justify-center text-center ${jobProgress >= 45 ? 'bg-indigo-950/80 text-indigo-300 border border-indigo-700/50' : 'bg-slate-800/40 text-slate-500'}`}>
+                  <span className="font-bold">3 Videos</span>
+                  <span className="text-[9px]">9:16 MP4</span>
+                </div>
+                <div className={`p-2 rounded flex flex-col items-center justify-center text-center ${jobProgress >= 70 ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50' : 'bg-slate-800/40 text-slate-500'}`}>
+                  <span className="font-bold">2 Carousels</span>
+                  <span className="text-[9px]">PDF + Slides</span>
+                </div>
+                <div className={`p-2 rounded flex flex-col items-center justify-center text-center ${jobProgress >= 90 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50' : 'bg-slate-800/40 text-slate-500'}`}>
+                  <span className="font-bold">5 Graphics</span>
+                  <span className="text-[9px]">1080x1080</span>
+                </div>
+              </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Generated Assets Results Workspace */}
+      {/* Generated Media Workspace (Rendered In-Place) */}
       {generatedResults.length > 0 && (
-        <div className="space-y-4 pt-6 border-t border-slate-200">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 uppercase font-mono">
-              Generated Batch ({generatedResults.length} Assets)
-            </h3>
-            <span className="text-xs text-emerald-600 font-medium flex items-center gap-1">
-              <Icon name="check-circle" className="w-3.5 h-3.5" />
-              <span>Saved to Manifest & Calendar</span>
-            </span>
+        <div className="space-y-6 pt-8 border-t border-slate-200" id="generated-workspace">
+          {/* Section Header */}
+          <div className="bg-white p-5 rounded-xl border border-slate-200 card-shadow flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 tracking-tight">
+                  Generated Campaign Media ({generatedResults.length} Deliverables)
+                </h3>
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                  <Icon name="check-circle" className="w-3 h-3 text-emerald-600" />
+                  <span>Media Ready & Validated</span>
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1">
+                All media files generated, previewable in-place, and ready for selective multi-platform publishing.
+              </p>
+            </div>
+
+            {/* Bulk Publish Controls */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <button
+                onClick={selectedAssetIds.size === filteredResults.length ? deselectAll : selectAll}
+                className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 transition-colors"
+              >
+                {selectedAssetIds.size === filteredResults.length ? 'Deselect All' : 'Select All'}
+              </button>
+              <button
+                disabled={selectedAssetIds.size === 0}
+                onClick={handlePublishSelected}
+                className="px-4 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white shadow-sm flex items-center gap-1.5 transition-all"
+              >
+                <Icon name="sparkles" className="w-3.5 h-3.5" />
+                <span>Publish Selected ({selectedAssetIds.size})</span>
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {generatedResults.map((asset) => (
-              <div 
-                key={asset.asset_id}
-                onClick={() => onOpenAsset(asset.asset_id)}
-                className="bg-white p-4 rounded-xl border border-slate-200 hover:border-indigo-400 card-shadow transition-all cursor-pointer flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700">
-                      {asset.format}
-                    </span>
-                    <span className="text-[11px] font-mono text-slate-400">{asset.platform}</span>
+          {/* Format Filter Tabs */}
+          <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+            <button
+              onClick={() => setFormatFilter('all')}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5 ${
+                formatFilter === 'all'
+                  ? 'bg-slate-900 text-white'
+                  : 'text-slate-600 hover:bg-slate-100'
+              }`}
+            >
+              <span>All Assets</span>
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20">{generatedResults.length}</span>
+            </button>
+            <button
+              onClick={() => setFormatFilter('video')}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5 ${
+                formatFilter === 'video'
+                  ? 'bg-red-600 text-white'
+                  : 'text-slate-600 hover:bg-slate-100'
+              }`}
+            >
+              <Icon name="play" className="w-3 h-3" />
+              <span>Videos</span>
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-red-100 text-red-700">{videoCount}</span>
+            </button>
+            <button
+              onClick={() => setFormatFilter('carousel')}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5 ${
+                formatFilter === 'carousel'
+                  ? 'bg-indigo-600 text-white'
+                  : 'text-slate-600 hover:bg-slate-100'
+              }`}
+            >
+              <Icon name="layers" className="w-3 h-3" />
+              <span>Carousels</span>
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700">{carouselCount}</span>
+            </button>
+            <button
+              onClick={() => setFormatFilter('graphic')}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5 ${
+                formatFilter === 'graphic'
+                  ? 'bg-emerald-600 text-white'
+                  : 'text-slate-600 hover:bg-slate-100'
+              }`}
+            >
+              <Icon name="image" className="w-3 h-3" />
+              <span>Graphics</span>
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-emerald-100 text-emerald-700">{graphicCount}</span>
+            </button>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredResults.map((asset) => {
+              const aid = asset.asset_id;
+              const fmt = (asset.format || '').toLowerCase();
+              const isVideo = fmt.includes('video');
+              const isCarousel = fmt.includes('carousel');
+              const isGraphic = fmt.includes('graphic');
+              const isSelected = selectedAssetIds.has(aid);
+              const pubState = publishingStates[aid] || { status: 'idle' };
+              const actionConfig = getPlatformActionConfig(asset.platform, asset.format);
+              const curSlide = carouselSlideIndices[aid] || 1;
+
+              return (
+                <div 
+                  key={aid}
+                  className={`bg-white rounded-xl border transition-all card-shadow flex flex-col justify-between overflow-hidden ${
+                    isSelected ? 'border-indigo-500 ring-2 ring-indigo-500/20' : 'border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  {/* Top Bar: Selector, ID, Platform */}
+                  <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                    <div className="flex items-center gap-2.5">
+                      <input 
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => toggleSelectAsset(aid)}
+                        className="w-4 h-4 rounded text-indigo-600 border-slate-300 focus:ring-indigo-500 cursor-pointer"
+                      />
+                      <span className="text-xs font-mono font-bold text-slate-800">{aid}</span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5">
+                      {/* Platform Pill */}
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 ${
+                        asset.platform === 'YouTube Shorts' 
+                          ? 'bg-red-50 text-red-700 border border-red-200' 
+                          : (asset.platform === 'Instagram'
+                              ? 'bg-pink-50 text-pink-700 border border-pink-200'
+                              : 'bg-blue-50 text-blue-700 border border-blue-200')
+                      }`}>
+                        <Icon 
+                          name={asset.platform === 'YouTube Shorts' ? 'play' : (asset.platform === 'Instagram' ? 'instagram' : 'facebook')} 
+                          className="w-3 h-3" 
+                        />
+                        <span>{asset.platform}</span>
+                      </span>
+
+                      {/* Format Pill */}
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600">
+                        {asset.format}
+                      </span>
+                    </div>
                   </div>
-                  <h4 className="text-xs font-bold text-slate-900 line-clamp-2">{asset.hook}</h4>
-                  <p className="text-[11px] text-slate-500 mt-1 line-clamp-3">{asset.caption}</p>
+
+                  {/* Media Preview Container */}
+                  <div className="p-4 bg-slate-900/5 border-b border-slate-100 flex flex-col items-center justify-center min-h-[260px]">
+                    {/* VIDEO OUTPUT PREVIEW */}
+                    {isVideo && (
+                      <div className="w-full space-y-2">
+                        <div className="relative rounded-xl overflow-hidden bg-black aspect-[9/16] max-h-[320px] mx-auto border border-slate-800 shadow-inner flex items-center justify-center">
+                          <video 
+                            controls 
+                            preload="metadata"
+                            src={asset.stream_url || `/media/videos/${aid}.mp4`}
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute top-2 right-2 bg-black/75 backdrop-blur text-white px-2 py-0.5 rounded text-[9px] font-mono flex items-center gap-1 border border-white/10 pointer-events-none">
+                            <Icon name="volume-2" className="w-3 h-3 text-cyan-400" />
+                            <span>12s MP4</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] px-1 text-slate-500">
+                          <span className="font-mono">1080x1920 &bull; Synthwave Audio</span>
+                          <a 
+                            href={asset.stream_url || `/media/videos/${aid}.mp4`} 
+                            download={`${aid}.mp4`}
+                            className="text-indigo-600 hover:underline font-semibold flex items-center gap-1"
+                          >
+                            <Icon name="download" className="w-3 h-3" />
+                            <span>Download</span>
+                          </a>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* CAROUSEL OUTPUT PREVIEW */}
+                    {isCarousel && (
+                      <div className="w-full space-y-2">
+                        <div className="relative rounded-xl overflow-hidden bg-slate-950 aspect-[1080/1350] max-h-[300px] mx-auto border border-slate-800 shadow-md flex items-center justify-center">
+                          <img 
+                            src={`/media/carousels/${aid}/slide_${curSlide}.png`} 
+                            alt={`Slide ${curSlide}`}
+                            onError={(e) => { e.target.src = `/media/carousels/${aid}_cover.png`; }}
+                            className="w-full h-full object-contain"
+                          />
+                          {/* Navigation buttons */}
+                          <button 
+                            type="button"
+                            onClick={() => setCarouselSlide(aid, curSlide > 1 ? curSlide - 1 : 5)}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center shadow transition-all"
+                            title="Previous Slide"
+                          >
+                            &larr;
+                          </button>
+                          <button 
+                            type="button"
+                            onClick={() => setCarouselSlide(aid, curSlide < 5 ? curSlide + 1 : 1)}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center shadow transition-all"
+                            title="Next Slide"
+                          >
+                            &rarr;
+                          </button>
+                          {/* Counter pill */}
+                          <div className="absolute top-2 right-2 bg-black/75 backdrop-blur text-white px-2 py-0.5 rounded text-[9px] font-mono border border-white/10">
+                            Slide {curSlide} / 5
+                          </div>
+                        </div>
+
+                        {/* Slide Indicator Dots */}
+                        <div className="flex items-center justify-center gap-1.5 py-1">
+                          {[1, 2, 3, 4, 5].map((sNum) => (
+                            <button
+                              key={sNum}
+                              type="button"
+                              onClick={() => setCarouselSlide(aid, sNum)}
+                              className={`h-1.5 rounded-full transition-all ${
+                                curSlide === sNum ? 'w-5 bg-indigo-600' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
+                              }`}
+                            />
+                          ))}
+                        </div>
+
+                        {/* Carousel links */}
+                        <div className="flex items-center justify-between text-[11px] px-1 text-slate-500">
+                          <a 
+                            href={`/media/carousels/${aid}/${aid}.pdf`} 
+                            download={`${aid}.pdf`}
+                            className="text-slate-600 hover:text-slate-900 font-semibold flex items-center gap-1"
+                          >
+                            <Icon name="download" className="w-3 h-3" />
+                            <span>PDF</span>
+                          </a>
+                          <a 
+                            href={`/media/carousels/${aid}/player.html`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-indigo-600 hover:underline font-semibold flex items-center gap-1"
+                          >
+                            <Icon name="external-link" className="w-3 h-3" />
+                            <span>Interactive Player &rarr;</span>
+                          </a>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* GRAPHIC OUTPUT PREVIEW */}
+                    {isGraphic && (
+                      <div className="w-full space-y-2">
+                        <div className="rounded-xl overflow-hidden bg-slate-900 aspect-square max-h-[280px] mx-auto border border-slate-200 shadow-sm flex items-center justify-center">
+                          <img 
+                            src={asset.png_url || `/media/graphics/${aid}.png`}
+                            alt={asset.hook}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] px-1 text-slate-500">
+                          <span className="font-mono">1080x1080 High-Res PNG</span>
+                          <a 
+                            href={asset.png_url || `/media/graphics/${aid}.png`} 
+                            download={`${aid}.png`}
+                            className="text-indigo-600 hover:underline font-semibold flex items-center gap-1"
+                          >
+                            <Icon name="download" className="w-3 h-3" />
+                            <span>Download</span>
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Copy & Narrative Metadata */}
+                  <div className="p-4 space-y-3 flex-1 flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <h4 className="text-xs font-bold text-slate-900 line-clamp-2 leading-tight">
+                          {asset.hook}
+                        </h4>
+                        <button
+                          type="button"
+                          onClick={() => copyText(asset.hook, `${aid}-hook`)}
+                          className="text-slate-400 hover:text-slate-600 shrink-0 p-1 rounded hover:bg-slate-100"
+                          title="Copy Hook"
+                        >
+                          <Icon name={copiedId === `${aid}-hook` ? "check" : "copy"} className="w-3 h-3 text-slate-500" />
+                        </button>
+                      </div>
+
+                      <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 text-[11px] text-slate-600 leading-relaxed font-sans max-h-24 overflow-y-auto">
+                        {asset.caption}
+                      </div>
+
+                      <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono pt-1">
+                        <span className="truncate max-w-[200px] text-slate-500">{asset.content_pillar}</span>
+                        <span>{asset.scheduled_date}</span>
+                      </div>
+                    </div>
+
+                    {/* Selective Publishing Controls */}
+                    <div className="pt-3 border-t border-slate-100 space-y-2">
+                      {/* State Feedback: Idle */}
+                      {pubState.status === 'idle' && (
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handlePublishSingle(asset)}
+                            className={`flex-1 py-2 px-3 text-xs font-bold rounded-lg text-white flex items-center justify-center gap-1.5 shadow-sm transition-all ${actionConfig.btnClass}`}
+                            title={`Selectively publish to ${asset.platform}`}
+                          >
+                            <Icon name={actionConfig.icon} className="w-3.5 h-3.5" />
+                            <span>{actionConfig.label}</span>
+                          </button>
+                          
+                          {onScheduleAsset && (
+                            <button
+                              type="button"
+                              onClick={() => onScheduleAsset(asset)}
+                              className="p-2 border border-slate-200 hover:border-slate-300 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
+                              title="Schedule to Calendar"
+                            >
+                              <Icon name="calendar" className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
+                      )}
+
+                      {/* State Feedback: Publishing */}
+                      {pubState.status === 'publishing' && (
+                        <div className="py-2 px-3 bg-indigo-50 border border-indigo-200 rounded-lg text-xs font-medium text-indigo-700 flex items-center justify-center gap-2">
+                          <span className="w-3.5 h-3.5 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin"></span>
+                          <span>Publishing to {asset.platform}...</span>
+                        </div>
+                      )}
+
+                      {/* State Feedback: Published */}
+                      {pubState.status === 'published' && (
+                        <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-lg space-y-1">
+                          <div className="flex items-center justify-between text-xs font-bold text-emerald-800">
+                            <span className="flex items-center gap-1">
+                              <Icon name="check-circle" className="w-3.5 h-3.5 text-emerald-600" />
+                              <span>Published to {asset.platform}!</span>
+                            </span>
+                          </div>
+                          {pubState.url && (
+                            <a 
+                              href={pubState.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-[11px] text-emerald-700 hover:underline font-mono flex items-center gap-1"
+                            >
+                              <Icon name="external-link" className="w-3 h-3" />
+                              <span className="truncate max-w-[260px]">{pubState.url}</span>
+                            </a>
+                          )}
+                        </div>
+                      )}
+
+                      {/* State Feedback: Failed */}
+                      {pubState.status === 'failed' && (
+                        <div className="p-2.5 bg-rose-50 border border-rose-200 rounded-lg space-y-1.5">
+                          <div className="flex items-center gap-1 text-xs font-bold text-rose-800">
+                            <Icon name="alert-circle" className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                            <span className="truncate">Publishing Failed</span>
+                          </div>
+                          <p className="text-[10px] text-rose-600 line-clamp-2">{pubState.error}</p>
+                          <button
+                            type="button"
+                            onClick={() => handlePublishSingle(asset)}
+                            className="w-full py-1 text-[11px] font-bold text-rose-700 bg-rose-100 hover:bg-rose-200 rounded transition-colors"
+                          >
+                            Retry Publishing
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
-                  <span className="font-mono">{asset.asset_id}</span>
-                  <span className="text-indigo-600 font-semibold hover:underline">Inspect Asset &rarr;</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}

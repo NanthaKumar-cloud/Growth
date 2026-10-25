@@ -1,0 +1,136 @@
+{
+  "title": "IncuBrix CreatorOps Careers",
+  "brand": {
+    "name": "IncuBrix",
+    "tagline": "Build the future of CreatorOps",
+    "website": "incubrix.com",
+    "handle": "@incubrix"
+  },
+  "voice": {
+    "name": "Kore",
+    "speaking_rate": 1.05,
+    "why": "Energetic and upbeat, perfect for exciting young engineers and tech talent looking for early ownership."
+  },
+  "world": "A modern, interconnected workspace bridging Singapore and India, featuring a glowing modular cube as the hero object representing the CreatorOps platform, transitioning from abstract code to real-world product impact.",
+  "design_system": {
+    "palette": {
+      "bg": "#0B0F19",
+      "bg_alt": "#161E2E",
+      "primary": "#3B82F6",
+      "secondary": "#10B981",
+      "accent": "#F59E0B",
+      "ink": "#FFFFFF",
+      "paper": "#1E293B"
+    },
+    "fonts": {
+      "display": "Poppins",
+      "body": "Inter"
+    },
+    "corner_radius": 24,
+    "illustration_style": "Flat vector illustration with clean geometric shapes, subtle gradient overlays, and glowing tech accent lines.",
+    "hero_element": "A glowing modular isometric cube (the IncuBrix CreatorOps core)",
+    "recurring_motifs": [
+      "Floating nodes and connection lines",
+      "Split-screen Singapore-India bridge icon"
+    ],
+    "ribbon": {
+      "y_fraction": 0.65,
+      "thickness": 32,
+      "color_key": "primary"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "role": "HOOK",
+      "narration": "What if you could own production ready tech products early in your career?",
+      "on_screen_headline": "Build Real Products",
+      "on_screen_support": "No waiting around. Own it from day one.",
+      "visual_description": "Wide shot of a dark blue futuristic interface. The glowing isometric hero cube floats in the center, pulsing with blue and orange light particles.",
+      "key_beats": [
+        {
+          "narration_fragment": "What if you could own production ready tech products",
+          "visual_action": "The glowing cube assembles itself from floating geometric wireframes."
+        },
+        {
+          "narration_fragment": "early in your career?",
+          "visual_action": "A bold typography badge pops out next to the cube with a bright accent glow."
+        }
+      ],
+      "mood": "Inspiring and energetic",
+      "background_color_key": "bg",
+      "opens_with": "Fresh opening frame with a dark gradient background.",
+      "closes_with": "The glowing isometric cube pulses in the center, casting a blue light downwards.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 2,
+      "role": "PROBLEM_SOLUTION",
+      "narration": "We are a twenty member team across Singapore and India, building a unified CreatorOps platform.",
+      "on_screen_headline": "Global Team, Big Vision",
+      "on_screen_support": "Singapore meets India in CreatorOps",
+      "visual_description": "Medium shot. The hero cube splits into two connected nodes representing Singapore and India, with miniature vector icons of software code, AI neural nets, and video timelines flowing between them.",
+      "key_beats": [
+        {
+          "narration_fragment": "We are a twenty member team across Singapore and India,",
+          "visual_action": "Two glowing map pins appear, linked by a dynamic data arc across the screen."
+        },
+        {
+          "narration_fragment": "building a unified CreatorOps platform.",
+          "visual_action": "Miniature icons of code, AI, and video streams merge smoothly into the central cube."
+        }
+      ],
+      "mood": "Collaborative and dynamic",
+      "background_color_key": "bg_alt",
+      "opens_with": "The glowing cube from scene one slides in from the right.",
+      "closes_with": "A stream of content workflow icons flows off the left edge of the screen.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 3,
+      "role": "PROOF",
+      "narration": "Our live platform helps creators discover, create, repurpose, and publish everywhere.",
+      "on_screen_headline": "Empowering Creators",
+      "on_screen_support": "From idea to multi-platform publishing",
+      "visual_description": "Close-up on the hero cube transforming into a sleek multi-screen dashboard interface showing audio, text, and video formatting tools in action with green success checkmarks.",
+      "key_beats": [
+        {
+          "narration_fragment": "Our live platform helps creators discover, create,",
+          "visual_action": "Dashboard panels flip open from the cube, displaying bright vector waveforms and text lines."
+        },
+        {
+          "narration_fragment": "repurpose, and publish everywhere.",
+          "visual_action": "Checkmarks pop up sequentially as content flows outward to various social media channel icons."
+        }
+      ],
+      "mood": "Efficient and high-tech",
+      "background_color_key": "bg",
+      "opens_with": "Workflow icons flow in from the right, re-entering the frame.",
+      "closes_with": "The dashboard collapses back neatly into the glowing hero cube.",
+      "transition_out": "slideleft"
+    },
+    {
+      "id": 4,
+      "role": "CTA",
+      "narration": "Join exceptional graduates taking on meaningful responsibilities. Visit incubrix dot com.",
+      "on_screen_headline": "Your Career Starts Here",
+      "on_screen_support": "incubrix.com | @incubrix",
+      "visual_description": "The hero cube rests at the top center, framed by clean modern UI cards. A bright accent CTA button pulses at the bottom with website and handle clearly displayed.",
+      "key_beats": [
+        {
+          "narration_fragment": "Join exceptional graduates taking on meaningful responsibilities.",
+          "visual_action": "The cube emits a warm burst of light, revealing clean typography for career opportunities."
+        },
+        {
+          "narration_fragment": "Visit incubrix dot com.",
+          "visual_action": "The CTA button at the bottom scales up slightly, inviting clicks."
+        }
+      ],
+      "mood": "Welcoming and action-oriented",
+      "background_color_key": "bg",
+      "opens_with": "The hero cube stabilizes in the upper portion of the frame.",
+      "closes_with": "The final brand card locks into place with website URL highlighted.",
+      "transition_out": "fade"
+    }
+  ]
+}

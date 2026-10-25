@@ -640,7 +640,29 @@
     }
   },
   {
-    "timestamp": "2026-10-25T07:07:55.935304",
+    "timestamp": "2026-10-25T07:25:52.784452",
+    "event_type": "AUTO_PUBLISH",
+    "details": {
+      "asset_id": "INC-VID-LIVE-846",
+      "platform": "YouTube Shorts",
+      "url": "https://youtube.com/shorts/r4d8a8VY2W0",
+      "status": "SUCCESS"
+    }
+  },
+  {
+    "timestamp": "2026-10-25T07:38:35.429701",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792913915-1",
+        "AUTO-CAR-1792913915-2",
+        "AUTO-IMG-1792913915-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T07:46:36.115116",
     "event_type": "AUDIT_TEST_EVENT",
     "details": {
       "asset_id": "INC-VID-010",
@@ -648,31 +670,7 @@
     }
   },
   {
-    "timestamp": "2026-10-25T07:08:53.188377",
-    "event_type": "CADENCE_BATCH_CREATED",
-    "details": {
-      "count": 3,
-      "asset_ids": [
-        "AUTO-VID-1792912133-1",
-        "AUTO-CAR-1792912133-2",
-        "AUTO-IMG-1792912133-3"
-      ]
-    }
-  },
-  {
-    "timestamp": "2026-10-25T07:08:53.721347",
-    "event_type": "CADENCE_BATCH_CREATED",
-    "details": {
-      "count": 3,
-      "asset_ids": [
-        "AUTO-VID-1792912133-1",
-        "AUTO-CAR-1792912133-2",
-        "AUTO-IMG-1792912133-3"
-      ]
-    }
-  },
-  {
-    "timestamp": "2026-10-25T07:08:59.905087",
+    "timestamp": "2026-10-25T07:47:33.406381",
     "event_type": "AUDIT_TEST_EVENT",
     "details": {
       "asset_id": "INC-VID-010",
@@ -680,7 +678,7 @@
     }
   },
   {
-    "timestamp": "2026-10-25T07:09:58.168268",
+    "timestamp": "2026-10-25T07:47:53.034237",
     "event_type": "AUDIT_TEST_EVENT",
     "details": {
       "asset_id": "INC-VID-010",
@@ -688,7 +686,67 @@
     }
   },
   {
-    "timestamp": "2026-10-25T07:11:03.151316",
+    "timestamp": "2026-10-25T07:48:13.058452",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792914493-1",
+        "AUTO-CAR-1792914493-2",
+        "AUTO-IMG-1792914493-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T07:54:45.457979",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792914885-1",
+        "AUTO-CAR-1792914885-2",
+        "AUTO-IMG-1792914885-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T07:54:46.152844",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792914886-1",
+        "AUTO-CAR-1792914886-2",
+        "AUTO-IMG-1792914886-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T07:57:20.439985",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792915040-1",
+        "AUTO-CAR-1792915040-2",
+        "AUTO-IMG-1792915040-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T07:57:20.987494",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792915040-1",
+        "AUTO-CAR-1792915040-2",
+        "AUTO-IMG-1792915040-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T07:57:27.499090",
     "event_type": "AUDIT_TEST_EVENT",
     "details": {
       "asset_id": "INC-VID-010",
@@ -696,27 +754,11 @@
     }
   },
   {
-    "timestamp": "2026-10-25T07:11:14.265364",
-    "event_type": "CADENCE_BATCH_CREATED",
+    "timestamp": "2026-10-25T07:58:00.690919",
+    "event_type": "AUDIT_TEST_EVENT",
     "details": {
-      "count": 3,
-      "asset_ids": [
-        "AUTO-VID-1792912274-1",
-        "AUTO-CAR-1792912274-2",
-        "AUTO-IMG-1792912274-3"
-      ]
-    }
-  },
-  {
-    "timestamp": "2026-10-25T07:11:18.189052",
-    "event_type": "CADENCE_BATCH_CREATED",
-    "details": {
-      "count": 3,
-      "asset_ids": [
-        "AUTO-VID-1792912278-1",
-        "AUTO-CAR-1792912278-2",
-        "AUTO-IMG-1792912278-3"
-      ]
+      "asset_id": "INC-VID-010",
+      "scheduled_date": "2026-10-25T15:00:00"
     }
   }
 ]

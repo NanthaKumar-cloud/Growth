@@ -1,0 +1,148 @@
+<svg viewBox="0 0 1080 1920" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&amp;family=Inter:wght@400;600;700&amp;display=swap');
+
+.a { opacity: 0; transform-box: fill-box; transform-origin: center; animation-fill-mode: forwards; }
+
+.bg-in { animation: fadeIn 0.6s ease-out 0s forwards; }
+.text-h1 { animation: textPop 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.2s forwards; }
+.text-sub { animation: textPop 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards; }
+
+.cube-core { animation: cubeEnter 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards, cubeFloat 4s ease-in-out 1.0s infinite alternate; }
+
+.card-1 { animation: cardEnter 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.6s forwards; }
+.card-2 { animation: cardEnter 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.8s forwards; }
+
+.cta-button { animation: ctaPop 0.8s cubic-bezier(0.34,1.56,0.64,1) 1.2s forwards, ctaPulse 2s ease-in-out 2.0s infinite alternate; }
+.ribbon-anim { animation: ribbonWave 3s ease-in-out infinite alternate 0.5s; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes textPop { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes cubeEnter { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+@keyframes cubeFloat { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-10px) rotate(1deg); } }
+@keyframes cardEnter { from { opacity: 0; transform: translateY(40px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes ctaPop { from { opacity: 0; transform: scale(0.7) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes ctaPulse { from { transform: scale(1); filter: drop-shadow(0 0 15px rgba(59,130,246,0.5)); } to { transform: scale(1.03); filter: drop-shadow(0 0 25px rgba(59,130,246,0.8)); } }
+@keyframes ribbonWave { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-6px) rotate(1.5deg); } }
+
+@media (prefers-reduced-motion: reduce) { 
+  .a { animation: none !important; opacity: 1 !important; transform: none !important; } 
+}
+</style>
+
+<defs>
+  <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0B0F19" />
+    <stop offset="100%" stop-color="#161E2E" />
+  </linearGradient>
+
+  <linearGradient id="cubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#60A5FA" />
+    <stop offset="100%" stop-color="#3B82F6" />
+  </linearGradient>
+  <linearGradient id="cubeLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#2563EB" />
+    <stop offset="100%" stop-color="#1D4ED8" />
+  </linearGradient>
+  <linearGradient id="cubeRight" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#3B82F6" />
+    <stop offset="100%" stop-color="#1E40AF" />
+  </linearGradient>
+
+  <linearGradient id="ctaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#3B82F6" />
+    <stop offset="100%" stop-color="#10B981" />
+  </linearGradient>
+
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="24" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+
+  <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="12" result="blur" />
+    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+  </filter>
+</defs>
+
+<!-- Background -->
+<rect width="1080" height="1920" fill="url(#bgGrad)" class="a bg-in" />
+
+<!-- Brand Mark -->
+<text x="72" y="100" font-size="32" font-weight="700" fill="#94A3B8" font-family="'Poppins', Arial, sans-serif">IncuBrix</text>
+
+<!-- Tech Grid Background Pattern -->
+<g opacity="0.08">
+  <path d="M 0 300 L 1080 300 M 0 600 L 1080 600 M 0 900 L 1080 900 M 0 1200 L 1080 1200 M 0 1500 L 1080 1500" stroke="#FFFFFF" stroke-width="2" />
+  <path d="M 270 0 L 270 1920 M 540 0 L 540 1920 M 810 0 L 810 1920" stroke="#FFFFFF" stroke-width="2" />
+</g>
+
+<!-- Hero Cube at Top Center -->
+<g transform="translate(540, 240)"><g class="a cube-core">
+  <ellipse cx="0" cy="120" rx="90" ry="25" fill="#3B82F6" opacity="0.4" filter="url(#glow)" />
+  
+  <path d="M 0 -90 L 90 -45 L 0 0 L -90 -45 Z" fill="url(#cubeTop)" stroke="#93C5FD" stroke-width="2" />
+  <path d="M -90 -45 L 0 0 L 0 110 L -90 65 Z" fill="url(#cubeLeft)" stroke="#60A5FA" stroke-width="2" />
+  <path d="M 0 0 L 90 -45 L 90 65 L 0 110 Z" fill="url(#cubeRight)" stroke="#93C5FD" stroke-width="2" />
+
+  <path d="M -45 -22 L 0 0 L 45 -22" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.7" />
+  <path d="M 0 0 L 0 55" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.7" />
+  <circle cx="0" cy="0" r="8" fill="#FFFFFF" filter="url(#softGlow)" />
+</g>
+</g>
+
+<!-- Headline -->
+<g transform="translate(540, 460)"><g class="a text-h1">
+  <text x="0" y="0" text-anchor="middle" font-size="72" font-weight="800" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">Your Career Starts Here</text>
+</g>
+</g>
+
+<!-- Subtitle -->
+<g transform="translate(540, 550)"><g class="a text-sub">
+  <text x="0" y="0" text-anchor="middle" font-size="34" font-weight="600" fill="#3B82F6" font-family="'Inter', Arial, sans-serif">Build the future of CreatorOps</text>
+</g>
+</g>
+
+<!-- Feature Card 1: Meaningful Responsibilities -->
+<g transform="translate(540, 750)"><g class="a card-1">
+  <rect x="-420" y="-100" width="840" height="180" rx="24" fill="#1E293B" stroke="#3B82F6" stroke-width="3" filter="url(#softGlow)" />
+  <circle cx="-340" cy="-10" r="36" fill="#0B0F19" stroke="#3B82F6" stroke-width="2" />
+  <path d="M -350 -15 L -335 0 L -330 -15" fill="none" stroke="#10B981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M -355 5 L -335 20 L -320 5" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <text x="-270" y="-35" font-size="28" font-weight="700" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">Exceptional Graduates &amp; Innovators</text>
+  <text x="-270" y="10" font-size="22" font-weight="400" fill="#94A3B8" font-family="'Inter', Arial, sans-serif">Take on core engineering &amp; product ownership roles from day one.</text>
+</g>
+</g>
+
+<!-- Feature Card 2: Global Impact -->
+<g transform="translate(540, 980)"><g class="a card-2">
+  <rect x="-420" y="-100" width="840" height="180" rx="24" fill="#1E293B" stroke="#10B981" stroke-width="3" filter="url(#softGlow)" />
+  <circle cx="-340" cy="-10" r="36" fill="#0B0F19" stroke="#10B981" stroke-width="2" />
+  <circle cx="-340" cy="-10" r="16" fill="none" stroke="#10B981" stroke-width="3" />
+  <path d="M -356 -10 L -324 -10 M -340 -26 L -340 6" stroke="#10B981" stroke-width="3" />
+
+  <text x="-270" y="-35" font-size="28" font-weight="700" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">Singapore &amp; India Connected</text>
+  <text x="-270" y="10" font-size="22" font-weight="400" fill="#94A3B8" font-family="'Inter', Arial, sans-serif">Work across borders in a high-growth, remote-first ecosystem.</text>
+</g>
+</g>
+
+<!-- Localized Ribbon Accent -->
+<g transform="translate(540, 1180)"><g class="a ribbon-anim">
+  <path d="M -100 0 Q 0 -25 100 0" fill="none" stroke="#3B82F6" stroke-width="32" stroke-linecap="round" opacity="0.85" filter="url(#softGlow)" />
+  <path d="M -60 0 Q 0 -15 60 0" fill="none" stroke="#10B981" stroke-width="12" stroke-linecap="round" opacity="0.9" />
+</g>
+</g>
+
+<!-- CTA Button / Final Brand Card -->
+<g transform="translate(540, 1380)"><g class="a cta-button">
+  <rect x="-420" y="-90" width="840" height="180" rx="36" fill="url(#ctaGrad)" filter="url(#glow)" />
+  <text x="0" y="-20" text-anchor="middle" font-size="44" font-weight="800" fill="#FFFFFF" font-family="'Poppins', Arial, sans-serif">incubrix.com</text>
+  <text x="0" y="35" text-anchor="middle" font-size="26" font-weight="600" fill="#E2E8F0" font-family="'Inter', Arial, sans-serif">@incubrix  |  Join Our Team</text>
+</g>
+</g>
+
+<!-- Subtitle safety zone background overlay -->
+<rect x="0" y="1760" width="1080" height="160" fill="#0B0F19" opacity="0.9" />
+
+</svg>

@@ -1,11 +1,30 @@
 import os
 import math
+import shutil
 import subprocess
 from pathlib import Path
 from typing import Dict, Any, List, Tuple
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 from src import config
+
+def get_ffmpeg_bin() -> str:
+    """Ensures ffmpeg executable is discovered across WinGet, Program Files, or PATH."""
+    bin_path = shutil.which("ffmpeg")
+    if bin_path:
+        return bin_path
+    candidates = []
+    if os.environ.get("LOCALAPPDATA"):
+        pkgs = Path(os.environ["LOCALAPPDATA"]) / "Microsoft" / "WinGet" / "Packages"
+        if pkgs.is_dir():
+            candidates += sorted(pkgs.glob("*FFmpeg*/**/bin/ffmpeg.exe"))
+    for d in (r"C:\ffmpeg\bin", r"C:\Program Files\ffmpeg\bin", r"C:\ProgramData\chocolatey\bin"):
+        candidates.append(Path(d) / ("ffmpeg.exe" if os.name == "nt" else "ffmpeg"))
+    for c in candidates:
+        if c.is_file():
+            os.environ["PATH"] = str(c.parent) + os.pathsep + os.environ.get("PATH", "")
+            return str(c)
+    return "ffmpeg"
 
 def get_font(size: int, bold: bool = False) -> ImageFont.ImageFont:
     """Helper to safely load crisp TrueType fonts across Windows and POSIX."""
@@ -937,7 +956,7 @@ class MediaRenderer:
             f.write(f"file '{f3_path.name}'\n")
 
         cmd = [
-            "ffmpeg",
+            get_ffmpeg_bin(),
             "-y",
             "-f", "concat",
             "-safe", "0",
