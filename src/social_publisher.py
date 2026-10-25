@@ -875,125 +875,125 @@ class SocialPublisher:
         # Resolve valid video file if it exists, else use base sample
         vid_to_pub = file_path if (file_path and file_path.exists()) else (BASE_DIR / "assets/final/videos/INC-VID-001.mp4")
 
-        # ROUTING LOGIC
-        if "shorts" in norm_platform:
-            # Explicit YouTube Shorts
-            res = self.publish_youtube_short(
-                video_path=vid_to_pub,
-                title=hook,
-                description=full_copy,
-            )
-            results.append(res)
-
-        elif "youtube" in norm_platform or (is_video and "youtube" in norm_platform):
-            # Check whether target or asset specifies short format
-            is_explicit_standard = "standard" in norm_platform or "normal" in norm_platform or norm_platform == "youtube video"
-            if not is_explicit_standard and (format_type == "short video" or "short" in format_type or norm_platform == "youtube shorts"):
+        try:
+            # ROUTING LOGIC - strictly honors target platform
+            if "shorts" in norm_platform:
+                # Explicit YouTube Shorts
                 res = self.publish_youtube_short(
                     video_path=vid_to_pub,
                     title=hook,
                     description=full_copy,
                 )
-            else:
-                res = self.publish_youtube_video(
-                    video_path=vid_to_pub,
-                    title=hook,
-                    description=full_copy,
-                    is_short=False,
-                )
-            results.append(res)
-
-        elif "instagram" in norm_platform:
-            if is_carousel:
-                slide_imgs = self._resolve_carousel_slides(file_path)
-                res = self.publish_instagram_carousel(slide_imgs or [self._get_fallback_image()], full_copy)
-                results.append(res)
-            elif is_video:
-                res = self.publish_instagram_reel(vid_to_pub, full_copy)
-                results.append(res)
-            else:
-                # Photo / Graphic Poster
-                img_to_pub = file_path if (file_path and file_path.exists()) else self._resolve_png(file_path)
-                res = self.publish_instagram_photo(img_to_pub, full_copy)
                 results.append(res)
 
-        elif "facebook" in norm_platform:
-            if is_carousel:
-                slide_imgs = self._resolve_carousel_slides(file_path)
-                if slide_imgs:
-                    res = self.publish_facebook_carousel(slide_imgs, full_copy)
+            elif "youtube" in norm_platform or (is_video and "youtube" in norm_platform):
+                is_explicit_standard = "standard" in norm_platform or "normal" in norm_platform or norm_platform == "youtube video"
+                if not is_explicit_standard and (format_type == "short video" or "short" in format_type or norm_platform == "youtube shorts"):
+                    res = self.publish_youtube_short(
+                        video_path=vid_to_pub,
+                        title=hook,
+                        description=full_copy,
+                    )
                 else:
-                    # Fallback single image if slides not found
-                    res = self.publish_facebook_photo(file_path or self._get_fallback_image(), full_copy)
+                    res = self.publish_youtube_video(
+                        video_path=vid_to_pub,
+                        title=hook,
+                        description=full_copy,
+                        is_short=False,
+                    )
                 results.append(res)
-            elif is_video:
-                res = self.publish_facebook_video(
-                    video_path=vid_to_pub,
-                    description=full_copy,
-                    title=hook,
-                )
-                results.append(res)
+
+            elif "instagram" in norm_platform:
+                if is_carousel:
+                    slide_imgs = self._resolve_carousel_slides(file_path)
+                    res = self.publish_instagram_carousel(slide_imgs or [self._get_fallback_image()], full_copy)
+                    results.append(res)
+                elif is_video:
+                    res = self.publish_instagram_reel(vid_to_pub, full_copy)
+                    results.append(res)
+                else:
+                    # Photo / Graphic Poster
+                    img_to_pub = file_path if (file_path and file_path.exists()) else self._resolve_png(file_path)
+                    res = self.publish_instagram_photo(img_to_pub, full_copy)
+                    results.append(res)
+
+            elif "facebook" in norm_platform:
+                if is_carousel:
+                    slide_imgs = self._resolve_carousel_slides(file_path)
+                    if slide_imgs:
+                        res = self.publish_facebook_carousel(slide_imgs, full_copy)
+                    else:
+                        # Fallback single image if slides not found
+                        res = self.publish_facebook_photo(file_path or self._get_fallback_image(), full_copy)
+                    results.append(res)
+                elif is_video:
+                    res = self.publish_facebook_video(
+                        video_path=vid_to_pub,
+                        description=full_copy,
+                        title=hook,
+                    )
+                    results.append(res)
+                else:
+                    # Single photo / graphic poster
+                    img_to_pub = file_path if (file_path and file_path.suffix.lower() == ".png") else self._resolve_png(file_path)
+                    res = self.publish_facebook_photo(img_to_pub, full_copy)
+                    results.append(res)
+
+            elif "all" in norm_platform or "multi" in norm_platform:
+                # Multi-Platform Syndication (Gracefully routes only format-compatible destinations)
+                # 1. Facebook (supports video, carousel, photo)
+                try:
+                    if is_video:
+                        fb_res = self.publish_facebook_video(vid_to_pub, full_copy, hook)
+                    elif is_carousel:
+                        slides = self._resolve_carousel_slides(file_path)
+                        fb_res = self.publish_facebook_carousel(slides or [self._get_fallback_image()], full_copy)
+                    else:
+                        fb_res = self.publish_facebook_photo(self._resolve_png(file_path), full_copy)
+                    results.append(fb_res)
+                except Exception as e:
+                    logger.error(f"Multi FB error: {e}")
+
+                # 2. Instagram (supports reels, carousel, photo)
+                try:
+                    if is_video:
+                        ig_res = self.publish_instagram_reel(vid_to_pub, full_copy)
+                    elif is_carousel:
+                        slides = self._resolve_carousel_slides(file_path)
+                        ig_res = self.publish_instagram_carousel(slides or [self._get_fallback_image()], full_copy)
+                    else:
+                        ig_res = self.publish_instagram_photo(self._resolve_png(file_path), full_copy)
+                    results.append(ig_res)
+                except Exception as e:
+                    logger.error(f"Multi IG error: {e}")
+
+                # 3. YouTube (strictly video only)
+                if is_video:
+                    try:
+                        yt_res = self.publish_youtube_short(vid_to_pub, hook, full_copy)
+                        results.append(yt_res)
+                    except Exception as e:
+                        logger.error(f"Multi YT error: {e}")
+                else:
+                    logger.info("Multi-platform cross-post: skipping YouTube for non-video asset (format compatibility enforced).")
             else:
-                # Single photo / graphic poster
-                img_to_pub = file_path if (file_path and file_path.suffix.lower() == ".png") else self._resolve_png(file_path)
+                # Default to Facebook post
+                img_to_pub = self._resolve_png(file_path)
                 res = self.publish_facebook_photo(img_to_pub, full_copy)
                 results.append(res)
 
-        elif "all" in norm_platform or "multi" in norm_platform:
-            # Multi-Platform Syndication (Gracefully routes only format-compatible destinations)
-            # 1. Facebook (supports video, carousel, photo)
-            try:
-                if is_video:
-                    fb_res = self.publish_facebook_video(vid_to_pub, full_copy, hook)
-                elif is_carousel:
-                    slides = self._resolve_carousel_slides(file_path)
-                    fb_res = self.publish_facebook_carousel(slides or [self._get_fallback_image()], full_copy)
-                else:
-                    fb_res = self.publish_facebook_photo(self._resolve_png(file_path), full_copy)
-                results.append(fb_res)
-            except Exception as e:
-                logger.error(f"Multi FB error: {e}")
-
-            # 2. Instagram (supports reels, carousel, photo)
-            try:
-                if is_video:
-                    ig_res = self.publish_instagram_reel(vid_to_pub, full_copy)
-                elif is_carousel:
-                    slides = self._resolve_carousel_slides(file_path)
-                    ig_res = self.publish_instagram_carousel(slides or [self._get_fallback_image()], full_copy)
-                else:
-                    ig_res = self.publish_instagram_photo(self._resolve_png(file_path), full_copy)
-                results.append(ig_res)
-            except Exception as e:
-                logger.error(f"Multi IG error: {e}")
-
-            # 3. YouTube (strictly video only)
-            if is_video:
-                try:
-                    yt_res = self.publish_youtube_short(vid_to_pub, hook, full_copy)
-                    results.append(yt_res)
-                except Exception as e:
-                    logger.error(f"Multi YT error: {e}")
-            else:
-                logger.info("Multi-platform cross-post: skipping YouTube for non-video asset (format compatibility enforced).")
-            if is_video:
-                try:
-                    yt_res = self.publish_youtube_short(file_path, hook, full_copy)
-                    results.append(yt_res)
-                except Exception as e:
-                    logger.error(f"Multi YT error: {e}")
-        else:
-            # Default to Facebook post
-            img_to_pub = self._resolve_png(file_path)
-            res = self.publish_facebook_photo(img_to_pub, full_copy)
-            results.append(res)
+        except Exception as pub_err:
+            asset["status"] = "Failed"
+            asset["notes"] = f"Publishing failed for {platform}: {str(pub_err)}"
+            save_manifest(assets)
+            raise
 
         primary_result = results[0] if results else {"status": "success", "published_url": "https://facebook.com/1387253494470730"}
 
         # UPDATE MANIFEST
         asset["status"] = "Published"
         asset["test_published_url"] = primary_result.get("published_url", "")
-        asset["notes"] = f"Published via IncuBrix Social Publisher on {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC"
+        asset["notes"] = f"Published to {platform} via IncuBrix Social Publisher on {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC"
         save_manifest(assets)
 
         return {

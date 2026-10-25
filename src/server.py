@@ -891,22 +891,51 @@ def trigger_ad_image(req: ImageGenerateRequest):
 # 5. CONTENT CALENDAR & SCHEDULING API
 # -----------------------------------------------------------------------------
 
+def normalize_datetime_str(val: Optional[str]) -> str:
+    """Standardizes datetime strings into clean, canonical 'YYYY-MM-DD HH:MM' format."""
+    if not val:
+        return ""
+    s = str(val).strip()
+    if not s:
+        return ""
+    # Support ISO '2026-10-25T15:00:00', '2026-10-25T15:00', '2026-11-02 10:00', or '2026-11-02'
+    s = s.replace("T", " ").replace("Z", "").split("+")[0].strip()
+    parts = s.split()
+    date_part = parts[0]
+    time_part = parts[1] if len(parts) > 1 else "10:00"
+    t_tokens = time_part.split(":")
+    hh = t_tokens[0].zfill(2)
+    mm = t_tokens[1].zfill(2) if len(t_tokens) > 1 else "00"
+    return f"{date_part} {hh}:{mm}"
+
+
+def parse_datetime_sort_key(dt_str: str) -> float:
+    try:
+        norm = normalize_datetime_str(dt_str)
+        return datetime.strptime(norm, "%Y-%m-%d %H:%M").timestamp()
+    except Exception:
+        return 0.0
+
+
 @app.get("/api/calendar")
 def get_calendar(month: Optional[str] = None):
     assets = load_manifest()
     events = []
     for a in assets:
-        date_str = a.get("scheduled_date", "")
+        date_str = normalize_datetime_str(a.get("scheduled_date", ""))
         events.append({
             "asset_id": a.get("asset_id"),
             "title": a.get("hook", "Untitled"),
             "platform": a.get("platform"),
             "format": a.get("format"),
-            "status": a.get("status"),
+            "status": a.get("status") or "Scheduled",
             "scheduled_date": date_str,
             "pillar": a.get("content_pillar"),
-            "final_file_url": a.get("final_file_url")
+            "final_file_url": a.get("final_file_url"),
+            "test_published_url": a.get("test_published_url", ""),
         })
+    # Requirement 3: Sort all scheduled items by actual scheduled datetime in ascending chronological order
+    events.sort(key=lambda x: parse_datetime_sort_key(x["scheduled_date"]))
     return {"events": events}
 
 
@@ -946,81 +975,126 @@ def verify_social_accounts():
 def reschedule_asset(req: RescheduleRequest):
     from src.validator import ContentValidator
 
-    if req.platform:
-        plat_low = req.platform.lower()
-        allowed = ["youtube", "youtube shorts", "youtube video", "shorts", "facebook", "facebook pages", "instagram", "multi-platform", "all"]
-        if not any(ap in plat_low for ap in allowed):
-            raise HTTPException(status_code=400, detail=f"Unsupported platform '{req.platform}'. Allowed: YouTube Shorts, Facebook Pages, Instagram, Multi-Platform.")
+    assets = load_manifest()
+    target_asset = next((a for a in assets if a.get("asset_id") == req.asset_id), None)
+    if not target_asset:
+        raise HTTPException(status_code=404, detail="Asset not found")
+
+    effective_platform = req.platform or target_asset.get("platform") or ""
+    plat_low = effective_platform.lower()
+
+    # Allowed platform check
+    allowed = ["youtube", "youtube shorts", "youtube video", "shorts", "facebook", "facebook pages", "instagram", "multi-platform", "all"]
+    if not any(ap in plat_low for ap in allowed):
+        raise HTTPException(status_code=400, detail=f"Unsupported platform '{effective_platform}'. Allowed: YouTube Shorts, Facebook Pages, Instagram, Multi-Platform.")
+
+    # Requirement 6: Validate asset-platform compatibility before scheduling
+    asset_format = str(target_asset.get("format", "")).lower()
+    is_video = "video" in asset_format
+    if ("youtube" in plat_low or "shorts" in plat_low) and not is_video:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Compatibility validation error: Cannot schedule '{target_asset.get('format')}' asset {req.asset_id} to YouTube Shorts. YouTube only supports MP4 video assets."
+        )
 
     if req.custom_caption:
         for phrase in ContentValidator.FORBIDDEN_PHRASES:
             if phrase in req.custom_caption.lower():
                 raise HTTPException(status_code=400, detail=f"Compliance check failed: caption contains prohibited claim '{phrase}'.")
 
-    assets = load_manifest()
-    found = False
-    for a in assets:
-        if a.get("asset_id") == req.asset_id:
-            a["scheduled_date"] = req.new_date
-            a["status"] = "Scheduled"
-            if req.platform:
-                a["platform"] = req.platform
-            if req.custom_caption:
-                a["caption"] = req.custom_caption
-            found = True
-            break
-    if not found:
-        raise HTTPException(status_code=404, detail="Asset not found")
+    normalized_date = normalize_datetime_str(req.new_date)
+    target_asset["scheduled_date"] = normalized_date
+    target_asset["status"] = "Rescheduled"
+    if req.platform:
+        target_asset["platform"] = req.platform
+    if req.custom_caption:
+        target_asset["caption"] = req.custom_caption
+
     save_manifest(assets)
-    return {"status": "success", "asset_id": req.asset_id, "new_date": req.new_date, "platform": req.platform}
+    return {"status": "success", "asset_id": req.asset_id, "new_date": normalized_date, "platform": target_asset.get("platform"), "asset_status": "Rescheduled"}
 
 
 @app.post("/api/schedule")
 def schedule_asset(req: ScheduleRequest):
     from src.validator import ContentValidator
 
-    if req.platform:
-        plat_low = req.platform.lower()
-        allowed = ["youtube", "youtube shorts", "youtube video", "shorts", "facebook", "facebook pages", "instagram", "multi-platform", "all"]
-        if not any(ap in plat_low for ap in allowed):
-            raise HTTPException(status_code=400, detail=f"Unsupported platform '{req.platform}'. Allowed: YouTube Shorts, Facebook Pages, Instagram, Multi-Platform.")
+    assets = load_manifest()
+    target_asset = next((a for a in assets if a.get("asset_id") == req.asset_id), None)
+    if not target_asset:
+        raise HTTPException(status_code=404, detail="Asset not found")
+
+    effective_platform = req.platform or target_asset.get("platform") or ""
+    plat_low = effective_platform.lower()
+
+    # Allowed platform check
+    allowed = ["youtube", "youtube shorts", "youtube video", "shorts", "facebook", "facebook pages", "instagram", "multi-platform", "all"]
+    if not any(ap in plat_low for ap in allowed):
+        raise HTTPException(status_code=400, detail=f"Unsupported platform '{effective_platform}'. Allowed: YouTube Shorts, Facebook Pages, Instagram, Multi-Platform.")
+
+    # Requirement 6: Validate asset-platform compatibility before scheduling
+    asset_format = str(target_asset.get("format", "")).lower()
+    is_video = "video" in asset_format
+    if ("youtube" in plat_low or "shorts" in plat_low) and not is_video:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Compatibility validation error: Cannot schedule '{target_asset.get('format')}' asset {req.asset_id} to YouTube Shorts. YouTube only supports MP4 video assets."
+        )
 
     if req.custom_caption:
         for phrase in ContentValidator.FORBIDDEN_PHRASES:
             if phrase in req.custom_caption.lower():
                 raise HTTPException(status_code=400, detail=f"Compliance check failed: caption contains prohibited claim '{phrase}'.")
 
-    assets = load_manifest()
-    found = False
-    for a in assets:
-        if a.get("asset_id") == req.asset_id:
-            a["scheduled_date"] = req.scheduled_date
-            a["status"] = "Scheduled"
-            if req.platform:
-                a["platform"] = req.platform
-            if req.custom_caption:
-                a["caption"] = req.custom_caption
-            found = True
-            break
-    if not found:
-        raise HTTPException(status_code=404, detail="Asset not found")
+    normalized_date = normalize_datetime_str(req.scheduled_date)
+    target_asset["scheduled_date"] = normalized_date
+    target_asset["status"] = "Scheduled"
+    if req.platform:
+        target_asset["platform"] = req.platform
+    if req.custom_caption:
+        target_asset["caption"] = req.custom_caption
+
     save_manifest(assets)
-    return {"status": "success", "asset_id": req.asset_id, "scheduled_date": req.scheduled_date, "platform": req.platform}
+    return {"status": "success", "asset_id": req.asset_id, "scheduled_date": normalized_date, "platform": target_asset.get("platform"), "asset_status": "Scheduled"}
 
 
 @app.post("/api/publish/{asset_id}")
 def publish_asset_now(asset_id: str, req: PublishRequest = Body(default=PublishRequest())):
     try:
+        assets = load_manifest()
+        asset = next((a for a in assets if a.get("asset_id") == asset_id), None)
+        if not asset:
+            raise HTTPException(status_code=404, detail=f"Asset {asset_id} not found in manifest")
+
+        # Requirement 2: Ensure backend publishing handler uses saved platform and asset ID, not hardcoded/default
+        effective_platform = req.platform if (req.platform and req.platform.strip()) else asset.get("platform")
+        if not effective_platform:
+            raise HTTPException(status_code=400, detail=f"Asset {asset_id} has no configured platform")
+
         res = default_publisher.publish_asset(
             asset_id=asset_id,
-            target_platform=req.platform,
+            target_platform=effective_platform,
             custom_caption=req.custom_caption,
             dry_run=req.dry_run,
         )
         return res
     except ValueError as ve:
+        # Requirement 5: Accurately record Failed status on validation error
+        assets = load_manifest()
+        for a in assets:
+            if a.get("asset_id") == asset_id:
+                a["status"] = "Failed"
+                a["notes"] = f"Pre-flight validation failed: {str(ve)}"
+                break
+        save_manifest(assets)
         raise HTTPException(status_code=400, detail=f"Pre-flight validation failed for {asset_id}: {str(ve)}")
     except Exception as e:
+        assets = load_manifest()
+        for a in assets:
+            if a.get("asset_id") == asset_id:
+                a["status"] = "Failed"
+                a["notes"] = f"Publishing failed: {str(e)}"
+                break
+        save_manifest(assets)
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Publishing failed for asset {asset_id}: {str(e)}")

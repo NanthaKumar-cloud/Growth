@@ -46,6 +46,104 @@ function Icon({ name, className = "w-4 h-4", ...props }) {
 }
 
 // -----------------------------------------------------------------------------
+// PLATFORM ACTION & SCHEDULING HELPERS
+// -----------------------------------------------------------------------------
+
+function getPlatformActionConfig(platform, format) {
+  const normPlat = (platform || '').toLowerCase();
+  const normFmt = (format || '').toLowerCase();
+  const isVideo = normFmt.includes('video');
+  const isCarousel = normFmt.includes('carousel');
+
+  if (normPlat.includes('youtube') || normPlat.includes('shorts')) {
+    return {
+      label: isVideo ? 'Publish to Shorts' : 'Publish to YouTube',
+      icon: 'youtube',
+      className: 'bg-red-600 hover:bg-red-700 text-white',
+      targetPlatform: isVideo ? 'YouTube Shorts' : 'YouTube Video',
+      title: 'Publish directly to YouTube'
+    };
+  } else if (normPlat.includes('instagram')) {
+    return {
+      label: isVideo ? 'Publish to IG Reels' : (isCarousel ? 'Publish to IG Carousel' : 'Publish to Instagram'),
+      icon: 'instagram',
+      className: 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white',
+      targetPlatform: 'Instagram',
+      title: 'Publish directly to Instagram'
+    };
+  } else {
+    // Facebook Pages
+    return {
+      label: isVideo ? 'Publish to FB Video' : (isCarousel ? 'Publish to FB Carousel' : 'Publish to Facebook'),
+      icon: 'facebook',
+      className: 'bg-blue-600 hover:bg-blue-700 text-white',
+      targetPlatform: 'Facebook Pages',
+      title: 'Publish directly to Facebook Pages'
+    };
+  }
+}
+
+function renderStatusBadge(status) {
+  const s = (status || 'Scheduled').toLowerCase();
+  if (s === 'published') {
+    return (
+      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1">
+        <Icon name="check-circle" className="w-3 h-3 text-emerald-600" />
+        <span>Published</span>
+      </span>
+    );
+  } else if (s === 'publishing') {
+    return (
+      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-300 flex items-center gap-1 animate-pulse">
+        <Icon name="clock" className="w-3 h-3 text-blue-600 animate-spin" />
+        <span>Publishing...</span>
+      </span>
+    );
+  } else if (s === 'failed') {
+    return (
+      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-300 flex items-center gap-1">
+        <Icon name="alert-triangle" className="w-3 h-3 text-rose-600" />
+        <span>Failed</span>
+      </span>
+    );
+  } else if (s === 'rescheduled') {
+    return (
+      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-300 flex items-center gap-1">
+        <Icon name="calendar" className="w-3 h-3 text-purple-600" />
+        <span>Rescheduled</span>
+      </span>
+    );
+  } else {
+    return (
+      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center gap-1">
+        <Icon name="clock" className="w-3 h-3 text-indigo-500" />
+        <span>Scheduled</span>
+      </span>
+    );
+  }
+}
+
+function parseDateTimeMs(str) {
+  if (!str) return 0;
+  const clean = str.replace(' ', 'T').replace('Z', '').split('+')[0];
+  const t = Date.parse(clean);
+  return isNaN(t) ? 0 : t;
+}
+
+function formatDisplayDateTime(str) {
+  if (!str) return '—';
+  try {
+    const clean = str.replace(' ', 'T').replace('Z', '').split('+')[0];
+    const d = new Date(clean);
+    if (isNaN(d.getTime())) return str;
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  } catch (e) {
+    return str;
+  }
+}
+
+// -----------------------------------------------------------------------------
 // MAIN APP COMPONENT
 // -----------------------------------------------------------------------------
 
@@ -61,6 +159,9 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleQuickPublish = async (assetId, targetPlatform = null) => {
+    const match = assets.find(a => a.asset_id === assetId);
+    const effPlatform = targetPlatform || (match && match.platform) || 'Social Media';
+    setAssets(prev => prev.map(a => a.asset_id === assetId ? { ...a, status: 'Publishing' } : a));
     try {
       const res = await fetch('/api/publish/' + encodeURIComponent(assetId), {
         method: 'POST',
@@ -69,14 +170,17 @@ function App() {
       });
       const data = await res.json();
       if (res.ok) {
-        alert(`Successfully Published ${assetId} to ${data.target_platform || targetPlatform || 'Social Media'}!
+        setAssets(prev => prev.map(a => a.asset_id === assetId ? { ...a, status: 'Published', test_published_url: data.primary_url } : a));
+        alert(`Successfully Published ${assetId} to ${data.target_platform || effPlatform}!
 
 Live URL: ${data.primary_url}`);
         fetchData();
       } else {
+        setAssets(prev => prev.map(a => a.asset_id === assetId ? { ...a, status: 'Failed' } : a));
         alert(`Publishing Error: ${data.detail || 'Failed to dispatch asset'}`);
       }
     } catch (err) {
+      setAssets(prev => prev.map(a => a.asset_id === assetId ? { ...a, status: 'Failed' } : a));
       alert(`Network Error: ${err.message}`);
     }
   };
@@ -2793,9 +2897,12 @@ function ContentCalendarPage({ onOpenAsset, onScheduleAsset, onPublishNow, onRef
     }
   };
 
-  const filtered = selectedPlatform === 'all' 
-    ? events 
-    : events.filter(e => e.platform?.toLowerCase().includes(selectedPlatform.toLowerCase()));
+  const sortedEvents = useMemo(() => {
+    const base = selectedPlatform === 'all' 
+      ? events 
+      : events.filter(e => e.platform?.toLowerCase().includes(selectedPlatform.toLowerCase()));
+    return [...base].sort((a, b) => parseDateTimeMs(a.scheduled_date) - parseDateTimeMs(b.scheduled_date));
+  }, [events, selectedPlatform]);
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
@@ -2859,68 +2966,54 @@ function ContentCalendarPage({ onOpenAsset, onScheduleAsset, onPublishNow, onRef
         </div>
 
         <div className="divide-y divide-slate-100">
-          {filtered.map((item, idx) => (
-            <div 
-              key={idx}
-              onClick={() => onOpenAsset(item.asset_id)}
-              className="px-6 py-3.5 flex items-center justify-between hover:bg-slate-50/80 cursor-pointer transition-colors"
-            >
-              <div className="w-44 text-xs font-mono text-slate-700">
-                {item.scheduled_date || `2026-11-${String((idx % 28) + 1).padStart(2, '0')} 10:00`}
-              </div>
-
-              <div className="min-w-0 flex-1 px-4">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
-                    {item.platform}
-                  </span>
-                  <span className="text-[10px] font-mono text-indigo-600">{item.asset_id}</span>
-                  <span className="text-[10px] text-slate-400 font-mono">&bull; {item.format}</span>
+          {sortedEvents.map((item, idx) => {
+            const actCfg = getPlatformActionConfig(item.platform, item.format);
+            return (
+              <div 
+                key={item.asset_id || idx}
+                onClick={() => onOpenAsset(item.asset_id)}
+                className="px-6 py-3.5 flex items-center justify-between hover:bg-slate-50/80 cursor-pointer transition-colors"
+              >
+                <div className="w-44 text-xs font-mono text-slate-700">
+                  {formatDisplayDateTime(item.scheduled_date)}
                 </div>
-                <p className="text-xs font-semibold text-slate-900 truncate">{item.title}</p>
-              </div>
 
-              <div className="w-64 flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
-                {item.status === 'Published' ? (
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1">
-                    <Icon name="check-circle" className="w-3 h-3 text-emerald-600" />
-                    <span>Published</span>
-                  </span>
-                ) : (
-                  <>
-                    {item.format && item.format.toLowerCase().includes('video') ? (
-                      <button 
-                        onClick={() => onPublishNow ? onPublishNow(item.asset_id, 'YouTube Shorts') : alert('Published!')}
-                        className="px-2.5 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white text-[11px] font-bold flex items-center gap-1 shadow-xs transition-colors"
-                        title="Publish video directly to YouTube Shorts"
-                      >
-                        <Icon name="youtube" className="w-3 h-3" />
-                        <span>Publish to YouTube</span>
-                      </button>
-                    ) : (
-                      <button 
-                        onClick={() => onPublishNow ? onPublishNow(item.asset_id, item.platform) : alert('Published!')}
-                        className="px-2.5 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold flex items-center gap-1 shadow-xs transition-colors"
-                        title="Publish immediately to target platform"
-                      >
-                        <Icon name="send" className="w-3 h-3" />
-                        <span>Publish</span>
-                      </button>
-                    )}
+                <div className="min-w-0 flex-1 px-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
+                      {item.platform}
+                    </span>
+                    <span className="text-[10px] font-mono text-indigo-600">{item.asset_id}</span>
+                    <span className="text-[10px] text-slate-400 font-mono">&bull; {item.format}</span>
+                  </div>
+                  <p className="text-xs font-semibold text-slate-900 truncate">{item.title}</p>
+                </div>
 
+                <div className="w-64 flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
+                  {renderStatusBadge(item.status)}
+                  {item.status !== 'Published' && (
                     <button 
-                      onClick={() => onScheduleAsset && onScheduleAsset(item)}
-                      className="px-2.5 py-1 rounded-md border border-slate-300 hover:bg-slate-100 text-slate-700 text-[11px] font-semibold flex items-center gap-1 transition-colors"
-                      title="Reschedule to custom date and time"
+                      onClick={() => onPublishNow ? onPublishNow(item.asset_id, actCfg.targetPlatform) : alert('Published!')}
+                      className={`px-2.5 py-1 rounded-md text-[11px] font-bold flex items-center gap-1 shadow-xs transition-colors ${actCfg.className}`}
+                      title={actCfg.title}
                     >
-                      <Icon name="calendar" className="w-3 h-3" />
-                      <span>Reschedule</span>
+                      <Icon name={actCfg.icon} className="w-3 h-3" />
+                      <span>{actCfg.label}</span>
                     </button>
-                  </>
-                )}
+                  )}
+
+                  <button 
+                    onClick={() => onScheduleAsset && onScheduleAsset(item)}
+                    className="px-2.5 py-1 rounded-md border border-slate-300 hover:bg-slate-100 text-slate-700 text-[11px] font-semibold flex items-center gap-1 transition-colors"
+                    title="Reschedule to custom date and time"
+                  >
+                    <Icon name="calendar" className="w-3 h-3" />
+                    <span>Reschedule</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -3127,29 +3220,19 @@ function AssetLibraryPage({ assets, onOpenAsset, onOpenCarousel, onOpenVideo, on
                   <span className="font-mono text-slate-500 text-[11px]">{asset.asset_id}</span>
                   {asset.status === 'Published' ? (
                     <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-100 text-emerald-800">Published</span>
-                  ) : (
-                    <>
-                      {isVideo ? (
-                        <button 
-                          onClick={() => onPublishNow ? onPublishNow(asset.asset_id, 'YouTube Shorts') : alert('Published!')}
-                          className="px-2 py-0.5 rounded bg-red-600 hover:bg-red-700 text-white text-[10px] font-bold flex items-center gap-1 shadow-xs"
-                          title="Publish video directly to YouTube Shorts"
-                        >
-                          <Icon name="youtube" className="w-2.5 h-2.5" />
-                          <span>Publish to YouTube</span>
-                        </button>
-                      ) : (
-                        <button 
-                          onClick={() => onPublishNow ? onPublishNow(asset.asset_id, asset.platform) : alert('Published!')}
-                          className="px-2 py-0.5 rounded bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold flex items-center gap-1 shadow-xs"
-                          title="Publish right now"
-                        >
-                          <Icon name="send" className="w-2.5 h-2.5" />
-                          <span>Publish</span>
-                        </button>
-                      )}
-                    </>
-                  )}
+                  ) : (() => {
+                    const actCfg = getPlatformActionConfig(asset.platform, asset.format);
+                    return (
+                      <button 
+                        onClick={() => onPublishNow ? onPublishNow(asset.asset_id, actCfg.targetPlatform) : alert('Published!')}
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 shadow-xs ${actCfg.className}`}
+                        title={actCfg.title}
+                      >
+                        <Icon name={actCfg.icon} className="w-2.5 h-2.5" />
+                        <span>{actCfg.label}</span>
+                      </button>
+                    );
+                  })()}
                   <button 
                     onClick={() => onScheduleAsset && onScheduleAsset(asset)}
                     className="px-2 py-0.5 rounded border border-slate-300 hover:bg-white text-slate-700 text-[10px] font-semibold flex items-center gap-1"
@@ -3402,52 +3485,50 @@ function PublishingQueuePage({ assets, onOpenAsset, onScheduleAsset, onPublishNo
         </div>
 
         <div className="divide-y divide-slate-100">
-          {assets.map((a) => (
-            <div 
-              key={a.asset_id} 
-              onClick={() => onOpenAsset(a.asset_id)}
-              className="px-6 py-3.5 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-colors text-xs"
-            >
-              <div className="w-48">
-                <span className="font-mono font-bold text-indigo-700">{a.asset_id}</span>
-                <p className="text-[11px] text-slate-500 font-medium">{a.platform} &bull; {a.format}</p>
-              </div>
+          {[...assets].sort((a, b) => parseDateTimeMs(a.scheduled_date) - parseDateTimeMs(b.scheduled_date)).map((a) => {
+            const actCfg = getPlatformActionConfig(a.platform, a.format);
+            return (
+              <div 
+                key={a.asset_id} 
+                onClick={() => onOpenAsset(a.asset_id)}
+                className="px-6 py-3.5 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-colors text-xs"
+              >
+                <div className="w-48">
+                  <span className="font-mono font-bold text-indigo-700">{a.asset_id}</span>
+                  <p className="text-[11px] text-slate-500 font-medium">{a.platform} &bull; {a.format}</p>
+                </div>
 
-              <div className="w-48 text-slate-700 font-medium">
-                {a.content_pillar}
-              </div>
+                <div className="w-48 text-slate-700 font-medium">
+                  {a.content_pillar}
+                </div>
 
-              <div className="min-w-0 flex-1 px-4 truncate font-mono text-[11px] text-slate-500">
-                {a.utm_link}
-              </div>
+                <div className="min-w-0 flex-1 px-4 truncate font-mono text-[11px] text-slate-500">
+                  {a.utm_link}
+                </div>
 
-              <div className="w-48 flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
-                {a.status === 'Published' ? (
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700 flex items-center gap-1">
-                    <Icon name="check-circle" className="w-3 h-3 text-emerald-600" />
-                    <span>Published</span>
-                  </span>
-                ) : (
-                  <>
+                <div className="w-48 flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
+                  {renderStatusBadge(a.status)}
+                  {a.status !== 'Published' && (
                     <button 
-                      onClick={() => onPublishNow ? onPublishNow(a.asset_id, a.platform) : alert('Published!')}
-                      className="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold flex items-center gap-1"
+                      onClick={() => onPublishNow ? onPublishNow(a.asset_id, actCfg.targetPlatform) : alert('Published!')}
+                      className={`px-2.5 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${actCfg.className}`}
+                      title={actCfg.title}
                     >
-                      <Icon name="send" className="w-2.5 h-2.5" />
-                      <span>Publish</span>
+                      <Icon name={actCfg.icon} className="w-2.5 h-2.5" />
+                      <span>{actCfg.label}</span>
                     </button>
-                    <button 
-                      onClick={() => onScheduleAsset && onScheduleAsset(a)}
-                      className="px-2.5 py-1 rounded border border-slate-300 hover:bg-white text-slate-700 text-[10px] font-semibold flex items-center gap-1"
-                    >
-                      <Icon name="calendar" className="w-2.5 h-2.5" />
-                      <span>Schedule</span>
-                    </button>
-                  </>
-                )}
+                  )}
+                  <button 
+                    onClick={() => onScheduleAsset && onScheduleAsset(a)}
+                    className="px-2.5 py-1 rounded border border-slate-300 hover:bg-white text-slate-700 text-[10px] font-semibold flex items-center gap-1"
+                  >
+                    <Icon name="calendar" className="w-2.5 h-2.5" />
+                    <span>Schedule</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -3614,20 +3695,44 @@ function ScheduleModal({ asset, onClose, onUpdated }) {
 
           <div>
             <label className="block text-slate-700 font-bold mb-1">Target Social Platform</label>
-            <select 
-              value={platform} 
-              onChange={(e) => setPlatform(e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white font-medium text-slate-800 focus:outline-none focus:border-indigo-500"
-            >
-              <option value="YouTube Shorts">YouTube Shorts (#Shorts Vertical 9:16)</option>
-              <option value="YouTube Video">YouTube Video (Standard 16:9 / Full Video)</option>
-              <option value="Instagram">Instagram (Reels / Carousel / Feed)</option>
-              <option value="Facebook Pages">Facebook Pages (Page Direct Video / Post)</option>
-              <option value="Multi-Platform">All 3 Platforms (Cross-Post Syndication)</option>
-            </select>
-            <p className="text-[10px] text-slate-400 mt-1">
-              Automatically selects suitable media container: 9:16 Shorts for Video, Multi-slide Carousel for Instagram/FB, or High-res Poster.
-            </p>
+            {(() => {
+              const isVideo = (asset.format || '').toLowerCase().includes('video');
+              const isCarousel = (asset.format || '').toLowerCase().includes('carousel');
+              const allowedOptions = isVideo ? [
+                { value: 'YouTube Shorts', label: 'YouTube Shorts (#Shorts Vertical 9:16)' },
+                { value: 'YouTube Video', label: 'YouTube Video (Standard 16:9 / Full Video)' },
+                { value: 'Instagram', label: 'Instagram (Reels)' },
+                { value: 'Facebook Pages', label: 'Facebook Pages (Direct Video)' },
+                { value: 'Multi-Platform', label: 'All 3 Platforms (Cross-Post Syndication)' }
+              ] : [
+                { value: 'Facebook Pages', label: isCarousel ? 'Facebook Pages (Multi-photo Carousel)' : 'Facebook Pages (Post Photo)' },
+                { value: 'Instagram', label: isCarousel ? 'Instagram (Carousel Post)' : 'Instagram (Single Image)' },
+                { value: 'Multi-Platform', label: 'Facebook + Instagram Syndication' }
+              ];
+              return (
+                <>
+                  <select 
+                    value={platform} 
+                    onChange={(e) => setPlatform(e.target.value)}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white font-medium text-slate-800 focus:outline-none focus:border-indigo-500"
+                  >
+                    {allowedOptions.map(opt => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                  {!isVideo && (
+                    <p className="text-[10px] text-amber-600 font-medium mt-1">
+                      ⚠️ Note: YouTube Shorts only supports video assets (.mp4). For carousel and graphic assets, target Facebook Pages or Instagram.
+                    </p>
+                  )}
+                  {isVideo && (
+                    <p className="text-[10px] text-slate-400 mt-1">
+                      Select target video container: 9:16 Shorts for YouTube, Reels for Instagram, or Direct Video for Facebook.
+                    </p>
+                  )}
+                </>
+              );
+            })()}
           </div>
 
           <div>

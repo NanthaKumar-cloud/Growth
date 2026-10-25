@@ -89,23 +89,23 @@ class AutonomousScheduler:
         for asset in assets:
             status = str(asset.get("status", "")).strip()
             # Check if asset is scheduled or publication-ready with a due date
-            if status not in ["Scheduled", "Publication-Ready"]:
+            if status not in ["Scheduled", "Publication-Ready", "Rescheduled"]:
                 continue
 
             scheduled_str = str(asset.get("scheduled_date", "")).strip()
             if not scheduled_str:
                 continue
 
-            # Parse date string (support YYYY-MM-DD or full ISO datetime)
+            # Parse date string (support YYYY-MM-DD HH:MM, ISO 8601, or date-only)
             is_due = False
             try:
-                if "T" in scheduled_str or ":" in scheduled_str:
-                    sched_dt = datetime.fromisoformat(scheduled_str.replace("Z", "+00:00").split("+")[0])
+                clean_s = scheduled_str.replace("T", " ").replace("Z", "").split("+")[0].strip()
+                if len(clean_s) >= 16:
+                    sched_dt = datetime.strptime(clean_s[:16], "%Y-%m-%d %H:%M")
                     if sched_dt <= now:
                         is_due = True
                 else:
-                    # Date-only (e.g. 2026-10-24)
-                    sched_d = datetime.strptime(scheduled_str[:10], "%Y-%m-%d").date()
+                    sched_d = datetime.strptime(clean_s[:10], "%Y-%m-%d").date()
                     if sched_d <= now.date():
                         is_due = True
             except Exception as pe:
@@ -114,7 +114,8 @@ class AutonomousScheduler:
 
             if is_due:
                 asset_id = asset.get("asset_id")
-                target_platform = asset.get("platform")
+                # Requirement 2: Strictly honor saved platform from asset
+                target_platform = asset.get("platform") or "Facebook Pages"
                 logger.info(f"Triggering scheduled publication for asset {asset_id} to {target_platform}")
                 try:
                     res = default_publisher.publish_asset(asset_id, target_platform=target_platform)
@@ -128,6 +129,9 @@ class AutonomousScheduler:
                     })
                 except Exception as e:
                     logger.error(f"Auto-publish failed for {asset_id}: {e}")
+                    asset["status"] = "Failed"
+                    asset["notes"] = f"Scheduled auto-publish failed: {str(e)}"
+                    save_manifest(assets)
                     self.log_event("PUBLISH_ERROR", {
                         "asset_id": asset_id,
                         "error": str(e)
@@ -160,10 +164,10 @@ class AutonomousScheduler:
         batch_id = int(now.timestamp())
         for idx in range(count):
             pillar_name, audience, hook_prompt = pillars[idx % len(pillars)]
-            sched_slot = (now + timedelta(days=idx + 1, hours=2)).strftime("%Y-%m-%dT10:00:00")
+            sched_slot = (now + timedelta(days=idx + 1, hours=2)).strftime("%Y-%m-%d %H:%M")
 
             if idx == 0:
-                # Video format
+                # Video format -> strictly YouTube Shorts
                 asset_id = f"AUTO-VID-{batch_id}-{idx+1}"
                 entry = {
                     "asset_id": asset_id,
@@ -180,7 +184,7 @@ class AutonomousScheduler:
                     "notes": "Autonomously generated via IncuBrix Weekly Cadence",
                 }
             elif idx == 1:
-                # Carousel format
+                # Carousel format -> strictly Instagram Carousel
                 asset_id = f"AUTO-CAR-{batch_id}-{idx+1}"
                 entry = {
                     "asset_id": asset_id,
@@ -197,18 +201,18 @@ class AutonomousScheduler:
                     "notes": "Autonomously generated via IncuBrix Weekly Cadence",
                 }
             else:
-                # Graphic Poster
+                # Graphic Poster -> strictly Facebook Pages
                 asset_id = f"AUTO-IMG-{batch_id}-{idx+1}"
                 entry = {
                     "asset_id": asset_id,
-                    "platform": "Facebook",
-                    "format": "Graphic / Single Image",
+                    "platform": "Facebook Pages",
+                    "format": "Graphic",
                     "content_pillar": pillar_name,
                     "hook": f"Why Modern Growth Requires {pillar_name}",
                     "caption": f"{hook_prompt} Explore how IncuBrix automates end-to-end production.",
                     "cta": "Claim your free 14-day pass today.",
                     "utm_link": f"https://incubrix.com/?utm_source=facebook&utm_campaign=auto_cadence&utm_content={asset_id}",
-                    "final_file_url": "assets/final/graphics/INC-GRA-001.png",
+                    "final_file_url": "assets/final/graphics/INC-PST-001.png",
                     "scheduled_date": sched_slot,
                     "status": "Scheduled",
                     "notes": "Autonomously generated via IncuBrix Weekly Cadence",
