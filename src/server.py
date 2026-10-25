@@ -157,9 +157,25 @@ def load_manifest() -> List[Dict[str, Any]]:
     return assets
 
 
+def norm_platform(p: Any) -> str:
+    p_lower = str(p or "").lower()
+    if "you" in p_lower:
+        return "YouTube Shorts"
+    if "face" in p_lower:
+        return "Facebook Pages"
+    if "insta" in p_lower:
+        return "Instagram"
+    return str(p or "")
+
+
 def save_manifest(assets: List[Dict[str, Any]]) -> None:
     """Saves assets to both manifest JSON and updates calendar.csv with official 23 columns."""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    for a in assets:
+        if "platform" in a:
+            a["platform"] = norm_platform(a["platform"])
+        if "platforms" in a and isinstance(a["platforms"], list):
+            a["platforms"] = [norm_platform(x) for x in a["platforms"]]
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
         json.dump(assets, f, indent=2, ensure_ascii=False)
 
@@ -170,6 +186,7 @@ def save_manifest(assets: List[Dict[str, Any]]) -> None:
             writer.writeheader()
             for a in assets:
                 row = {col: a.get(col, "") for col in OFFICIAL_COLUMNS}
+                row["platform"] = norm_platform(row.get("platform", ""))
                 writer.writerow(row)
 
 
@@ -576,21 +593,217 @@ def render_generated_carousel(renderer, aid: str, pillar: str, slides: list, cta
     return slide_urls
 
 
+def call_ai_repurposing_model(req: GenerateRequest) -> List[Dict[str, Any]]:
+    """
+    Calls the Gemini AI model to extract 10 bespoke multi-platform social assets
+    directly from the user's submitted source text.
+    Strictly preserves key facts, numbers, tools, and technical details from the input.
+    """
+    import json
+    import time
+    from google import genai
+    from google.genai import types
+    from src import config
+
+    if not config.GEMINI_API_KEY:
+        raise ValueError("GEMINI_API_KEY is not configured. Real AI model call requires GEMINI_API_KEY.")
+
+    client = genai.Client(api_key=config.GEMINI_API_KEY)
+    
+    brand = req.brand or "IncuBrix"
+    title = req.title or "Bespoke Content Campaign"
+    cta = req.cta or "Test the CreatorOps engine free at app.incubrix.com"
+    tone = req.tone or "Authoritative, Energetic, Technical SaaS"
+    source_type = req.source_type or "transcript"
+    goal = req.goal or "Drive Awareness & Signups"
+    word_count = len(req.input_text.split())
+
+    print(f"\n========================================================")
+    print(f"[AI Content Engine] STARTING REAL GEMINI MODEL CALL")
+    print(f"  Model: {config.GEMINI_MODEL}")
+    print(f"  Title: {title}")
+    print(f"  Source Type: {source_type}")
+    print(f"  Editorial Tone: {tone}")
+    print(f"  Input Word Count: {word_count}")
+    print(f"  Timestamp: {datetime.now().isoformat()}")
+    print(f"========================================================\n")
+
+    prompt = f"""You are the Principal Growth Strategist and Content Engineer for {brand}.
+Transform the following SOURCE INPUT into exactly 10 publication-ready, platform-tailored social media assets for YouTube Shorts, Facebook Pages, and Instagram.
+
+SOURCE TITLE: {title}
+SOURCE TYPE: {source_type}
+EDITORIAL TONE: {tone}
+CAMPAIGN GOAL: {goal}
+CALL TO ACTION (CTA): {cta}
+
+SOURCE CONTENT:
+=== SOURCE TEXT START ===
+{req.input_text.strip()}
+=== SOURCE TEXT END ===
+
+CRITICAL ACCURACY & COMPLIANCE RULES:
+1. Ground truth: All hooks, scripts, captions, slide points, and graphics MUST be derived directly, faithfully, and specifically from the provided SOURCE CONTENT. Preserve specific statistics, metrics, dollars, tool names, comparisons, and technical details mentioned in the source.
+2. Absolutely no prohibited claims (no guaranteed follower counts, no fake revenue claims).
+3. Deliver exactly 10 assets covering the required platforms and formats:
+   - Asset 1: Platform: "YouTube Shorts", Format: "Short video", Media Type: "video"
+     * "hook": Opening 3-second visual/verbal hook (e.g. bold question or startling metric from source)
+     * "caption": Engaging YouTube Shorts description with 3-5 hashtags and CTA
+     * "script": 45-60 second spoken voiceover script under 130 words with visual cues [Visual: ...]
+     * "content_pillar": One of ["CreatorOps & Tool Consolidation", "Repurposing Recipes", "AI Video & Voice Engineering", "Growth Analytics & Algorithm Benchmarks", "Behind-the-Studio & Product Spotlights"]
+     * "hashtags": "#Shorts #{brand} ..."
+   - Asset 2: Platform: "Instagram", Format: "Short video", Media Type: "video"
+     * "hook": Punchy Instagram Reel hook
+     * "caption": Full Reels caption with line breaks, emojis, hashtags, and CTA
+     * "script": Spoken script under 130 words reflecting source facts
+     * "content_pillar": Relevant pillar
+     * "hashtags": "#Reels ..."
+   - Asset 3: Platform: "Facebook Pages", Format: "Short video", Media Type: "video"
+     * "hook": High-dwell opening hook
+     * "caption": Story-driven Facebook post caption unpacking the key lesson from source
+     * "script": Spoken script under 130 words
+     * "content_pillar": Relevant pillar
+     * "hashtags": "#CreatorOps ..."
+   - Asset 4: Platform: "Facebook Pages", Format: "Carousel", Media Type: "carousel"
+     * "hook": Carousel cover hook / title
+     * "caption": High-value swipeable breakdown caption
+     * "content_pillar": Relevant pillar
+     * "hashtags": 3-5 hashtags
+     * "slides": Exactly 5 slides summarizing the source:
+       - Slide 1: Cover slide (title max 6 words, body hook max 20 words)
+       - Slide 2: The Core Problem or Context from source (title max 6 words, body max 25 words)
+       - Slide 3: The Framework or Mechanism from source (title max 6 words, body max 25 words)
+       - Slide 4: Key Results, Metrics, or Comparative Advantage (title max 6 words, body max 25 words)
+       - Slide 5: Takeaway & Next Steps / CTA (title max 6 words, body max 20 words)
+   - Asset 5: Platform: "Instagram", Format: "Carousel", Media Type: "carousel"
+     * "hook": Instagram swipe-guide hook
+     * "caption": Instagram carousel caption with bullet points
+     * "content_pillar": Relevant pillar
+     * "hashtags": 3-5 hashtags
+     * "slides": Exactly 5 slides summarizing key insights from the source (each with "title" <= 6 words and "body" <= 25 words)
+   - Asset 6: Platform: "Instagram", Format: "Graphic", Media Type: "graphic"
+     * "hook": Bold metric or high-conviction quote from source
+     * "caption": Deep-dive analytical commentary
+     * "graphic_headline": Punchy 2-5 word visual poster title
+     * "graphic_subtitle": 1-2 sentence supporting statistic or insight
+     * "content_pillar": Relevant pillar
+     * "hashtags": 3-5 hashtags
+   - Asset 7: Platform: "Facebook Pages", Format: "Graphic", Media Type: "graphic"
+     * "hook": Contrarian or eye-opening insight from source
+     * "caption": Facebook thought leadership post
+     * "graphic_headline": 2-5 word poster title
+     * "graphic_subtitle": 1-2 sentence supporting insight
+     * "content_pillar": Relevant pillar
+     * "hashtags": 3-5 hashtags
+   - Asset 8: Platform: "Instagram", Format: "Graphic", Media Type: "graphic"
+     * "hook": Framework or benchmark takeaway
+     * "caption": Instagram educational caption
+     * "graphic_headline": 2-5 word poster title
+     * "graphic_subtitle": 1-2 sentence supporting insight
+     * "content_pillar": Relevant pillar
+     * "hashtags": 3-5 hashtags
+   - Asset 9: Platform: "Facebook Pages", Format: "Graphic", Media Type: "graphic"
+     * "hook": Workflow or tool breakdown insight
+     * "caption": Actionable Facebook post
+     * "graphic_headline": 2-5 word poster title
+     * "graphic_subtitle": 1-2 sentence supporting insight
+     * "content_pillar": Relevant pillar
+     * "hashtags": 3-5 hashtags
+   - Asset 10: Platform: "Facebook Pages", Format: "Graphic", Media Type: "graphic"
+     * "hook": Strategic takeaway / future outlook
+     * "caption": Executive-level summary
+     * "graphic_headline": 2-5 word poster title
+     * "graphic_subtitle": 1-2 sentence supporting insight
+     * "content_pillar": Relevant pillar
+     * "hashtags": 3-5 hashtags
+
+Return ONLY a valid JSON object matching this schema:
+{{
+  "assets": [
+    {{
+      "asset_num": 1,
+      "platform": "YouTube Shorts",
+      "format": "Short video",
+      "media_type": "video",
+      "content_pillar": "CreatorOps & Tool Consolidation",
+      "hook": "string",
+      "caption": "string",
+      "script": "string",
+      "hashtags": "string",
+      "cta": "{cta}"
+    }},
+    ...
+  ]
+}}
+    """
+
+    t_start = time.time()
+    try:
+        response = client.models.generate_content(
+            model=config.GEMINI_MODEL,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                temperature=0.3
+            )
+        )
+    except Exception as e:
+        print(f"[AI Content Engine ERROR] Gemini model call failed: {e}")
+        raise RuntimeError(f"Gemini AI model generation failed: {e}")
+
+    duration = time.time() - t_start
+    raw_text = response.text.strip()
+    
+    # Strip markdown code blocks if returned
+    if raw_text.startswith("```json"):
+        raw_text = raw_text[7:]
+    if raw_text.startswith("```"):
+        raw_text = raw_text[3:]
+    if raw_text.endswith("```"):
+        raw_text = raw_text[:-3]
+    raw_text = raw_text.strip()
+
+    try:
+        parsed = json.loads(raw_text)
+    except Exception as je:
+        print(f"[AI Content Engine ERROR] Failed to parse model JSON: {je}\nRaw text:\n{raw_text[:500]}")
+        raise RuntimeError(f"Model returned invalid JSON: {je}")
+
+    items = parsed.get("assets", []) if isinstance(parsed, dict) else (parsed if isinstance(parsed, list) else [])
+    print(f"[AI Content Engine SUCCESS] Gemini generated {len(items)} assets in {duration:.2f}s")
+    
+    if not items:
+        raise RuntimeError("Model returned empty asset list.")
+
+    return items
+
+
 @app.post("/api/generate")
 async def trigger_content_generation(req: GenerateRequest, background_tasks: BackgroundTasks):
+    if not req.input_text or not req.input_text.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Source text or transcript cannot be empty. Please provide your source text to generate assets."
+        )
+    if len(req.input_text.strip().split()) < 5:
+        raise HTTPException(
+            status_code=400,
+            detail="Source text is too short. Please provide substantive content (at least 5 words)."
+        )
+
     job_id = f"job_{int(time.time())}"
     active_jobs[job_id] = {
         "job_id": job_id,
         "title": req.title,
         "status": "processing",
         "progress": 10,
-        "stage": "Reading and normalizing source text...",
+        "stage": "Initializing Gemini AI model & reading source text...",
         "start_time": time.time(),
         "generated_assets": [],
         "error": None
     }
 
-    # Run synchronous generation pipeline in thread pool to avoid blocking async event loop
+    # Run synchronous generation pipeline in background thread to avoid blocking async event loop
     background_tasks.add_task(run_generation_job, job_id, req)
     return {"status": "started", "job_id": job_id}
 
@@ -600,145 +813,125 @@ def run_generation_job(job_id: str, req: GenerateRequest):
         from datetime import datetime, timedelta
         from src.media_renderer import MediaRenderer
         from src.tracking import UTMBuilder
+        from src import config
         import csv
 
         renderer = MediaRenderer()
         utm_builder = UTMBuilder(
             base_url=req.destination_url or "https://incubrix.com",
-            campaign=f"campaign_{job_id}"
+            campaign=config.CAMPAIGN_NAME or "growth_engine_q1"
         )
 
         job = active_jobs[job_id]
         word_count = len(req.input_text.split())
-        job["stage"] = f"Ingesting & analyzing source text ({word_count} words)..."
+        job["stage"] = f"Ingesting source text ({word_count} words)..."
         job["progress"] = 15
 
         ts_code = str(int(time.time()))[-4:]
-        base_title = req.title or "Solo Creator Bottleneck & Tool Consolidation"
+        base_title = req.title or "New Campaign"
         cta = req.cta or "Test the CreatorOps engine free at app.incubrix.com"
 
-        job["stage"] = "Extracting 10 platform narrative angles & compliance check..."
+        job["stage"] = "Connecting to Gemini AI model to generate 10 bespoke platform assets..."
         job["progress"] = 25
 
-        deliverables_spec = [
-            # 3 Short Videos
-            {
-                "aid": f"INC-VID-GEN-{ts_code}-01",
-                "plat": "YouTube Shorts",
-                "fmt": "Short video",
-                "pillar": "CreatorOps & Tool Consolidation",
-                "hook": "Stop paying $97/month across 4 separate creator apps. #Shorts",
-                "caption": "If you are a creator, you probably juggle 4 tools: Descript ($24), Opus Clip ($19), and Buffer ($15). IncuBrix consolidates prompt editing, automated silence removal, and multi-format syndication into 1 screen. Slashed 12 hours of weekly editing down to 2.",
-                "hashtags": "#Shorts #IncuBrix #CreatorOps #ToolConsolidation #VideoEditing",
-                "media_type": "video"
-            },
-            {
-                "aid": f"INC-VID-GEN-{ts_code}-02",
-                "plat": "Instagram",
-                "fmt": "Short video",
-                "pillar": "Repurposing Recipes",
-                "hook": "The 14-Hour Solo Creator Bottleneck in 2026. #Reels",
-                "caption": "Why creators burn out in 2026 isn't lack of ideas. For every 1 hour of recording, you spend 14 hours on formatting, audio sync, and context switching. Watch how IncuBrix reverses the 9:1 ratio.",
-                "hashtags": "#Reels #ContentCreator #SaaS #CreatorOps #Automation",
-                "media_type": "video"
-            },
-            {
-                "aid": f"INC-VID-GEN-{ts_code}-03",
-                "plat": "Facebook Pages",
-                "fmt": "Short video",
-                "pillar": "AI Video & Voice Engineering",
-                "hook": "Turn 1 master recording into 10 social assets in 90 seconds.",
-                "caption": "Drop your raw audio or transcript into IncuBrix Thought Inbox. In under 90 seconds, automated pipelines extract 3 vertical shorts, 2 document carousels, and 5 hook-driven posts. Stop editing manually from scratch.",
-                "hashtags": "#CreatorOps #VideoMarketing #AITools #Efficiency",
-                "media_type": "video"
-            },
-            # 2 Document Carousels
-            {
-                "aid": f"INC-CAR-GEN-{ts_code}-04",
-                "plat": "Facebook Pages",
-                "fmt": "Carousel",
-                "pillar": "CreatorOps & Tool Consolidation",
-                "hook": "The 5-Step System: Repurposing & Multi-Platform Syndication",
-                "caption": "Swipe through the exact architecture that turns 1 recording into 10 high-dwell assets across Shorts, Reels, and Facebook Pages.",
-                "hashtags": "#Carousel #ContentRepurposing #GrowthEngine #Marketing",
-                "media_type": "carousel",
-                "slides": [
-                    {"title": "The 5-Step Content Multiplier", "body": "How solo creators turn 1 recording into 10 multi-platform assets"},
-                    {"title": "Step 1: Thought Inbox Ingestion", "body": "Drop unedited podcast, webinar or case study notes"},
-                    {"title": "Step 2: AI Prompt Video Editor", "body": "Auto-trim pauses and format 9:16 vertical framing"},
-                    {"title": "Step 3: Multi-Platform Syndication", "body": "Publish directly to Shorts, Reels, and Facebook Pages"},
-                    {"title": "Results: 85% Time Saved", "body": "Weekly editing dropped from 14h to 2h. Start free at incubrix.com"}
-                ]
-            },
-            {
-                "aid": f"INC-CAR-GEN-{ts_code}-05",
-                "plat": "Instagram",
-                "fmt": "Carousel",
-                "pillar": "Behind-the-Studio & Product Spotlights",
-                "hook": "The 2026 Solo Creator Blueprint: Tool Consolidation",
-                "caption": "Why juggling 4 different $20/mo tools is killing your channel growth — and how unified CreatorOps cuts production time by 85%.",
-                "hashtags": "#InstagramCarousels #CreatorEconomy #SaaSTools #Productivity",
-                "media_type": "carousel",
-                "slides": [
-                    {"title": "The Solo Creator Bottleneck", "body": "A 9:1 ratio of logistics to creation burns creators out"},
-                    {"title": "The Fragmented Tool Trap", "body": "Descript ($24) + Opus ($19) + Buffer ($15) = $97/mo & friction"},
-                    {"title": "The Unified Solution", "body": "One workspace for recording, editing, and distribution"},
-                    {"title": "Automated Quality & Compliance", "body": "Built-in rights check, AI disclosures, and UTM tracking"},
-                    {"title": "Scale Without Burnout", "body": "Compound reach across all major video networks with IncuBrix"}
-                ]
-            },
-            # 5 Thought Leadership Graphics
-            {
-                "aid": f"INC-PST-GEN-{ts_code}-06",
-                "plat": "Instagram",
-                "fmt": "Graphic",
-                "pillar": "Growth Analytics & Algorithm Benchmarks",
-                "hook": "The 9:1 Ratio: Logistics vs Creation in 2026",
-                "caption": "For every 1 hour of creating, creators lose 14 hours to manual editing and formatting. IncuBrix reverses the curve.",
-                "hashtags": "#Analytics #CreatorOps #GrowthHacking #IncuBrix",
-                "media_type": "graphic"
-            },
-            {
-                "aid": f"INC-PST-GEN-{ts_code}-07",
-                "plat": "Facebook Pages",
-                "fmt": "Graphic",
-                "pillar": "CreatorOps & Tool Consolidation",
-                "hook": "Unified CreatorOps vs Fragmented Tool Trap",
-                "caption": "Descript + Opus Clip + Buffer = $97/mo and 4x context switching. Unify your entire video production into 1 prompt engine.",
-                "hashtags": "#ToolConsolidation #Productivity #VideoMarketing",
-                "media_type": "graphic"
-            },
-            {
-                "aid": f"INC-PST-GEN-{ts_code}-08",
-                "plat": "Instagram",
-                "fmt": "Graphic",
-                "pillar": "Growth Analytics & Algorithm Benchmarks",
-                "hook": "85% Weekly Production Time Saved",
-                "caption": "Verified benchmark: creator teams dropped weekly production from 14 hours down to 2 hours with automated silence trimming and multi-destination syndication.",
-                "hashtags": "#Benchmarks #CaseStudy #CreatorEconomy #Efficiency",
-                "media_type": "graphic"
-            },
-            {
-                "aid": f"INC-PST-GEN-{ts_code}-09",
-                "plat": "Facebook Pages",
-                "fmt": "Graphic",
-                "pillar": "AI Video & Voice Engineering",
-                "hook": "Prompt Video Editing: Cut Pauses in Seconds",
-                "caption": "Edit your video just by editing text. Automated silence removal, filler word trimming, and vertical 9:16 framing in one click.",
-                "hashtags": "#VideoEditing #AIStudio #CreatorOps #Workflow",
-                "media_type": "graphic"
-            },
-            {
-                "aid": f"INC-PST-GEN-{ts_code}-10",
-                "plat": "Facebook Pages",
-                "fmt": "Graphic",
-                "pillar": "Behind-the-Studio & Product Spotlights",
-                "hook": "The Future of Content Creation is Modular",
-                "caption": "You don't need a 10-person video team in 2026. You just need an intelligent CreatorOps engine that extracts maximum reach from every insight.",
-                "hashtags": "#FutureOfWork #ModularContent #CreatorStudio",
-                "media_type": "graphic"
-            }
+        # Perform genuine AI model call
+        ai_assets = call_ai_repurposing_model(req)
+
+        # Target layout for 10 platform-tailored deliverables
+        platforms_formats = [
+            ("YouTube Shorts", "Short video", "video"),
+            ("Instagram", "Short video", "video"),
+            ("Facebook Pages", "Short video", "video"),
+            ("Facebook Pages", "Carousel", "carousel"),
+            ("Instagram", "Carousel", "carousel"),
+            ("Instagram", "Graphic", "graphic"),
+            ("Facebook Pages", "Graphic", "graphic"),
+            ("Instagram", "Graphic", "graphic"),
+            ("Facebook Pages", "Graphic", "graphic"),
+            ("Facebook Pages", "Graphic", "graphic"),
         ]
+
+        # Separate items by format if available
+        video_items = [a for a in ai_assets if str(a.get("format", "")).lower() in ["short video", "short_video", "video"]]
+        carousel_items = [a for a in ai_assets if str(a.get("format", "")).lower() in ["carousel", "multi-slide document carousel"]]
+        graphic_items = [a for a in ai_assets if str(a.get("format", "")).lower() in ["graphic", "poster", "thought-leadership graphic / poster"]]
+
+        deliverables_spec = []
+        for idx in range(10):
+            target_plat, target_fmt, target_type = platforms_formats[idx]
+            aid_prefix = "INC-VID-GEN" if target_type == "video" else ("INC-CAR-GEN" if target_type == "carousel" else "INC-PST-GEN")
+            aid = f"{aid_prefix}-{ts_code}-{idx+1:02d}"
+
+            source_item = None
+            if target_type == "video":
+                v_idx = idx
+                if v_idx < len(video_items):
+                    source_item = video_items[v_idx]
+                elif idx < len(ai_assets):
+                    source_item = ai_assets[idx]
+            elif target_type == "carousel":
+                c_idx = idx - 3
+                if c_idx < len(carousel_items):
+                    source_item = carousel_items[c_idx]
+                elif idx < len(ai_assets):
+                    source_item = ai_assets[idx]
+            else:
+                g_idx = idx - 5
+                if g_idx < len(graphic_items):
+                    source_item = graphic_items[g_idx]
+                elif idx < len(ai_assets):
+                    source_item = ai_assets[idx]
+
+            if not source_item:
+                source_item = ai_assets[idx % len(ai_assets)]
+
+            hook = source_item.get("hook", "").strip() or f"{base_title} - Insight #{idx+1}"
+            caption = source_item.get("caption", "").strip() or hook
+            script = source_item.get("script", "").strip() or caption
+            hashtags = source_item.get("hashtags", "").strip() or f"#{req.brand or 'IncuBrix'} #Growth #AI"
+            pillar = source_item.get("content_pillar", "").strip() or "CreatorOps & Tool Consolidation"
+
+            # Parse and clean slides for carousels
+            slides = source_item.get("slides", [])
+            if not isinstance(slides, list) or len(slides) < 3:
+                slides = [
+                    {"title": hook[:35], "body": f"Core takeaway from {base_title}"},
+                    {"title": "The Key Challenge", "body": caption[:100]},
+                    {"title": "The Strategic Mechanism", "body": f"How {req.brand or 'IncuBrix'} solves this systematically"},
+                    {"title": "Observed Results", "body": "Measurable efficiency and reach gains in real workflows"},
+                    {"title": "Next Steps & Action", "body": cta}
+                ]
+            else:
+                cleaned_slides = []
+                for s_i, s in enumerate(slides[:5]):
+                    if isinstance(s, dict):
+                        stitle = s.get("title", f"Point {s_i+1}")
+                        sbody = s.get("body", s.get("text", stitle))
+                    else:
+                        stitle = f"Slide {s_i+1}"
+                        sbody = str(s)
+                    cleaned_slides.append({"title": stitle, "body": sbody})
+                while len(cleaned_slides) < 5:
+                    cleaned_slides.append({"title": f"Summary Step {len(cleaned_slides)+1}", "body": cta})
+                slides = cleaned_slides
+
+            graphic_headline = source_item.get("graphic_headline", "").strip() or hook[:30]
+            graphic_subtitle = source_item.get("graphic_subtitle", "").strip() or caption[:100]
+
+            deliverables_spec.append({
+                "aid": aid,
+                "plat": target_plat,
+                "fmt": target_fmt,
+                "media_type": target_type,
+                "pillar": pillar,
+                "hook": hook,
+                "caption": caption,
+                "script": script,
+                "hashtags": hashtags,
+                "slides": slides,
+                "graphic_headline": graphic_headline,
+                "graphic_subtitle": graphic_subtitle
+            })
 
         new_assets = []
         base_scheduled_date = datetime.now() + timedelta(days=1)
@@ -751,6 +944,7 @@ def run_generation_job(job_id: str, req: GenerateRequest):
             aid = item["aid"]
             hook = item["hook"]
             caption = item["caption"]
+            script = item["script"]
             pillar = item["pillar"]
             plat = item["plat"]
             fmt = item["fmt"]
@@ -758,7 +952,7 @@ def run_generation_job(job_id: str, req: GenerateRequest):
             v_path = renderer.render_short_video(
                 asset_id=aid,
                 hook=hook,
-                caption=caption,
+                caption=script or caption,
                 pillar="creatorops" if "creatorops" in pillar.lower() else ("repurposing" if "repurpos" in pillar.lower() else "voice"),
                 duration_seconds=12,
                 use_animated_svg=False
@@ -767,10 +961,22 @@ def run_generation_job(job_id: str, req: GenerateRequest):
             src_content = (
                 f"# {aid} Short Video Source\n\n"
                 f"**Platform:** {plat}\n"
+                f"**Format:** {fmt}\n"
                 f"**Pillar:** {pillar}\n"
                 f"**Hook:** {hook}\n\n"
-                f"**Script / Caption:**\n{caption}\n\n"
-                f"**CTA:** {cta}\n"
+                f"### Spoken Script:\n{script}\n\n"
+                f"### Social Caption & Hashtags:\n{caption}\n\n{item['hashtags']}\n\n"
+                f"**CTA:** {cta}\n\n"
+                f"---\n"
+                f"### Original Source Excerpt:\n"
+                f"**Title:** {base_title}\n"
+                f"**Source Type:** {req.source_type}\n"
+                f"**Editorial Tone:** {req.tone}\n\n"
+                f"> {req.input_text.strip()[:600]}...\n\n"
+                f"---\n"
+                f"**Compliance & Rights:**\n"
+                f"- Rights Checked: MET (Original IP / Verified)\n"
+                f"- AI Label Needed: Yes (AI generated script/media disclosed)\n"
             )
             (SOURCE_DIR / f"{aid}_source.md").write_text(src_content, encoding="utf-8")
 
@@ -784,13 +990,14 @@ def run_generation_job(job_id: str, req: GenerateRequest):
                 "content_pillar": pillar,
                 "hook": hook,
                 "caption": caption,
+                "script": script,
                 "cta": cta,
                 "hashtags": item["hashtags"],
                 "utm_link": utm_link,
                 "final_file_url": f"assets/final/videos/{aid}.mp4",
                 "source_file_url": f"assets/source/{aid}_source.md",
                 "source_input": base_title,
-                "tools_used": "IncuBrix AI Engine (Gemini 2.5 Flash), FFmpeg, Synthwave Audio",
+                "tools_used": f"IncuBrix AI Engine ({config.GEMINI_MODEL}), FFmpeg, Synthwave Audio",
                 "rights_checked": "MET (Original IP / Verified)",
                 "ai_label_needed": "Yes (AI generated script/media disclosed)",
                 "scheduled_date": sch_date,
@@ -824,10 +1031,22 @@ def run_generation_job(job_id: str, req: GenerateRequest):
             src_content = (
                 f"# {aid} Document Carousel Source\n\n"
                 f"**Platform:** {plat}\n"
+                f"**Format:** {fmt}\n"
                 f"**Pillar:** {pillar}\n"
                 f"**Hook:** {hook}\n\n"
-                f"**Slides:**\n" + "\n".join([f"{i+1}. {s['title']} - {s['body']}" for i, s in enumerate(slides)]) +
-                f"\n\n**CTA:** {cta}\n"
+                f"### Slide Breakdown:\n" + "\n".join([f"{i+1}. {s['title']} - {s['body']}" for i, s in enumerate(slides)]) +
+                f"\n\n### Social Caption & Hashtags:\n{caption}\n\n{item['hashtags']}\n\n"
+                f"**CTA:** {cta}\n\n"
+                f"---\n"
+                f"### Original Source Excerpt:\n"
+                f"**Title:** {base_title}\n"
+                f"**Source Type:** {req.source_type}\n"
+                f"**Editorial Tone:** {req.tone}\n\n"
+                f"> {req.input_text.strip()[:600]}...\n\n"
+                f"---\n"
+                f"**Compliance & Rights:**\n"
+                f"- Rights Checked: MET (Original IP / Verified)\n"
+                f"- AI Label Needed: Yes (AI generated script/media disclosed)\n"
             )
             (SOURCE_DIR / f"{aid}_source.md").write_text(src_content, encoding="utf-8")
 
@@ -847,7 +1066,7 @@ def run_generation_job(job_id: str, req: GenerateRequest):
                 "final_file_url": f"assets/final/carousels/{aid}/{aid}.pdf",
                 "source_file_url": f"assets/source/{aid}_source.md",
                 "source_input": base_title,
-                "tools_used": "IncuBrix AI Engine (Gemini 2.5 Flash), Pillow, PDFKit",
+                "tools_used": f"IncuBrix AI Engine ({config.GEMINI_MODEL}), Pillow, PDFKit",
                 "rights_checked": "MET (Original IP / Verified)",
                 "ai_label_needed": "Yes (AI generated script/media disclosed)",
                 "scheduled_date": sch_date,
@@ -876,11 +1095,13 @@ def run_generation_job(job_id: str, req: GenerateRequest):
             pillar = item["pillar"]
             plat = item["plat"]
             fmt = item["fmt"]
+            headline = item.get("graphic_headline") or hook
+            subtitle = item.get("graphic_subtitle") or caption
 
             renderer.render_graphic(
                 aid,
-                hook,
-                caption,
+                headline,
+                subtitle,
                 "analytics" if "analytic" in pillar.lower() else ("creatorops" if "creatorops" in pillar.lower() else "voice"),
                 cta
             )
@@ -888,10 +1109,22 @@ def run_generation_job(job_id: str, req: GenerateRequest):
             src_content = (
                 f"# {aid} Graphic Source\n\n"
                 f"**Platform:** {plat}\n"
+                f"**Format:** {fmt}\n"
                 f"**Pillar:** {pillar}\n"
-                f"**Headline:** {hook}\n\n"
-                f"**Copy:**\n{caption}\n\n"
-                f"**CTA:** {cta}\n"
+                f"**Headline:** {headline}\n\n"
+                f"**Subhead / Copy:**\n{subtitle}\n\n"
+                f"### Social Caption & Hashtags:\n{caption}\n\n{item['hashtags']}\n\n"
+                f"**CTA:** {cta}\n\n"
+                f"---\n"
+                f"### Original Source Excerpt:\n"
+                f"**Title:** {base_title}\n"
+                f"**Source Type:** {req.source_type}\n"
+                f"**Editorial Tone:** {req.tone}\n\n"
+                f"> {req.input_text.strip()[:600]}...\n\n"
+                f"---\n"
+                f"**Compliance & Rights:**\n"
+                f"- Rights Checked: MET (Original IP / Verified)\n"
+                f"- AI Label Needed: Yes (AI generated script/media disclosed)\n"
             )
             (SOURCE_DIR / f"{aid}_source.md").write_text(src_content, encoding="utf-8")
 
@@ -911,7 +1144,7 @@ def run_generation_job(job_id: str, req: GenerateRequest):
                 "final_file_url": f"assets/final/graphics/{aid}.png",
                 "source_file_url": f"assets/source/{aid}_source.md",
                 "source_input": base_title,
-                "tools_used": "IncuBrix AI Engine (Gemini 2.5 Flash), Pillow, Antialiased SVG",
+                "tools_used": f"IncuBrix AI Engine ({config.GEMINI_MODEL}), Pillow, Antialiased SVG",
                 "rights_checked": "MET (Original IP / Verified)",
                 "ai_label_needed": "Yes (AI generated script/media disclosed)",
                 "scheduled_date": sch_date,
@@ -945,25 +1178,6 @@ def run_generation_job(job_id: str, req: GenerateRequest):
 
         current_assets.sort(key=lambda x: parse_datetime_sort_key(x.get("scheduled_date", "")))
         save_manifest(current_assets)
-
-        # Update calendar.csv
-        try:
-            with open(CALENDAR_CSV, "r", encoding="utf-8") as f:
-                existing_rows = list(csv.DictReader(f))
-            fieldnames = existing_rows[0].keys() if existing_rows else []
-            seen_ids = set(r.get("asset_id") for r in existing_rows)
-            for na in new_assets:
-                if na["asset_id"] not in seen_ids:
-                    row = {k: na.get(k, "") for k in fieldnames}
-                    existing_rows.append(row)
-                    seen_ids.add(na["asset_id"])
-            existing_rows.sort(key=lambda x: parse_datetime_sort_key(x.get("scheduled_date", "")))
-            with open(CALENDAR_CSV, "w", newline="", encoding="utf-8") as f:
-                w = csv.DictWriter(f, fieldnames=fieldnames)
-                w.writeheader()
-                w.writerows(existing_rows)
-        except Exception as e_cal:
-            print(f"[Warning] Error syncing calendar.csv: {e_cal}")
 
         job["progress"] = 100
         job["status"] = "completed"

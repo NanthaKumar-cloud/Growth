@@ -760,5 +760,45 @@
       "asset_id": "INC-VID-010",
       "scheduled_date": "2026-10-25T15:00:00"
     }
+  },
+  {
+    "timestamp": "2026-10-25T08:18:07.750857",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792916287-1",
+        "AUTO-CAR-1792916287-2",
+        "AUTO-IMG-1792916287-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:18:08.256406",
+    "event_type": "CADENCE_BATCH_CREATED",
+    "details": {
+      "count": 3,
+      "asset_ids": [
+        "AUTO-VID-1792916288-1",
+        "AUTO-CAR-1792916288-2",
+        "AUTO-IMG-1792916288-3"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:18:15.331725",
+    "event_type": "AUDIT_TEST_EVENT",
+    "details": {
+      "asset_id": "INC-VID-010",
+      "scheduled_date": "2026-10-25T15:00:00"
+    }
+  },
+  {
+    "timestamp": "2026-10-25T08:19:30.855781",
+    "event_type": "AUDIT_TEST_EVENT",
+    "details": {
+      "asset_id": "INC-VID-010",
+      "scheduled_date": "2026-10-25T15:00:00"
+    }
   }
 ]

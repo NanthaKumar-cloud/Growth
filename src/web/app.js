@@ -930,11 +930,17 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
   }, [inputText]);
 
   const handleStartGeneration = async () => {
-    if (!inputText.trim()) return;
+    if (!inputText || !inputText.trim()) {
+      alert("Source text or transcript cannot be empty. Please enter or paste your source text before generating.");
+      return;
+    }
+    // Clear previous results immediately so stale/cached assets never appear while generating
+    setGeneratedResults([]);
     setIsGenerating(true);
-    setJobProgress(15);
-    setJobStage('Reading source text & extracting core claims...');
+    setJobProgress(10);
+    setJobStage('Initializing Gemini AI model & reading source text...');
     setSelectedAssetIds(new Set());
+    setPublishingStates({});
 
     try {
       const res = await fetch('/api/generate', {
@@ -954,8 +960,11 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
         })
       });
 
-      if (!res.ok) throw new Error("Generation request failed");
-      const { job_id } = await res.json();
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.detail || "Generation request failed");
+      }
+      const { job_id } = data;
 
       // Poll progress
       const pollInterval = setInterval(async () => {
@@ -980,7 +989,7 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
         } catch (e) {
           console.error(e);
         }
-      }, 900);
+      }, 1000);
 
     } catch (err) {
       setIsGenerating(false);
@@ -1203,7 +1212,7 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
             {/* Primary Action Button */}
             <div className="pt-4">
               <button
-                disabled={isGenerating || !inputText.trim()}
+                disabled={isGenerating}
                 onClick={handleStartGeneration}
                 className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white rounded-lg text-xs font-bold shadow-md transition-all flex items-center justify-center gap-2"
               >
@@ -1263,7 +1272,7 @@ IncuBrix changes this by consolidating ideation, text-prompt video editing, auto
       </div>
 
       {/* Generated Media Workspace (Rendered In-Place) */}
-      {generatedResults.length > 0 && (
+      {generatedResults.length > 0 && !isGenerating && (
         <div className="space-y-6 pt-8 border-t border-slate-200" id="generated-workspace">
           {/* Section Header */}
           <div className="bg-white p-5 rounded-xl border border-slate-200 card-shadow flex flex-col md:flex-row md:items-center justify-between gap-4">
