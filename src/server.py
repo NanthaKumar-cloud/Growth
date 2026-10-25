@@ -920,11 +920,13 @@ class RescheduleRequest(BaseModel):
 class PublishRequest(BaseModel):
     platform: Optional[str] = None
     custom_caption: Optional[str] = None
+    dry_run: bool = False
 
 
 class BatchPublishRequest(BaseModel):
     asset_ids: List[str]
     target_platform: Optional[str] = None
+    dry_run: bool = False
 
 
 class ScheduleRequest(BaseModel):
@@ -934,8 +936,27 @@ class ScheduleRequest(BaseModel):
     custom_caption: Optional[str] = None
 
 
+@app.get("/api/publish/verify-accounts")
+def verify_social_accounts():
+    """Audits connected platform accounts and authentication without posting any content."""
+    return default_publisher.verify_accounts()
+
+
 @app.post("/api/calendar/reschedule")
 def reschedule_asset(req: RescheduleRequest):
+    from src.validator import ContentValidator
+
+    if req.platform:
+        plat_low = req.platform.lower()
+        allowed = ["youtube", "youtube shorts", "youtube video", "shorts", "facebook", "facebook pages", "instagram", "multi-platform", "all"]
+        if not any(ap in plat_low for ap in allowed):
+            raise HTTPException(status_code=400, detail=f"Unsupported platform '{req.platform}'. Allowed: YouTube Shorts, Facebook Pages, Instagram, Multi-Platform.")
+
+    if req.custom_caption:
+        for phrase in ContentValidator.FORBIDDEN_PHRASES:
+            if phrase in req.custom_caption.lower():
+                raise HTTPException(status_code=400, detail=f"Compliance check failed: caption contains prohibited claim '{phrase}'.")
+
     assets = load_manifest()
     found = False
     for a in assets:
@@ -956,6 +977,19 @@ def reschedule_asset(req: RescheduleRequest):
 
 @app.post("/api/schedule")
 def schedule_asset(req: ScheduleRequest):
+    from src.validator import ContentValidator
+
+    if req.platform:
+        plat_low = req.platform.lower()
+        allowed = ["youtube", "youtube shorts", "youtube video", "shorts", "facebook", "facebook pages", "instagram", "multi-platform", "all"]
+        if not any(ap in plat_low for ap in allowed):
+            raise HTTPException(status_code=400, detail=f"Unsupported platform '{req.platform}'. Allowed: YouTube Shorts, Facebook Pages, Instagram, Multi-Platform.")
+
+    if req.custom_caption:
+        for phrase in ContentValidator.FORBIDDEN_PHRASES:
+            if phrase in req.custom_caption.lower():
+                raise HTTPException(status_code=400, detail=f"Compliance check failed: caption contains prohibited claim '{phrase}'.")
+
     assets = load_manifest()
     found = False
     for a in assets:
@@ -981,8 +1015,11 @@ def publish_asset_now(asset_id: str, req: PublishRequest = Body(default=PublishR
             asset_id=asset_id,
             target_platform=req.platform,
             custom_caption=req.custom_caption,
+            dry_run=req.dry_run,
         )
         return res
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=f"Pre-flight validation failed for {asset_id}: {str(ve)}")
     except Exception as e:
         import traceback
         traceback.print_exc()
